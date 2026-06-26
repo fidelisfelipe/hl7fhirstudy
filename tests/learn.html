@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>FHIR Learn — Trilha</title>
+<title>FHIR Foundations Learn — Trilha</title>
 <style>
   :root{
     --bg:#0b1020;--bg2:#151c3a;--card:#121a33;--line:#23305c;--muted:#c9d3f5;
@@ -95,13 +95,12 @@
   .trap{background:rgba(252,211,77,.10);border-left:3px solid var(--gold);border-radius:0 12px 12px 0;
     padding:12px 14px;color:#ffe9a8;font-size:13.5px;line-height:1.5}
   .trap b,.analogy b,.teach li b{color:#fff}
-  .refs{margin-top:14px;border-top:1px solid var(--line);padding-top:14px}
-  .refs .rtitle{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
-  .refs a{display:flex;align-items:center;gap:8px;padding:9px 12px;margin:6px 0;border:1px solid var(--line);
-    border-radius:10px;background:rgba(91,134,255,.06);color:#dbe6ff;text-decoration:none;font-size:13.5px;line-height:1.4}
-  .refs a:hover{background:rgba(91,134,255,.14);border-color:var(--accent2)}
-  .refs a .ricon{flex:0 0 auto}
-  .refs a .rext{margin-left:auto;flex:0 0 auto;opacity:.5;font-size:12px}
+  .refs{margin-top:14px;display:flex;flex-direction:column;gap:6px}
+  .refs a{font-size:12px;color:var(--accent2);text-decoration:none;display:flex;align-items:center;gap:6px}
+  .refs a:hover{text-decoration:underline}
+  .refs .ref-kind{font-size:10px;padding:1px 6px;border-radius:999px;border:1px solid;flex-shrink:0}
+  .refs .ref-kind.spec{color:#a5b4fc;border-color:#a5b4fc44}
+  .refs .ref-kind.material{color:var(--accent);border-color:var(--accent)44}
 
   .qcard{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px}
   .qtag{font-size:12px;color:var(--muted)}
@@ -158,41 +157,12 @@
   .modal .row{display:flex;gap:10px;justify-content:flex-end;margin-top:18px}
   .hint{font-size:12px;color:var(--muted);line-height:1.5}
   .hidden{display:none!important}
-  /* material (.md) viewer */
-  .modal.wide{max-width:820px;display:flex;flex-direction:column;max-height:88vh}
-  .md-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
-  .md-head h3{margin:0;flex:1;font-size:16px;line-height:1.3}
-  .md-langtog{display:flex;gap:0;border:1px solid var(--line);border-radius:9px;overflow:hidden}
-  .md-langtog button{background:transparent;border:none;color:var(--muted);padding:6px 11px;font-size:12px;cursor:pointer;border-right:1px solid var(--line)}
-  .md-langtog button:last-child{border-right:none}
-  .md-langtog button.on{background:var(--accent2);color:#fff}
-  .mdwrap{overflow:auto;border:1px solid var(--line);border-radius:12px;background:#0c1228;padding:18px 20px}
-  .mdbody{color:var(--txt);font-size:14px;line-height:1.6;word-wrap:break-word}
-  .mdbody h1,.mdbody h2,.mdbody h3,.mdbody h4{line-height:1.3;margin:18px 0 8px;color:#fff}
-  .mdbody h1{font-size:20px;border-bottom:1px solid var(--line);padding-bottom:6px}
-  .mdbody h2{font-size:17px;border-bottom:1px solid var(--line);padding-bottom:4px}
-  .mdbody h3{font-size:15px;color:var(--accent)}
-  .mdbody h4{font-size:14px;color:var(--muted)}
-  .mdbody p{margin:8px 0}
-  .mdbody ul,.mdbody ol{margin:8px 0;padding-left:22px}
-  .mdbody li{margin:4px 0}
-  .mdbody code{background:rgba(91,134,255,.14);padding:1px 5px;border-radius:5px;font-size:12.5px}
-  .mdbody pre{background:#070b18;border:1px solid var(--line);border-radius:10px;padding:12px;overflow:auto}
-  .mdbody pre code{background:none;padding:0;font-size:12.5px;line-height:1.45}
-  .mdbody blockquote{border-left:3px solid var(--accent2);margin:10px 0;padding:4px 14px;color:var(--muted);background:rgba(91,134,255,.06)}
-  .mdbody table{border-collapse:collapse;width:100%;margin:12px 0;font-size:13px}
-  .mdbody th,.mdbody td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
-  .mdbody th{background:rgba(91,134,255,.10);color:#fff}
-  .mdbody hr{border:none;border-top:1px solid var(--line);margin:16px 0}
-  .mdbody a{color:var(--accent2)}
-  .mdbody .md-hit{background:rgba(252,211,77,.18);border-radius:6px;animation:mdflash 2.4s ease-out}
-  @keyframes mdflash{0%{background:rgba(252,211,77,.5)}100%{background:rgba(252,211,77,.10)}}
 </style>
 </head>
 <body>
 <header>
   <div class="hbar">
-    <div class="brand"><span class="logo">🔥</span><span>FHIR Learn</span></div>
+    <div class="brand"><span class="logo">🏥</span><span>FHIR Foundations</span></div>
     <div class="stats">
       <span class="chip streak" id="chipStreak">🔥 0</span>
       <span class="chip xp" id="chipXp">⭐ 0 XP</span>
@@ -226,31 +196,15 @@
   </div>
 </div>
 
-<!-- material (.md) viewer modal -->
-<div class="modal-bg" id="mdModal">
-  <div class="modal wide">
-    <div class="md-head">
-      <h3 id="mdTitle">Material do curso</h3>
-      <div class="md-langtog" id="mdLangTog">
-        <button data-mode="PT">PT</button>
-        <button data-mode="EN">EN</button>
-        <button data-mode="BOTH" id="mdBothBtn">Ambos</button>
-      </div>
-      <button class="btn ghost small" id="mdClose">✕</button>
-    </div>
-    <div class="mdwrap"><div class="mdbody" id="mdBody"></div></div>
-  </div>
-</div>
-
 <script>
 /* ============================== i18n ============================== */
 const T = {
-  PT:{ready:'Prontidão para a prova',readySub:'Sua maestria estimada por unidade. Revise diariamente para subir.',
+  PT:{ready:'Prontidão para o exame',readySub:'Sua maestria estimada por unidade. Revise diariamente para subir.',
     reviewNow:'Revisar agora',reviewDue:n=>`Revisar ${n} pendente${n>1?'s':''}`,noDue:'Nada para revisar hoje 🎉',
     unit:'Unidade',locked:'Conclua a lição anterior',start:'Começar',continue:'Continuar',check:'Verificar',
     correct:'Correto!',incorrect:'Quase lá',explainMore:'💡 Explicar melhor (IA)',thinking:'Pensando…',
     lessonDone:'Lição concluída!',reviewDoneT:'Revisão concluída!',xpEarned:'XP ganho',accuracy:'Acerto',
-    mastered:'Itens revisados',backHome:'Voltar à trilha',pick:'Selecione uma resposta.',deepenTitle:'Aprofundar no material oficial',
+    mastered:'Itens revisados',backHome:'Voltar à trilha',pick:'Selecione uma resposta.',
     selectAll:'(selecione todas)',crownsLeft:n=>`${n} para dominar`,dueReview:'Revisão do dia',
     needKey:'Adicione sua chave da API nas Configurações ⚙️ para usar a IA.',aiErr:'Erro ao chamar a IA: ',
     concepts:'Conceitos consolidados',dominated:'Questões dominadas',consolidation:'Consolidação do conhecimento',
@@ -258,13 +212,13 @@ const T = {
     cpName:'Prova da Unidade',cpIntro:n=>`Todas as ${n} questões da unidade, embaralhadas e sem dicas. Uma tentativa por questão.`,
     cpStart:'Iniciar prova',cpNeed:p=>`Acerte ${p}% para dominar a unidade.`,
     cpDoneT:'Prova da Unidade',cpPassed:'Unidade Dominada! 🏆',cpFailed:'Quase! Refaça para dominar a unidade.',
-    masteredBadge:'DOMINADA',retryCp:'Refazer prova'},
+    masteredBadge:'DOMINADA',retryCp:'Refazer prova',refs:'Referências'},
   EN:{ready:'Exam readiness',readySub:'Your estimated mastery per unit. Review daily to climb.',
     reviewNow:'Review now',reviewDue:n=>`Review ${n} due`,noDue:'Nothing to review today 🎉',
     unit:'Unit',locked:'Finish the previous lesson',start:'Start',continue:'Continue',check:'Check',
     correct:'Correct!',incorrect:'Not quite',explainMore:'💡 Explain better (AI)',thinking:'Thinking…',
     lessonDone:'Lesson complete!',reviewDoneT:'Review complete!',xpEarned:'XP earned',accuracy:'Accuracy',
-    mastered:'Items reviewed',backHome:'Back to path',pick:'Select an answer.',deepenTitle:'Go deeper in the official spec',
+    mastered:'Items reviewed',backHome:'Back to path',pick:'Select an answer.',
     selectAll:'(select all)',crownsLeft:n=>`${n} to master`,dueReview:'Daily review',
     needKey:'Add your API key in Settings ⚙️ to use AI.',aiErr:'AI call error: ',
     concepts:'Concepts consolidated',dominated:'Questions mastered',consolidation:'Knowledge consolidation',
@@ -272,14 +226,14 @@ const T = {
     cpName:'Unit Test',cpIntro:n=>`All ${n} unit questions, shuffled and hint-free. One attempt per question.`,
     cpStart:'Start test',cpNeed:p=>`Score ${p}% to master the unit.`,
     cpDoneT:'Unit Test',cpPassed:'Unit Mastered! 🏆',cpFailed:'Almost! Retry to master the unit.',
-    masteredBadge:'MASTERED',retryCp:'Retry test'}
+    masteredBadge:'MASTERED',retryCp:'Retry test',refs:'References'}
 };
-let LANG = localStorage.getItem('flearn_lang') || 'PT';
+let LANG = localStorage.getItem('hl7_lang') || 'PT';
 const t = k => T[LANG][k];
 const L = (o,base) => LANG==='EN' ? (o[base+'En']??o[base+'Pt']) : (o[base+'Pt']??o[base+'En']);
 
 /* ============================== storage ============================== */
-const SRS_K='flearn_srs', GAM_K='flearn_gam';
+const SRS_K='hl7_srs', GAM_K='hl7_gam';
 const ld=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}};
 const sv=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
 let SRS=ld(SRS_K,{});
@@ -306,11 +260,10 @@ function applyGrade(key,correct){
   s.lastGrade=q;
   SRS[key]=s; sv(SRS_K,SRS);
 }
-// strength 0..1 used for mastery rings
 function strength(key){
   const s=SRS[key]; if(!s||s.reps===0) return 0;
-  let base=Math.min(s.reps,3)/3;               // up to 3 good reps = full
-  if(s.due && s.due<now()) base*=0.6;          // overdue decays
+  let base=Math.min(s.reps,3)/3;
+  if(s.due && s.due<now()) base*=0.6;
   if(s.lastGrade!==null && s.lastGrade<3) base*=0.4;
   return base;
 }
@@ -327,7 +280,7 @@ function bumpStreak(){
 }
 
 /* ============================== data load ============================== */
-let PATHS=[], PATH=null, QMAP={};  // QMAP["module1_q1#1"] = question obj
+let PATHS=[], PATH=null, QMAP={};
 async function loadAll(){
   const man=await (await fetch('data/modules.json')).json();
   for(const m of (man.modules||[])){
@@ -339,17 +292,14 @@ async function loadAll(){
       qs.forEach(q=>{ QMAP[`${pref}#${q.id}`]=q; });
     }
   }
-  const saved=localStorage.getItem('flearn_module');
+  const saved=localStorage.getItem('hl7_module');
   PATH = PATHS.find(p=>p.key===saved) || PATHS[0];
 }
-// keys of the CURRENT module
 function allItemKeys(){ const a=[]; PATH.units.forEach(u=>u.lessons.forEach(l=>a.push(...l.items))); return a; }
-// keys across ALL modules (for global daily review)
 function globalItemKeys(){ const a=[]; PATHS.forEach(p=>p.units.forEach(u=>u.lessons.forEach(l=>a.push(...l.items)))); return a; }
 function flatLessons(){ const a=[]; PATH.units.forEach(u=>u.lessons.forEach(l=>a.push({unit:u,lesson:l}))); return a; }
 function moduleMastery(p){ const ks=[]; p.units.forEach(u=>u.lessons.forEach(l=>ks.push(...l.items))); return ks.length?ks.reduce((a,k)=>a+strength(k),0)/ks.length:0; }
 
-/* crown level 0..3 for a lesson */
 function crownLevel(lesson){
   const reps=lesson.items.map(k=>SRS[k]?.reps||0);
   const minR=Math.min(...reps);
@@ -369,20 +319,15 @@ function unitMastery(u){
   if(!ks.length) return 0;
   return ks.reduce((a,k)=>a+strength(k),0)/ks.length;
 }
-function overallMastery(){
-  const ks=allItemKeys();
-  return ks.reduce((a,k)=>a+strength(k),0)/ks.length;
-}
 
-/* ============================== checkpoints & consolidation ============================== */
-const CP_PASS=0.8;                                   // limiar para "Unidade Dominada"
+/* ============================== checkpoints ============================== */
+const CP_PASS=0.8;
 function unitItems(u){ const a=[]; u.lessons.forEach(l=>a.push(...l.items)); return a; }
 function unitCheckpointItems(u){ return (u.checkpoint&&u.checkpoint.items&&u.checkpoint.items.length)? u.checkpoint.items : unitItems(u); }
-function unitDone(u){ return u.lessons.every(l=>crownLevel(l)>=1); }      // checkpoint destrava com todas as lições feitas
+function unitDone(u){ return u.lessons.every(l=>crownLevel(l)>=1); }
 function umId(p,u){ return `${p.key}:${u.id}`; }
 function isUnitMastered(u){ return !!GAM.mastered[umId(PATH,u)]; }
 function setUnitMastered(u){ GAM.mastered[umId(PATH,u)]=true; sv(GAM_K,GAM); }
-// consolidação: conceito = lição com coroa ≥🥈 ; questão dominada = item revisado ≥2× e último acerto
 function itemDominated(k){ const s=SRS[k]; return !!(s&&s.reps>=2&&s.lastGrade>=3); }
 function lessonConsolidated(l){ return crownLevel(l)>=2; }
 function countConcepts(){ let d=0,t=0; PATHS.forEach(p=>p.units.forEach(u=>u.lessons.forEach(l=>{t++; if(lessonConsolidated(l))d++;}))); return {d,t}; }
@@ -408,7 +353,6 @@ function renderHome(){
   const due=dueKeys(globalItemKeys());
   const flats=flatLessons();
 
-  // module tabs
   let tabs=PATHS.map(p=>{
     const m=Math.round(moduleMastery(p)*100);
     const act=p.key===PATH.key?'act':'';
@@ -431,7 +375,6 @@ function renderHome(){
         <div class="bubble">${emoji}${crowns}</div>
         <div class="name">${L(l,'title')}</div></div>`;
     });
-    // checkpoint node (fechamento da unidade)
     const cpUnlocked=unitDone(u), cpMastered=isUnitMastered(u);
     const cpCls=['node','checkpoint']; if(!cpUnlocked)cpCls.push('locked'); if(cpMastered)cpCls.push('mastered');
     const cpEmoji=cpMastered?'🏆':(cpUnlocked?'🎯':'🔒');
@@ -481,7 +424,7 @@ function renderHome(){
     ${units}`;
 
   app.querySelectorAll('.modtab').forEach(b=>b.onclick=()=>{
-    PATH=PATHS.find(p=>p.key===b.dataset.mod); localStorage.setItem('flearn_module',PATH.key); renderHome();
+    PATH=PATHS.find(p=>p.key===b.dataset.mod); localStorage.setItem('hl7_module',PATH.key); renderHome();
   });
   app.querySelectorAll('.node:not(.locked):not(.checkpoint)').forEach(n=>{
     n.onclick=()=>startLesson(n.dataset.lesson,false);
@@ -495,9 +438,8 @@ function renderHome(){
 
 /* ============================== LESSON / REVIEW player ============================== */
 let SESS=null;
-// Fisher-Yates: nova ordem a cada sessão para não decorar por posição
 function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
-function startLesson(lessonId, isReview){
+function startLesson(lessonId){
   const fl=flatLessons().find(f=>f.lesson.id===lessonId);
   SESS={ mode:'lesson', lesson:fl.lesson, unit:fl.unit,
     queue:shuffle([...fl.lesson.items]), idx:0, total:fl.lesson.items.length,
@@ -540,21 +482,10 @@ function renderTeach(){
   renderHeader();
   const c=SESS.lesson.card;
   const pts=L(c,'points').map(p=>`<li>${p}</li>`).join('');
-  const refs=Array.isArray(c.refs)?c.refs:[];
-  const refsHtml = refs.length ? `
-        <div class="refs">
-          <div class="rtitle">📖 ${t('deepenTitle')}</div>
-          ${refs.map((r,ri)=>{
-            const icon = r.kind==='material' ? '📗' : '📘';
-            const label = LANG==='EN' ? (r.labelEn??r.labelPt) : (r.labelPt??r.labelEn);
-            if(r.kind==='material'){
-              const m=label.match(/"([^"]+)"/);
-              const anchor=(m?m[1]:'').replace(/"/g,'&quot;');
-              return `<a href="${r.url}" data-md="${ri}" data-anchor="${anchor}"><span class="ricon">${icon}</span><span>${label}</span><span class="rext">⤢</span></a>`;
-            }
-            return `<a href="${r.url}" target="_blank" rel="noopener noreferrer"><span class="ricon">${icon}</span><span>${label}</span><span class="rext">↗</span></a>`;
-          }).join('')}
-        </div>` : '';
+  const refsHtml = (c.refs&&c.refs.length) ? `<div class="refs"><b style="font-size:12px;color:var(--muted)">${t('refs')}</b>${
+    c.refs.map(r=>`<a href="${r.url}" target="_blank" rel="noopener">
+      <span class="ref-kind ${r.kind}">${r.kind}</span>${LANG==='EN'?(r.labelEn||r.labelPt):(r.labelPt||r.labelEn)}</a>`).join('')
+  }</div>` : '';
   document.getElementById('app').innerHTML=`
     <div class="player">
       <div class="pbar-wrap"><div class="pbar" style="width:0%"></div></div>
@@ -573,14 +504,6 @@ function renderTeach(){
     </div>`;
   document.getElementById('bExit').onclick=renderHome;
   document.getElementById('bGo').onclick=()=>{SESS.showTeach=false;renderQuestion();};
-  document.querySelectorAll('.refs a[data-md]').forEach(a=>{
-    a.onclick=e=>{
-      e.preventDefault();
-      const r=refs[+a.dataset.md];
-      const title=LANG==='EN'?(r.labelEn??r.labelPt):(r.labelPt??r.labelEn);
-      openMaterial(r.url, a.dataset.anchor||'', title);
-    };
-  });
 }
 
 function renderQuestion(){
@@ -596,7 +519,6 @@ function renderQuestion(){
     media='<div class="qmedia">'+q.media.filter(m=>m.type==='image'&&m.src)
       .map(m=>`<img src="${m.src}" alt="${LANG==='EN'?(m.altEn||''):(m.altPt||'')}" loading="lazy">`).join('')+'</div>';
   }
-  // embaralha a ordem das alternativas (a letra/chave viaja com o texto → explicações seguem corretas)
   const opts=shuffle([...q.options]).map(o=>`
     <div class="opt" data-key="${o.key}">
       <input type="${isMulti?'checkbox':'radio'}" name="opt" value="${o.key}">
@@ -650,7 +572,6 @@ function checkAnswer(key,q,isMulti){
     else if(rset.has(k)&&!cset.has(k)) el.classList.add('miss');
   });
 
-  // SRS + XP: lock grade on FIRST encounter of this item in the session
   const firstTime=!SESS.seen.has(key);
   if(firstTime){
     SESS.seen.add(key);
@@ -659,8 +580,6 @@ function checkAnswer(key,q,isMulti){
     if(correct){ SESS.correctFirst++; SESS.xp+=10; addXp(10); }
   } else if(correct){ SESS.xp+=2; addXp(2); }
 
-  // wrong → requeue at end (Duolingo style), grade already locked.
-  // checkpoint = modo prova: uma tentativa por questão, sem reenfileirar.
   if(!correct && SESS.mode!=='checkpoint') SESS.queue.push(key);
 
   const fb=document.getElementById('fb');
@@ -685,7 +604,7 @@ function renderResults(){
     title=t('cpDoneT');
     if(passed){
       emoji='🏆';
-      if(!isUnitMastered(SESS.unit)){ setUnitMastered(SESS.unit); SESS.xp+=20; addXp(20); }  // bônus 1ª vez
+      if(!isUnitMastered(SESS.unit)){ setUnitMastered(SESS.unit); SESS.xp+=20; addXp(20); }
       sub=`<p class="rd-sub" style="color:var(--accent)">${t('cpPassed')}</p>`;
     }else{
       emoji='💪'; sub=`<p class="rd-sub" style="color:var(--gold)">${t('cpFailed')}</p>`;
@@ -715,14 +634,14 @@ function renderResults(){
   const r=document.getElementById('bRetry'); if(r) r.onclick=()=>startCheckpoint(SESS.unit.id);
 }
 
-/* ============================== AI explain (optional) ============================== */
+/* ============================== AI explain ============================== */
 async function aiExplain(q,chosen,right){
-  const key=localStorage.getItem('flearn_apikey');
+  const key=localStorage.getItem('hl7_apikey');
   const box=document.getElementById('aiBox');
   box.className='ai-box show';
   if(!key){ box.textContent=t('needKey'); return; }
   box.textContent=t('thinking');
-  const model=localStorage.getItem('flearn_aimodel')||'claude-haiku-4-5-20251001';
+  const model=localStorage.getItem('hl7_aimodel')||'claude-haiku-4-5-20251001';
   const qtext=LANG==='EN'?q.qEn:q.qPt;
   const optTxt=q.options.map(o=>`${o.key}. ${LANG==='EN'?o.en:o.pt}${o.correct?' [CORRECT]':''}`).join('\n');
   const langName=LANG==='EN'?'English':'Brazilian Portuguese';
@@ -755,157 +674,28 @@ function applyLangLabels(){
   $('setSave').textContent=LANG==='EN'?'Save':'Salvar';
   $('btnReset').textContent=LANG==='EN'?'Reset progress':'Zerar progresso';
 }
-/* ===================== material (.md) viewer ===================== */
-const MDCACHE={};
-function escHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
-function mdInline(s){
-  return s
-    .replace(/`([^`]+)`/g,(m,c)=>`<code>${c}</code>`)
-    .replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>')
-    .replace(/__([^_]+)__/g,'<strong>$1</strong>')
-    .replace(/(^|[^*])\*([^*\n]+)\*/g,'$1<em>$2</em>')
-    .replace(/\[([^\]]+)\]\(([^)]+)\)/g,'<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
-}
-function mdToHtml(md){
-  const lines=md.replace(/\r\n/g,'\n').split('\n');
-  let html='',i=0,inCode=false,codeBuf='',listType=null;
-  const closeList=()=>{ if(listType){html+=`</${listType}>`;listType=null;} };
-  while(i<lines.length){
-    const line=lines[i];
-    if(/^```/.test(line)){
-      if(!inCode){closeList();inCode=true;codeBuf='';}
-      else{html+=`<pre><code>${escHtml(codeBuf)}</code></pre>`;inCode=false;}
-      i++;continue;
-    }
-    if(inCode){codeBuf+=line+'\n';i++;continue;}
-    if(/^\s*\|/.test(line) && i+1<lines.length && /-/.test(lines[i+1]) && /^\s*\|?[\s:|-]+\|/.test(lines[i+1])){
-      closeList();
-      const cells=l=>l.trim().replace(/^\||\|$/g,'').split('|').map(c=>mdInline(escHtml(c.trim())));
-      const header=cells(line); i+=2; const rows=[];
-      while(i<lines.length && /^\s*\|/.test(lines[i])){rows.push(cells(lines[i]));i++;}
-      html+='<table><thead><tr>'+header.map(h=>`<th>${h}</th>`).join('')+'</tr></thead><tbody>'
-        +rows.map(r=>'<tr>'+r.map(c=>`<td>${c}</td>`).join('')+'</tr>').join('')+'</tbody></table>';
-      continue;
-    }
-    const h=line.match(/^(#{1,6})\s+(.*)$/);
-    if(h){closeList();const lvl=h[1].length;html+=`<h${lvl}>${mdInline(escHtml(h[2].trim()))}</h${lvl}>`;i++;continue;}
-    if(/^\s*([-*_])\1{2,}\s*$/.test(line)){closeList();html+='<hr>';i++;continue;}
-    if(/^\s*>\s?/.test(line)){closeList();html+=`<blockquote>${mdInline(escHtml(line.replace(/^\s*>\s?/,'')))}</blockquote>`;i++;continue;}
-    const ul=line.match(/^\s*[-*+]\s+(.*)$/);
-    if(ul){if(listType!=='ul'){closeList();html+='<ul>';listType='ul';}html+=`<li>${mdInline(escHtml(ul[1]))}</li>`;i++;continue;}
-    const ol=line.match(/^\s*\d+\.\s+(.*)$/);
-    if(ol){if(listType!=='ol'){closeList();html+='<ol>';listType='ol';}html+=`<li>${mdInline(escHtml(ol[1]))}</li>`;i++;continue;}
-    if(/^\s*$/.test(line)){closeList();i++;continue;}
-    closeList();
-    let para=line;i++;
-    const special=l=>/^\s*$/.test(l)||/^(#{1,6})\s/.test(l)||/^```/.test(l)||/^\s*[-*+]\s/.test(l)||/^\s*\d+\.\s/.test(l)||/^\s*\|/.test(l)||/^\s*>/.test(l);
-    while(i<lines.length && !special(lines[i])){para+=' '+lines[i];i++;}
-    html+=`<p>${mdInline(escHtml(para))}</p>`;
-  }
-  if(inCode) html+=`<pre><code>${escHtml(codeBuf)}</code></pre>`;
-  closeList();
-  return html;
-}
-/* O material .md é bilíngue (EN seguido de PT, ou "EN / PT" na mesma linha).
-   Filtro heurístico p/ mostrar só um idioma: detecta PT por acentos/palavras comuns. */
-function mdStrip(line){ return line.replace(/^\s*(?:[-*+]\s+|\d+\.\s+|#{1,6}\s+|>\s?)?/,'').trim(); }
-function mdLangOf(text){
-  const t=text.replace(/`[^`]*`/g,' ').replace(/https?:\/\/\S+/g,' ');
-  if(!/[A-Za-zÀ-ÿ]/.test(t)) return 'NEU';
-  if(/[áàâãéêíóôõúüç]/i.test(t)) return 'PT';
-  if(/\b(você|voce|não|nao|são|sao|também|está|da|do|das|dos|na|no|nas|nos|para|com|uma|por|que|seu|sua|pela|pelo|ção|ões|qualquer|conformidade)\b/i.test(t)) return 'PT';
-  return 'EN';
-}
-function mdSplitInline(line,mode){
-  const m=line.match(/^(\s*(?:[-*+]\s+|\d+\.\s+|#{1,6}\s+|>\s?)?)([\s\S]*)$/);
-  const prefix=m[1], rest=m[2];
-  if(rest.includes(' / ')){
-    const parts=rest.split(' / ');
-    if(parts.length===2){
-      const a=mdLangOf(parts[0]), b=mdLangOf(parts[1]);
-      if(a!==b && a!=='NEU' && b!=='NEU'){
-        if(mode==='EN') return prefix+(a==='EN'?parts[0]:parts[1]);
-        if(mode==='PT') return prefix+(a==='PT'?parts[0]:parts[1]);
-      }
-    }
-  }
-  return line;
-}
-function mdFilterBilingual(md,mode){
-  if(mode==='BOTH') return md;
-  const lines=md.replace(/\r\n/g,'\n').split('\n');
-  const isCode=[]; let inC=false;
-  for(const l of lines){ const f=/^```/.test(l); isCode.push(inC||f); if(f) inC=!inC; }
-  const skip=lines.map((l,i)=> isCode[i] || /^\s*$/.test(l) || /^```/.test(l));
-  const isHead=lines.map(l=>/^\s*#{1,6}\s/.test(l));
-  const cls=lines.map((l,i)=> skip[i]?'SKIP':mdLangOf(mdStrip(l)));
-  const other = mode==='PT'?'EN':'PT';
-  const near=(i,d)=>{ for(let j=i+d;j>=0&&j<lines.length;j+=d){ if(!skip[j]) return cls[j]; } return null; };
-  const out=[];
-  for(let i=0;i<lines.length;i++){
-    if(skip[i]){ out.push(lines[i]); continue; }
-    const split=mdSplitInline(lines[i],mode);
-    if(split!==lines[i]){ out.push(split); continue; }
-    if(isHead[i]){ out.push(lines[i]); continue; }        // nunca remove títulos
-    if(cls[i]===other && (near(i,-1)===mode || near(i,1)===mode)) continue; // remove a tradução
-    out.push(lines[i]);
-  }
-  return out.join('\n');
-}
-const MDVIEW={url:'',anchor:'',mode:'PT'};
-function mdRender(){
-  const body=$('mdBody');
-  body.innerHTML=mdToHtml(mdFilterBilingual(MDCACHE[MDVIEW.url]||'', MDVIEW.mode));
-  [...$('mdLangTog').children].forEach(b=>b.classList.toggle('on', b.dataset.mode===MDVIEW.mode));
-  body.parentElement.scrollTop=0;
-  if(MDVIEW.anchor){
-    const want=MDVIEW.anchor.trim().toLowerCase();
-    const hit=[...body.querySelectorAll('h1,h2,h3,h4,h5,h6')].find(el=>el.textContent.toLowerCase().includes(want));
-    if(hit){ hit.classList.add('md-hit'); hit.scrollIntoView({block:'start'}); }
-  }
-}
-async function openMaterial(url,anchor,title){
-  const body=$('mdBody');
-  MDVIEW.url=url; MDVIEW.anchor=anchor; MDVIEW.mode=LANG;
-  $('mdTitle').textContent=title||(LANG==='EN'?'Course material':'Material do curso');
-  $('mdBothBtn').textContent=LANG==='EN'?'Both':'Ambos';
-  $('mdModal').classList.add('show');
-  body.innerHTML=`<p>${LANG==='EN'?'Loading…':'Carregando…'}</p>`;
-  try{
-    if(!MDCACHE[url]) MDCACHE[url]=await (await fetch(url)).text();
-  }catch(e){
-    body.innerHTML=`<p>⚠️ ${LANG==='EN'?'Could not load the material file':'Não foi possível carregar o arquivo do material'} (<code>${escHtml(url)}</code>).</p>
-      <p class="hint">${LANG==='EN'?'Serve the project from the repository root so the .md files are reachable: <code>python -m http.server</code> at the repo root, then open <code>/tests/learn.html</code>.':'Sirva o projeto a partir da raiz do repositório para que os arquivos .md fiquem acessíveis: <code>python -m http.server</code> na raiz e abra <code>/tests/learn.html</code>.'}</p>`;
-    return;
-  }
-  mdRender();
-}
-$('mdLangTog').onclick=e=>{ const b=e.target.closest('button'); if(!b)return; MDVIEW.mode=b.dataset.mode; mdRender(); };
-$('mdClose').onclick=()=>$('mdModal').classList.remove('show');
-$('mdModal').onclick=e=>{ if(e.target===$('mdModal')) $('mdModal').classList.remove('show'); };
-
-$('btnLang').onclick=()=>{ LANG=LANG==='EN'?'PT':'EN'; localStorage.setItem('flearn_lang',LANG); applyLangLabels();
+$('btnLang').onclick=()=>{ LANG=LANG==='EN'?'PT':'EN'; localStorage.setItem('hl7_lang',LANG); applyLangLabels();
   if(SESS && !SESS.showTeach && SESS.idx<SESS.queue.length) renderQuestion();
   else if(SESS && SESS.showTeach) renderTeach();
   else renderHome(); };
-$('btnSettings').onclick=()=>{ $('apiKey').value=localStorage.getItem('flearn_apikey')||'';
-  $('aiModel').value=localStorage.getItem('flearn_aimodel')||'claude-haiku-4-5-20251001';
+$('btnSettings').onclick=()=>{ $('apiKey').value=localStorage.getItem('hl7_apikey')||'';
+  $('aiModel').value=localStorage.getItem('hl7_aimodel')||'claude-haiku-4-5-20251001';
   $('settingsModal').classList.add('show'); };
 $('setClose').onclick=()=>$('settingsModal').classList.remove('show');
 $('setSave').onclick=()=>{ const k=$('apiKey').value.trim();
-  if(k) localStorage.setItem('flearn_apikey',k); else localStorage.removeItem('flearn_apikey');
-  localStorage.setItem('flearn_aimodel',$('aiModel').value);
+  if(k) localStorage.setItem('hl7_apikey',k); else localStorage.removeItem('hl7_apikey');
+  localStorage.setItem('hl7_aimodel',$('aiModel').value);
   $('settingsModal').classList.remove('show'); };
 $('btnReset').onclick=()=>{ if(!confirm(LANG==='EN'?'Reset ALL progress, XP and streak?':'Zerar TODO o progresso, XP e streak?'))return;
   localStorage.removeItem(SRS_K); localStorage.removeItem(GAM_K);
-  SRS={}; GAM={xp:0,streak:0,lastDay:null,crowns:{}}; $('settingsModal').classList.remove('show'); renderHome(); };
+  SRS={}; GAM={xp:0,streak:0,lastDay:null,crowns:{},mastered:{}}; $('settingsModal').classList.remove('show'); renderHome(); };
 
 /* ============================== init ============================== */
 (async function(){
   applyLangLabels();
   try{ await loadAll(); renderHome(); }
   catch(e){ $('app').innerHTML=`<div class="readiness"><h2>⚠️ ${e.message}</h2>
-    <p class="rd-sub">Abra com um servidor local a partir da <b>raiz do repositório</b>: <code>python -m http.server</code> na raiz e acesse <code>/tests/learn.html</code> (assim o material do curso em <code>.md</code> também fica acessível).</p></div>`; }
+    <p class="rd-sub">Abra com um servidor local: <code>node server.js</code> na raiz do projeto e acesse <code>http://localhost:8001/learn.html</code>.</p></div>`; }
 })();
 </script>
 </body>
