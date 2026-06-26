@@ -1,0 +1,176 @@
+[
+  {
+    "id": 1,
+    "titleEn": "Use existing extensions – interpreterRequired",
+    "titlePt": "Usar extensões existentes – interpreterRequired",
+    "qEn": "Refer to the image. An implementer must indicate that the patient requires an interpreter. Which option correctly defines the extension instance?",
+    "qPt": "Consulte a imagem. É necessário indicar que o paciente requer intérprete. Qual opção define corretamente a instância da extensão?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module2/q1.png",
+        "altEn": "StructureDefinition: patient-interpreterRequired screen",
+        "altPt": "Tela do StructureDefinition patient-interpreterRequired",
+        "captionEn": "Extension summary and XML/JSON tabs",
+        "captionPt": "Resumo da extensão e abas XML/JSON"
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "<code>&lt;extension url=&quot;http://hl7.org/fhir/StructureDefinition/patient-interpreterRequired&quot;&gt; &lt;valueBoolean value=&quot;true&quot;/&gt; &lt;/extension&gt;</code>",
+        "pt": "<code>&lt;extension url=&quot;http://hl7.org/fhir/StructureDefinition/patient-interpreterRequired&quot;&gt; &lt;valueBoolean value=&quot;true&quot;/&gt; &lt;/extension&gt;</code>",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "<code>&lt;extension&gt; &lt;url value=&quot;http://hl7.org/fhir/StructureDefinition/patient-interpreterRequired&quot;/&gt; &lt;valueBoolean value=&quot;true&quot;/&gt; &lt;/extension&gt;</code>",
+        "pt": "<code>&lt;extension&gt; &lt;url value=&quot;http://hl7.org/fhir/StructureDefinition/patient-interpreterRequired&quot;/&gt; &lt;valueBoolean value=&quot;true&quot;/&gt; &lt;/extension&gt;</code>",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "<code>interpreterRequired &lt;extension url=&quot;http://hl7.org/fhir/StructureDefinition/patient-interpreterRequired&quot;&gt; &lt;valueBoolean value=&quot;true&quot;/&gt; &lt;/extension&gt; &lt;/interpreterRequired&gt;</code>",
+        "pt": "<code>interpreterRequired &lt;extension url=&quot;http://hl7.org/fhir/StructureDefinition/patient-interpreterRequired&quot;&gt; &lt;valueBoolean value=&quot;true&quot;/&gt; &lt;/extension&gt; &lt;/interpreterRequired&gt;</code>",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "<code>&lt;interpreterRequired&gt; &lt;extension url=&quot;http://hl7.org/fhir/StructureDefinition/patient-interpreterRequired&quot;&gt; &lt;valueBoolean value=&quot;true&quot;/&gt; &lt;/extension&gt; &lt;/interpreterRequired&gt;</code>",
+        "pt": "<code>&lt;interpreterRequired&gt; &lt;extension url=&quot;http://hl7.org/fhir/StructureDefinition/patient-interpreterRequired&quot;&gt; &lt;valueBoolean value=&quot;true&quot;/&gt; &lt;/extension&gt; &lt;/interpreterRequired&gt;</code>",
+        "correct": true
+      }
+    ],
+    "explanationEn": "D is correct. In FHIR XML, extensions on Patient elements are serialized with the extension's short name as the outer element tag (e.g., <interpreterRequired>), and inside it the <extension url=\"...\"> element specifies the canonical URL and value. A is missing the outer wrapper. B places url as a child element instead of an XML attribute. C omits the opening < on interpreterRequired, making it malformed XML.",
+    "explanationPt": "D está correta. Em FHIR XML, extensões em elementos Patient são serializadas com o nome curto da extensão como tag XML externa (ex.: <interpreterRequired>), e dentro dela o elemento <extension url=\"...\"> especifica a URL canônica e o valor. A não tem o wrapper externo. B coloca url como elemento filho em vez de atributo XML. C omite o < de abertura do interpreterRequired, tornando o XML malformado."
+  },
+  {
+    "id": 2,
+    "titleEn": "Use existing extensions – PQ-translation on Quantity",
+    "titlePt": "Usar extensões existentes – PQ-translation em Quantity",
+    "qEn": "Refer to the image. A lab system must send an alternate representation of the same physical quantity (cholesterol) using different unit code systems. The information must be exchanged on Observation.value[x] (Quantity). Which option most appropriately defines the extension instance?",
+    "qPt": "Consulte a imagem. Um sistema de laboratório deve enviar uma representação alternativa da mesma quantidade física (colesterol) usando diferentes sistemas de código de unidade. A informação deve ser trocada em Observation.value[x] (Quantity). Qual opção define mais corretamente a instância da extensão?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module2/q2.png",
+        "altEn": "StructureDefinition iso21090-PQ-translation – use on Element ID Quantity",
+        "altPt": "StructureDefinition iso21090-PQ-translation – uso no Element ID Quantity",
+        "captionEn": "Extension content shows context: Quantity, type: valueQuantity",
+        "captionPt": "Conteúdo da extensão: contexto Quantity, tipo: valueQuantity"
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "<pre><code>{\n  \"resourceType\": \"Observation\",\n  \"valueQuantity\": {\n    \"value\": 6.3,\n    \"system\": \"http://unitsofmeasure.org\",\n    \"code\": \"mmol/L\",\n    \"extension\": [\n      {\n        \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-PQ-translation\",\n        \"valueQuantity\": {\n          \"value\": 113,\n          \"system\": \"http://systeminternational.org/unitcodes\",\n          \"code\": \"mg/dL\"\n        }\n      },\n      {\n        \"url\": \"http://ghh.org/fhir/StructureDefinition/unit-translation\",\n        \"valueQuantity\": {\n          \"value\": 6300,\n          \"system\": \"http://mylabs.org/unitcodes\",\n          \"code\": \"umol/l\"\n        }\n      }\n    ]\n  }\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"resourceType\": \"Observation\",\n  \"valueQuantity\": {\n    \"value\": 6.3,\n    \"system\": \"http://unitsofmeasure.org\",\n    \"code\": \"mmol/L\",\n    \"extension\": [\n      {\n        \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-PQ-translation\",\n        \"valueQuantity\": {\n          \"value\": 113,\n          \"system\": \"http://systeminternational.org/unitcodes\",\n          \"code\": \"mg/dL\"\n        }\n      },\n      {\n        \"url\": \"http://ghh.org/fhir/StructureDefinition/unit-translation\",\n        \"valueQuantity\": {\n          \"value\": 6300,\n          \"system\": \"http://mylabs.org/unitcodes\",\n          \"code\": \"umol/l\"\n        }\n      }\n    ]\n  }\n}</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "<pre><code>{\n  \"resourceType\": \"Observation\",\n  \"valueQuantity\": {\n    \"value\": 6.3,\n    \"system\": \"http://unitsofmeasure.org\",\n    \"code\": \"mmol/L\"\n  },\n  \"extension\": [\n    {\n      \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-PQ-translation\",\n      \"valueQuantity\": {\n        \"value\": 113,\n        \"system\": \"http://systeminternational.org/unitcodes\",\n        \"code\": \"mg/dL\"\n      }\n    }\n  ],\n  \"extension\": [\n    {\n      \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-PQ-translation\",\n      \"valueQuantity\": {\n        \"value\": 6300,\n        \"system\": \"http://mylabs.org/unitcodes\",\n        \"code\": \"umol/l\"\n      }\n    }\n  ]\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"resourceType\": \"Observation\",\n  \"valueQuantity\": {\n    \"value\": 6.3,\n    \"system\": \"http://unitsofmeasure.org\",\n    \"code\": \"mmol/L\"\n  },\n  \"extension\": [\n    {\n      \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-PQ-translation\",\n      \"valueQuantity\": {\n        \"value\": 113,\n        \"system\": \"http://systeminternational.org/unitcodes\",\n        \"code\": \"mg/dL\"\n      }\n    }\n  ],\n  \"extension\": [\n    {\n      \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-PQ-translation\",\n      \"valueQuantity\": {\n        \"value\": 6300,\n        \"system\": \"http://mylabs.org/unitcodes\",\n        \"code\": \"umol/l\"\n      }\n    }\n  ]\n}</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "<pre><code>{\n  \"resourceType\": \"Observation\",\n  \"extension\": [\n    {\n      \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-PQ-translation\",\n      \"valueQuantity\": {\n        \"value\": 113,\n        \"system\": \"http://systeminternational.org/unitcodes\",\n        \"code\": \"mg/dL\"\n      }\n    },\n    {\n      \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-PQ-translation\",\n      \"valueQuantity\": {\n        \"value\": 6300,\n        \"system\": \"http://mylabs.org/unitcodes\",\n        \"code\": \"umol/l\"\n      }\n    }\n  ],\n  \"valueQuantity\": {\n    \"value\": 6.3,\n    \"system\": \"http://unitsofmeasure.org\",\n    \"code\": \"mmol/L\"\n  }\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"resourceType\": \"Observation\",\n  \"extension\": [\n    {\n      \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-PQ-translation\",\n      \"valueQuantity\": {\n        \"value\": 113,\n        \"system\": \"http://systeminternational.org/unitcodes\",\n        \"code\": \"mg/dL\"\n      }\n    },\n    {\n      \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-PQ-translation\",\n      \"valueQuantity\": {\n        \"value\": 6300,\n        \"system\": \"http://mylabs.org/unitcodes\",\n        \"code\": \"umol/l\"\n      }\n    }\n  ],\n  \"valueQuantity\": {\n    \"value\": 6.3,\n    \"system\": \"http://unitsofmeasure.org\",\n    \"code\": \"mmol/L\"\n  }\n}</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "<pre><code>{\n  \"resourceType\": \"Observation\",\n  \"valueQuantity\": {\n    \"value\": 6.3,\n    \"system\": \"http://unitsofmeasure.org\",\n    \"code\": \"mmol/L\",\n    \"extension\": [\n      {\n        \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-PQ-translation\",\n        \"valueQuantity\": {\n          \"value\": 113,\n          \"system\": \"http://systeminternational.org/unitcodes\",\n          \"code\": \"mg/dL\"\n        }\n      },\n      {\n        \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-PQ-translation\",\n        \"valueQuantity\": {\n          \"value\": 6300,\n          \"system\": \"http://mylabs.org/unitcodes\",\n          \"code\": \"umol/l\"\n        }\n      }\n    ]\n  }\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"resourceType\": \"Observation\",\n  \"valueQuantity\": {\n    \"value\": 6.3,\n    \"system\": \"http://unitsofmeasure.org\",\n    \"code\": \"mmol/L\",\n    \"extension\": [\n      {\n        \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-PQ-translation\",\n        \"valueQuantity\": {\n          \"value\": 113,\n          \"system\": \"http://systeminternational.org/unitcodes\",\n          \"code\": \"mg/dL\"\n        }\n      },\n      {\n        \"url\": \"http://hl7.org/fhir/StructureDefinition/iso21090-PQ-translation\",\n        \"valueQuantity\": {\n          \"value\": 6300,\n          \"system\": \"http://mylabs.org/unitcodes\",\n          \"code\": \"umol/l\"\n        }\n      }\n    ]\n  }\n}</code></pre>",
+        "correct": true
+      }
+    ],
+    "explanationEn": "D is correct. The iso21090-PQ-translation extension must be placed inside the Quantity object (valueQuantity.extension) to represent alternate representations of the same value. Both translations use the same canonical extension URL in an array. A uses a different extension URL for the second translation. B duplicates the 'extension' key at Observation root level (invalid JSON) and places extensions at the wrong context. C places extensions at the Observation root instead of inside valueQuantity.",
+    "explanationPt": "D está correta. A extensão iso21090-PQ-translation deve ser colocada dentro do objeto Quantity (valueQuantity.extension) para representar representações alternativas do mesmo valor. Ambas as traduções usam a mesma URL de extensão canônica em um array. A usa URL de extensão diferente para a segunda tradução. B duplica a chave 'extension' no nível raiz de Observation (JSON inválido) e coloca extensões no contexto errado. C coloca extensões na raiz de Observation em vez de dentro de valueQuantity."
+  },
+  {
+    "id": 3,
+    "titleEn": "Use existing extensions – patient-contactParty",
+    "titlePt": "Usar extensões existentes – patient-contactParty",
+    "qEn": "The patient's contact party is his father (John Cena). Demographics are captured in the RelatedPerson resource. After setting the extension url to \"http://ghh.org/fhir/StructureDefinition/patient-contactParty\", which JSON fragment is correct for this use case?",
+    "qPt": "O responsável/contato do paciente é o pai (John Cena). Os dados demográficos são capturados em RelatedPerson. Após definir a url da extensão como \"http://ghh.org/fhir/StructureDefinition/patient-contactParty\", qual fragmento JSON está correto para este caso?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "<pre><code>{\n  \"extension\": [{\n    \"url\": \"http://ghh.org/fhir/StructureDefinition/patient-contactParty\",\n    \"valueContactDetail\": { \"name\": \"John Cena\" }\n  }]\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"extension\": [{\n    \"url\": \"http://ghh.org/fhir/StructureDefinition/patient-contactParty\",\n    \"valueContactDetail\": { \"name\": \"John Cena\" }\n  }]\n}</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "<pre><code>{\n  \"extension\": [{\n    \"url\": \"http://ghh.org/fhir/StructureDefinition/patient-contactParty\",\n    \"valueString\": \"RelatedPerson/9087\"\n  }]\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"extension\": [{\n    \"url\": \"http://ghh.org/fhir/StructureDefinition/patient-contactParty\",\n    \"valueString\": \"RelatedPerson/9087\"\n  }]\n}</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "<pre><code>{\n  \"extension\": [{\n    \"url\": \"http://ghh.org/fhir/StructureDefinition/patient-contactParty\",\n    \"valueReference\": { \"reference\": \"RelatedPerson/9087\" }\n  }]\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"extension\": [{\n    \"url\": \"http://ghh.org/fhir/StructureDefinition/patient-contactParty\",\n    \"valueReference\": { \"reference\": \"RelatedPerson/9087\" }\n  }]\n}</code></pre>",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "en": "<pre><code>{\n  \"extension\": [{\n    \"url\": \"http://ghh.org/fhir/StructureDefinition/patient-contactParty\",\n    \"valueHumanName\": { \"family\": \"Cena\", \"given\": [\"John\"] }\n  }]\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"extension\": [{\n    \"url\": \"http://ghh.org/fhir/StructureDefinition/patient-contactParty\",\n    \"valueHumanName\": { \"family\": \"Cena\", \"given\": [\"John\"] }\n  }]\n}</code></pre>",
+        "correct": false
+      }
+    ],
+    "explanationEn": "C is correct. When an extension carries a Reference to another resource (RelatedPerson), the value is expressed as valueReference with { \"reference\": \"RelatedPerson/9087\" }. A uses valueContactDetail (inline data type, not a reference). B uses valueString for a reference (FHIR requires valueReference). D uses valueHumanName (inline name data), bypassing the RelatedPerson resource that holds demographics.",
+    "explanationPt": "C está correta. Quando uma extensão carrega uma Reference a outro recurso (RelatedPerson), o valor é expresso como valueReference com { \"reference\": \"RelatedPerson/9087\" }. A usa valueContactDetail (tipo inline, não uma referência). B usa valueString para uma referência (FHIR exige valueReference). D usa valueHumanName (dados de nome inline), ignorando o recurso RelatedPerson que contém os dados demográficos."
+  },
+  {
+    "id": 4,
+    "titleEn": "Use existing extensions – partner surname on HumanName.family",
+    "titlePt": "Usar extensões existentes – sobrenome do(a) parceiro(a) em HumanName.family",
+    "qEn": "Refer to the image. The implementer must send both the patient's birth family name and the surname derived from the partner/spouse. The Patient resource has Patient.name (HumanName). According to the extension shown, which JSON fragment is correct?",
+    "qPt": "Consulte a imagem. O implementador deve enviar o sobrenome de nascimento do paciente e o sobrenome derivado do(a) parceiro(a)/cônjuge. O recurso Patient possui Patient.name (HumanName). De acordo com a extensão mostrada, qual fragmento JSON está correto?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module2/q4.png",
+        "altEn": "StructureDefinition humanname-partner-name (use on HumanName.family)",
+        "altPt": "StructureDefinition humanname-partner-name (uso em HumanName.family)",
+        "captionEn": "Extension to carry partner-derived family name on the primitive element HumanName.family",
+        "captionPt": "Extensão para levar o sobrenome derivado do(a) parceiro(a) no elemento primitivo HumanName.family"
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "<pre><code>{\n  \"resourceType\": \"Patient\",\n  \"name\": [{\n    \"family\": \"Joshi\",\n    \"given\": [\"Aditya\"],\n    \"_family\": {\n      \"extension\": [{\n        \"url\": \"http://hl7.org/fhir/StructureDefinition/humanname-partner-name\",\n        \"valueString\": \"Sharma\"\n      }]\n    }\n  }]\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"resourceType\": \"Patient\",\n  \"name\": [{\n    \"family\": \"Joshi\",\n    \"given\": [\"Aditya\"],\n    \"_family\": {\n      \"extension\": [{\n        \"url\": \"http://hl7.org/fhir/StructureDefinition/humanname-partner-name\",\n        \"valueString\": \"Sharma\"\n      }]\n    }\n  }]\n}</code></pre>",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "<pre><code>{\n  \"resourceType\": \"Patient\",\n  \"extension\": [{\n    \"url\": \"http://hl7.org/fhir/StructureDefinition/humanname-partner-name\",\n    \"valueString\": \"Sharma\"\n  }],\n  \"name\": [{ \"family\": \"Joshi\", \"given\": [\"Aditya\"] }]\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"resourceType\": \"Patient\",\n  \"extension\": [{\n    \"url\": \"http://hl7.org/fhir/StructureDefinition/humanname-partner-name\",\n    \"valueString\": \"Sharma\"\n  }],\n  \"name\": [{ \"family\": \"Joshi\", \"given\": [\"Aditya\"] }]\n}</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "<pre><code>{\n  \"resourceType\": \"Patient\",\n  \"name\": [{\n    \"family\": \"Joshi\",\n    \"given\": [\"Aditya\"],\n    \"extension\": [{\n      \"url\": \"http://hl7.org/fhir/StructureDefinition/humanname-partner-name\",\n      \"valueString\": \"Sharma\"\n    }]\n  }]\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"resourceType\": \"Patient\",\n  \"name\": [{\n    \"family\": \"Joshi\",\n    \"given\": [\"Aditya\"],\n    \"extension\": [{\n      \"url\": \"http://hl7.org/fhir/StructureDefinition/humanname-partner-name\",\n      \"valueString\": \"Sharma\"\n    }]\n  }]\n}</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "<pre><code>{\n  \"resourceType\": \"Patient\",\n  \"name\": [{\n    \"family\": {\n      \"extension\": [{\n        \"url\": \"http://hl7.org/fhir/StructureDefinition/humanname-partner-name\",\n        \"valueString\": \"Sharma\"\n      }]\n    },\n    \"given\": [\"Aditya\"]\n  }]\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"resourceType\": \"Patient\",\n  \"name\": [{\n    \"family\": {\n      \"extension\": [{\n        \"url\": \"http://hl7.org/fhir/StructureDefinition/humanname-partner-name\",\n        \"valueString\": \"Sharma\"\n      }]\n    },\n    \"given\": [\"Aditya\"]\n  }]\n}</code></pre>",
+        "correct": false
+      }
+    ],
+    "explanationEn": "A is correct. To extend a primitive element (HumanName.family) in FHIR JSON, you use a shadow property prefixed with an underscore (_family). This companion object holds the extension array while the original 'family' property retains its string value. B places the extension at the Patient root level. C places it on the HumanName object (not the specific primitive). D incorrectly converts 'family' to an object — primitives must remain their original type; the extension goes in _family.",
+    "explanationPt": "A está correta. Para estender um elemento primitivo (HumanName.family) em FHIR JSON, usa-se uma propriedade sombra com prefixo sublinhado (_family). Esse objeto companheiro contém o array de extensões enquanto a propriedade 'family' original mantém seu valor string. B coloca a extensão no nível raiz do Patient. C coloca no objeto HumanName (não no primitivo específico). D converte 'family' incorretamente em um objeto — primitivos devem manter seu tipo original; a extensão vai em _family."
+  }
+]

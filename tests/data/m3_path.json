@@ -1,0 +1,676 @@
+{
+  "module": "module3",
+  "titlePt": "Módulo 3 – API REST, Search, Bundles e Operações",
+  "titleEn": "Module 3 – REST API, Search, Bundles & Operations",
+  "examNotePt": "~25% da prova — o módulo mais cobrado. Status HTTP, sintaxe de search e tipos de Bundle têm a maior densidade de distratores.",
+  "examNoteEn": "~25% of the exam — the most tested module. HTTP status, search syntax and Bundle types have the highest distractor density.",
+  "sources": {
+    "module3_1_q1": "quizzes/module3_1_q1.json",
+    "module3_2_q1": "quizzes/module3_2_q1.json",
+    "module3_2_q2": "quizzes/module3_2_q2.json",
+    "module3_3_q1": "quizzes/module3_3_q1.json",
+    "module3_4_q1": "quizzes/module3_4_q1.json",
+    "module3_4_q2": "quizzes/module3_4_q2.json",
+    "module3_4_q3": "quizzes/module3_4_q3.json",
+    "module3_5_q1": "quizzes/module3_5_q1.json",
+    "module3_5_q2": "quizzes/module3_5_q2.json",
+    "module3_cp": "quizzes/module3_cp.json"
+  },
+  "units": [
+    {
+      "id": "u1",
+      "titlePt": "REST API",
+      "titleEn": "REST API",
+      "color": "#6ee7b7",
+      "lessons": [
+        {
+          "id": "m3-l1",
+          "titlePt": "Verbos e códigos de sucesso",
+          "titleEn": "Verbs & success codes",
+          "card": {
+            "titlePt": "Cada verbo HTTP tem um recibo (status code)",
+            "titleEn": "Each HTTP verb has a receipt (status code)",
+            "analogyPt": "A API FHIR é um correio padronizado: cada envelope (verbo) tem finalidade fixa e gera um recibo (status). Misturar envelope com operação errada é o erro mais cobrado.",
+            "analogyEn": "The FHIR API is standardized mail: each envelope (verb) has a fixed purpose and gives a receipt (status). Mixing the wrong envelope with the wrong operation is the most tested mistake.",
+            "pointsPt": [
+              "<b>POST</b> [base]/[Recurso] = create → <b>201 Created</b> + header <b>Location</b> com o novo ID.",
+              "<b>GET</b> .../[id] = read → 200 OK. <b>GET</b> [base]/[Recurso] = search → 200 OK + Bundle searchset.",
+              "<b>PUT</b> .../[id] = update → 200 (ou 201 se criar). <b>DELETE</b> → 200 + OperationOutcome ou 204 No Content.",
+              "Busca sem resultados = <b>200 OK + Bundle.total=0</b>, nunca 404."
+            ],
+            "pointsEn": [
+              "<b>POST</b> [base]/[Resource] = create → <b>201 Created</b> + <b>Location</b> header with the new ID.",
+              "<b>GET</b> .../[id] = read → 200 OK. <b>GET</b> [base]/[Resource] = search → 200 OK + searchset Bundle.",
+              "<b>PUT</b> .../[id] = update → 200 (or 201 if it creates). <b>DELETE</b> → 200 + OperationOutcome or 204 No Content.",
+              "Search with no results = <b>200 OK + Bundle.total=0</b>, never 404."
+            ],
+            "trapPt": "O create retorna <b>201</b> (não 200) e o ID novo vem no header <b>Location</b>. Busca vazia nunca é 404.",
+            "trapEn": "Create returns <b>201</b> (not 200) and the new ID comes in the <b>Location</b> header. An empty search is never 404.",
+            "refs": [
+              { "kind": "spec", "labelPt": "RESTful API — verbos HTTP e interações", "labelEn": "RESTful API — HTTP verbs and interactions", "url": "https://hl7.org/fhir/R4/http.html" },
+              { "kind": "spec", "labelPt": "create — 201 e header Location", "labelEn": "create — 201 and the Location header", "url": "https://hl7.org/fhir/R4/http.html#create" },
+              { "kind": "material", "labelPt": "Material do curso — Módulo 3 · Unit 1 \"FHIR REST API\"", "labelEn": "Course material — Module 3 · Unit 1 \"FHIR REST API\"", "url": "../module-3.md" }
+            ]
+          },
+          "items": [
+            "module3_1_q1#1",
+            "module3_1_q1#2",
+            "module3_1_q1#3",
+            "module3_1_q1#4",
+            "module3_1_q1#5"
+          ]
+        },
+        {
+          "id": "m3-l2",
+          "titlePt": "Códigos de erro (400 vs 422)",
+          "titleEn": "Error codes (400 vs 422)",
+          "card": {
+            "titlePt": "Sintático vs semântico",
+            "titleEn": "Syntactic vs semantic",
+            "analogyPt": "400 é 'sua carta está rasgada' (formato quebrado); 422 é 'a carta está perfeita, mas o pedido é impossível' (viola uma regra).",
+            "analogyEn": "400 is 'your letter is torn' (broken format); 422 is 'the letter is perfect, but the request is impossible' (breaks a rule).",
+            "pointsPt": [
+              "<b>400</b> Bad Request = problema <b>sintático</b> (JSON/XML inválido, parâmetro malformado).",
+              "<b>422</b> Unprocessable Entity = bem formado mas <b>inválido semanticamente</b> (viola regra/perfil).",
+              "<b>404</b> = ID não existe · <b>405</b> = verbo não suportado · <b>409</b> = conflito de versão · <b>412</b> = pré-condição falhou.",
+              "Diferenciar 400 de 422 é distrator frequente: estrutura ok + regra violada = 422."
+            ],
+            "pointsEn": [
+              "<b>400</b> Bad Request = <b>syntactic</b> problem (invalid JSON/XML, malformed parameter).",
+              "<b>422</b> Unprocessable Entity = well-formed but <b>semantically invalid</b> (violates rule/profile).",
+              "<b>404</b> = ID doesn't exist · <b>405</b> = verb not supported · <b>409</b> = version conflict · <b>412</b> = precondition failed.",
+              "Telling 400 from 422 is a frequent distractor: structure ok + rule violated = 422."
+            ],
+            "trapPt": "JSON quebrado = 400. Recurso estruturalmente correto que viola validação/perfil = 422 (não 400).",
+            "trapEn": "Broken JSON = 400. A structurally correct resource that fails validation/profile = 422 (not 400).",
+            "refs": [
+              { "kind": "spec", "labelPt": "RESTful API — status HTTP e erros (400 vs 422)", "labelEn": "RESTful API — HTTP status and errors (400 vs 422)", "url": "https://hl7.org/fhir/R4/http.html#summary" },
+              { "kind": "spec", "labelPt": "OperationOutcome — detalhe do erro", "labelEn": "OperationOutcome — error detail", "url": "https://hl7.org/fhir/R4/operationoutcome.html" },
+              { "kind": "material", "labelPt": "Material do curso — Módulo 3 · Unit 1 (CRUD)", "labelEn": "Course material — Module 3 · Unit 1 (CRUD)", "url": "../module-3.md" }
+            ]
+          },
+          "items": [
+            "module3_1_q1#6",
+            "module3_1_q1#7",
+            "module3_1_q1#8",
+            "module3_1_q1#9"
+          ]
+        },
+        {
+          "id": "m3-l3",
+          "titlePt": "Operações condicionais",
+          "titleEn": "Conditional interactions",
+          "card": {
+            "titlePt": "Operações sem ID na URL (por query)",
+            "titleEn": "Operations without an ID in the URL (by query)",
+            "analogyPt": "Em vez de apontar pelo número do prontuário, você descreve 'o paciente com tal identificador' — o servidor encontra e age.",
+            "analogyEn": "Instead of pointing by record number, you describe 'the patient with this identifier' — the server finds it and acts.",
+            "pointsPt": [
+              "<b>Create condicional</b>: POST com header <b>If-None-Exist: [query]</b> — cria só se nada satisfizer a query.",
+              "<b>Update condicional</b>: PUT [base]/[Recurso]?param=valor.",
+              "<b>Delete condicional</b>: DELETE [base]/[Recurso]?param=valor.",
+              "A busca da condição que não acha nada retorna 200 + Bundle vazio (não 404)."
+            ],
+            "pointsEn": [
+              "<b>Conditional create</b>: POST with header <b>If-None-Exist: [query]</b> — creates only if nothing matches the query.",
+              "<b>Conditional update</b>: PUT [base]/[Resource]?param=value.",
+              "<b>Conditional delete</b>: DELETE [base]/[Resource]?param=value.",
+              "The matching search finding nothing returns 200 + empty Bundle (not 404)."
+            ],
+            "trapPt": "O create condicional usa o header <b>If-None-Exist</b>, não um parâmetro na URL.",
+            "trapEn": "Conditional create uses the <b>If-None-Exist</b> header, not a URL parameter.",
+            "refs": [
+              { "kind": "spec", "labelPt": "Conditional create/update/delete — operações por query", "labelEn": "Conditional create/update/delete — operations by query", "url": "https://hl7.org/fhir/R4/http.html#cond-update" },
+              { "kind": "material", "labelPt": "Material do curso — Módulo 3 · Unit 1 \"Conditional Interactions\"", "labelEn": "Course material — Module 3 · Unit 1 \"Conditional Interactions\"", "url": "../module-3.md" }
+            ]
+          },
+          "items": [
+            "module3_1_q1#10",
+            "module3_1_q1#11",
+            "module3_1_q1#12",
+            "module3_1_q1#13"
+          ]
+        },
+        {
+          "id": "m3-l4",
+          "titlePt": "Read, vread e history",
+          "titleEn": "Read, vread & history",
+          "card": {
+            "titlePt": "Leituras e histórico de versões",
+            "titleEn": "Reads and version history",
+            "analogyPt": "read é 'me dê a versão atual'; vread é 'me dê aquela versão específica'; history é 'me mostre o álbum de versões'.",
+            "analogyEn": "read is 'give me the current version'; vread is 'give me that specific version'; history is 'show me the version album'.",
+            "pointsPt": [
+              "<b>read</b>: GET .../[id] → recurso atual. <b>vread</b>: GET .../[id]/_history/[vid] → versão específica.",
+              "<b>history-instance</b>: GET .../[id]/_history → histórico de um recurso.",
+              "<b>history-type</b>: GET [base]/[Recurso]/_history → histórico de todos do tipo.",
+              "Update com versão desatualizada → 409 Conflict."
+            ],
+            "pointsEn": [
+              "<b>read</b>: GET .../[id] → current resource. <b>vread</b>: GET .../[id]/_history/[vid] → specific version.",
+              "<b>history-instance</b>: GET .../[id]/_history → one resource's history.",
+              "<b>history-type</b>: GET [base]/[Resource]/_history → history of all of that type.",
+              "Update with a stale version → 409 Conflict."
+            ],
+            "trapPt": "history-instance (um recurso) ≠ history-type (todos do tipo). Um servidor pode suportar um e não o outro.",
+            "trapEn": "history-instance (one resource) ≠ history-type (all of that type). A server may support one and not the other.",
+            "refs": [
+              { "kind": "spec", "labelPt": "read, vread & history — leituras e histórico de versões", "labelEn": "read, vread & history — reads and version history", "url": "https://hl7.org/fhir/R4/http.html#read" },
+              { "kind": "material", "labelPt": "Material do curso — Módulo 3 · Unit 1 (GET/Read)", "labelEn": "Course material — Module 3 · Unit 1 (GET/Read)", "url": "../module-3.md" }
+            ]
+          },
+          "items": [
+            "module3_1_q1#14",
+            "module3_1_q1#15",
+            "module3_1_q1#16",
+            "module3_1_q1#17"
+          ]
+        }
+      ],
+      "checkpoint": {
+        "items": [
+          "module3_cp#1",
+          "module3_cp#2",
+          "module3_cp#3",
+          "module3_cp#4"
+        ]
+      }
+    },
+    {
+      "id": "u2",
+      "titlePt": "FHIR Search",
+      "titleEn": "FHIR Search",
+      "color": "#a5b4fc",
+      "lessons": [
+        {
+          "id": "m3-l5",
+          "titlePt": "Tipos de parâmetro e token",
+          "titleEn": "Parameter types & token",
+          "card": {
+            "titlePt": "Cada tipo de parâmetro tem sua sintaxe",
+            "titleEn": "Each parameter type has its syntax",
+            "analogyPt": "Buscar string é como busca por 'começa com'; token é busca exata com etiqueta (sistema|código).",
+            "analogyEn": "String search is like 'starts with'; token is an exact search with a label (system|code).",
+            "pointsPt": [
+              "<b>string</b> name=John → parcial ('John' acha 'Johnson'). <b>token</b> code=system|code → exato.",
+              "<b>reference</b> patient=Patient/123 · <b>date</b> birthdate=ge1990-01-01 · <b>quantity</b> value-quantity=6.3||mmol/L · <b>number</b> probability=gt0.8.",
+              "Múltiplos parâmetros = <b>AND</b>; vírgula dentro de um parâmetro = <b>OR</b>.",
+              "O separador sistema|código do token é o <b>pipe</b> (|), não a barra (/)."
+            ],
+            "pointsEn": [
+              "<b>string</b> name=John → partial ('John' matches 'Johnson'). <b>token</b> code=system|code → exact.",
+              "<b>reference</b> patient=Patient/123 · <b>date</b> birthdate=ge1990-01-01 · <b>quantity</b> value-quantity=6.3||mmol/L · <b>number</b> probability=gt0.8.",
+              "Multiple parameters = <b>AND</b>; comma inside one parameter = <b>OR</b>.",
+              "The token system|code separator is the <b>pipe</b> (|), not the slash (/)."
+            ],
+            "trapPt": "<code>code=http://loinc.org|8867-4</code> está certo. Com barra (<code>/8867-4</code>) vira parte da URL e a busca falha.",
+            "trapEn": "<code>code=http://loinc.org|8867-4</code> is correct. With a slash (<code>/8867-4</code>) it becomes part of the URL and the search fails.",
+            "refs": [
+              { "kind": "spec", "labelPt": "Search — tipos de parâmetro e o tipo token", "labelEn": "Search — parameter types and the token type", "url": "https://hl7.org/fhir/R4/search.html#token" },
+              { "kind": "material", "labelPt": "Material do curso — Módulo 3 · Unit 2 \"Tipos de parâmetros\"", "labelEn": "Course material — Module 3 · Unit 2 \"Search Parameter Types\"", "url": "../module-3.md" }
+            ]
+          },
+          "items": [
+            "module3_2_q1#1",
+            "module3_2_q1#2",
+            "module3_2_q1#3"
+          ]
+        },
+        {
+          "id": "m3-l6",
+          "titlePt": "Disponibilidade de parâmetros",
+          "titleEn": "Parameter availability",
+          "card": {
+            "titlePt": "Nem todo recurso tem todo parâmetro",
+            "titleEn": "Not every resource has every parameter",
+            "analogyPt": "Cada recurso publica sua própria 'lista de filtros' — confira no CapabilityStatement antes de assumir.",
+            "analogyEn": "Each resource publishes its own 'filter list' — check the CapabilityStatement before assuming.",
+            "pointsPt": [
+              "Os parâmetros de busca suportados por recurso aparecem em <b>rest[].resource[].searchParam</b> do CapabilityStatement.",
+              "Parâmetros comuns existem para a maioria dos recursos: <b>_id, _lastUpdated, _profile, _tag, _security</b>.",
+              "Parâmetro desconhecido pode ser ignorado pelo servidor (a menos que com <b>Prefer: handling=strict</b> → erro).",
+              "Confirme o tipo do parâmetro (string/token/date) para montar a sintaxe correta."
+            ],
+            "pointsEn": [
+              "Supported search parameters per resource appear in the CapabilityStatement's <b>rest[].resource[].searchParam</b>.",
+              "Common parameters exist for most resources: <b>_id, _lastUpdated, _profile, _tag, _security</b>.",
+              "An unknown parameter may be ignored by the server (unless <b>Prefer: handling=strict</b> → error).",
+              "Confirm the parameter type (string/token/date) to build the correct syntax."
+            ],
+            "trapPt": "Antes de afirmar que uma busca funciona, verifique se aquele parâmetro existe para aquele recurso.",
+            "trapEn": "Before claiming a search works, verify that the parameter exists for that resource.",
+            "refs": [
+              { "kind": "spec", "labelPt": "SearchParameter Registry — quais parâmetros existem", "labelEn": "SearchParameter Registry — which parameters exist", "url": "https://hl7.org/fhir/R4/searchparameter-registry.html" },
+              { "kind": "spec", "labelPt": "Search — parâmetros padrão por recurso", "labelEn": "Search — standard parameters per resource", "url": "https://hl7.org/fhir/R4/search.html#standard" },
+              { "kind": "material", "labelPt": "Material do curso — Módulo 3 · Unit 2 (Query Approach)", "labelEn": "Course material — Module 3 · Unit 2 (Query Approach)", "url": "../module-3.md" }
+            ]
+          },
+          "items": [
+            "module3_2_q1#4",
+            "module3_2_q1#5",
+            "module3_2_q1#6"
+          ]
+        },
+        {
+          "id": "m3-l7",
+          "titlePt": "Prefixos e intervalos de data",
+          "titleEn": "Prefixes & date ranges",
+          "card": {
+            "titlePt": "Comparações com prefixo e intervalos com AND",
+            "titleEn": "Prefix comparisons and AND ranges",
+            "analogyPt": "Um intervalo precisa de duas cercas (início E fim), unidas por &. Vírgula derruba uma das cercas (vira OR).",
+            "analogyEn": "A range needs two fences (start AND end), joined by &. A comma knocks one fence down (becomes OR).",
+            "pointsPt": [
+              "Prefixos (date/number/quantity): <b>eq, ne, lt, gt, le, ge</b>. Sem prefixo = eq.",
+              "Intervalo precisa de <b>dois parâmetros com &</b>: <code>death-date=ge2022-01-01&death-date=lt2023-01-01</code>.",
+              "Vírgula (ge...,lt...) é <b>OR</b> e retorna fora do intervalo — armadilha clássica.",
+              "Ordenar: <b>_sort=-date</b> (o '-' = decrescente, mais recente primeiro)."
+            ],
+            "pointsEn": [
+              "Prefixes (date/number/quantity): <b>eq, ne, lt, gt, le, ge</b>. No prefix = eq.",
+              "A range needs <b>two parameters joined by &</b>: <code>death-date=ge2022-01-01&death-date=lt2023-01-01</code>.",
+              "A comma (ge...,lt...) is <b>OR</b> and returns results outside the range — classic trap.",
+              "Sort: <b>_sort=-date</b> ('-' = descending, most recent first)."
+            ],
+            "trapPt": "Intervalo de datas = dois parâmetros com <b>&</b> (AND). Vírgula = OR.",
+            "trapEn": "Date range = two parameters with <b>&</b> (AND). Comma = OR.",
+            "refs": [
+              { "kind": "spec", "labelPt": "Search — prefixos (gt, lt, ge…) e parâmetros de data", "labelEn": "Search — prefixes (gt, lt, ge…) and date parameters", "url": "https://hl7.org/fhir/R4/search.html#prefix" },
+              { "kind": "spec", "labelPt": "Search — date e intervalos com AND/OR", "labelEn": "Search — date and AND/OR ranges", "url": "https://hl7.org/fhir/R4/search.html#date" },
+              { "kind": "material", "labelPt": "Material do curso — Módulo 3 · Unit 2 (Number, Date)", "labelEn": "Course material — Module 3 · Unit 2 (Number, Date)", "url": "../module-3.md" }
+            ]
+          },
+          "items": [
+            "module3_2_q2#1",
+            "module3_2_q2#2",
+            "module3_2_q2#3",
+            "module3_2_q2#4"
+          ]
+        },
+        {
+          "id": "m3-l8",
+          "titlePt": "Globais, include e chaining",
+          "titleEn": "Globals, include & chaining",
+          "card": {
+            "titlePt": "Parâmetros _ e relações entre recursos",
+            "titleEn": "_ parameters and resource relationships",
+            "analogyPt": "_include traz 'os documentos citados'; _revinclude traz 'quem cita este'; chaining filtra por uma propriedade do recurso ligado.",
+            "analogyEn": "_include brings 'the documents cited'; _revinclude brings 'who cites this'; chaining filters by a linked resource's property.",
+            "pointsPt": [
+              "<b>_count</b> limita por página · <b>_sort</b> ordena · <b>_summary=true</b> retorna só elementos com flag Σ.",
+              "<b>_include=Observation:subject</b> inclui o referenciado; <b>_revinclude</b> inclui quem referencia.",
+              "<b>Chaining</b>: <code>Observation?subject:Patient.name=João</code> filtra pelo recurso ligado.",
+              "<b>_has</b> (reverse chaining): filtra pelo recurso que aponta para o atual.",
+              "Ex.: Observation mais recente → <code>?patient=Patient/123&_sort=-date&_count=1</code>."
+            ],
+            "pointsEn": [
+              "<b>_count</b> limits per page · <b>_sort</b> orders · <b>_summary=true</b> returns only Σ-flagged elements.",
+              "<b>_include=Observation:subject</b> includes the referenced; <b>_revinclude</b> includes those referencing.",
+              "<b>Chaining</b>: <code>Observation?subject:Patient.name=João</code> filters by the linked resource.",
+              "<b>_has</b> (reverse chaining): filters by the resource pointing at the current one.",
+              "E.g. latest Observation → <code>?patient=Patient/123&_sort=-date&_count=1</code>."
+            ],
+            "trapPt": "_include puxa o que o recurso referencia; _revinclude puxa quem o referencia. Não confunda os dois.",
+            "trapEn": "_include pulls what the resource references; _revinclude pulls who references it. Don't mix them up.",
+            "refs": [
+              { "kind": "spec", "labelPt": "Search — _include, _revinclude e _has", "labelEn": "Search — _include, _revinclude and _has", "url": "https://hl7.org/fhir/R4/search.html#include" },
+              { "kind": "spec", "labelPt": "Search — chaining e parâmetros globais (_)", "labelEn": "Search — chaining and global (_) parameters", "url": "https://hl7.org/fhir/R4/search.html#chaining" },
+              { "kind": "material", "labelPt": "Material do curso — Módulo 3 · Unit 2 (_include/_revinclude/_has)", "labelEn": "Course material — Module 3 · Unit 2 (_include/_revinclude/_has)", "url": "../module-3.md" }
+            ]
+          },
+          "items": [
+            "module3_2_q2#5",
+            "module3_2_q2#6",
+            "module3_2_q2#7",
+            "module3_2_q2#8"
+          ]
+        }
+      ],
+      "checkpoint": {
+        "items": [
+          "module3_cp#5",
+          "module3_cp#6",
+          "module3_cp#7",
+          "module3_cp#8"
+        ]
+      }
+    },
+    {
+      "id": "u3",
+      "titlePt": "Bundles",
+      "titleEn": "Bundles",
+      "color": "#fcd34d",
+      "lessons": [
+        {
+          "id": "m3-l9",
+          "titlePt": "Tipos de Bundle",
+          "titleEn": "Bundle types",
+          "card": {
+            "titlePt": "O tipo do Bundle define a semântica",
+            "titleEn": "The Bundle type defines its semantics",
+            "analogyPt": "O Bundle é um envelope que agrupa recursos; o tipo é o carimbo que diz o que fazer com eles.",
+            "analogyEn": "A Bundle is an envelope grouping resources; the type is the stamp telling what to do with them.",
+            "pointsPt": [
+              "<b>searchset</b> (servidor) resposta de busca · <b>history</b> (servidor) histórico · <b>collection</b> conjunto genérico.",
+              "<b>transaction/batch</b> (cliente) enviam vários recursos; <b>document</b> e <b>message</b> são clínico/mensageria.",
+              "<b>document</b>: 1ª entry obrigatoriamente <b>Composition</b>. <b>message</b>: 1ª entry obrigatoriamente <b>MessageHeader</b>.",
+              "Cada Bundle de envio tem sua resposta: transaction-response / batch-response."
+            ],
+            "pointsEn": [
+              "<b>searchset</b> (server) search response · <b>history</b> (server) history · <b>collection</b> generic set.",
+              "<b>transaction/batch</b> (client) send multiple resources; <b>document</b> and <b>message</b> are clinical/messaging.",
+              "<b>document</b>: 1st entry must be <b>Composition</b>. <b>message</b>: 1st entry must be <b>MessageHeader</b>.",
+              "Each sending Bundle has its response: transaction-response / batch-response."
+            ],
+            "trapPt": "Document → 1ª entry Composition; Message → 1ª entry MessageHeader. 'Patient como 1ª entry de Document' é falso.",
+            "trapEn": "Document → 1st entry Composition; Message → 1st entry MessageHeader. 'Patient as 1st entry of a Document' is false.",
+            "refs": [
+              { "kind": "spec", "labelPt": "Bundle — tipos e semântica de cada um", "labelEn": "Bundle — types and each one's semantics", "url": "https://hl7.org/fhir/R4/bundle.html" },
+              { "kind": "spec", "labelPt": "Documents — Composition como 1ª entrada", "labelEn": "Documents — Composition as the 1st entry", "url": "https://hl7.org/fhir/R4/documents.html" },
+              { "kind": "material", "labelPt": "Material do curso — Módulo 3 · Unit 3 \"Bundles\"", "labelEn": "Course material — Module 3 · Unit 3 \"Bundles\"", "url": "../module-3.md" }
+            ]
+          },
+          "items": [
+            "module3_3_q1#1",
+            "module3_3_q1#2",
+            "module3_3_q1#3",
+            "module3_3_q1#4"
+          ]
+        },
+        {
+          "id": "m3-l10",
+          "titlePt": "Transaction vs batch e urn:uuid",
+          "titleEn": "Transaction vs batch & urn:uuid",
+          "card": {
+            "titlePt": "Atômico ou independente?",
+            "titleEn": "Atomic or independent?",
+            "analogyPt": "transaction é 'tudo ou nada' (como uma transferência bancária); batch é 'cada item por si' (como vários pedidos avulsos).",
+            "analogyEn": "transaction is 'all or nothing' (like a bank transfer); batch is 'each item on its own' (like separate orders).",
+            "pointsPt": [
+              "<b>transaction</b>: processado como unidade atômica — se uma entry falha, tudo é revertido.",
+              "<b>batch</b>: cada entry é independente — uma falha não afeta as outras.",
+              "Recursos inter-relacionados no mesmo Bundle usam <b>urn:uuid:XXXX</b> como fullUrl temporário; outras entries referenciam por esse urn.",
+              "Após processar, o servidor substitui os urn:uuid pelos IDs reais e retorna transaction-response."
+            ],
+            "pointsEn": [
+              "<b>transaction</b>: processed as an atomic unit — if one entry fails, everything rolls back.",
+              "<b>batch</b>: each entry is independent — one failure doesn't affect the others.",
+              "Inter-related resources in the same Bundle use <b>urn:uuid:XXXX</b> as a temporary fullUrl; other entries reference that urn.",
+              "After processing, the server replaces urn:uuid with real IDs and returns transaction-response."
+            ],
+            "trapPt": "'Todos persistidos ou nenhum' = transaction. Falhas parciais aceitáveis = batch.",
+            "trapEn": "'All persisted or none' = transaction. Partial failures acceptable = batch.",
+            "refs": [
+              { "kind": "spec", "labelPt": "transaction & batch — atomicidade e urn:uuid", "labelEn": "transaction & batch — atomicity and urn:uuid", "url": "https://hl7.org/fhir/R4/http.html#transaction" },
+              { "kind": "material", "labelPt": "Material do curso — Módulo 3 · Unit 3 \"Transações e Batch\"", "labelEn": "Course material — Module 3 · Unit 3 \"Transactions and Batch\"", "url": "../module-3.md" }
+            ]
+          },
+          "items": [
+            "module3_3_q1#5",
+            "module3_3_q1#6",
+            "module3_3_q1#7",
+            "module3_3_q1#8"
+          ]
+        }
+      ],
+      "checkpoint": {
+        "items": [
+          "module3_cp#9",
+          "module3_cp#10",
+          "module3_cp#11",
+          "module3_cp#12"
+        ]
+      }
+    },
+    {
+      "id": "u4",
+      "titlePt": "Operações e CapabilityStatement",
+      "titleEn": "Operations & CapabilityStatement",
+      "color": "#fca5a5",
+      "lessons": [
+        {
+          "id": "m3-l11",
+          "titlePt": "Selecionar a operação",
+          "titleEn": "Selecting the operation",
+          "card": {
+            "titlePt": "Operações ($) estendem o CRUD",
+            "titleEn": "Operations ($) extend CRUD",
+            "analogyPt": "Quando uma ação não cabe nos verbos HTTP, o FHIR oferece uma 'operação especial' marcada com $.",
+            "analogyEn": "When an action doesn't fit the HTTP verbs, FHIR offers a 'special operation' marked with $.",
+            "pointsPt": [
+              "3 níveis: base <code>POST [base]/$op</code> · tipo <code>[Recurso]/$op</code> · instância <code>[Recurso]/[id]/$op</code>.",
+              "<b>Patient/[id]/$everything</b>: tudo do paciente. <b>Group/[id]/$everything</b>: tudo de um grupo clínico.",
+              "<b>$validate</b>: valida sem persistir. <b>$process-message</b> (nível base): processa Bundle message.",
+              "<b>$all-resources</b> NÃO existe — só <b>$everything</b>."
+            ],
+            "pointsEn": [
+              "3 levels: base <code>POST [base]/$op</code> · type <code>[Resource]/$op</code> · instance <code>[Resource]/[id]/$op</code>.",
+              "<b>Patient/[id]/$everything</b>: everything for a patient. <b>Group/[id]/$everything</b>: everything for a clinical group.",
+              "<b>$validate</b>: validates without persisting. <b>$process-message</b> (base level): processes a message Bundle.",
+              "<b>$all-resources</b> does NOT exist — only <b>$everything</b>."
+            ],
+            "trapPt": "Grupo de pacientes (ensaio clínico) → <b>Group/[id]/$everything</b>, não várias chamadas Patient/$everything.",
+            "trapEn": "A group of patients (clinical trial) → <b>Group/[id]/$everything</b>, not multiple Patient/$everything calls.",
+            "refs": [
+              { "kind": "spec", "labelPt": "Operations — operações ($) estendem o CRUD", "labelEn": "Operations — operations ($) extend CRUD", "url": "https://hl7.org/fhir/R4/operations.html" },
+              { "kind": "spec", "labelPt": "Lista de operações padrão", "labelEn": "List of standard operations", "url": "https://hl7.org/fhir/R4/operationslist.html" },
+              { "kind": "material", "labelPt": "Material do curso — Módulo 3 · Unit 4 \"FHIR Operations\"", "labelEn": "Course material — Module 3 · Unit 4 \"FHIR Operations\"", "url": "../module-3.md" }
+            ]
+          },
+          "items": [
+            "module3_4_q1#1",
+            "module3_4_q1#2",
+            "module3_4_q1#3"
+          ]
+        },
+        {
+          "id": "m3-l12",
+          "titlePt": "$everything, $validate e sintaxe",
+          "titleEn": "$everything, $validate & syntax",
+          "card": {
+            "titlePt": "Endpoints e níveis corretos",
+            "titleEn": "Correct endpoints and levels",
+            "analogyPt": "Cada operação tem um 'andar' certo (base, tipo ou instância) — usar o andar errado é o distrator.",
+            "analogyEn": "Each operation has its right 'floor' (base, type or instance) — using the wrong floor is the distractor.",
+            "pointsPt": [
+              "<b>$validate</b> em nível de tipo: <code>POST [base]/Patient/$validate</code> valida sem salvar.",
+              "<b>$process-message</b>: <code>POST [base]/$process-message</code> (base), não <code>Bundle/$process-message</code>.",
+              "Operações usam <b>POST</b> quando têm corpo; algumas aceitam GET com parâmetros.",
+              "O nome da operação sempre começa com <b>$</b>."
+            ],
+            "pointsEn": [
+              "<b>$validate</b> at type level: <code>POST [base]/Patient/$validate</code> validates without saving.",
+              "<b>$process-message</b>: <code>POST [base]/$process-message</code> (base), not <code>Bundle/$process-message</code>.",
+              "Operations use <b>POST</b> when they have a body; some accept GET with parameters.",
+              "An operation name always starts with <b>$</b>."
+            ],
+            "trapPt": "$process-message é nível base. Prefixar com 'Bundle/' é distrator.",
+            "trapEn": "$process-message is base level. Prefixing it with 'Bundle/' is a distractor.",
+            "refs": [
+              { "kind": "spec", "labelPt": "$everything (Patient) — endpoint e nível corretos", "labelEn": "$everything (Patient) — correct endpoint and level", "url": "https://hl7.org/fhir/R4/patient-operation-everything.html" },
+              { "kind": "spec", "labelPt": "$validate — validar uma instância", "labelEn": "$validate — validate an instance", "url": "https://hl7.org/fhir/R4/resource-operation-validate.html" },
+              { "kind": "material", "labelPt": "Material do curso — Módulo 3 · Unit 4 \"Extended Operations\"", "labelEn": "Course material — Module 3 · Unit 4 \"Extended Operations\"", "url": "../module-3.md" }
+            ]
+          },
+          "items": [
+            "module3_4_q1#4",
+            "module3_4_q1#5",
+            "module3_4_q1#6"
+          ]
+        },
+        {
+          "id": "m3-l13",
+          "titlePt": "Usar operações de terminologia",
+          "titleEn": "Using terminology operations",
+          "card": {
+            "titlePt": "$expand, $validate-code, $translate",
+            "titleEn": "$expand, $validate-code, $translate",
+            "analogyPt": "Pergunte: 'pertence a este conjunto?' (ValueSet) ou 'existe neste sistema?' (CodeSystem) ou 'traduza entre sistemas' (ConceptMap).",
+            "analogyEn": "Ask: 'is it in this set?' (ValueSet) or 'does it exist in this system?' (CodeSystem) or 'translate between systems' (ConceptMap).",
+            "pointsPt": [
+              "<b>ValueSet/$expand</b>: expande o VS numa lista de códigos.",
+              "<b>ValueSet/$validate-code</b>: o código pertence ao conjunto permitido? <b>CodeSystem/$validate-code</b>: o código existe no sistema?",
+              "<b>CodeSystem/$lookup</b>: detalhes de um código. <b>ConceptMap/$translate</b>: traduz entre sistemas (SNOMED→ICD-10).",
+              "Escolha a operação pela pergunta exata do enunciado."
+            ],
+            "pointsEn": [
+              "<b>ValueSet/$expand</b>: expands the VS into a list of codes.",
+              "<b>ValueSet/$validate-code</b>: is the code in the allowed set? <b>CodeSystem/$validate-code</b>: does the code exist in the system?",
+              "<b>CodeSystem/$lookup</b>: details about a code. <b>ConceptMap/$translate</b>: translates between systems (SNOMED→ICD-10).",
+              "Pick the operation by the exact wording of the question."
+            ],
+            "trapPt": "Traduzir entre sistemas = <b>ConceptMap/$translate</b> (não $lookup, não $validate-code).",
+            "trapEn": "Translate between systems = <b>ConceptMap/$translate</b> (not $lookup, not $validate-code).",
+            "refs": [
+              { "kind": "spec", "labelPt": "ValueSet/$expand e $validate-code", "labelEn": "ValueSet/$expand and $validate-code", "url": "https://hl7.org/fhir/R4/valueset-operation-expand.html" },
+              { "kind": "spec", "labelPt": "ConceptMap/$translate — traduzir entre sistemas", "labelEn": "ConceptMap/$translate — translate between systems", "url": "https://hl7.org/fhir/R4/conceptmap-operation-translate.html" },
+              { "kind": "material", "labelPt": "Material do curso — Módulo 3 · Unit 4 (operações de terminologia)", "labelEn": "Course material — Module 3 · Unit 4 (terminology operations)", "url": "../module-3.md" }
+            ]
+          },
+          "items": [
+            "module3_4_q2#1",
+            "module3_4_q2#2",
+            "module3_4_q2#3",
+            "module3_4_q2#4",
+            "module3_4_q2#5"
+          ]
+        },
+        {
+          "id": "m3-l14",
+          "titlePt": "Interpretar CapabilityStatement",
+          "titleEn": "Reading a CapabilityStatement",
+          "card": {
+            "titlePt": "O 'cardápio' do servidor FHIR",
+            "titleEn": "The FHIR server's 'menu'",
+            "analogyPt": "O CapabilityStatement é o cardápio do servidor: lista o que ele sabe fazer. Obtém-se em GET [base]/metadata.",
+            "analogyEn": "The CapabilityStatement is the server's menu: it lists what it can do. You get it via GET [base]/metadata.",
+            "pointsPt": [
+              "<b>GET [base]/metadata</b> retorna o CapabilityStatement.",
+              "<b>kind</b>: instance (servidor real) · capability (o que o software suporta) · requirements (mínimos exigidos).",
+              "<b>rest[].resource[].interaction.code</b>: read, vread, create, update, delete, search-type, history-instance, history-type.",
+              "<b>rest[].interaction</b> (nível sistema): transaction, batch, search-system, history-system."
+            ],
+            "pointsEn": [
+              "<b>GET [base]/metadata</b> returns the CapabilityStatement.",
+              "<b>kind</b>: instance (real server) · capability (what the software supports) · requirements (minimums required).",
+              "<b>rest[].resource[].interaction.code</b>: read, vread, create, update, delete, search-type, history-instance, history-type.",
+              "<b>rest[].interaction</b> (system level): transaction, batch, search-system, history-system."
+            ],
+            "trapPt": "CapabilityStatement diz o que o servidor <b>suporta</b> — não o que um recurso contém (isso é StructureDefinition).",
+            "trapEn": "A CapabilityStatement says what the server <b>supports</b> — not what a resource contains (that's StructureDefinition).",
+            "refs": [
+              { "kind": "spec", "labelPt": "CapabilityStatement — o 'cardápio' do servidor FHIR", "labelEn": "CapabilityStatement — the FHIR server's 'menu'", "url": "https://hl7.org/fhir/R4/capabilitystatement.html" },
+              { "kind": "material", "labelPt": "Material do curso — Módulo 3 · Unit 4 \"CapabilityStatement\"", "labelEn": "Course material — Module 3 · Unit 4 \"CapabilityStatement\"", "url": "../module-3.md" }
+            ]
+          },
+          "items": [
+            "module3_4_q3#1",
+            "module3_4_q3#2",
+            "module3_4_q3#3",
+            "module3_4_q3#4",
+            "module3_4_q3#5",
+            "module3_4_q3#6"
+          ]
+        }
+      ],
+      "checkpoint": {
+        "items": [
+          "module3_cp#13",
+          "module3_cp#14",
+          "module3_cp#15",
+          "module3_cp#16"
+        ]
+      }
+    },
+    {
+      "id": "u5",
+      "titlePt": "Segurança e safety",
+      "titleEn": "Security & safety",
+      "color": "#c4b5fd",
+      "lessons": [
+        {
+          "id": "m3-l15",
+          "titlePt": "Checklist de safety",
+          "titleEn": "Safety checklist",
+          "card": {
+            "titlePt": "Segurança funcional do conteúdo",
+            "titleEn": "Functional safety of content",
+            "analogyPt": "Safety é evitar que dados corretos causem dano por má interpretação ou renderização insegura.",
+            "analogyEn": "Safety is preventing correct data from causing harm via misinterpretation or unsafe rendering.",
+            "pointsPt": [
+              "Validar a <b>narrativa</b> (text) contra <b>XSS</b> antes de renderizar em interfaces web.",
+              "Usar <b>NTP</b> para sincronizar relógios (timestamps de AuditEvent e assinaturas).",
+              "Resolver corretamente referências <b>absolutas vs relativas</b> para não apontar ao recurso errado.",
+              "Respeitar elementos <b>Is-Modifier</b> e <b>modifierExtension</b>: se desconhecidos, rejeitar o recurso."
+            ],
+            "pointsEn": [
+              "Validate the <b>narrative</b> (text) against <b>XSS</b> before rendering in web UIs.",
+              "Use <b>NTP</b> to sync clocks (AuditEvent timestamps and signatures).",
+              "Correctly resolve <b>absolute vs relative</b> references so they don't point to the wrong resource.",
+              "Honor <b>Is-Modifier</b> and <b>modifierExtension</b>: if unknown, reject the resource."
+            ],
+            "trapPt": "A narrativa pode conter HTML malicioso: sempre sanitizar contra XSS antes de exibir.",
+            "trapEn": "The narrative can contain malicious HTML: always sanitize against XSS before display.",
+            "refs": [
+              { "kind": "spec", "labelPt": "Safety Checklist — segurança funcional do conteúdo", "labelEn": "Safety Checklist — functional safety of content", "url": "https://hl7.org/fhir/R4/safety.html" },
+              { "kind": "spec", "labelPt": "Narrative — sanitizar HTML contra XSS", "labelEn": "Narrative — sanitize HTML against XSS", "url": "https://hl7.org/fhir/R4/narrative.html" },
+              { "kind": "material", "labelPt": "Material do curso — Módulo 3 · Unit 5 \"Safety & Security\"", "labelEn": "Course material — Module 3 · Unit 5 \"Safety & Security\"", "url": "../module-3.md" }
+            ]
+          },
+          "items": [
+            "module3_5_q1#1",
+            "module3_5_q1#2",
+            "module3_5_q1#3",
+            "module3_5_q1#4",
+            "module3_5_q1#5",
+            "module3_5_q1#6"
+          ]
+        },
+        {
+          "id": "m3-l16",
+          "titlePt": "Segurança: TLS, OAuth e labels",
+          "titleEn": "Security: TLS, OAuth & labels",
+          "card": {
+            "titlePt": "Transporte, autorização e rótulos",
+            "titleEn": "Transport, authorization & labels",
+            "analogyPt": "TLS é o envelope lacrado; OAuth/SMART é o crachá de acesso; security labels são etiquetas de sigilo no recurso.",
+            "analogyEn": "TLS is the sealed envelope; OAuth/SMART is the access badge; security labels are confidentiality tags on the resource.",
+            "pointsPt": [
+              "<b>TLS</b> obrigatório para tráfego com dados clínicos; <b>OAuth 2.0 + SMART-on-FHIR</b> para autorização.",
+              "Security labels (meta.security): <b>HTEST</b> (teste), <b>NOREUSE</b>, <b>RESTRICTED</b>, <b>VHIGH</b> (HIV/saúde mental).",
+              "<b>AuditEvent</b> = log de segurança (quem acessou/quando); <b>Provenance</b> = origem/cadeia de um recurso clínico.",
+              "Acesso negado por autorização: o servidor retorna <b>200 OK + Bundle vazio</b>, não 403 — para não revelar a existência do recurso."
+            ],
+            "pointsEn": [
+              "<b>TLS</b> required for traffic with clinical data; <b>OAuth 2.0 + SMART-on-FHIR</b> for authorization.",
+              "Security labels (meta.security): <b>HTEST</b> (test), <b>NOREUSE</b>, <b>RESTRICTED</b>, <b>VHIGH</b> (HIV/mental health).",
+              "<b>AuditEvent</b> = security log (who accessed/when); <b>Provenance</b> = a clinical resource's origin/custody chain.",
+              "Authorization-denied access: the server returns <b>200 OK + empty Bundle</b>, not 403 — so as not to reveal the resource exists."
+            ],
+            "trapPt": "Acesso negado → 200 OK com Bundle vazio (não 403). AuditEvent (segurança) ≠ Provenance (rastreabilidade clínica).",
+            "trapEn": "Access denied → 200 OK with empty Bundle (not 403). AuditEvent (security) ≠ Provenance (clinical traceability).",
+            "refs": [
+              { "kind": "spec", "labelPt": "Security — TLS, OAuth/SMART e controle de acesso", "labelEn": "Security — TLS, OAuth/SMART and access control", "url": "https://hl7.org/fhir/R4/security.html" },
+              { "kind": "spec", "labelPt": "Security Labels & AuditEvent vs Provenance", "labelEn": "Security Labels & AuditEvent vs Provenance", "url": "https://hl7.org/fhir/R4/security-labels.html" },
+              { "kind": "material", "labelPt": "Material do curso — Módulo 3 · Unit 5 (TLS, OAuth, labels)", "labelEn": "Course material — Module 3 · Unit 5 (TLS, OAuth, labels)", "url": "../module-3.md" }
+            ]
+          },
+          "items": [
+            "module3_5_q2#1",
+            "module3_5_q2#2",
+            "module3_5_q2#3",
+            "module3_5_q2#4"
+          ]
+        }
+      ],
+      "checkpoint": {
+        "items": [
+          "module3_cp#17",
+          "module3_cp#18",
+          "module3_cp#19",
+          "module3_cp#20"
+        ]
+      }
+    }
+  ]
+}

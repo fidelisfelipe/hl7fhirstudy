@@ -1,0 +1,664 @@
+[
+  {
+    "id": 1,
+    "module": "Module 3 - Quiz 1",
+    "titleEn": "Updating an existing Practitioner resource",
+    "titlePt": "Atualizando um recurso Practitioner existente",
+    "qEn": "A client system needs to update an existing Practitioner resource instance by creating a newer version of it. Which HTTP method should the client system use?",
+    "qPt": "Um sistema cliente precisa atualizar uma instância de recurso Practitioner existente criando uma nova versão dela. Qual método HTTP o sistema cliente deve usar?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "POST",
+        "pt": "POST",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "PUT",
+        "pt": "PUT",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "en": "DELETE",
+        "pt": "DELETE",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "GET",
+        "pt": "GET",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The correct HTTP method for updating an existing FHIR resource with a new version is PUT. POST is used for creating new resources, GET for retrieving resources, and DELETE for removing them. PUT replaces the current version of the resource with the provided representation, thus creating a new version in the FHIR server.",
+    "explanationPt": "O método HTTP correto para atualizar um recurso FHIR existente com uma nova versão é o PUT. O POST é usado para criar novos recursos, o GET para recuperar recursos e o DELETE para removê-los. O PUT substitui a versão atual do recurso pela representação fornecida, criando assim uma nova versão no servidor FHIR."
+  },
+  {
+    "id": 2,
+    "module": "Module 3 - Quiz 1",
+    "titleEn": "Updating only part of a Patient resource",
+    "titlePt": "Atualizando apenas parte de um recurso Patient",
+    "qEn": "A client application has created a Patient resource on the FHIR server. Later on, they realized that the phone number in the resource instance is incorrect. There is no need to modify the complete resource instance. Which HTTP verb should the client application use to update only the phone number of the patient in the existing version of the resource instance?",
+    "qPt": "Um aplicativo cliente criou um recurso Patient no servidor FHIR. Mais tarde, perceberam que o número de telefone na instância do recurso está incorreto. Não há necessidade de modificar todo o recurso. Qual verbo HTTP o aplicativo cliente deve usar para atualizar apenas o número de telefone do paciente na versão existente da instância do recurso?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "PATCH",
+        "pt": "PATCH",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "PUT",
+        "pt": "PUT",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "POST",
+        "pt": "POST",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "HEAD",
+        "pt": "HEAD",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The correct HTTP method is PATCH. PATCH allows updating only specific elements of a resource without sending the complete resource again. This is useful when only part of the resource, such as the phone number, needs to be changed. PUT replaces the entire resource, POST creates new resources, and HEAD retrieves metadata only.",
+    "explanationPt": "O método HTTP correto é PATCH. PATCH permite atualizar apenas elementos específicos de um recurso sem precisar reenviar o recurso completo. Isso é útil quando apenas parte do recurso, como o número de telefone, precisa ser alterado. PUT substitui o recurso inteiro, POST cria novos recursos e HEAD recupera apenas metadados."
+  },
+  {
+    "id": 3,
+    "module": "Module 3 - Quiz 1",
+    "titleEn": "Conditional create of a FHIR resource",
+    "titlePt": "Criação condicional de um recurso FHIR",
+    "qEn": "A client system needs to create a resource instance on the FHIR server. It needs to ensure that the server does not create a new resource instance if there is already a resource instance matching the criteria provided by the client system. Which mechanism should the client system use?",
+    "qPt": "Um sistema cliente precisa criar uma instância de recurso no servidor FHIR. É necessário garantir que o servidor não crie uma nova instância de recurso se já existir uma que corresponda aos critérios fornecidos pelo sistema cliente. Qual mecanismo o sistema cliente deve usar?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "update",
+        "pt": "update",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "create",
+        "pt": "create",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "conditional create",
+        "pt": "conditional create",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "en": "conditional update",
+        "pt": "conditional update",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The correct mechanism is conditional create. This allows the client to request creation of a resource only if it does not already exist, using the `If-None-Exist` header in the request. If a matching resource already exists, the server will return it instead of creating a new one.",
+    "explanationPt": "O mecanismo correto é conditional create. Isso permite que o cliente solicite a criação de um recurso apenas se ele ainda não existir, usando o cabeçalho `If-None-Exist` na requisição. Se já existir um recurso correspondente, o servidor o retornará em vez de criar um novo."
+  },
+  {
+    "id": 4,
+    "module": "Module 3 - Quiz 1",
+    "titleEn": "Conditional update of a Patient resource",
+    "titlePt": "Atualização condicional de um recurso Patient",
+    "qEn": "A developer needs to update a complete Patient resource instance. The resource id is not known but the developer knows the unique business identifier of the patient. Which HTTP method should the developer use?",
+    "qPt": "Um desenvolvedor precisa atualizar uma instância completa de recurso Patient. O id do recurso não é conhecido, mas o desenvolvedor sabe o identificador de negócio único do paciente. Qual método HTTP o desenvolvedor deve usar?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "PATCH",
+        "pt": "PATCH",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "POST",
+        "pt": "POST",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "PUT",
+        "pt": "PUT",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "en": "DELETE",
+        "pt": "DELETE",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The correct method is PUT. Since the resource id is unknown but the patient’s unique business identifier is available, a conditional update must be used. This is done by including the identifier in the REST URL (e.g., `Patient?identifier=[system]|[value]`).",
+    "explanationPt": "O método correto é PUT. Como o id do recurso não é conhecido, mas o identificador único de negócio do paciente está disponível, deve-se usar uma atualização condicional. Isso é feito incluindo o identificador na URL REST (ex.: `Patient?identifier=[sistema]|[valor]`)."
+  },
+  {
+    "id": 5,
+    "module": "Module 3 - Quiz 1",
+    "titleEn": "Retrieve latest version of Patient resource if modified after a date",
+    "titlePt": "Recuperar última versão do recurso Patient se modificada após uma data",
+    "qEn": "An implementer needs to retrieve the latest version of the Patient resource instance only if it has been updated after a specific date and time. Which mechanism should the implementer use?",
+    "qPt": "Um implementador precisa recuperar a versão mais recente da instância do recurso Patient somente se ela tiver sido atualizada após uma data e hora específicas. Qual mecanismo o implementador deve usar?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "POST with If-None-Exist in the request header",
+        "pt": "POST com If-None-Exist no cabeçalho da requisição",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "PUT with parameters in the URL",
+        "pt": "PUT com parâmetros na URL",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "GET with If-None-Match in the request header",
+        "pt": "GET com If-None-Match no cabeçalho da requisição",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "GET with If-Modified-Since in the request header",
+        "pt": "GET com If-Modified-Since no cabeçalho da requisição",
+        "correct": true
+      }
+    ],
+    "explanationEn": "The correct mechanism is to use GET with the `If-Modified-Since` request header. This ensures the resource is retrieved only if it has been updated after the specified date and time.",
+    "explanationPt": "O mecanismo correto é usar GET com o cabeçalho `If-Modified-Since`. Isso garante que o recurso seja recuperado apenas se tiver sido atualizado após a data e hora especificadas."
+  },
+  {
+    "id": 6,
+    "module": "Module 3 - Quiz 1",
+    "titleEn": "Retrieve all patients with asthma diagnosis",
+    "titlePt": "Recuperar todos os pacientes com diagnóstico de asma",
+    "qEn": "A provider needs to retrieve all the patients with asthma as a diagnosis. Which FHIR method should a provider use to fetch this information from the FHIR server?",
+    "qPt": "Um provedor precisa recuperar todos os pacientes com diagnóstico de asma. Qual método FHIR o provedor deve usar para buscar essa informação do servidor FHIR?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "read",
+        "pt": "read",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "search",
+        "pt": "search",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "en": "update",
+        "pt": "update",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "create",
+        "pt": "create",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The correct method is `search`, because it retrieves all matching Patient resources with a given condition (e.g., asthma). The `read` method is only for fetching a specific resource by ID.",
+    "explanationPt": "O método correto é `search`, pois ele recupera todos os recursos Patient correspondentes com uma condição específica (ex.: asma). O método `read` serve apenas para buscar um recurso específico pelo seu ID."
+  },
+  {
+    "id": 7,
+    "module": "Module 3 - Quiz 1",
+    "titleEn": "Create 500 patient records in one request",
+    "titlePt": "Criar 500 registros de pacientes em uma única requisição",
+    "qEn": "A client needs to create 500 patient records on a FHIR server. Which FHIR interaction should be used to achieve this only in one request?",
+    "qPt": "Um cliente precisa criar 500 registros de pacientes em um servidor FHIR. Qual interação FHIR deve ser usada para realizar isso em apenas uma requisição?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "create",
+        "pt": "create",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "batch",
+        "pt": "batch",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "en": "patch",
+        "pt": "patch",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "update",
+        "pt": "update",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The correct method is `batch`. A batch interaction allows multiple operations (like multiple creates) to be bundled into a single request, making it more efficient than sending 500 individual create requests.",
+    "explanationPt": "O método correto é `batch`. Uma interação de batch permite agrupar múltiplas operações (como várias criações) em uma única requisição, tornando o processo mais eficiente do que enviar 500 requisições de criação separadas."
+  },
+  {
+    "id": 8,
+    "module": "Module 3 - Quiz 1",
+    "titleEn": "Retrieve all versions of a Patient resource",
+    "titlePt": "Recuperar todas as versões de um recurso Patient",
+    "qEn": "A developer needs to retrieve all three versions of a Patient resource instance whose logical id is 1414. Which of the following options correctly represents the interaction that supports this requirement?",
+    "qPt": "Um desenvolvedor precisa recuperar todas as três versões de uma instância do recurso Patient cujo ID lógico é 1414. Qual das seguintes opções representa corretamente a interação que atende a esse requisito?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "http://hapi.fhir.org/baseR5/Patient/1414/_history",
+        "pt": "http://hapi.fhir.org/baseR5/Patient/1414/_history",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "http://hapi.fhir.org/baseR5/Patient/1414",
+        "pt": "http://hapi.fhir.org/baseR5/Patient/1414",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "http://hapi.fhir.org/baseR5/Patient/1414/_history/3",
+        "pt": "http://hapi.fhir.org/baseR5/Patient/1414/_history/3",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "http://hapi.fhir.org/baseR5/Patient?identifier=1414",
+        "pt": "http://hapi.fhir.org/baseR5/Patient?identifier=1414",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The correct interaction is `http://hapi.fhir.org/baseR5/Patient/1414/_history`, known as history-instance. This interaction retrieves all versions of the resource instance.",
+    "explanationPt": "A interação correta é `http://hapi.fhir.org/baseR5/Patient/1414/_history`, conhecida como history-instance. Essa interação recupera todas as versões da instância do recurso."
+  },
+  {
+    "id": 9,
+    "module": "Module 3 - Quiz 1",
+    "titleEn": "Delete a Patient resource created by mistake",
+    "titlePt": "Excluir um recurso Patient criado por engano",
+    "qEn": "A developer created a Patient resource by mistake, which he needs to remove now from the FHIR server. Which FHIR interaction supports this requirement?",
+    "qPt": "Um desenvolvedor criou um recurso Patient por engano, que agora precisa ser removido do servidor FHIR. Qual interação FHIR suporta esse requisito?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "update",
+        "pt": "atualizar",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "delete",
+        "pt": "excluir",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "en": "search",
+        "pt": "pesquisar",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "patch",
+        "pt": "patch",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The DELETE HTTP verb is used to remove resources from the FHIR server. This interaction is simply called 'delete'.",
+    "explanationPt": "O verbo HTTP DELETE é usado para remover recursos do servidor FHIR. Essa interação é simplesmente chamada de 'delete'."
+  },
+  {
+    "id": 10,
+    "module": "Module 3 - Quiz 1",
+    "titleEn": "Fetch a specific version of a Patient resource",
+    "titlePt": "Buscar uma versão específica de um recurso Patient",
+    "qEn": "A client system needs to fetch a specific version (versionId as 2) of the Patient resource whose logical id is 160117. Out of the options below, which one best reflects this requirement?",
+    "qPt": "Um sistema cliente precisa buscar uma versão específica (versionId = 2) do recurso Patient cujo id lógico é 160117. Entre as opções abaixo, qual melhor reflete esse requisito?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "http://fhiserver.hl7fundamentals.org/fhir/Patient/160117/_history/2",
+        "pt": "http://fhiserver.hl7fundamentals.org/fhir/Patient/160117/_history/2",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "http://fhiserver.hl7fundamentals.org/fhir/Patient/160117/history/2",
+        "pt": "http://fhiserver.hl7fundamentals.org/fhir/Patient/160117/history/2",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "http://fhiserver.hl7fundamentals.org/fhir/Patient/_history",
+        "pt": "http://fhiserver.hl7fundamentals.org/fhir/Patient/_history",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "http://fhiserver.hl7fundamentals.org/fhir/Patient/_history/160117/2",
+        "pt": "http://fhiserver.hl7fundamentals.org/fhir/Patient/_history/160117/2",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The correct format to fetch a specific version of a resource is /[type]/[id]/_history/[vid]. In this case: Patient/160117/_history/2.",
+    "explanationPt": "O formato correto para buscar uma versão específica de um recurso é /[type]/[id]/_history/[vid]. Neste caso: Patient/160117/_history/2."
+  },
+  {
+    "id": 11,
+    "module": "Module 3 - Quiz 1",
+    "titleEn": "Create Patient resource on FHIR server",
+    "titlePt": "Criar recurso Patient no servidor FHIR",
+    "qEn": "A client system needs to create the Patient resource on a FHIR server. Which of the following options correctly represent the HTTP verb and the REST API URL for this requirement?",
+    "qPt": "Um sistema cliente precisa criar o recurso Patient em um servidor FHIR. Qual das seguintes opções representa corretamente o verbo HTTP e a URL REST API para este requisito?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "POST http://fhiserver.hl7fundamentals.org/fhir/Patient",
+        "pt": "POST http://fhiserver.hl7fundamentals.org/fhir/Patient",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "POST http://fhiserver.hl7fundamentals.org/fhir/Patient/71",
+        "pt": "POST http://fhiserver.hl7fundamentals.org/fhir/Patient/71",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "PUT http://fhiserver.hl7fundamentals.org/fhir/Patient",
+        "pt": "PUT http://fhiserver.hl7fundamentals.org/fhir/Patient",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "POST http://fhiserver.hl7fundamentals.org/fhir/Patient?identifier=90876",
+        "pt": "POST http://fhiserver.hl7fundamentals.org/fhir/Patient?identifier=90876",
+        "correct": false
+      }
+    ],
+    "explanationEn": "POST is used to create a resource. The URL should only contain the resource type, and no resource id, as it will be assigned by the server.",
+    "explanationPt": "O método POST é usado para criar um recurso. A URL deve conter apenas o tipo de recurso, sem um id, pois este será atribuído pelo servidor."
+  },
+  {
+    "id": 12,
+    "module": "Module 3 - Quiz 1",
+    "titleEn": "Reproduce existing data model with original IDs",
+    "titlePt": "Reproduzir modelo de dados existente com IDs originais",
+    "qEn": "A client system needs to reproduce an existing data model on the server and needs to keep original ids in order to retain ongoing integrity. Which HTTP verb should be used by the client system to define their choice id of the resource while creating them on the FHIR server?",
+    "qPt": "Um sistema cliente precisa reproduzir um modelo de dados existente no servidor e manter os IDs originais para preservar a integridade contínua. Qual verbo HTTP deve ser usado pelo sistema cliente para definir seu próprio ID do recurso ao criá-lo no servidor FHIR?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "POST",
+        "pt": "POST",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "PATCH",
+        "pt": "PATCH",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "PUT",
+        "pt": "PUT",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "en": "GET",
+        "pt": "GET",
+        "correct": false
+      }
+    ],
+    "explanationEn": "PUT is used as 'update as create'. Client systems can provide their own IDs if the server supports this interaction. Some servers allow client systems to use their assigned IDs as the resource ID on the server.",
+    "explanationPt": "PUT é usado como 'update as create'. Os sistemas clientes podem fornecer seus próprios IDs se o servidor suportar essa interação. Alguns servidores permitem que os clientes utilizem seus IDs atribuídos como o ID do recurso no servidor."
+  },
+  {
+    "id": 13,
+    "module": "Module 3 - Quiz 1",
+    "titleEn": "Conditional update of Patient resource",
+    "titlePt": "Atualização condicional de recurso Patient",
+    "qEn": "An implementer needs to update an existing Patient resource, but they are not aware of the resource logical id. The implementer has a patient unique business identifier available with them. Which FHIR interaction supports this requirement?",
+    "qPt": "Um implementador precisa atualizar um recurso Patient existente, mas não conhece o identificador lógico do recurso. O implementador possui um identificador comercial único do paciente. Qual interação FHIR suporta esse requisito?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "conditional create",
+        "pt": "criação condicional",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "conditional read",
+        "pt": "leitura condicional",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "conditional delete",
+        "pt": "remoção condicional",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "conditional update",
+        "pt": "atualização condicional",
+        "correct": true
+      }
+    ],
+    "explanationEn": "The conditional update interaction allows a client to update an existing resource based on some identification criteria, rather than by logical id. To accomplish this, the client issues a PUT as shown: PUT [base]/[type]?[search parameters].",
+    "explanationPt": "A interação de atualização condicional permite que um cliente atualize um recurso existente com base em critérios de identificação, em vez de pelo identificador lógico. Para realizar isso, o cliente envia um PUT no formato: PUT [base]/[type]?[search parameters]."
+  },
+  {
+    "id": 14,
+    "module": "Module 3 - Quiz 1",
+    "titleEn": "Conditional delete of Patient resource",
+    "titlePt": "Exclusão condicional de recurso Patient",
+    "qEn": "An implementer is trying to delete the Patient resource based on the patient's unique business identifier with a value of 9807. Which FHIR interaction and REST URL option correctly represent this requirement?",
+    "qPt": "Um implementador está tentando excluir o recurso Patient com base no identificador comercial único do paciente com valor 9807. Qual interação FHIR e opção de URL REST representam corretamente esse requisito?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "DELETE http://baseurl/Patient/9807",
+        "pt": "DELETE http://baseurl/Patient/9807",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "PUT http://baseurl/Patient?identifier=9807",
+        "pt": "PUT http://baseurl/Patient?identifier=9807",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "DELETE http://baseurl/Patient?identifier=9807",
+        "pt": "DELETE http://baseurl/Patient?identifier=9807",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "en": "HEAD http://baseurl/Patient?identifier=9807",
+        "pt": "HEAD http://baseurl/Patient?identifier=9807",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The conditional delete interaction allows a client to delete an existing resource based on some selection criteria, rather than by a specific logical id. To accomplish this, the client issues an HTTP DELETE as shown: DELETE [base]/[type]?[search parameters].",
+    "explanationPt": "A interação de exclusão condicional permite que um cliente exclua um recurso existente com base em alguns critérios de seleção, em vez de por um identificador lógico específico. Para realizar isso, o cliente envia um HTTP DELETE no formato: DELETE [base]/[type]?[search parameters]."
+  },
+  {
+    "id": 15,
+    "module": "Module 3 - Quiz 1",
+    "titleEn": "Request Patient resource in XML format",
+    "titlePt": "Solicitar recurso Patient em formato XML",
+    "qEn": "A FHIR server is capable of providing the resource instances in both XML and JSON formats. Which of the following is the right mechanism to request the Patient resource in XML format?",
+    "qPt": "Um servidor FHIR é capaz de fornecer as instâncias de recursos em ambos os formatos XML e JSON. Qual das seguintes opções é o mecanismo correto para solicitar o recurso Patient em formato XML?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "Accept-Language: application/fhir+xml in request header",
+        "pt": "Accept-Language: application/fhir+xml no cabeçalho da requisição",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "_format=application/fhir+xml in request header",
+        "pt": "_format=application/fhir+xml no cabeçalho da requisição",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "Accept: application/fhir+json in request header",
+        "pt": "Accept: application/fhir+json no cabeçalho da requisição",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Accept: application/fhir+xml in request header",
+        "pt": "Accept: application/fhir+xml no cabeçalho da requisição",
+        "correct": true
+      }
+    ],
+    "explanationEn": "The correct way to request a resource in XML format from a FHIR server is to use the Accept header with the value 'application/fhir+xml'. This informs the server that the client expects the response in XML format.",
+    "explanationPt": "A maneira correta de solicitar um recurso em formato XML de um servidor FHIR é usar o cabeçalho Accept com o valor 'application/fhir+xml'. Isso informa ao servidor que o cliente espera a resposta em formato XML."
+  },
+  {
+    "id": 16,
+    "module": "Module 3 - Quiz 1",
+    "titleEn": "Read Patient resource by resource id",
+    "titlePt": "Ler recurso Patient pelo id do recurso",
+    "qEn": "A client system wants to fetch the Patient resource instance whose resource id is 71 using the read FHIR REST API interaction. Which of the following is the correct way to execute it?",
+    "qPt": "Um sistema cliente deseja buscar a instância do recurso Patient cujo id do recurso é 71 usando a interação read da API REST FHIR. Qual das seguintes opções é a maneira correta de executar isso?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "http://baseurl/Patient/71",
+        "pt": "http://baseurl/Patient/71",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "http://baseurl/Patient?identifier=71",
+        "pt": "http://baseurl/Patient?identifier=71",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "http://baseurl/Patient?_id=71",
+        "pt": "http://baseurl/Patient?_id=71",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "http://baseurl/Patient/71/_history/1",
+        "pt": "http://baseurl/Patient/71/_history/1",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The read interaction is used to fetch a resource instance directly using its logical id (e.g., Patient/71). Using ?identifier or ?_id performs a search, which returns a Bundle instead of a single resource instance. The _history endpoint is for retrieving version history, not a direct read.",
+    "explanationPt": "A interação read é usada para buscar uma instância de recurso diretamente pelo seu id lógico (por exemplo, Patient/71). Usar ?identifier ou ?_id realiza uma pesquisa, que retorna um Bundle em vez de uma única instância do recurso. O endpoint _history serve para obter histórico de versões, não uma leitura direta."
+  },
+  {
+    "id": 17,
+    "module": "Module 3 - Quiz 1",
+    "titleEn": "Fetch latest version of Patient resource",
+    "titlePt": "Buscar a última versão do recurso Patient",
+    "qEn": "A client system wants to fetch the latest version of the Patient resource instance. The logical id is 1414, and there are in total 5 versions of this resource instance. Which of the following is the correct way to execute it?",
+    "qPt": "Um sistema cliente deseja buscar a última versão da instância do recurso Patient. O id lógico é 1414 e existem no total 5 versões desta instância do recurso. Qual das seguintes opções é a maneira correta de executar isso?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "http://hapi.fhir.org/baseR5/Patient/1414/_history/5",
+        "pt": "http://hapi.fhir.org/baseR5/Patient/1414/_history/5",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "http://hapi.fhir.org/baseR5/Patient/1414",
+        "pt": "http://hapi.fhir.org/baseR5/Patient/1414",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "en": "http://hapi.fhir.org/baseR5/Patient/1414/5",
+        "pt": "http://hapi.fhir.org/baseR5/Patient/1414/5",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "http://hapi.fhir.org/baseR5/Patient/1414/_history/1",
+        "pt": "http://hapi.fhir.org/baseR5/Patient/1414/_history/1",
+        "correct": false
+      }
+    ],
+    "explanationEn": "When reading a resource using the logical id (e.g., Patient/1414), the server always returns the latest version by default. Using /_history/{vid} retrieves a specific past version, not necessarily the latest one, unless explicitly known. Since the question does not specify a versionId but only asks for the latest version, the correct way is simply Patient/1414.",
+    "explanationPt": "Ao buscar um recurso usando o id lógico (por exemplo, Patient/1414), o servidor sempre retorna a última versão por padrão. Usar /_history/{vid} recupera uma versão específica anterior, não necessariamente a última, a menos que seja explicitamente informada. Como a questão não especifica um versionId, mas apenas pede a última versão, a forma correta é simplesmente Patient/1414."
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+]

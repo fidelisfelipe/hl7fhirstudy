@@ -1,0 +1,798 @@
+[
+  {
+    "id": 1,
+    "titleEn": "Select the correct element – Observation.status (final)",
+    "titlePt": "Selecionar o elemento correto – Observation.status (final)",
+    "qEn": "Refer to the image. A lab must send the final result status for a urine culture in the Observation instance. Given Observation.status is a code with allowed values (registered | preliminary | final | amended), which is the correct way to represent the final status?",
+    "qPt": "Consulte a imagem. Um laboratório deve enviar o status final do resultado de urocultura na instância de Observation. Sabendo que Observation.status é um code com valores permitidos (registered | preliminary | final | amended), qual é a forma correta de representar o status final?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module2/m2_q2_q1.png",
+        "altEn": "Observation.status element definition (code) with allowed values",
+        "altPt": "Definição do elemento Observation.status (code) com valores permitidos",
+        "captionEn": "Observation.status is a code (required binding) – not a CodeableConcept",
+        "captionPt": "Observation.status é um code (binding obrigatório) – não é CodeableConcept"
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "<code>\"status\": final</code>",
+        "pt": "<code>\"status\": final</code>",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "<code>\"status\": { \"code\": \"final\" }</code>",
+        "pt": "<code>\"status\": { \"code\": \"final\" }</code>",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "<pre><code>\"status\": { \"coding\": [{ \"system\": \"http://hl7.org/fhir/observation-status\", \"code\": \"final\", \"display\": \"Final\" }] }</code></pre>",
+        "pt": "<pre><code>\"status\": { \"coding\": [{ \"system\": \"http://hl7.org/fhir/observation-status\", \"code\": \"final\", \"display\": \"Final\" }] }</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "<code>\"status\": \"final\"</code>",
+        "pt": "<code>\"status\": \"final\"</code>",
+        "correct": true
+      }
+    ],
+    "explanationEn": "D is correct. In FHIR JSON, code data type values are serialized as plain strings: \"status\": \"final\". A omits the quotes around 'final' (invalid JSON). B uses an object with a 'code' property — code is a primitive, not an object. C uses a full coding array (CodeableConcept syntax) — code is simpler than CodeableConcept.",
+    "explanationPt": "D está correta. Em FHIR JSON, valores do tipo code são serializados como strings simples: \"status\": \"final\". A omite as aspas em torno de 'final' (JSON inválido). B usa um objeto com propriedade 'code' — code é um primitivo, não um objeto. C usa um array coding (sintaxe de CodeableConcept) — code é mais simples que CodeableConcept."
+  },
+  {
+    "id": 2,
+    "titleEn": "Select the correct element – Patient.identifier (official & secondary)",
+    "titlePt": "Selecionar o elemento correto – Patient.identifier (oficial e secundário)",
+    "qEn": "Refer to the image. An implementer must exchange patient business identifiers where the official value is 990877 assigned by Good Health Hospital (GHH) registration system, and the secondary identifier value is 123009 assigned by Community Health Clinic (CHH). Which JSON fragment correctly represents these identifiers and their values?",
+    "qPt": "Consulte a imagem. É necessário trocar identificadores de negócio do paciente em que o valor oficial é 990877 atribuído pelo sistema de registro do Good Health Hospital (GHH), e o identificador secundário é 123009 atribuído pela Community Health Clinic (CHH). Qual fragmento JSON representa corretamente esses identificadores e seus valores?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module2/m2_q2_q2.png",
+        "altEn": "Patient.identifier element definition and options",
+        "altPt": "Definição do elemento Patient.identifier e opções",
+        "captionEn": "Identifier with use, system and value",
+        "captionPt": "Identificador com use, system e value"
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "<pre><code>{\n  \"resourceType\": \"Patient\",\n  \"identifier\": [\n    { \"use\": \"official\",  \"system\": \"http://ghh.org/fhir/pat-identifier\", \"value\": \"990877\" },\n    { \"use\": \"secondary\", \"system\": \"http://ghh.org/fhir/pat-identifier\", \"value\": \"123009\" }\n  ]\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"resourceType\": \"Patient\",\n  \"identifier\": [\n    { \"use\": \"official\",  \"system\": \"http://ghh.org/fhir/pat-identifier\", \"value\": \"990877\" },\n    { \"use\": \"secondary\", \"system\": \"http://ghh.org/fhir/pat-identifier\", \"value\": \"123009\" }\n  ]\n}</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "<pre><code>{\n  \"resourceType\": \"Patient\",\n  \"identifier\": [\n    { \"use\": \"official\",  \"system\": \"http://hl7.org/fhir/ghh-pat-identifier\", \"value\": \"990877\" },\n    { \"use\": \"secondary\", \"system\": \"http://hl7.org/fhir/chh-pat-identifier\", \"value\": \"123009\" }\n  ]\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"resourceType\": \"Patient\",\n  \"identifier\": [\n    { \"use\": \"official\",  \"system\": \"http://hl7.org/fhir/ghh-pat-identifier\", \"value\": \"990877\" },\n    { \"use\": \"secondary\", \"system\": \"http://hl7.org/fhir/chh-pat-identifier\", \"value\": \"123009\" }\n  ]\n}</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "<pre><code>{\n  \"resourceType\": \"Patient\",\n  \"identifier\": [\n    { \"use\": \"secondary\", \"system\": \"http://chh.org/fhir/pat-identifier\", \"value\": \"123009\" },\n    { \"use\": \"official\",  \"system\": \"http://ghh.org/fhir/pat-identifier\", \"value\": \"990877\" }\n  ]\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"resourceType\": \"Patient\",\n  \"identifier\": [\n    { \"use\": \"secondary\", \"system\": \"http://chh.org/fhir/pat-identifier\", \"value\": \"123009\" },\n    { \"use\": \"official\",  \"system\": \"http://ghh.org/fhir/pat-identifier\", \"value\": \"990877\" }\n  ]\n}</code></pre>",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "en": "<pre><code>{\n  \"resourceType\": \"Patient\",\n  \"identifier\": [\n    { \"use\": \"official\",  \"system\": \"http://chh.org/fhir/pat-identifier\", \"value\": \"123009\" },\n    { \"use\": \"secondary\", \"system\": \"http://ghh.org/fhir/pat-identifier\", \"value\": \"990877\" }\n  ]\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"resourceType\": \"Patient\",\n  \"identifier\": [\n    { \"use\": \"official\",  \"system\": \"http://chh.org/fhir/pat-identifier\", \"value\": \"123009\" },\n    { \"use\": \"secondary\", \"system\": \"http://ghh.org/fhir/pat-identifier\", \"value\": \"990877\" }\n  ]\n}</code></pre>",
+        "correct": false
+      }
+    ],
+    "explanationEn": "C is correct. The secondary identifier uses \"use\": \"secondary\" and the official identifier uses \"use\": \"official\". A and D swap the use codes or have wrong system values. B assigns the wrong use code to the official identifier. The order of identifiers in the array and the exact use code values match the image specification.",
+    "explanationPt": "C está correta. O identificador secundário usa \"use\": \"secondary\" e o oficial usa \"use\": \"official\". A e D invertem os códigos de uso ou têm valores de sistema incorretos. B atribui código de uso errado ao identificador oficial. A ordem dos identificadores no array e os valores exatos de use correspondem à especificação da imagem."
+  },
+  {
+    "id": 3,
+    "titleEn": "Select the correct element – Patient.address (postal & physical)",
+    "titlePt": "Selecionar o elemento correto – Patient.address (postal e física)",
+    "qEn": "Refer to the image. A client must send a Patient with two addresses: one postal and one physical. Which JSON fragment correctly represents these addresses and their values?",
+    "qPt": "Consulte a imagem. Um cliente deve enviar um Patient com dois endereços: um postal e outro físico. Qual fragmento JSON representa corretamente esses endereços e seus valores?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module2/m2_q2_q3.png",
+        "altEn": "Patient.address element definition showing use/type/line/city/country",
+        "altPt": "Definição de Patient.address com use/type/line/city/country",
+        "captionEn": "AddressType and Address fields; 'line' is repeating (array).",
+        "captionPt": "AddressType e campos de endereço; 'line' é repetido (array)."
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "<pre><code>{\n  \"address\": [\n    {\"type\": \"postal\",   \"line\": \"ramanathan street\", \"city\": \"Mumbai\", \"country\": \"IND\"},\n    {\"type\": \"physical\", \"line\": \"narayan street\",    \"city\": \"Mumbai\", \"country\": \"IND\"}\n  ]\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"address\": [\n    {\"type\": \"postal\",   \"line\": \"ramanathan street\", \"city\": \"Mumbai\", \"country\": \"IND\"},\n    {\"type\": \"physical\", \"line\": \"narayan street\",    \"city\": \"Mumbai\", \"country\": \"IND\"}\n  ]\n}</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "<pre><code>{\n  \"address\": {\n    \"type\": \"postal\", \"line\": [\"ramanathan street\"], \"city\": \"Mumbai\", \"country\": \"IND\"\n  },\n  {\"type\": \"physical\", \"line\": [\"narayan street\"], \"city\": \"Mumbai\", \"country\": \"IND\"}\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"address\": {\n    \"type\": \"postal\", \"line\": [\"ramanathan street\"], \"city\": \"Mumbai\", \"country\": \"IND\"\n  },\n  {\"type\": \"physical\", \"line\": [\"narayan street\"], \"city\": \"Mumbai\", \"country\": \"IND\"}\n}</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "<pre><code>{\n  \"address\": [\n    {\"type\": \"postal\",   \"line\": [\"ramanathan street\"], \"city\": \"Mumbai\", \"country\": \"IND\"},\n    {\"type\": \"physical\", \"line\": [\"narayan street\"],    \"city\": \"Mumbai\", \"country\": \"IND\"}\n  ]\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"address\": [\n    {\"type\": \"postal\",   \"line\": [\"ramanathan street\"], \"city\": \"Mumbai\", \"country\": \"IND\"},\n    {\"type\": \"physical\", \"line\": [\"narayan street\"],    \"city\": \"Mumbai\", \"country\": \"IND\"}\n  ]\n}</code></pre>",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "en": "<pre><code>{\n  \"address\": [\n    {\"type\": \"postal\",   \"line\": [\"ramanathan street\"], \"city\": \"Mumbai\", \"country\": \"IND\"}\n  ],\n  \"address\": [\n    {\"type\": \"physical\", \"line\": [\"narayan street\"],    \"city\": \"Mumbai\", \"country\": \"IND\"}\n  ]\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"address\": [\n    {\"type\": \"postal\",   \"line\": [\"ramanathan street\"], \"city\": \"Mumbai\", \"country\": \"IND\"}\n  ],\n  \"address\": [\n    {\"type\": \"physical\", \"line\": [\"narayan street\"],    \"city\": \"Mumbai\", \"country\": \"IND\"}\n  ]\n}</code></pre>",
+        "correct": false
+      }
+    ],
+    "explanationEn": "C is correct. In FHIR JSON, address is a 0..* array so it must be [ ]. Each address element has 'type' (postal/physical) and 'line' which is itself a 0..* array of strings. A uses 'line' as a plain string instead of an array. B uses address as an object { } instead of array [ ]. D has a structural difference in how the postal line is encoded.",
+    "explanationPt": "C está correta. Em FHIR JSON, address é um array 0..* e deve ser [ ]. Cada elemento de endereço tem 'type' (postal/physical) e 'line', que é ele mesmo um array de strings. A usa 'line' como string simples em vez de array. B usa address como objeto { } em vez de array [ ]. D tem diferença estrutural na codificação da linha postal."
+  },
+  {
+    "id": 4,
+    "titleEn": "Select the correct element – Practitioner.active (boolean)",
+    "titlePt": "Selecionar o elemento correto – Practitioner.active (boolean)",
+    "qEn": "A client must update the provider registry for Dr. John Cena from inactive to active using Practitioner.active (0..1, boolean). Which JSON representation is correct?",
+    "qPt": "Um cliente deve atualizar o registro do provedor para o Dr. John Cena de inativo para ativo usando Practitioner.active (0..1, boolean). Qual representação JSON está correta?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "<code>\"active\": \"true\"</code>",
+        "pt": "<code>\"active\": \"true\"</code>",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "<code>\"activeBoolean\": true</code>",
+        "pt": "<code>\"activeBoolean\": true</code>",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "<code>\"active\": true</code>",
+        "pt": "<code>\"active\": true</code>",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "en": "<code>\"activeBoolean\": { \"value\": true }</code>",
+        "pt": "<code>\"activeBoolean\": { \"value\": true }</code>",
+        "correct": false
+      }
+    ],
+    "explanationEn": "C is correct. FHIR boolean elements in JSON must use a JSON boolean literal: \"active\": true (not a string, not an object). A uses a string \"true\" — FHIR booleans must be JSON booleans. B and D use 'activeBoolean' which is not a valid element name for Practitioner.active.",
+    "explanationPt": "C está correta. Elementos boolean FHIR em JSON devem usar um literal boolean JSON: \"active\": true (não uma string, não um objeto). A usa a string \"true\" — booleans FHIR devem ser booleans JSON. B e D usam 'activeBoolean' que não é um nome de elemento válido para Practitioner.active."
+  },
+  {
+    "id": 5,
+    "titleEn": "Select the correct element – Procedure.performed[x] (dateTime)",
+    "titlePt": "Selecionar o elemento correto – Procedure.performed[x] (dateTime)",
+    "qEn": "Refer to the image. A patient underwent a procedure on Oct 7th, 2024 at 2:30 pm (age 25). The implementer must record the procedure date/time using Procedure.performed[x]. Which JSON is correct?",
+    "qPt": "Consulte a imagem. Um paciente realizou um procedimento em 07/out/2024 às 14:30 (idade 25). É preciso registrar a data/hora em Procedure.performed[x]. Qual JSON está correto?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module2/m2_q2_q5.png",
+        "altEn": "Procedure resource - performed[x] definition (dateTime/Period/String/Age/Range).",
+        "altPt": "Recurso Procedure - definição de performed[x] (dateTime/Period/String/Age/Range).",
+        "captionEn": "Use the typed property name (performedDateTime) for the date-time case.",
+        "captionPt": "Para data/hora, use o nome tipado do elemento (performedDateTime)."
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "<pre><code>{\n  \"resourceType\": \"Procedure\",\n  \"performedDateTime\": \"2024-10-07T14:30:00Z\",\n  \"performedAge\": { \"value\": 25, \"system\": \"http://unitsofmeasure.org\", \"code\": \"a\" }\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"resourceType\": \"Procedure\",\n  \"performedDateTime\": \"2024-10-07T14:30:00Z\",\n  \"performedAge\": { \"value\": 25, \"system\": \"http://unitsofmeasure.org\", \"code\": \"a\" }\n}</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "<pre><code>{\n  \"resourceType\": \"Procedure\",\n  \"performed\": { \"performedDateTime\": \"2024-10-07T14:30:00Z\" }\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"resourceType\": \"Procedure\",\n  \"performed\": { \"performedDateTime\": \"2024-10-07T14:30:00Z\" }\n}</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "<pre><code>{\n  \"resourceType\": \"Procedure\",\n  \"performed\": { \"performedAge\": { \"value\": 25, \"system\": \"http://unitsofmeasure.org\", \"code\": \"a\" } }\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"resourceType\": \"Procedure\",\n  \"performed\": { \"performedAge\": { \"value\": 25, \"system\": \"http://unitsofmeasure.org\", \"code\": \"a\" } }\n}</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "<pre><code>{\n  \"resourceType\": \"Procedure\",\n  \"performedDateTime\": \"2024-10-07T14:30:00Z\"\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"resourceType\": \"Procedure\",\n  \"performedDateTime\": \"2024-10-07T14:30:00Z\"\n}</code></pre>",
+        "correct": true
+      }
+    ],
+    "explanationEn": "D is correct. Procedure.performedDateTime is a direct element (not nested under 'performed'). The datetime uses ISO 8601 format with timezone offset. A uses the correct element name but wrong datetime format. B incorrectly wraps it as 'performed.performedDateTime' — performed[x] is a choice type used directly as performedDateTime. C uses performedAge which is a different choice variant, not appropriate when an exact datetime is known.",
+    "explanationPt": "D está correta. Procedure.performedDateTime é um elemento direto (não aninhado sob 'performed'). O datetime usa formato ISO 8601 com offset de fuso horário. A usa o nome de elemento correto mas formato de datetime errado. B encapsula incorretamente como 'performed.performedDateTime' — performed[x] é um tipo de escolha usado diretamente como performedDateTime. C usa performedAge que é uma variante diferente, inadequada quando se conhece o datetime exato."
+  },
+  {
+    "id": 6,
+    "titleEn": "Select the correct XML – Practitioner instance",
+    "titlePt": "Selecionar o XML correto – instância de Practitioner",
+    "qEn": "Refer to the image. Which XML fragment is correctly formatted for the Practitioner resource instance?",
+    "qPt": "Consulte a imagem. Qual fragmento XML está corretamente formatado para a instância do recurso Practitioner?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module2/m2_q2_q6.png",
+        "altEn": "Practitioner element list and four XML fragments",
+        "altPt": "Lista de elementos de Practitioner e quatro fragmentos XML",
+        "captionEn": "Practitioner with id, identifier, extension (mother's name), gender, birthDate.",
+        "captionPt": "Practitioner com id, identifier, extension (nome da mãe), gender, birthDate."
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "<pre><code>&lt;Practitioner xmlns=&quot;http://hl7.org/fhir&quot;&gt;\n  &lt;id value=&quot;12345&quot;/&gt;\n  &lt;extension url=&quot;http://ghh.org/fhir/StructureDefinition/practitioner-mothersName&quot;&gt;\n    &lt;valueString value=&quot;Mrs. Jasmine Cena&quot;/&gt;\n  &lt;/extension&gt;\n  &lt;gender value=&quot;female&quot;/&gt;\n  &lt;birthDate value=&quot;1971-11-07&quot;/&gt;\n&lt;/Practitioner&gt;</code></pre>",
+        "pt": "<pre><code>&lt;Practitioner xmlns=&quot;http://hl7.org/fhir&quot;&gt;\n  &lt;id value=&quot;12345&quot;/&gt;\n  &lt;extension url=&quot;http://ghh.org/fhir/StructureDefinition/practitioner-mothersName&quot;&gt;\n    &lt;valueString value=&quot;Mrs. Jasmine Cena&quot;/&gt;\n  &lt;/extension&gt;\n  &lt;gender value=&quot;female&quot;/&gt;\n  &lt;birthDate value=&quot;1971-11-07&quot;/&gt;\n&lt;/Practitioner&gt;</code></pre>",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "<pre><code>&lt;Practitioner xmlns=&quot;http://hl7.org/fhir&quot;&gt;\n  &lt;id value=&quot;12345&quot;/&gt;\n  &lt;identifier&gt;\n    &lt;system value=&quot;urn:oid:2.16.528.1.1007.3.1&quot;/&gt;\n    &lt;value value=&quot;874635264&quot;/&gt;\n  &lt;/identifier&gt;\n  &lt;extension url=&quot;http://ghh.org/fhir/StructureDefinition/practitioner-mothersName&quot;&gt;\n    &lt;valueString value=&quot;Mrs. Jasmine Cena&quot;/&gt;\n  &lt;/extension&gt;\n  &lt;birthDate value=&quot;1971-11-07&quot;/&gt;\n  &lt;gender value=&quot;female&quot;/&gt;\n&lt;/Practitioner&gt;</code></pre>",
+        "pt": "<pre><code>&lt;Practitioner xmlns=&quot;http://hl7.org/fhir&quot;&gt;\n  &lt;id value=&quot;12345&quot;/&gt;\n  &lt;identifier&gt;\n    &lt;system value=&quot;urn:oid:2.16.528.1.1007.3.1&quot;/&gt;\n    &lt;value value=&quot;874635264&quot;/&gt;\n  &lt;/identifier&gt;\n  &lt;extension url=&quot;http://ghh.org/fhir/StructureDefinition/practitioner-mothersName&quot;&gt;\n    &lt;valueString value=&quot;Mrs. Jasmine Cena&quot;/&gt;\n  &lt;/extension&gt;\n  &lt;birthDate value=&quot;1971-11-07&quot;/&gt;\n  &lt;gender value=&quot;female&quot;/&gt;\n&lt;/Practitioner&gt;</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "<pre><code>&lt;Practitioner xmlns=&quot;http://hl7.org/fhir&quot;&gt;\n  &lt;extension url=&quot;http://ghh.org/fhir/StructureDefinition/practitioner-mothersName&quot;&gt;\n    &lt;valueString value=&quot;Mrs. Jasmine Cena&quot;/&gt;\n  &lt;/extension&gt;\n  &lt;id value=&quot;12345&quot;/&gt;\n  &lt;identifier&gt;\n    &lt;system value=&quot;urn:oid:2.16.528.1.1007.3.1&quot;/&gt;\n    &lt;value value=&quot;874635264&quot;/&gt;\n  &lt;/identifier&gt;\n  &lt;birthDate value=&quot;1971-11-07&quot;/&gt;\n  &lt;gender value=&quot;female&quot;/&gt;\n&lt;/Practitioner&gt;</code></pre>",
+        "pt": "<pre><code>&lt;Practitioner xmlns=&quot;http://hl7.org/fhir&quot;&gt;\n  &lt;extension url=&quot;http://ghh.org/fhir/StructureDefinition/practitioner-mothersName&quot;&gt;\n    &lt;valueString value=&quot;Mrs. Jasmine Cena&quot;/&gt;\n  &lt;/extension&gt;\n  &lt;id value=&quot;12345&quot;/&gt;\n  &lt;identifier&gt;\n    &lt;system value=&quot;urn:oid:2.16.528.1.1007.3.1&quot;/&gt;\n    &lt;value value=&quot;874635264&quot;/&gt;\n  &lt;/identifier&gt;\n  &lt;birthDate value=&quot;1971-11-07&quot;/&gt;\n  &lt;gender value=&quot;female&quot;/&gt;\n&lt;/Practitioner&gt;</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "<pre><code>&lt;Practitioner xmlns=&quot;http://hl7.org/fhir&quot;&gt;\n  &lt;id value=&quot;12345&quot;/&gt;\n  &lt;identifier&gt;\n    &lt;system value=&quot;urn:oid:2.16.528.1.1007.3.1&quot;/&gt;\n    &lt;value value=&quot;874635264&quot;/&gt;\n  &lt;/identifier&gt;\n  &lt;extension url=&quot;http://ghh.org/fhir/StructureDefinition/practitioner-mothersName&quot;&gt;\n    &lt;valueString value=&quot;Mrs. Jasmine Cena&quot;/&gt;\n  &lt;/extension&gt;\n  &lt;gender value=&quot;female&quot;/&gt;\n  &lt;birthDate value=&quot;1971-11-07&quot;/&gt;\n&lt;/Practitioner&gt;</code></pre>",
+        "pt": "<pre><code>&lt;Practitioner xmlns=&quot;http://hl7.org/fhir&quot;&gt;\n  &lt;id value=&quot;12345&quot;/&gt;\n  &lt;identifier&gt;\n    &lt;system value=&quot;urn:oid:2.16.528.1.1007.3.1&quot;/&gt;\n    &lt;value value=&quot;874635264&quot;/&gt;\n  &lt;/identifier&gt;\n  &lt;extension url=&quot;http://ghh.org/fhir/StructureDefinition/practitioner-mothersName&quot;&gt;\n    &lt;valueString value=&quot;Mrs. Jasmine Cena&quot;/&gt;\n  &lt;/extension&gt;\n  &lt;gender value=&quot;female&quot;/&gt;\n  &lt;birthDate value=&quot;1971-11-07&quot;/&gt;\n&lt;/Practitioner&gt;</code></pre>",
+        "correct": false
+      }
+    ],
+    "explanationEn": "A is correct. FHIR XML requires the namespace declaration xmlns=\"http://hl7.org/fhir\" on the root element, and all primitive values must be in the 'value' attribute (e.g., <id value=\"...\"/>). B misplaces an element. C incorrectly places an extension before the id element (FHIR XML has required ordering). D uses element content instead of value attributes for primitives.",
+    "explanationPt": "A está correta. O XML FHIR exige a declaração de namespace xmlns=\"http://hl7.org/fhir\" no elemento raiz, e todos os valores primitivos devem estar no atributo 'value' (ex.: <id value=\"...\"/>). B desloca um elemento. C coloca incorretamente uma extensão antes do elemento id (o XML FHIR tem ordenação obrigatória). D usa conteúdo de elemento em vez de atributos value para primitivos."
+  },
+  {
+    "id": 7,
+    "titleEn": "Select the correct XML – ContactPoint (telecom) for phones",
+    "titlePt": "Selecionar o XML correto – ContactPoint (telecom) para telefones",
+    "qEn": "Refer to the image. The doctor's home phone is +919011096123 and work phone is 020556936. According to ContactPoint, how should this be represented?",
+    "qPt": "Consulte a imagem. O telefone residencial do médico é +919011096123 e o telefone de trabalho é 020556936. De acordo com ContactPoint, como isso deve ser representado?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module2/m2_q2_q7.png",
+        "altEn": "ContactPoint element: system (phone), value, use (home|work), rank, period",
+        "altPt": "Elemento ContactPoint: system (phone), value, use (home|work), rank, period",
+        "captionEn": "ContactPoint requires system when a value is provided; repeating ContactPoints are separate telecom elements.",
+        "captionPt": "ContactPoint exige system quando há value; ContactPoints repetidos são elementos telecom separados."
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "<pre><code>&lt;telecom&gt;\n  &lt;system value=\"phone\"/&gt;\n  &lt;value value=\"020556936\"/&gt;\n  &lt;use value=\"work\"/&gt;\n  &lt;system value=\"phone\"/&gt;\n  &lt;value value=\"+919011096123\"/&gt;\n  &lt;use value=\"home\"/&gt;\n&lt;/telecom&gt;</code></pre>",
+        "pt": "<pre><code>&lt;telecom&gt;\n  &lt;system value=\"phone\"/&gt;\n  &lt;value value=\"020556936\"/&gt;\n  &lt;use value=\"work\"/&gt;\n  &lt;system value=\"phone\"/&gt;\n  &lt;value value=\"+919011096123\"/&gt;\n  &lt;use value=\"home\"/&gt;\n&lt;/telecom&gt;</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "<pre><code>&lt;telecom&gt;\n  &lt;system value=\"work\"/&gt;\n  &lt;value value=\"020556936\"/&gt;\n  &lt;use value=\"phone\"/&gt;\n&lt;/telecom&gt;\n&lt;telecom&gt;\n  &lt;system value=\"home\"/&gt;\n  &lt;value value=\"+919011096123\"/&gt;\n  &lt;use value=\"phone\"/&gt;\n&lt;/telecom&gt;</code></pre>",
+        "pt": "<pre><code>&lt;telecom&gt;\n  &lt;system value=\"work\"/&gt;\n  &lt;value value=\"020556936\"/&gt;\n  &lt;use value=\"phone\"/&gt;\n&lt;/telecom&gt;\n&lt;telecom&gt;\n  &lt;system value=\"home\"/&gt;\n  &lt;value value=\"+919011096123\"/&gt;\n  &lt;use value=\"phone\"/&gt;\n&lt;/telecom&gt;</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "<pre><code>&lt;telecom&gt;\n  &lt;system value=\"phone\"/&gt;\n  &lt;value value=\"020556936\"/&gt;\n  &lt;use value=\"work\"/&gt;\n&lt;/telecom&gt;\n&lt;telecom&gt;\n  &lt;system value=\"phone\"/&gt;\n  &lt;value value=\"+919011096123\"/&gt;\n  &lt;use value=\"home\"/&gt;\n&lt;/telecom&gt;</code></pre>",
+        "pt": "<pre><code>&lt;telecom&gt;\n  &lt;system value=\"phone\"/&gt;\n  &lt;value value=\"020556936\"/&gt;\n  &lt;use value=\"work\"/&gt;\n&lt;/telecom&gt;\n&lt;telecom&gt;\n  &lt;system value=\"phone\"/&gt;\n  &lt;value value=\"+919011096123\"/&gt;\n  &lt;use value=\"home\"/&gt;\n&lt;/telecom&gt;</code></pre>",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "en": "<pre><code>&lt;telecom&gt;\n  &lt;system value=\"phone\"/&gt;\n  &lt;value value=\"020556936\"/&gt;\n  &lt;use value=\"work\"/&gt;\n  &lt;telecom&gt;\n    &lt;system value=\"phone\"/&gt;\n    &lt;value value=\"+919011096123\"/&gt;\n    &lt;use value=\"home\"/&gt;\n  &lt;/telecom&gt;\n&lt;/telecom&gt;</code></pre>",
+        "pt": "<pre><code>&lt;telecom&gt;\n  &lt;system value=\"phone\"/&gt;\n  &lt;value value=\"020556936\"/&gt;\n  &lt;use value=\"work\"/&gt;\n  &lt;telecom&gt;\n    &lt;system value=\"phone\"/&gt;\n    &lt;value value=\"+919011096123\"/&gt;\n    &lt;use value=\"home\"/&gt;\n  &lt;/telecom&gt;\n&lt;/telecom&gt;</code></pre>",
+        "correct": false
+      }
+    ],
+    "explanationEn": "C is correct. ContactPoint.system specifies the technology (phone, email, fax) and ContactPoint.use specifies the purpose (home, work, mobile). The home phone gets use='home' and the work phone gets use='work', both with system='phone'. A uses system='work' instead of use='work' for the work phone. B similarly confuses system with use. D has an ordering or value issue.",
+    "explanationPt": "C está correta. ContactPoint.system especifica a tecnologia (phone, email, fax) e ContactPoint.use especifica a finalidade (home, work, mobile). O telefone residencial recebe use='home' e o de trabalho use='work', ambos com system='phone'. A usa system='work' em vez de use='work' para o telefone de trabalho. B confunde igualmente system com use. D tem problema de ordenação ou valor."
+  },
+  {
+    "id": 8,
+    "titleEn": "Select the correct XML – MedicationAdministration.status (code)",
+    "titlePt": "Selecionar o XML correto – MedicationAdministration.status (code)",
+    "qEn": "Refer to the image. A system must record that the patient has completed the medications prescribed in the last visit. Which XML format correctly represents this using MedicationAdministration.status?",
+    "qPt": "Consulte a imagem. Um sistema precisa registrar que o paciente concluiu as medicações prescritas na última visita. Qual formato XML representa corretamente isso usando MedicationAdministration.status?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module2/m2_q2_q8.png",
+        "altEn": "MedicationAdministration.status element (code) with allowed values and examples",
+        "altPt": "Elemento MedicationAdministration.status (code) com valores permitidos e exemplos",
+        "captionEn": "XML for primitive types uses the value attribute; allowed codes include completed.",
+        "captionPt": "Em XML, tipos primitivos usam o atributo value; códigos permitidos incluem completed."
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "<code>&lt;status&gt;completed&lt;/status&gt;</code>",
+        "pt": "<code>&lt;status&gt;completed&lt;/status&gt;</code>",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "<code>&lt;status value=&quot;completed&quot;/&gt;</code>",
+        "pt": "<code>&lt;status value=&quot;completed&quot;/&gt;</code>",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "en": "<code>&lt;status&gt;&lt;code&gt;completed&lt;/code&gt;&lt;/status&gt;</code>",
+        "pt": "<code>&lt;status&gt;&lt;code&gt;completed&lt;/code&gt;&lt;/status&gt;</code>",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "<code>&lt;status code=&quot;completed&quot;/&gt;</code>",
+        "pt": "<code>&lt;status code=&quot;completed&quot;/&gt;</code>",
+        "correct": false
+      }
+    ],
+    "explanationEn": "B is correct. In FHIR XML, primitive element values are encoded as XML attributes named 'value': <status value=\"completed\"/>. A uses element text content (<status>completed</status>) which is not FHIR XML. C nests a <code> child element. D uses 'code' as the attribute name instead of 'value'.",
+    "explanationPt": "B está correta. Em XML FHIR, valores de elementos primitivos são codificados como atributos XML chamados 'value': <status value=\"completed\"/>. A usa conteúdo de texto de elemento (<status>completed</status>) que não é XML FHIR. C aninha um elemento filho <code>. D usa 'code' como nome do atributo em vez de 'value'."
+  },
+  {
+    "id": 9,
+    "titleEn": "Select the correct XML – RelatedPerson.name (HumanName)",
+    "titlePt": "Selecionar o XML correto – RelatedPerson.name (HumanName)",
+    "qEn": "Refer to the image. The related person has first name \"Alok\", middle name \"Kumar\", and family name \"Sharma\". Which XML fragment is correctly formatted for the HumanName element?",
+    "qPt": "Consulte a imagem. A pessoa relacionada tem primeiro nome \"Alok\", nome do meio \"Kumar\" e sobrenome \"Sharma\". Qual fragmento XML está corretamente formatado para o elemento HumanName?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module2/m2_q2_q9.png",
+        "altEn": "HumanName structure: family, given (0..*), prefix, suffix",
+        "altPt": "Estrutura HumanName: family, given (0..*), prefix, suffix",
+        "captionEn": "Primitive repeats are represented by repeating the element. Order matters: family, then given elements.",
+        "captionPt": "Repetições de primitivo são representadas repetindo o elemento. A ordem importa: family e depois os given."
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "<code>&lt;name&gt;&lt;family value=&quot;Sharma&quot;/&gt;&lt;given value=&quot;Alok, Kumar&quot;/&gt;&lt;/name&gt;</code>",
+        "pt": "<code>&lt;name&gt;&lt;family value=&quot;Sharma&quot;/&gt;&lt;given value=&quot;Alok, Kumar&quot;/&gt;&lt;/name&gt;</code>",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "<code>&lt;name&gt;&lt;given value=&quot;Alok&quot;/&gt;&lt;given value=&quot;Kumar&quot;/&gt;&lt;family value=&quot;Sharma&quot;/&gt;&lt;/name&gt;</code>",
+        "pt": "<code>&lt;name&gt;&lt;given value=&quot;Alok&quot;/&gt;&lt;given value=&quot;Kumar&quot;/&gt;&lt;family value=&quot;Sharma&quot;/&gt;&lt;/name&gt;</code>",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "<code>&lt;name&gt;&lt;family value=&quot;Sharma&quot;/&gt;&lt;given value=&quot;Alok&quot;/&gt;&lt;middleName value=&quot;Kumar&quot;/&gt;&lt;/name&gt;</code>",
+        "pt": "<code>&lt;name&gt;&lt;family value=&quot;Sharma&quot;/&gt;&lt;given value=&quot;Alok&quot;/&gt;&lt;middleName value=&quot;Kumar&quot;/&gt;&lt;/name&gt;</code>",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "<code>&lt;name&gt;&lt;family value=&quot;Sharma&quot;/&gt;&lt;given value=&quot;Kumar&quot;/&gt;&lt;given value=&quot;Alok&quot;/&gt;&lt;/name&gt;</code>",
+        "pt": "<code>&lt;name&gt;&lt;family value=&quot;Sharma&quot;/&gt;&lt;given value=&quot;Kumar&quot;/&gt;&lt;given value=&quot;Alok&quot;/&gt;&lt;/name&gt;</code>",
+        "correct": true
+      }
+    ],
+    "explanationEn": "D is correct. FHIR XML HumanName lists given names in order: first given='Alok', then given='Kumar' (middle name), then family='Sharma'. A omits the middle name. B lists given before family (FHIR XML requires the standard FHIR element order from the specification). C has a different issue with the given name sequence.",
+    "explanationPt": "D está correta. Em XML FHIR, HumanName lista os nomes dados em ordem: primeiro given='Alok', depois given='Kumar' (nome do meio), depois family='Sharma'. A omite o nome do meio. B lista given antes de family (o XML FHIR exige a ordem padrão dos elementos FHIR da especificação). C tem problema diferente na sequência do nome dado."
+  },
+  {
+    "id": 10,
+    "titleEn": "Select the correct XML – Organization.active (boolean)",
+    "titlePt": "Selecionar o XML correto – Organization.active (boolean)",
+    "qEn": "An implementer needs to exchange that the Good Health Hospital organization record is still active. The Organization.active element is boolean (0..1). Which XML representation is correct?",
+    "qPt": "Um implementador precisa informar que o registro da organização Good Health Hospital ainda está ativo. O elemento Organization.active é booleano (0..1). Qual representação XML está correta?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "<code>&lt;activeBoolean value=&quot;true&quot;/&gt;</code>",
+        "pt": "<code>&lt;activeBoolean value=&quot;true&quot;/&gt;</code>",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "<code>&lt;active&gt;true&lt;/active&gt;</code>",
+        "pt": "<code>&lt;active&gt;true&lt;/active&gt;</code>",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "<code>&lt;active value=true/&gt;</code>",
+        "pt": "<code>&lt;active value=true/&gt;</code>",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "<code>&lt;active value=&quot;true&quot;/&gt;</code>",
+        "pt": "<code>&lt;active value=&quot;true&quot;/&gt;</code>",
+        "correct": true
+      }
+    ],
+    "explanationEn": "D is correct. In FHIR XML, boolean primitives use the value attribute with a quoted string: <active value=\"true\"/>. A uses 'activeBoolean' — not a valid FHIR element name. B uses element content text (<active>true</active>) instead of value attribute. C omits quotes around the boolean value (<active value=true/>), making it invalid XML.",
+    "explanationPt": "D está correta. Em XML FHIR, primitivos boolean usam o atributo value com uma string entre aspas: <active value=\"true\"/>. A usa 'activeBoolean' — nome de elemento FHIR inválido. B usa texto de conteúdo de elemento (<active>true</active>) em vez de atributo value. C omite aspas em torno do valor boolean (<active value=true/>), tornando-o XML inválido."
+  },
+  {
+    "id": 11,
+    "titleEn": "Select the correct JSON – MedicationRequest.substitution (allowed[x])",
+    "titlePt": "Selecionar o JSON correto – MedicationRequest.substitution (allowed[x])",
+    "qEn": "Refer to the image. A physician ordered Amoxicillin 500 mg for 5 days and stated that if unavailable, it may be substituted by a bioequivalent and therapeutically equivalent product. Using MedicationRequest.substitution, which JSON is correct?",
+    "qPt": "Consulte a imagem. Um médico prescreveu Amoxicilina 500 mg por 5 dias e informou que, se indisponível, pode ser substituída por produto bioequivalente e terapeuticamente equivalente. Usando MedicationRequest.substitution, qual JSON está correto?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module2/m2_q2_q11.png",
+        "altEn": "MedicationRequest.substitution with allowed[x] (boolean | CodeableConcept) and reason",
+        "altPt": "MedicationRequest.substitution com allowed[x] (boolean | CodeableConcept) e reason",
+        "captionEn": "Choose one type for allowed[x]. For equivalence, use allowedCodeableConcept.",
+        "captionPt": "Escolha um tipo para allowed[x]. Para equivalência, use allowedCodeableConcept."
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "<pre><code>{\n  \"substitution\": {\n    \"allowedCodeableConcept\": {\n      \"coding\": {\n        \"system\": \"http://terminology.hl7.org/CodeSystem/v3-substanceAdminSubstitution\",\n        \"code\": \"E\",\n        \"display\": \"equivalent\"\n      }\n    }\n  }\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"substitution\": {\n    \"allowedCodeableConcept\": {\n      \"coding\": {\n        \"system\": \"http://terminology.hl7.org/CodeSystem/v3-substanceAdminSubstitution\",\n        \"code\": \"E\",\n        \"display\": \"equivalente\"\n      }\n    }\n  }\n}</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "<pre><code>{\n  \"substitution\": {\n    \"allowedBoolean\": false\n  },\n  \"reason\": {\n    \"coding\": [{\n      \"system\": \"http://terminology.hl7.org/CodeSystem/v3-ActReason\",\n      \"code\": \"FP\",\n      \"display\": \"formulary policy\"\n    }]\n  }\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"substitution\": {\n    \"allowedBoolean\": false\n  },\n  \"reason\": {\n    \"coding\": [{\n      \"system\": \"http://terminology.hl7.org/CodeSystem/v3-ActReason\",\n      \"code\": \"FP\",\n      \"display\": \"política de formulário\"\n    }]\n  }\n}</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "<pre><code>{\n  \"substitution\": {\n    \"allowedCodeableConcept\": {\n      \"coding\": [{\n        \"system\": \"http://terminology.hl7.org/CodeSystem/v3-substanceAdminSubstitution\",\n        \"code\": \"E\",\n        \"display\": \"equivalent\"\n      }]\n    }\n  }\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"substitution\": {\n    \"allowedCodeableConcept\": {\n      \"coding\": [{\n        \"system\": \"http://terminology.hl7.org/CodeSystem/v3-substanceAdminSubstitution\",\n        \"code\": \"E\",\n        \"display\": \"equivalente\"\n      }]\n    }\n  }\n}</code></pre>",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "en": "<pre><code>{\n  \"substitution\": {\n    \"allowedBoolean\": true,\n    \"allowedCodeableConcept\": {\n      \"coding\": [{\n        \"system\": \"http://terminology.hl7.org/CodeSystem/v3-substanceAdminSubstitution\",\n        \"code\": \"E\",\n        \"display\": \"equivalent\"\n      }]\n    }\n  }\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"substitution\": {\n    \"allowedBoolean\": true,\n    \"allowedCodeableConcept\": {\n      \"coding\": [{\n        \"system\": \"http://terminology.hl7.org/CodeSystem/v3-substanceAdminSubstitution\",\n        \"code\": \"E\",\n        \"display\": \"equivalente\"\n      }]\n    }\n  }\n}</code></pre>",
+        "correct": false
+      }
+    ],
+    "explanationEn": "C is correct. MedicationRequest.substitution uses allowedCodeableConcept with a coded value indicating substitution is allowed, plus a separate reason element. A uses the same structure but has an incorrect code value or reason placement. B uses allowedBoolean: false (meaning substitution NOT allowed — contrary to the scenario). D incorrectly includes both allowedBoolean and allowedCodeableConcept (only one choice type can be used).",
+    "explanationPt": "C está correta. MedicationRequest.substitution usa allowedCodeableConcept com um valor codificado indicando que a substituição é permitida, mais um elemento reason separado. A usa a mesma estrutura mas tem valor de código incorreto ou posicionamento errado do reason. B usa allowedBoolean: false (significando substituição NÃO permitida — contrário ao cenário). D inclui incorretamente allowedBoolean e allowedCodeableConcept juntos (apenas um tipo de escolha pode ser usado)."
+  },
+  {
+    "id": 12,
+    "titleEn": "Select the correct XML – Observation.valueQuantity (UCUM)",
+    "titlePt": "Selecionar o XML correto – Observation.valueQuantity (UCUM)",
+    "qEn": "Refer to the image. The lab must send glucose value 6.3 with unit mmol/L (UCUM). Which XML for Observation.valueQuantity is correct?",
+    "qPt": "Consulte a imagem. O laboratório deve enviar valor de glicose 6,3 com unidade mmol/L (UCUM). Qual XML de Observation.valueQuantity está correto?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module2/m2_q2_q12.png",
+        "altEn": "Quantity data type with value, unit, system (UCUM), code",
+        "altPt": "Tipo Quantity com value, unit, system (UCUM), code",
+        "captionEn": "If code is present, system SHALL be present (UCUM URL). System may appear without code.",
+        "captionPt": "Se existir code, o system DEVE estar presente (URL UCUM). O system pode aparecer sem code."
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "<pre><code>&lt;valueQuantity&gt;\n  &lt;value value=\"6.3\"/&gt;\n  &lt;unit value=\"mmol/L\"/&gt;\n  &lt;system value=\"http://ucum.org\"/&gt;\n  &lt;code value=\"mmol/L\"/&gt;\n&lt;/valueQuantity&gt;</code></pre>",
+        "pt": "<pre><code>&lt;valueQuantity&gt;\n  &lt;value value=\"6.3\"/&gt;\n  &lt;unit value=\"mmol/L\"/&gt;\n  &lt;system value=\"http://ucum.org\"/&gt;\n  &lt;code value=\"mmol/L\"/&gt;\n&lt;/valueQuantity&gt;</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "<pre><code>&lt;valueQuantity&gt;\n  &lt;value value=\"6.3\"/&gt;\n  &lt;unit value=\"mmol/L\"/&gt;\n  &lt;system/&gt;\n  &lt;code value=\"mmol/L\"/&gt;\n&lt;/valueQuantity&gt;</code></pre>",
+        "pt": "<pre><code>&lt;valueQuantity&gt;\n  &lt;value value=\"6.3\"/&gt;\n  &lt;unit value=\"mmol/L\"/&gt;\n  &lt;system/&gt;\n  &lt;code value=\"mmol/L\"/&gt;\n&lt;/valueQuantity&gt;</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "<pre><code>&lt;valueQuantity&gt;\n  &lt;value value=\"6.3\"/&gt;\n  &lt;unit value=\"mmol/L\"/&gt;\n  &lt;system value=\"http://unitsofmeasure.org\"/&gt;\n&lt;/valueQuantity&gt;</code></pre>",
+        "pt": "<pre><code>&lt;valueQuantity&gt;\n  &lt;value value=\"6.3\"/&gt;\n  &lt;unit value=\"mmol/L\"/&gt;\n  &lt;system value=\"http://unitsofmeasure.org\"/&gt;\n&lt;/valueQuantity&gt;</code></pre>",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "en": "<pre><code>&lt;valueQuantity&gt;\n  &lt;value value=\"6.3\"/&gt;\n  &lt;unit value=\"mmol/L\"/&gt;\n  &lt;code value=\"mmol/L\"/&gt;\n&lt;/valueQuantity&gt;</code></pre>",
+        "pt": "<pre><code>&lt;valueQuantity&gt;\n  &lt;value value=\"6.3\"/&gt;\n  &lt;unit value=\"mmol/L\"/&gt;\n  &lt;code value=\"mmol/L\"/&gt;\n&lt;/valueQuantity&gt;</code></pre>",
+        "correct": false
+      }
+    ],
+    "explanationEn": "C is correct. A FHIR Quantity value in XML requires: <value value=\"6.3\"/>, <unit value=\"mmol/L\"/> (display), <system value=\"http://unitsofmeasure.org\"/> (UCUM system), and <code value=\"mmol/L\"/> (machine-readable UCUM code). A and B are missing system or use wrong system URL. D omits the code element or uses wrong values.",
+    "explanationPt": "C está correta. Um valor Quantity FHIR em XML requer: <value value=\"6.3\"/>, <unit value=\"mmol/L\"/> (display), <system value=\"http://unitsofmeasure.org\"/> (sistema UCUM) e <code value=\"mmol/L\"/> (código UCUM legível por máquina). A e B não têm system ou usam URL de sistema errada. D omite o elemento code ou usa valores incorretos."
+  },
+  {
+    "id": 13,
+    "titleEn": "Select the correct JSON – Patient logical id vs medical record number",
+    "titlePt": "Selecionar o JSON correto – id lógico do Patient vs número do prontuário",
+    "qEn": "A client must update a Patient whose logical id is 90112 and the medical record number assigned by Good Health Hospital is 789099. Which JSON correctly represents this?",
+    "qPt": "Um cliente deve atualizar um Patient cujo id lógico é 90112 e cujo número de prontuário (MRN) atribuído pelo Good Health Hospital é 789099. Qual JSON representa isso corretamente?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "<pre><code>{\n  \"resourceType\": \"Patient\",\n  \"id\": [\"90112\", \"789099\"],\n  \"meta\": { \"versionId\": \"...\", \"lastUpdated\": \"2012-05-29T23:48:32Z\" }\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"resourceType\": \"Patient\",\n  \"id\": [\"90112\", \"789099\"],\n  \"meta\": { \"versionId\": \"...\", \"lastUpdated\": \"2012-05-29T23:48:32Z\" }\n}</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "<pre><code>{\n  \"resourceType\": \"Patient\",\n  \"meta\": { \"versionId\": \"...\", \"lastUpdated\": \"2012-05-29T23:47:32Z\" },\n  \"identifier\": [ { \"value\": \"90112\" }, { \"value\": \"789099\" } ]\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"resourceType\": \"Patient\",\n  \"meta\": { \"versionId\": \"...\", \"lastUpdated\": \"2012-05-29T23:47:32Z\" },\n  \"identifier\": [ { \"value\": \"90112\" }, { \"value\": \"789099\" } ]\n}</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "<pre><code>{\n  \"resourceType\": \"Patient\",\n  \"id\": \"789099\",\n  \"meta\": { \"versionId\": \"...\", \"lastUpdated\": \"2012-05-29T23:46:32Z\" },\n  \"identifier\": [ { \"value\": \"90112\" } ]\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"resourceType\": \"Patient\",\n  \"id\": \"789099\",\n  \"meta\": { \"versionId\": \"...\", \"lastUpdated\": \"2012-05-29T23:46:32Z\" },\n  \"identifier\": [ { \"value\": \"90112\" } ]\n}</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "<pre><code>{\n  \"resourceType\": \"Patient\",\n  \"id\": \"90112\",\n  \"meta\": { \"versionId\": \"...\", \"lastUpdated\": \"2012-05-29T23:45:32Z\" },\n  \"identifier\": [ { \"value\": \"789099\" } ]\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"resourceType\": \"Patient\",\n  \"id\": \"90112\",\n  \"meta\": { \"versionId\": \"...\", \"lastUpdated\": \"2012-05-29T23:45:32Z\" },\n  \"identifier\": [ { \"value\": \"789099\" } ]\n}</code></pre>",
+        "correct": true
+      }
+    ],
+    "explanationEn": "D is correct. For a Patient update: 'id' must be the server-assigned logical id (90112), and the medical record number (789099) is stored as an identifier element. A uses 'id' as an array (id must be a single string). B omits the id entirely. C uses the MRN as the id — the server logical id is 90112, not the business identifier.",
+    "explanationPt": "D está correta. Para atualização de Patient: 'id' deve ser o id lógico atribuído pelo servidor (90112), e o número de prontuário (789099) é armazenado como elemento identifier. A usa 'id' como array (id deve ser uma string única). B omite o id completamente. C usa o prontuário como id — o id lógico do servidor é 90112, não o identificador de negócio."
+  },
+  {
+    "id": 14,
+    "titleEn": "Select the correct JSON – MedicationRequest.dosageInstruction.timing (repeat)",
+    "titlePt": "Selecionar o JSON correto – MedicationRequest.dosageInstruction.timing (repeat)",
+    "qEn": "Refer to the image. Prescription: take 1 tablet 3–4 times per day for 2 weeks. Which JSON for dosageInstruction.timing (Timing.repeat) is correct?",
+    "qPt": "Consulte a imagem. Prescrição: tomar 1 comprimido 3–4 vezes ao dia por 2 semanas. Qual JSON do dosageInstruction.timing (Timing.repeat) está correto?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module2/m2_q2_q14.png",
+        "altEn": "Timing data type with repeat: frequency, frequencyMax, period, periodUnit, duration, durationUnit",
+        "altPt": "Tipo Timing com repeat: frequency, frequencyMax, period, periodUnit, duration, durationUnit",
+        "captionEn": "Use UCUM time units (d, wk, etc.). Numbers must be numeric (not strings).",
+        "captionPt": "Use unidades UCUM (d, wk etc.). Valores numéricos não devem ser strings."
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "<pre><code>{\n  \"timing\": {\n    \"repeat\": {\n      \"duration\": 2,\n      \"durationUnit\": \"wk\",\n      \"frequency\": 3,\n      \"frequencyMax\": 4,\n      \"period\": 1,\n      \"periodUnit\": \"d\"\n    }\n  }\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"timing\": {\n    \"repeat\": {\n      \"duration\": 2,\n      \"durationUnit\": \"wk\",\n      \"frequency\": 3,\n      \"frequencyMax\": 4,\n      \"period\": 1,\n      \"periodUnit\": \"d\"\n    }\n  }\n}</code></pre>",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "<pre><code>{\n  \"timing\": {\n    \"repeat\": {\n      \"duration\": 2,\n      \"durationUnit\": \"wk\",\n      \"frequency\": 1,\n      \"frequencyMax\": 4,\n      \"period\": 3,\n      \"periodUnit\": \"d\"\n    }\n  }\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"timing\": {\n    \"repeat\": {\n      \"duration\": 2,\n      \"durationUnit\": \"wk\",\n      \"frequency\": 1,\n      \"frequencyMax\": 4,\n      \"period\": 3,\n      \"periodUnit\": \"d\"\n    }\n  }\n}</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "<pre><code>{\n  \"timing\": {\n    \"repeat\": {\n      \"duration\": \"2\",\n      \"durationUnit\": \"wk\",\n      \"frequency\": 3,\n      \"frequencyMax\": 4,\n      \"period\": 1,\n      \"periodUnit\": \"d\"\n    }\n  }\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"timing\": {\n    \"repeat\": {\n      \"duration\": \"2\",\n      \"durationUnit\": \"wk\",\n      \"frequency\": 3,\n      \"frequencyMax\": 4,\n      \"period\": 1,\n      \"periodUnit\": \"d\"\n    }\n  }\n}</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "<pre><code>{\n  \"timing\": {\n    \"repeat\": {\n      \"duration\": 2,\n      \"durationUnit\": \"wk\",\n      \"frequency\": 4,\n      \"frequencyMax\": 3,\n      \"period\": 1,\n      \"periodUnit\": \"d\"\n    }\n  }\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"timing\": {\n    \"repeat\": {\n      \"duration\": 2,\n      \"durationUnit\": \"wk\",\n      \"frequency\": 4,\n      \"frequencyMax\": 3,\n      \"period\": 1,\n      \"periodUnit\": \"d\"\n    }\n  }\n}</code></pre>",
+        "correct": false
+      }
+    ],
+    "explanationEn": "A is correct. Timing.repeat for '1 tablet 3-4 times/day for 2 weeks': duration=2 (number), durationUnit='wk', frequency=3, frequencyMax=4. B has incorrect frequency values. C uses duration as a string \"2\" instead of number 2. D has wrong unit or frequency values.",
+    "explanationPt": "A está correta. Timing.repeat para '1 comprimido 3-4 vezes/dia por 2 semanas': duration=2 (número), durationUnit='wk', frequency=3, frequencyMax=4. B tem valores de frequência incorretos. C usa duration como string \"2\" em vez de número 2. D tem unidade ou valores de frequência errados."
+  },
+  {
+    "id": 15,
+    "titleEn": "Select the correct JSON – DiagnosticReport references (Patient by identifier, Device as performer)",
+    "titlePt": "Selecionar o JSON correto – Referências do DiagnosticReport (Patient por identificador, Device como performer)",
+    "qEn": "Refer to the image. A lab must send a lipid panel as a DiagnosticReport. The Patient's business identifier is 45009 (known to both systems). The generating device exists as Device with logical id 340987. What is the correct JSON to reference the Patient and the Device?",
+    "qPt": "Consulte a imagem. Um laboratório deve enviar um lipid panel como DiagnosticReport. O identificador de negócio do Patient é 45009 (conhecido por ambos os sistemas). O dispositivo gerador existe como Device com id lógico 340987. Qual é o JSON correto para referenciar o Patient e o Device?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module2/m2_q2_q15.png",
+        "altEn": "DiagnosticReport structure; Reference datatype; subject and identifier fields",
+        "altPt": "Estrutura do DiagnosticReport; tipo Reference; campos subject e identifier",
+        "captionEn": "Use subject.identifier for the patient's business id; reference Device under performer.",
+        "captionPt": "Use subject.identifier para o identificador de negócio do paciente; referencie o Device em performer."
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "<pre><code>{\n  \"resourceType\": \"DiagnosticReport\",\n  \"subject\": { \"reference\": \"Patient/45009\" }\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"resourceType\": \"DiagnosticReport\",\n  \"subject\": { \"reference\": \"Patient/45009\" }\n}</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "<pre><code>{\n  \"resourceType\": \"DiagnosticReport\",\n  \"subject\": {\n    \"reference\": \"Device/340987\",\n    \"identifier\": {\n      \"system\": \"http://epicemr.org/fhir/pat-identifiers\",\n      \"value\": \"45009\"\n    }\n  }\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"resourceType\": \"DiagnosticReport\",\n  \"subject\": {\n    \"reference\": \"Device/340987\",\n    \"identifier\": {\n      \"system\": \"http://epicemr.org/fhir/pat-identifiers\",\n      \"value\": \"45009\"\n    }\n  }\n}</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "<pre><code>{\n  \"resourceType\": \"DiagnosticReport\",\n  \"subject\": {\n    \"identifier\": {\n      \"system\": \"http://epicemr.org/fhir/pat-identifiers\",\n      \"value\": \"45009\"\n    }\n  },\n  \"performer\": [ { \"reference\": \"Device/340987\" } ]\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"resourceType\": \"DiagnosticReport\",\n  \"subject\": {\n    \"identifier\": {\n      \"system\": \"http://epicemr.org/fhir/pat-identifiers\",\n      \"value\": \"45009\"\n    }\n  },\n  \"performer\": [ { \"reference\": \"Device/340987\" } ]\n}</code></pre>",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "en": "<pre><code>{\n  \"resourceType\": \"DiagnosticReport\",\n  \"identifier\": {\n    \"system\": \"http://epicemr.org/fhir/pat-identifiers\",\n    \"value\": \"45009\"\n  },\n  \"subject\": { \"reference\": \"Device/340987\" }\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"resourceType\": \"DiagnosticReport\",\n  \"identifier\": {\n    \"system\": \"http://epicemr.org/fhir/pat-identifiers\",\n    \"value\": \"45009\"\n  },\n  \"subject\": { \"reference\": \"Device/340987\" }\n}</code></pre>",
+        "correct": false
+      }
+    ],
+    "explanationEn": "C is correct. When the patient has a business identifier but no server resource id, use a logical reference: subject.identifier with the business identifier system and value. A uses a literal reference (subject.reference) requiring a server id that doesn't exist. B has wrong syntax for the reference. D incorrectly places the identifier at the DiagnosticReport root level instead of inside subject.",
+    "explanationPt": "C está correta. Quando o paciente tem identificador de negócio mas nenhum id de recurso servidor, usa-se referência lógica: subject.identifier com o sistema e valor do identificador de negócio. A usa referência literal (subject.reference) exigindo id de servidor que não existe. B tem sintaxe errada para a referência. D coloca incorretamente o identifier no nível raiz do DiagnosticReport em vez de dentro de subject."
+  },
+  {
+    "id": 16,
+    "titleEn": "Select the correct JSON – Claim.provider referencing a contained Practitioner",
+    "titlePt": "Selecionar o JSON correto – Claim.provider referenciando um Practitioner contido",
+    "qEn": "Refer to the image. The sender must submit a Claim. The responsible doctor is John Cena (male) and the hospital is Good Health Hospital. The payer has Practitioner/Organization resources, but the provider system has no ids for them. Which JSON correctly represents the Claim referring to the provider?",
+    "qPt": "Consulte a imagem. O prestador deve enviar um Claim. O médico responsável é John Cena (masculino) e o hospital é Good Health Hospital. O pagador possui os recursos Practitioner/Organization, mas o sistema do prestador não tem os ids deles. Qual JSON representa corretamente o Claim referindo-se ao provider?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module2/m2_q2_q16.png",
+        "altEn": "Claim resource with provider 1..1 and contained reference rule (#id)",
+        "altPt": "Recurso Claim com provider 1..1 e regra de referência para contained (#id)",
+        "captionEn": "Contained resources are referenced with #<id>. Claim.provider is 1..1.",
+        "captionPt": "Recursos contidos são referenciados com #<id>. Claim.provider é 1..1."
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "<pre><code>{\n  \"resourceType\": \"Claim\",\n  \"contained\": [\n    { \"resourceType\": \"Practitioner\", \"id\": \"prac01\", \"name\": [{ \"family\": \"Cena\", \"given\": [\"John\"] }], \"gender\": \"male\" },\n    { \"resourceType\": \"Organization\", \"id\": \"org01\", \"name\": \"Good Health Hospital\" }\n  ],\n  \"provider\": { \"reference\": \"#prac01\" }\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"resourceType\": \"Claim\",\n  \"contained\": [\n    { \"resourceType\": \"Practitioner\", \"id\": \"prac01\", \"name\": [{ \"family\": \"Cena\", \"given\": [\"John\"] }], \"gender\": \"male\" },\n    { \"resourceType\": \"Organization\", \"id\": \"org01\", \"name\": \"Good Health Hospital\" }\n  ],\n  \"provider\": { \"reference\": \"#prac01\" }\n}</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "<pre><code>{\n  \"resourceType\": \"Claim\",\n  \"contained\": [\n    { \"resourceType\": \"Practitioner\", \"id\": \"prac01\", \"name\": [{ \"family\": \"Cena\", \"given\": [\"John\"] }], \"gender\": \"male\" }\n  ],\n  \"provider\": { \"reference\": \"prac01\" }\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"resourceType\": \"Claim\",\n  \"contained\": [\n    { \"resourceType\": \"Practitioner\", \"id\": \"prac01\", \"name\": [{ \"family\": \"Cena\", \"given\": [\"John\"] }], \"gender\": \"male\" }\n  ],\n  \"provider\": { \"reference\": \"prac01\" }\n}</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "<pre><code>{\n  \"resourceType\": \"Claim\",\n  \"contained\": [\n    { \"resourceType\": \"Practitioner\", \"id\": \"prac01\", \"name\": [{ \"family\": \"Cena\", \"given\": [\"John\"] }], \"gender\": \"male\" }\n  ],\n  \"provider\": { \"reference\": \"Practitioner/prac01\" }\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"resourceType\": \"Claim\",\n  \"contained\": [\n    { \"resourceType\": \"Practitioner\", \"id\": \"prac01\", \"name\": [{ \"family\": \"Cena\", \"given\": [\"John\"] }], \"gender\": \"male\" }\n  ],\n  \"provider\": { \"reference\": \"Practitioner/prac01\" }\n}</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "<pre><code>{\n  \"resourceType\": \"Claim\",\n  \"contained\": [\n    { \"resourceType\": \"Practitioner\", \"id\": \"prac01\", \"name\": [{ \"family\": \"Cena\", \"given\": [\"John\"] }], \"gender\": \"male\" }\n  ],\n  \"provider\": { \"reference\": \"#prac01\" }\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"resourceType\": \"Claim\",\n  \"contained\": [\n    { \"resourceType\": \"Practitioner\", \"id\": \"prac01\", \"name\": [{ \"family\": \"Cena\", \"given\": [\"John\"] }], \"gender\": \"male\" }\n  ],\n  \"provider\": { \"reference\": \"#prac01\" }\n}</code></pre>",
+        "correct": true
+      }
+    ],
+    "explanationEn": "D is correct. A contained Practitioner must have an id (e.g., '#p1') so the Claim can reference it as 'careteam.provider.reference: #p1'. The contained resource must be in the 'contained' array. A, B, C have incorrect id formats, missing ids, or wrong reference syntax for the contained resource.",
+    "explanationPt": "D está correta. Um Practitioner contained deve ter um id (ex.: '#p1') para que o Claim possa referenciá-lo como 'careteam.provider.reference: #p1'. O recurso contained deve estar no array 'contained'. A, B e C têm formatos de id incorretos, ids ausentes ou sintaxe de referência errada para o recurso contained."
+  },
+  {
+    "id": 17,
+    "titleEn": "Select the well-formatted Patient JSON instance",
+    "titlePt": "Selecione a instância Patient em JSON bem formatada",
+    "qEn": "Refer to the image. A client system needs to exchange patient demographics (name, gender, phone, etc.). Which option is a well-formatted JSON Patient resource?",
+    "qPt": "Consulte a imagem. Um sistema cliente precisa enviar dados demográficos do paciente (nome, gênero, telefone etc.). Qual opção é uma instância Patient em JSON bem formatada?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module2/m2_q2_q17.png",
+        "altEn": "Patient resource elements including active, name 0..*, gender (required), deceased[x]",
+        "altPt": "Elementos do recurso Patient incluindo active, name 0..*, gender (obrigatório), deceased[x]"
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "<pre><code>{\n  \"resourceType\": \"Patient\",\n  \"active\": true,\n  \"name\": {\n    \"family\": \"Cena\",\n    \"given\": [\"John\", \"Undertaker\"]\n  },\n  {\n    \"family\": \"Cerius\",\n    \"given\": [\"Willy\", \"S\"]\n  },\n  \"gender\": \"male\",\n  \"deceasedBoolean\": false\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"resourceType\": \"Patient\",\n  \"active\": true,\n  \"name\": {\n    \"family\": \"Cena\",\n    \"given\": [\"John\", \"Undertaker\"]\n  },\n  {\n    \"family\": \"Cerius\",\n    \"given\": [\"Willy\", \"S\"]\n  },\n  \"gender\": \"male\",\n  \"deceasedBoolean\": false\n}</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "<pre><code>{\n  \"resourceType\": \"Patient\",\n  \"active\": true,\n  \"name\": [\n    { \"family\": \"Cena\", \"given\": [\"John\", \"Undertaker\"] },\n    { \"family\": \"Cerius\", \"given\": \"Willy\" }\n  ],\n  \"gender\": \"male\",\n  \"deceasedboolean\": false\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"resourceType\": \"Patient\",\n  \"active\": true,\n  \"name\": [\n    { \"family\": \"Cena\", \"given\": [\"John\", \"Undertaker\"] },\n    { \"family\": \"Cerius\", \"given\": \"Willy\" }\n  ],\n  \"gender\": \"male\",\n  \"deceasedboolean\": false\n}</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "<pre><code>{\n  \"resourceType\": \"patient\",\n  \"active\": true,\n  \"name\": [\n    { \"family\": \"Cena\", \"given\": [\"John\", \"Undertaker\"] },\n    { \"family\": \"Cerius\", \"given\": [\"Johnny\"] }\n  ],\n  \"gender\": \"male\",\n  \"deceasedBoolean\": false\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"resourceType\": \"patient\",\n  \"active\": true,\n  \"name\": [\n    { \"family\": \"Cena\", \"given\": [\"John\", \"Undertaker\"] },\n    { \"family\": \"Cerius\", \"given\": [\"Johnny\"] }\n  ],\n  \"gender\": \"male\",\n  \"deceasedBoolean\": false\n}</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "<pre><code>{\n  \"resourceType\": \"Patient\",\n  \"active\": true,\n  \"gender\": \"male\",\n  \"deceasedBoolean\": false,\n  \"name\": [\n    { \"family\": \"Cena\", \"given\": [\"John\", \"Undertaker\"] },\n    { \"family\": \"Cerius\", \"given\": [\"Johnny\"] }\n  ]\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"resourceType\": \"Patient\",\n  \"active\": true,\n  \"gender\": \"male\",\n  \"deceasedBoolean\": false,\n  \"name\": [\n    { \"family\": \"Cena\", \"given\": [\"John\", \"Undertaker\"] },\n    { \"family\": \"Cerius\", \"given\": [\"Johnny\"] }\n  ]\n}</code></pre>",
+        "correct": true
+      }
+    ],
+    "explanationEn": "D is correct. Key requirements: 'resourceType' must be 'Patient' (PascalCase), 'name' must be an array [ ] (0..*), 'gender' must be a code string ('male'), and 'deceasedBoolean' must be a JSON boolean (false). A uses name as an object {}. B has a different structural issue. C uses lowercase 'patient' as resourceType — FHIR resource types are case-sensitive.",
+    "explanationPt": "D está correta. Requisitos principais: 'resourceType' deve ser 'Patient' (PascalCase), 'name' deve ser array [ ] (0..*), 'gender' deve ser string code ('male'), e 'deceasedBoolean' deve ser boolean JSON (false). A usa name como objeto {}. B tem problema estrutural diferente. C usa 'patient' em minúsculas como resourceType — tipos de recursos FHIR são sensíveis a maiúsculas/minúsculas."
+  },
+  {
+    "id": 18,
+    "titleEn": "Select the correct Patient XML (id & gender unknown)",
+    "titlePt": "Selecione o Patient XML correto (id e gênero desconhecidos)",
+    "qEn": "Refer to the image. The business identifier and gender are unknown for this patient. Which XML is the correct Patient instance per the resource definition?",
+    "qPt": "Consulte a imagem. O identificador comercial e o gênero são desconhecidos para este paciente. Qual XML representa corretamente a instância de Patient conforme a definição do recurso?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module2/m2_q2_q18.png",
+        "altEn": "Patient elements (identifier 0..*, gender required) – example where id and gender are unknown",
+        "altPt": "Elementos de Patient (identifier 0..*, gender obrigatório) – exemplo em que id e gênero são desconhecidos"
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "<pre><code>&lt;Patient xmlns=&quot;http://hl7.org/fhir&quot;&gt;\n  &lt;identifier&gt;No data&lt;/identifier&gt;\n  &lt;name&gt;\n    &lt;use value=&quot;usual&quot;/&gt;\n    &lt;family value=&quot;van de Heuvel&quot;/&gt;\n    &lt;given value=&quot;Pieter&quot;/&gt;\n  &lt;/name&gt;\n  &lt;birthDate value=&quot;1944-11-17&quot;/&gt;\n&lt;/Patient&gt;</code></pre>",
+        "pt": "<pre><code>&lt;Patient xmlns=&quot;http://hl7.org/fhir&quot;&gt;\n  &lt;identifier&gt;No data&lt;/identifier&gt;\n  &lt;name&gt;\n    &lt;use value=&quot;usual&quot;/&gt;\n    &lt;family value=&quot;van de Heuvel&quot;/&gt;\n    &lt;given value=&quot;Pieter&quot;/&gt;\n  &lt;/name&gt;\n  &lt;birthDate value=&quot;1944-11-17&quot;/&gt;\n&lt;/Patient&gt;</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "<pre><code>&lt;Patient xmlns=&quot;http://hl7.org/fhir&quot;&gt;\n  &lt;name&gt;\n    &lt;family value=&quot;van de Heuvel&quot;/&gt;\n    &lt;given value=&quot;Pieter&quot;/&gt;\n  &lt;/name&gt;\n  &lt;birthDate value=&quot;1944-11-17&quot;/&gt;\n&lt;/Patient&gt;</code></pre>",
+        "pt": "<pre><code>&lt;Patient xmlns=&quot;http://hl7.org/fhir&quot;&gt;\n  &lt;name&gt;\n    &lt;family value=&quot;van de Heuvel&quot;/&gt;\n    &lt;given value=&quot;Pieter&quot;/&gt;\n  &lt;/name&gt;\n  &lt;birthDate value=&quot;1944-11-17&quot;/&gt;\n&lt;/Patient&gt;</code></pre>",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "en": "<pre><code>&lt;Patient xmlns=&quot;http://hl7.org/fhir&quot;&gt;\n  &lt;identifier&gt;\n    &lt;system/&gt;\n    &lt;value/&gt;\n  &lt;/identifier&gt;\n  &lt;name&gt;\n    &lt;use value=&quot;usual&quot;/&gt;\n    &lt;family value=&quot;van de Heuvel&quot;/&gt;\n    &lt;given value=&quot;Pieter&quot;/&gt;\n  &lt;/name&gt;\n  &lt;gender value=&quot;NA&quot;/&gt;\n  &lt;birthDate value=&quot;1944-11-17&quot;/&gt;\n&lt;/Patient&gt;</code></pre>",
+        "pt": "<pre><code>&lt;Patient xmlns=&quot;http://hl7.org/fhir&quot;&gt;\n  &lt;identifier&gt;\n    &lt;system/&gt;\n    &lt;value/&gt;\n  &lt;/identifier&gt;\n  &lt;name&gt;\n    &lt;use value=&quot;usual&quot;/&gt;\n    &lt;family value=&quot;van de Heuvel&quot;/&gt;\n    &lt;given value=&quot;Pieter&quot;/&gt;\n  &lt;/name&gt;\n  &lt;gender value=&quot;NA&quot;/&gt;\n  &lt;birthDate value=&quot;1944-11-17&quot;/&gt;\n&lt;/Patient&gt;</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "<pre><code>&lt;Patient xmlns=&quot;http://hl7.org/fhir&quot;&gt;\n  &lt;identifier /&gt;\n  &lt;name&gt;\n    &lt;use value=&quot;usual&quot;/&gt;\n    &lt;family value=&quot;van de Heuvel&quot;/&gt;\n    &lt;given value=&quot;Pieter&quot;/&gt;\n  &lt;/name&gt;\n  &lt;gender /&gt;\n  &lt;birthDate value=&quot;1944-11-17&quot;/&gt;\n&lt;/Patient&gt;</code></pre>",
+        "pt": "<pre><code>&lt;Patient xmlns=&quot;http://hl7.org/fhir&quot;&gt;\n  &lt;identifier /&gt;\n  &lt;name&gt;\n    &lt;use value=&quot;usual&quot;/&gt;\n    &lt;family value=&quot;van de Heuvel&quot;/&gt;\n    &lt;given value=&quot;Pieter&quot;/&gt;\n  &lt;/name&gt;\n  &lt;gender /&gt;\n  &lt;birthDate value=&quot;1944-11-17&quot;/&gt;\n&lt;/Patient&gt;</code></pre>",
+        "correct": false
+      }
+    ],
+    "explanationEn": "B is correct. When a data element is unknown, FHIR prescribes omitting it entirely — do not include empty or null elements. B correctly omits the identifier and gender elements. A adds a literal text 'No data' inside identifier (invalid). C includes empty elements with self-closing tags for system and value (also wrong — unknown means absent). D includes a self-closing <identifier /> tag which is still present and implies known-but-empty.",
+    "explanationPt": "B está correta. Quando um elemento de dado é desconhecido, o FHIR prescreve omiti-lo completamente — não inclua elementos vazios ou nulos. B omite corretamente os elementos identifier e gender. A adiciona texto literal 'No data' dentro de identifier (inválido). C inclui elementos vazios com tags auto-fechadas para system e value (também errado — desconhecido significa ausente). D inclui uma tag <identifier /> auto-fechada que ainda está presente, implicando conhecido-mas-vazio."
+  }
+]

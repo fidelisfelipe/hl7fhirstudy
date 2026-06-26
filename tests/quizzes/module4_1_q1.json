@@ -1,0 +1,182 @@
+[
+  {
+    "id": 1,
+    "titleEn": "Select the correct Observation profile for a lab information system",
+    "titlePt": "Selecionar o perfil de Observation correto para um sistema de informação laboratorial",
+    "qEn": "A lab information system needs to exchange lab result data with the following rules:\n\n- Reference to the US Core **Patient** (mandatory)\n- Result **status**: only **final** results are allowed\n- Result **category**: one of the categories shall be **\"laboratory\"** (mandatory)\n- **Code**: if available from LOINC → use it; otherwise a custom code is also allowed (**extensible** binding)\n- **Value**: numeric with unit using **UCUM** (`http://unitsofmeasure.org`) as the coded value source\n- **effective[x]**: clinically relevant time period in **date and time format only** (not a time period/range)\n\nWhich profile fulfills all these requirements?\n\n| Element | Profile A | Profile B | Profile C | Profile D |\n|---|---|---|---|---|\n| status | registered\\|preliminary\\|final\\|amended+ | Fixed: **\"final\"** | Fixed: **\"final\"** | Fixed: **\"final\"** |\n| category | 0..* optional | 1..* **mandatory**, must include \"laboratory\" | 0..* optional | 0..* optional |\n| code binding | Extensible LOINC | Extensible LOINC | **Required** LOINC | Extensible LOINC |\n| subject | Reference(US Core Patient) | Reference(US Core Patient) | Reference(US Core Patient) | Reference(US Core Patient) |\n| effective[x] type | dateTime | **dateTime** | dateTime | **Period** |\n| value system | `http://unitsofmeasure.org` | `http://unitsofmeasure.org` | `http://unitsofmeasure.org` | `http://ucum.org/unitsofmeasure` |",
+    "qPt": "Um sistema de informação laboratorial precisa trocar dados de resultados de exames com as seguintes regras:\n\n- Referência ao **Patient** US Core (obrigatório)\n- **Status** do resultado: apenas resultados **finais** são permitidos\n- **Categoria** do resultado: uma das categorias deve ser **\"laboratory\"** (obrigatório)\n- **Código**: se disponível no LOINC → deve ser usado; caso contrário, um código personalizado também é permitido (binding **extensible**)\n- **Valor**: numérico com unidade usando **UCUM** (`http://unitsofmeasure.org`) como fonte do valor codificado\n- **effective[x]**: período de tempo clinicamente relevante apenas em **formato de data e hora** (não um intervalo/período)\n\nQual perfil atende a todos esses requisitos?\n\n| Elemento | Perfil A | Perfil B | Perfil C | Perfil D |\n|---|---|---|---|---|\n| status | registered\\|preliminary\\|final\\|amended+ | Fixo: **\"final\"** | Fixo: **\"final\"** | Fixo: **\"final\"** |\n| category | 0..* opcional | 1..* **obrigatório**, deve incluir \"laboratory\" | 0..* opcional | 0..* opcional |\n| code binding | Extensible LOINC | Extensible LOINC | **Required** LOINC | Extensible LOINC |\n| subject | Reference(US Core Patient) | Reference(US Core Patient) | Reference(US Core Patient) | Reference(US Core Patient) |\n| tipo de effective[x] | dateTime | **dateTime** | dateTime | **Period** |\n| value system | `http://unitsofmeasure.org` | `http://unitsofmeasure.org` | `http://unitsofmeasure.org` | `http://ucum.org/unitsofmeasure` |",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "Profile A",
+        "pt": "Perfil A",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "Profile B",
+        "pt": "Perfil B",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "en": "Profile C",
+        "pt": "Perfil C",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Profile D",
+        "pt": "Perfil D",
+        "correct": false
+      }
+    ],
+    "explanationEn": "Profile B is correct. Key reasoning:\n- **status fixed \"final\"** → eliminates Profile A (allows multiple values)\n- **category 1..*  with \"laboratory\" mandatory** → eliminates Profiles C and D (category is 0..*)\n- **code binding extensible** (custom code allowed if LOINC unavailable) → eliminates Profile C (required binding = no custom code)\n- **effective[x] must be dateTime** (not Period/range) → eliminates Profile D (uses Period type)\n- **value system = `http://unitsofmeasure.org`** (correct UCUM URL) → eliminates Profile D (wrong URL `http://ucum.org/unitsofmeasure`)",
+    "explanationPt": "O Perfil B está correto. Raciocínio-chave:\n- **status fixo \"final\"** → elimina o Perfil A (permite múltiplos valores)\n- **category 1..* com \"laboratory\" obrigatório** → elimina Perfis C e D (category é 0..*)\n- **binding extensible do código** (código personalizado permitido se LOINC indisponível) → elimina Perfil C (binding required = sem código personalizado)\n- **effective[x] deve ser dateTime** (não Period/intervalo) → elimina Perfil D (usa tipo Period)\n- **value system = `http://unitsofmeasure.org`** (URL UCUM correta) → elimina Perfil D (URL incorreta `http://ucum.org/unitsofmeasure`)"
+  },
+  {
+    "id": 2,
+    "titleEn": "Select the correct Observation profile for a clinical trial heart rate system",
+    "titlePt": "Selecionar o perfil de Observation correto para um sistema de frequência cardíaca em ensaio clínico",
+    "qEn": "An application needs to transmit average heart rate data for a group of patients enrolled in a clinical trial program. The profile must enforce the following:\n\na. Code: LOINC **8867-4**, system URL = `http://loinc.org`\nb. Value unit: **/min**, unit system = `http://unitsofmeasure.org`\nc. Clinically relevant date and time\nd. Reference to the **group** of patients (not a single patient)\ne. Observation recorded by a registered practitioner (**lab technician** role)\n\nWhich profile fulfills all these requirements?\n\n| Element | Profile A | Profile B | Profile C | Profile D |\n|---|---|---|---|---|\n| code system | `http://loinc.org` | `LOINC` (plain text) | `http://loinc.org` | `http://loinc.org` |\n| value unit system | `http://unitsofmeasure.org` | `http://unitsofmeasure.org` | `UCUM` (plain text) | `http://unitsofmeasure.org` |\n| subject | Reference(**Group** Profile) | Reference(**Patient** Profile) | Reference(**Group** Profile) | Reference(**Patient** Profile) |\n| performer | Reference(US Core **PractitionerRole**) | Reference(US Core **PractitionerRole**) | Reference(US Core **RelatedPerson**) | Reference(US Core **RelatedPerson**) |",
+    "qPt": "Uma aplicação precisa transmitir dados de frequência cardíaca média para um grupo de pacientes inscritos em um programa de ensaio clínico. O perfil deve impor o seguinte:\n\na. Código: LOINC **8867-4**, URL do sistema = `http://loinc.org`\nb. Unidade do valor: **/min**, sistema da unidade = `http://unitsofmeasure.org`\nc. Data e hora clinicamente relevantes\nd. Referência ao **grupo** de pacientes (não a um único paciente)\ne. Observação registrada por um profissional registrado (função de **técnico de laboratório**)\n\nQual perfil atende a todos esses requisitos?\n\n| Elemento | Perfil A | Perfil B | Perfil C | Perfil D |\n|---|---|---|---|---|\n| code system | `http://loinc.org` | `LOINC` (texto puro) | `http://loinc.org` | `http://loinc.org` |\n| value unit system | `http://unitsofmeasure.org` | `http://unitsofmeasure.org` | `UCUM` (texto puro) | `http://unitsofmeasure.org` |\n| subject | Reference(Perfil de **Group**) | Reference(Perfil de **Patient**) | Reference(Perfil de **Group**) | Reference(Perfil de **Patient**) |\n| performer | Reference(US Core **PractitionerRole**) | Reference(US Core **PractitionerRole**) | Reference(US Core **RelatedPerson**) | Reference(US Core **RelatedPerson**) |",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "Profile A",
+        "pt": "Perfil A",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "Profile B",
+        "pt": "Perfil B",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "Profile C",
+        "pt": "Perfil C",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Profile D",
+        "pt": "Perfil D",
+        "correct": false
+      }
+    ],
+    "explanationEn": "Profile A is correct:\n- **subject → Group** (data belongs to a group of patients in a clinical trial, not a single patient) → eliminates B and D\n- **performer → PractitionerRole** (a lab technician has a role, so PractitionerRole is the correct reference) → eliminates C\n- **code system = `http://loinc.org`** (correct full URL) → eliminates B (`LOINC` is not a valid URL)\n- **value unit system = `http://unitsofmeasure.org`** (correct UCUM URL) → eliminates C (`UCUM` is not a valid URL)",
+    "explanationPt": "Perfil A está correto:\n- **subject → Group** (os dados pertencem a um grupo de pacientes em ensaio clínico, não a um único paciente) → elimina B e D\n- **performer → PractitionerRole** (um técnico de laboratório tem uma função, portanto PractitionerRole é a referência correta) → elimina C\n- **code system = `http://loinc.org`** (URL completa correta) → elimina B (`LOINC` não é uma URL válida)\n- **value unit system = `http://unitsofmeasure.org`** (URL UCUM correta) → elimina C (`UCUM` não é uma URL válida)"
+  },
+  {
+    "id": 3,
+    "titleEn": "Select the correct Practitioner profile for a state regulatory agency",
+    "titlePt": "Selecionar o perfil de Practitioner correto para uma agência reguladora estadual",
+    "qEn": "A state regulatory agency in US healthcare manages the provider registry with information of all practitioners. It needs to create a **Practitioner resource profile** based on the following minimum rules:\n\na. The **business identifier** shall be present with system and value always present. One must be the **NPI** (National Provider ID) assigned by the US Doctors Association (system URL = `http://hl7.org/fhir/sid/us-npi`). **Other identifiers are also allowed**.\nb. At least **one name** with **last name (family) as mandatory**\nc. **Practitioner contact details if available** (not mandatory)\nd. Practitioner **gender** information\n\nWhich profile fulfills these rules?\n\n| Element | Profile A | Profile B | Profile C | Profile D |\n|---|---|---|---|---|\n| identifier slices cardinality | **1..1** | 1..* | 1..* | 1..* |\n| identifier slicing rules | open | **closed** | open | open |\n| NPI system value | CodeableConcept (no fixed URL) | Fixed: `http://hl7.org/fhir/sid/us-npi` | CodeableConcept (no fixed URL) | Fixed: `http://hl7.org/fhir/sid/us-npi` |\n| family (last name) | 1..1 | 1..1 | 1..1 | 1..1 |\n| given (first name) | 0..1 | 0..1 | **1..1** (mandatory) | 0..1 |\n| telecom | 0..* | 0..* | **1..*** (mandatory) | 0..* |",
+    "qPt": "Uma agência reguladora estadual na área de saúde dos EUA gerencia o registro de provedores com informações de todos os profissionais. Ela precisa criar um **perfil de recurso Practitioner** baseado nas seguintes regras mínimas:\n\na. O **identificador de negócio** deve estar presente com sistema e valor sempre presentes. Um deles deve ser o **NPI** (National Provider ID) atribuído pela Associação de Médicos dos EUA (URL do sistema = `http://hl7.org/fhir/sid/us-npi`). **Outros identificadores também são permitidos**.\nb. Pelo menos **um nome** com **sobrenome (family) obrigatório**\nc. **Dados de contato do profissional se disponíveis** (não obrigatório)\nd. Informações de **gênero** do profissional\n\nQual perfil cumpre essas regras?\n\n| Elemento | Perfil A | Perfil B | Perfil C | Perfil D |\n|---|---|---|---|---|\n| cardinalidade dos identifier slices | **1..1** | 1..* | 1..* | 1..* |\n| regras de slicing do identifier | open | **closed** | open | open |\n| valor do sistema NPI | CodeableConcept (sem URL fixa) | Fixo: `http://hl7.org/fhir/sid/us-npi` | CodeableConcept (sem URL fixa) | Fixo: `http://hl7.org/fhir/sid/us-npi` |\n| family (sobrenome) | 1..1 | 1..1 | 1..1 | 1..1 |\n| given (primeiro nome) | 0..1 | 0..1 | **1..1** (obrigatório) | 0..1 |\n| telecom | 0..* | 0..* | **1..*** (obrigatório) | 0..* |",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "Profile A",
+        "pt": "Perfil A",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "Profile B",
+        "pt": "Perfil B",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "Profile C",
+        "pt": "Perfil C",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Profile D",
+        "pt": "Perfil D",
+        "correct": true
+      }
+    ],
+    "explanationEn": "Profile D is correct:\n- **identifier slices 1..* with rules=open**: NPI is required (1..*), other identifiers are also allowed (rules=open) → eliminates A (1..1 = only one slice) and B (rules=closed = no other identifiers allowed)\n- **NPI system Fixed URL** `http://hl7.org/fhir/sid/us-npi` → eliminates C (no fixed URL for NPI system)\n- **telecom 0..***: contact details 'if available' means NOT mandatory → eliminates C (telecom 1..*)\n- **given 0..1**: first name is NOT mandatory → eliminates C (given 1..1)",
+    "explanationPt": "Perfil D está correto:\n- **identifier slices 1..* com rules=open**: NPI é obrigatório (1..*), outros identificadores também são permitidos (rules=open) → elimina A (1..1 = apenas um slice) e B (rules=closed = sem outros identificadores)\n- **URL fixa do sistema NPI** `http://hl7.org/fhir/sid/us-npi` → elimina C (sem URL fixa para o sistema NPI)\n- **telecom 0..*** : dados de contato 'se disponíveis' significa NÃO obrigatório → elimina C (telecom 1..*)\n- **given 0..1**: primeiro nome NÃO é obrigatório → elimina C (given 1..1)"
+  },
+  {
+    "id": 4,
+    "titleEn": "Select the correct Encounter profile for a hospital registration system",
+    "titlePt": "Selecionar o perfil de Encounter correto para um sistema de registro hospitalar",
+    "qEn": "A hospital registration system creates patient visit/admission records. These records need to be exchanged with the OPD system. Each Encounter record must adhere to these rules:\n\n**Must Have (mandatory):**\na. A status\nb. A classification (inpatient, outpatient, or emergency)\nc. An encounter type\nd. A patient (subject)\ne. The encounter period — **SHALL at least contain a start or an end date** (invariant rule)\n\n**Must Support (present if applicable, but not required):**\na. An encounter identifier\nb. Providers involved in the encounter\n\nWhich profile would be used by the registration system?\n\n| Element | Profile A | Profile B | Profile C | Profile D |\n|---|---|---|---|---|\n| identifier | S Σ **1..**** (mandatory) | Σ 0..* (no S flag) | **S** Σ 0..* | S Σ 0..* |\n| status | ?!SΣ 1..1 | ?!SΣ 1..1 | ?!SΣ 1..1 | ?!SΣ 1..1 |\n| subject | Σ 1..1 Ref(Patient) | Σ 1..1 Ref(Patient) | Σ 1..1 Ref(Patient) | Σ 1..1 Ref(Patient) |\n| participant | Σ **1..*** (mandatory) | Σ 0..* (no S flag) | **S** 0..* | S Σ 0..* |\n| period | Σ I 1..1 Rule: start or end | Σ 1..1 (no I flag) | Σ **I** 1..1 + Rule | Σ I 1..1 Rule |\n| period.start | Σ I 0..1 | Σ 0..1 (no I) | Σ **I** 0..1 | Σ I 0..1 |\n| period.end | Σ I 0..1 | Σ 0..1 (no I) | Σ **I** 0..1 | Σ I 0..1 |",
+    "qPt": "Um sistema de registro hospitalar cria registros de visita/internação de pacientes. Esses registros precisam ser trocados com o sistema de OPD. Cada registro de Encounter deve obedecer a estas regras:\n\n**Must Have (obrigatório):**\na. Um status\nb. Uma classificação (internado, ambulatorial ou emergência)\nc. Um tipo de encontro\nd. Um paciente (subject)\ne. O período do encontro — **DEVE conter pelo menos uma data de início ou término** (regra invariante)\n\n**Must Support (presente se aplicável, mas não obrigatório):**\na. Um identificador de encontro\nb. Profissionais envolvidos no encontro\n\nQual perfil seria usado pelo sistema de registro?\n\n| Elemento | Perfil A | Perfil B | Perfil C | Perfil D |\n|---|---|---|---|---|\n| identifier | S Σ **1..**** (obrigatório) | Σ 0..* (sem flag S) | **S** Σ 0..* | S Σ 0..* |\n| status | ?!SΣ 1..1 | ?!SΣ 1..1 | ?!SΣ 1..1 | ?!SΣ 1..1 |\n| subject | Σ 1..1 Ref(Patient) | Σ 1..1 Ref(Patient) | Σ 1..1 Ref(Patient) | Σ 1..1 Ref(Patient) |\n| participant | Σ **1..*** (obrigatório) | Σ 0..* (sem flag S) | **S** 0..* | S Σ 0..* |\n| period | Σ I 1..1 Regra: início ou fim | Σ 1..1 (sem flag I) | Σ **I** 1..1 + Regra | Σ I 1..1 Regra |\n| period.start | Σ I 0..1 | Σ 0..1 (sem I) | Σ **I** 0..1 | Σ I 0..1 |\n| period.end | Σ I 0..1 | Σ 0..1 (sem I) | Σ **I** 0..1 | Σ I 0..1 |",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "Profile A",
+        "pt": "Perfil A",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "Profile B",
+        "pt": "Perfil B",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "Profile C",
+        "pt": "Perfil C",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "en": "Profile D",
+        "pt": "Perfil D",
+        "correct": false
+      }
+    ],
+    "explanationEn": "Profile C is correct:\n- **identifier: S Σ 0..***: Must Support (S flag) but not mandatory (0..*) → eliminates A (identifier 1..* = mandatory)\n- **participant: S 0..***: Must Support but not mandatory → eliminates A (participant 1..* = mandatory) and B (no S flag on participant)\n- **period.start/end: I flag**: The invariant constraint (I) on start and end enforces the rule 'SHALL at least contain start or end date' → eliminates B (no I flag on start/end)\n- Profile D is similar to C but has participant with S flag on individual reference rather than participant element itself — Profile C correctly places S on participant.",
+    "explanationPt": "Perfil C está correto:\n- **identifier: S Σ 0..***: Must Support (flag S) mas não obrigatório (0..*) → elimina A (identifier 1..* = obrigatório)\n- **participant: S 0..***: Must Support mas não obrigatório → elimina A (participant 1..* = obrigatório) e B (sem flag S no participant)\n- **period.start/end: flag I**: A restrição invariante (I) em start e end impõe a regra 'DEVE conter pelo menos data de início ou fim' → elimina B (sem flag I em start/end)\n- Perfil D é similar ao C mas tem o flag S no elemento individual reference em vez de no próprio participant — Perfil C coloca corretamente S no participant."
+  },
+  {
+    "id": 5,
+    "titleEn": "Select the correct Patient profile for an EPIC EMR system",
+    "titlePt": "Selecionar o perfil de Patient correto para um sistema EMR EPIC",
+    "qEn": "An EPIC EMR needs to create patient records in order to expose them to the client systems. The Patient resource instance must **minimally** contain at least:\n\n- One or more **business identifiers** (like MRN, SSN, etc.)\n- One or more **names**\n- A **birth date**\n- A **single** practitioner reference\n- At least **one preferred language** (communication element)\n- **Patient contact details** (phone, email, etc.) **if available** (not mandatory)\n\nWhich patient profile defines these requirements?\n\n| Element | Profile A | Profile B | Profile C | Profile D |\n|---|---|---|---|---|\n| identifier | 1..* | 1..* | 1..* | 1..* |\n| name | 1..* | 1..* | 1..* | **0..*  (optional)** |\n| birthDate | 1..1 | 1..1 | 1..1 | 1..1 |\n| generalPractitioner | **1..*** (multiple allowed) | **1..1** (single) | **1..*** (multiple allowed) | 1..1 |\n| communication | **0..*** (optional) | **1..*** (mandatory) | **0..*** (optional) | 1..* |\n| telecom | 0..* | 0..* | **1..*** (mandatory) | 0..* |",
+    "qPt": "Um EMR EPIC precisa criar registros de pacientes para expô-los aos sistemas clientes. A instância do recurso Patient deve **minimamente** conter pelo menos:\n\n- Um ou mais **identificadores de negócio** (como MRN, SSN, etc.)\n- Um ou mais **nomes**\n- Uma **data de nascimento**\n- Uma referência a **um único** profissional\n- Pelo menos **um idioma preferido** (elemento communication)\n- **Dados de contato do paciente** (telefone, e-mail, etc.) **se disponíveis** (não obrigatório)\n\nQual perfil de paciente define esses requisitos?\n\n| Elemento | Perfil A | Perfil B | Perfil C | Perfil D |\n|---|---|---|---|---|\n| identifier | 1..* | 1..* | 1..* | 1..* |\n| name | 1..* | 1..* | 1..* | **0..*** (opcional) |\n| birthDate | 1..1 | 1..1 | 1..1 | 1..1 |\n| generalPractitioner | **1..*** (múltiplos) | **1..1** (único) | **1..*** (múltiplos) | 1..1 |\n| communication | **0..*** (opcional) | **1..*** (obrigatório) | **0..*** (opcional) | 1..* |\n| telecom | 0..* | 0..* | **1..*** (obrigatório) | 0..* |",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "Profile A",
+        "pt": "Perfil A",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "Profile B",
+        "pt": "Perfil B",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "en": "Profile C",
+        "pt": "Perfil C",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Profile D",
+        "pt": "Perfil D",
+        "correct": false
+      }
+    ],
+    "explanationEn": "Profile B is correct:\n- **generalPractitioner 1..1**: 'a single practitioner reference' = exactly one reference → eliminates A and C (1..*)\n- **communication 1..***: preferred language is mandatory (for language to come in the resource, communication must be mandatory) → eliminates A and C (0..* = optional communication)\n- **telecom 0..***: contact details 'if available' = NOT mandatory → eliminates C (telecom 1..* = mandatory)\n- **name 1..***: one or more names required → eliminates D (name 0..* = optional)",
+    "explanationPt": "Perfil B está correto:\n- **generalPractitioner 1..1**: 'uma única referência de profissional' = exatamente uma referência → elimina A e C (1..*)\n- **communication 1..***: idioma preferido é obrigatório (para que o idioma conste no recurso, communication deve ser obrigatório) → elimina A e C (0..* = communication opcional)\n- **telecom 0..***: dados de contato 'se disponíveis' = NÃO obrigatório → elimina C (telecom 1..* = obrigatório)\n- **name 1..***: um ou mais nomes exigidos → elimina D (name 0..* = opcional)"
+  }
+]

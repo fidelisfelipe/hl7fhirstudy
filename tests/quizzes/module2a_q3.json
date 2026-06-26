@@ -1,0 +1,361 @@
+[
+  {
+    "id": 1,
+    "titleEn": "Mapping HL7 V2 PID-10 (race) to Patient resource",
+    "titlePt": "Mapeando HL7 V2 PID-10 (raça) para o recurso Patient",
+    "qEn": "A business analyst needs to map an incoming HL7 V2 ADT message to FHIR. One of the requirements is to map the PID-10 (race) to one of the Patient resource elements. Based on the Patient resource definition given in the image, where should the race data from V2 be mapped in the Patient resource?",
+    "qPt": "Um analista de negócios precisa mapear uma mensagem HL7 V2 ADT recebida para FHIR. Um dos requisitos é mapear o PID-10 (raça) para um dos elementos do recurso Patient. Com base na definição do recurso Patient fornecida na imagem, onde os dados de raça do V2 devem ser mapeados no recurso Patient?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module2a/m2a_q3_q1.png",
+        "altEn": "Question about mapping HL7 V2 race field to Patient resource",
+        "altPt": "Questão sobre mapeamento do campo race do HL7 V2 para Patient"
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "Patient.identifier",
+        "pt": "Patient.identifier",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "Patient.text",
+        "pt": "Patient.text",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "Patient.extension",
+        "pt": "Patient.extension",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "en": "Patient.race",
+        "pt": "Patient.race",
+        "correct": false
+      },
+      {
+        "key": "E",
+        "en": "Patient.contained",
+        "pt": "Patient.contained",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The Patient resource does not define a direct 'race' element. Instead, information such as race or ethnicity must be represented using an extension, usually defined through a StructureDefinition. Therefore, the correct way to map HL7 V2 PID-10 (race) is Patient.extension.",
+    "explanationPt": "O recurso Patient não possui um elemento 'race' definido diretamente. Em vez disso, informações como raça ou etnia devem ser representadas usando uma extensão, geralmente definida através de um StructureDefinition. Portanto, a forma correta de mapear o HL7 V2 PID-10 (raça) é usando Patient.extension."
+  },
+  {
+    "id": 2,
+    "titleEn": "Extension for representing patient religion in Patient resource",
+    "titlePt": "Extensão para representar religião do paciente no recurso Patient",
+    "qEn": "A patient registry requires the inclusion of the patient religion while exchanging the Patient resource. Based on the provided image, which extension is most appropriate to choose in order to correctly represent the source terminology and the code for the religion in the Patient resource?",
+    "qPt": "Um registro de pacientes exige a inclusão da religião do paciente ao trocar o recurso Patient. Com base na imagem fornecida, qual extensão é mais apropriada para representar corretamente a terminologia de origem e o código da religião no recurso Patient?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module2a/m2a_q3_q2.png",
+        "altEn": "Question about extension for religion in Patient resource",
+        "altPt": "Questão sobre extensão para religião no recurso Patient"
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "Extension A",
+        "pt": "Extensão A",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "Extension B",
+        "pt": "Extensão B",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "Extension C",
+        "pt": "Extensão C",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "en": "Extension D",
+        "pt": "Extensão D",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The HL7 FHIR-defined extension is preferred over a custom extension. An existing extension that uses the CodeableConcept data type allows representing both the code and the source terminology, which fits the requirement for patient religion. Extensions with `hl7.org` URLs are defined by HL7, while custom extensions often use implementer-specific domains (e.g., ghh.org). Therefore, Extension C is the correct choice.",
+    "explanationPt": "A extensão definida pelo HL7 FHIR é preferível em relação a uma extensão personalizada. Uma extensão existente que utilize o tipo de dado CodeableConcept permite representar tanto o código quanto a terminologia de origem, atendendo ao requisito de religião do paciente. Extensões com URLs de `hl7.org` são definidas pelo HL7, enquanto extensões personalizadas usam domínios específicos de implementadores (por exemplo, ghh.org). Portanto, a Extensão C é a escolha correta."
+  },
+  {
+    "id": 3,
+    "titleEn": "Representing tentative or absent surgeon in Procedure resource",
+    "titlePt": "Representando cirurgião tentativo ou ausente no recurso Procedure",
+    "qEn": "The patient is planned to undergo surgery. There are multiple doctors involved in the surgery. One of the doctors involved is Dr. John Cena. Before the surgery began, Dr. John got occupied in a different emergency case. The surgery department system updates the status of this doctor as 'tentative' for the patient's planned surgery. Post-surgery, the implementer needs to assert that this doctor (Dr. John Cena) was actually not involved in the procedure. Which resource element should be used to include this information in the Procedure resource?",
+    "qPt": "O paciente está planejado para ser submetido a uma cirurgia. Há vários médicos envolvidos na cirurgia. Um dos médicos envolvidos é o Dr. John Cena. Antes do início da cirurgia, o Dr. John foi ocupado em outro caso de emergência. O sistema do departamento cirúrgico atualiza o status deste médico como 'tentativo' para a cirurgia planejada do paciente. Após a cirurgia, o implementador precisa afirmar que este médico (Dr. John Cena) na verdade não participou do procedimento. Qual elemento do recurso Procedure deve ser usado para incluir esta informação?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module2a/m2a_q3_q3.png",
+        "altEn": "Question about representing tentative/absent performer in Procedure resource",
+        "altPt": "Questão sobre representar performer tentativo/ausente no recurso Procedure"
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "Procedure.extension",
+        "pt": "Procedure.extension",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "Procedure.performer.extension",
+        "pt": "Procedure.performer.extension",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "en": "Procedure.statusReason",
+        "pt": "Procedure.statusReason",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Procedure.asserter.extension",
+        "pt": "Procedure.asserter.extension",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The extension should be applied to the affected element. In this case, the relevant element is `Procedure.performer`, which holds information about practitioners who executed (or were expected to execute) the surgery. To capture the detail that Dr. John Cena was marked as tentative and later did not participate, the extension must be applied on Procedure.performer. Therefore, Procedure.performer.extension is the correct choice.",
+    "explanationPt": "A extensão deve ser aplicada ao elemento afetado. Neste caso, o elemento relevante é `Procedure.performer`, que contém informações sobre os profissionais que executaram (ou que eram esperados para executar) a cirurgia. Para capturar o detalhe de que o Dr. John Cena foi marcado como tentativo e depois não participou, a extensão deve ser aplicada em Procedure.performer. Portanto, Procedure.performer.extension é a escolha correta."
+  },
+  {
+    "id": 4,
+    "titleEn": "Extension for representing patient nationality",
+    "titlePt": "Extensão para representar nacionalidade do paciente",
+    "qEn": "The implementer needs to add the patient's nationality in the Patient resource along with the other demographic data. Nationality data includes the country code defined in the ISO 3166 table and the period (start and end dates) when nationality was effective. Which extension should be used?",
+    "qPt": "O implementador precisa adicionar a nacionalidade do paciente no recurso Patient juntamente com os outros dados demográficos. Os dados de nacionalidade incluem o código do país definido na tabela ISO 3166 e o período (datas de início e fim) em que a nacionalidade foi efetiva. Qual extensão deve ser usada?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module2a/m2a_q3_q4.png",
+        "altEn": "Question about extension for nationality in Patient resource",
+        "altPt": "Questão sobre extensão para nacionalidade no recurso Patient"
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "Extension A",
+        "pt": "Extensão A",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "Extension B",
+        "pt": "Extensão B",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "en": "Extension C",
+        "pt": "Extensão C",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Extension D",
+        "pt": "Extensão D",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The nationality data requires a complex extension with two sub-extensions: one for the nationality code and one for the effective period. The nationality code must include both code and source, so either Coding or CodeableConcept data types are required. For the period of nationality, the Period data type is required to capture start and end dates. Therefore, the correct choice is Extension B.",
+    "explanationPt": "Os dados de nacionalidade exigem uma extensão complexa com duas subextensões: uma para o código da nacionalidade e outra para o período de validade. O código de nacionalidade deve incluir tanto o código quanto a fonte, portanto são necessários os tipos de dados Coding ou CodeableConcept. Para o período da nacionalidade, o tipo de dado Period é necessário para registrar as datas de início e fim. Portanto, a escolha correta é a Extensão B."
+  },
+  {
+    "id": 5,
+    "titleEn": "Representing insurance purchaser in Coverage resource",
+    "titlePt": "Representando o comprador do seguro no recurso Coverage",
+    "qEn": "The purchaser of the insurance policy is the father of the patient. How will this information be represented by the FHIR analyst in the Coverage resource instance?",
+    "qPt": "O comprador da apólice de seguro é o pai do paciente. Como essa informação será representada pelo analista FHIR na instância do recurso Coverage?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module2a/m2a_q2_q5.png",
+        "altEn": "Question about representing policy holder in Coverage resource",
+        "altPt": "Questão sobre como representar policy holder no recurso Coverage"
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "Coverage.policyHolder.extension",
+        "pt": "Coverage.policyHolder.extension",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "Coverage.extension",
+        "pt": "Coverage.extension",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "Coverage.subscriber.extension",
+        "pt": "Coverage.subscriber.extension",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Coverage.policyHolder(Reference(RelatedPerson))",
+        "pt": "Coverage.policyHolder(Reference(RelatedPerson))",
+        "correct": true
+      }
+    ],
+    "explanationEn": "The purchaser of the policy is the owner, which is represented in the Coverage resource using the `policyHolder` element. Since the father is related to the patient, this can be mapped as a Reference to a RelatedPerson. There is no need for an extension in this case.",
+    "explanationPt": "O comprador da apólice é o proprietário, que é representado no recurso Coverage usando o elemento `policyHolder`. Como o pai é relacionado ao paciente, isso pode ser mapeado como uma referência a RelatedPerson. Não há necessidade de usar uma extensão neste caso."
+  },
+  {
+    "id": 6,
+    "titleEn": "Extension for paternal portion of family name",
+    "titlePt": "Extensão para a parte paterna do sobrenome",
+    "qEn": "The implementer needs to exchange the portion of the family name that is derived from the person's father as free text data for a patient. One such value is 'Cena,' and the other value is 'Brown'. Based on the provided image, which extension is most appropriate to choose in order to correctly represent the above information?",
+    "qPt": "O implementador precisa trocar a parte do sobrenome que é derivada do pai da pessoa como dados de texto livre para um paciente. Um desses valores é 'Cena' e o outro é 'Brown'. Com base na imagem fornecida, qual extensão é mais apropriada para representar corretamente as informações acima?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module2a/m2a_q3_q6.png",
+        "altEn": "Question about extension for paternal family name portion",
+        "altPt": "Questão sobre extensão para parte paterna do sobrenome"
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "Extension A",
+        "pt": "Extensão A",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "Extension B",
+        "pt": "Extensão B",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "Extension C",
+        "pt": "Extensão C",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Extension D",
+        "pt": "Extensão D",
+        "correct": true
+      }
+    ],
+    "explanationEn": "The paternal portion of the family name requires an extension with a string data type, as it is free-text information. Since there can be multiple paternal family names, the extension must support repetition. Therefore, the correct choice is Extension D.",
+    "explanationPt": "A parte paterna do sobrenome requer uma extensão com tipo de dado string, pois trata-se de informação em texto livre. Como podem existir múltiplos sobrenomes paternos, a extensão deve permitir repetição. Portanto, a escolha correta é a Extensão D."
+  },
+  {
+    "id": 7,
+    "titleEn": "Extension for representing patient ethnicity with extensible binding",
+    "titlePt": "Extensão para representar etnia do paciente com binding extensível",
+    "qEn": "The EMR application hosting a FHIR server needs to define a Patient profile. The FHIR SME has a task to define an extension for patient ethnicity in this profile. The application has defined its own ValueSet and CodeSystem for extension codes. If there is no applicable concept in the extension value set, an alternate concept (system/code pair) can be used by the sender. If there is at least one applicable concept in the extension value set, then the sender shall use that code and can optionally also add their custom equivalent code in it. Based on the provided image, which extension definition is most appropriate to choose in order to correctly represent the above information?",
+    "qPt": "A aplicação EMR que hospeda um servidor FHIR precisa definir um perfil de Patient. O especialista FHIR (SME) tem a tarefa de definir uma extensão para etnia do paciente neste perfil. A aplicação definiu seu próprio ValueSet e CodeSystem para os códigos da extensão. Se não houver conceito aplicável no ValueSet da extensão, um conceito alternativo (par system/code) pode ser usado pelo remetente. Se houver pelo menos um conceito aplicável no ValueSet da extensão, então o remetente deve usar esse código e pode opcionalmente adicionar seu código equivalente personalizado. Com base na imagem fornecida, qual definição de extensão é mais apropriada para representar corretamente as informações acima?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module2a/m2a_q3_q7.png",
+        "altEn": "Question about extension definition for ethnicity in Patient profile",
+        "altPt": "Questão sobre definição de extensão para etnia em perfil de Patient"
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "Extension A",
+        "pt": "Extensão A",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "Extension B",
+        "pt": "Extensão B",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "Extension C",
+        "pt": "Extensão C",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Extension D",
+        "pt": "Extensão D",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The extension must allow both extension-defined codes and custom codes when needed. Therefore, it requires an extensible binding. The proper data type is CodeableConcept (not Coding) because it allows multiple codings, including equivalent codes from different systems. Thus, Extension A is the correct choice.",
+    "explanationPt": "A extensão deve permitir tanto códigos definidos pela extensão quanto códigos personalizados quando necessário. Portanto, exige um binding do tipo extensível. O tipo de dado adequado é CodeableConcept (não Coding), pois permite múltiplos codings, incluindo códigos equivalentes de diferentes sistemas. Assim, a Extensão A é a escolha correta."
+  },
+  {
+    "id": 8,
+    "titleEn": "Extension for indicating if patient record is active",
+    "titlePt": "Extensão para indicar se o registro do paciente está ativo",
+    "qEn": "The client system needs to define an extension to convey whether the patient record is active or not (true/false). Which of the following options correctly depicts this extension structure?",
+    "qPt": "O sistema cliente precisa definir uma extensão para indicar se o registro do paciente está ativo ou não (verdadeiro/falso). Qual das opções a seguir representa corretamente essa estrutura de extensão?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "modifierExtension: valueString",
+        "pt": "modifierExtension: valueString",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "extension: valueString",
+        "pt": "extension: valueString",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "extension: valueBoolean",
+        "pt": "extension: valueBoolean",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "modifierExtension: valueBoolean",
+        "pt": "modifierExtension: valueBoolean",
+        "correct": true
+      }
+    ],
+    "explanationEn": "A modifierExtension must be used because it can alter the interpretation of the entire resource. Whether the patient record is active or not changes the meaning of the Patient resource. Since the value represents true/false, the correct data type is Boolean. Therefore, the correct choice is modifierExtension: valueBoolean.",
+    "explanationPt": "Deve-se usar modifierExtension porque ela pode alterar a interpretação de todo o recurso. Se o registro do paciente está ativo ou não muda o significado do recurso Patient. Como o valor representa verdadeiro/falso, o tipo de dado correto é Boolean. Portanto, a escolha correta é modifierExtension: valueBoolean."
+  }
+
+
+
+
+
+
+
+
+]

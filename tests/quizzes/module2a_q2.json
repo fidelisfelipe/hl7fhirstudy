@@ -1,0 +1,819 @@
+[
+  {
+    "id": 1,
+    "titleEn": "Use deceased[x] without date/time",
+    "titlePt": "Usar deceased[x] sem data/hora",
+    "qEn": "Using the FHIR Patient resource, a clinician needs to represent that the patient is deceased but without sharing the actual date and time. Which format of the deceased[x] element should be used?",
+    "qPt": "Usando o recurso Patient do FHIR, o clínico precisa representar que o paciente está falecido, sem compartilhar a data e hora. Qual formato do elemento deceased[x] deve ser usado?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "deceased",
+        "pt": "deceased",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "deceasedDateTime",
+        "pt": "deceasedDateTime",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "deceasedUrl",
+        "pt": "deceasedUrl",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "deceasedBoolean",
+        "pt": "deceasedBoolean",
+        "correct": true
+      }
+    ],
+    "explanationEn": "Use Patient.deceasedBoolean when indicating death without sharing a specific date/time (true|false).",
+    "explanationPt": "Use Patient.deceasedBoolean quando indicar óbito sem compartilhar data/hora específica (true|false)."
+  },
+  {
+    "id": 2,
+    "titleEn": "Patient.identifier cardinality [1..*]",
+    "titlePt": "Cardinalidade de Patient.identifier [1..*]",
+    "qEn": "A clinician needs to represent business identifiers (MRN, SSN, etc.) using the FHIR Patient resource. The identifier element has cardinality [1..*]. How many identifiers can be included in the instance?",
+    "qPt": "Um clínico precisa representar identificadores de negócio (MRN, SSN etc.) usando o recurso Patient do FHIR. O elemento identifier possui cardinalidade [1..*]. Quantos identificadores podem ser incluídos na instância?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "From 0 to many identifier elements",
+        "pt": "De 0 a muitos elementos identifier",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "No more than 1 identifier",
+        "pt": "No máximo 1 identifier",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "At least 2 identifier elements or more",
+        "pt": "Pelo menos 2 elementos identifier ou mais",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Minimum 1 but can be more identifier elements",
+        "pt": "Mínimo 1, mas pode haver mais elementos identifier",
+        "correct": true
+      }
+    ],
+    "explanationEn": "[1..*] means at least one occurrence is required and '*' allows as many as are available (repetition allowed but not mandatory).",
+    "explanationPt": "[1..*] significa que pelo menos uma ocorrência é obrigatória e '*' permite tantas ocorrências quanto houver (repetição permitida, mas não obrigatória)."
+  },
+  {
+    "id": 3,
+    "titleEn": "Pick the right strategy to reference Patient when only a business identifier is known",
+    "titlePt": "Escolha a estratégia correta para referenciar o Patient quando apenas o identificador de negócio é conhecido",
+    "qEn": "Using the Observation resource, a Radiology Information System (RIS) must transmit a patient's X-ray findings. The target Patient resource id is not known in the RIS, but both systems know the Patient's business identifier. Which strategy is most appropriate to add the patient's details to the Observation instance?",
+    "qPt": "Usando o recurso Observation, um sistema de radiologia (RIS) precisa transmitir os achados de um exame de raios-X. O id do recurso Patient de destino não é conhecido no RIS, porém ambos os sistemas conhecem o identificador de negócio do paciente. Qual estratégia é mais apropriada para incluir os dados do paciente na instância de Observation?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "Using canonical URLs",
+        "pt": "Usando URLs canônicas",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "Literal referencing using logical id",
+        "pt": "Referência literal usando logical id",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "Contained mechanism",
+        "pt": "Mecanismo contained",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Logical referencing (Reference.identifier)",
+        "pt": "Referência lógica (Reference.identifier)",
+        "correct": true
+      }
+    ],
+    "explanationEn": "When the literal reference (logical id) is not known, use logical referencing by populating Reference.identifier with the patient's business identifier.",
+    "explanationPt": "Quando a referência literal (logical id) não é conhecida, use referência lógica preenchendo Reference.identifier com o identificador de negócio do paciente."
+  },
+  {
+    "id": 4,
+    "titleEn": "Choose the valid Patient summary element set",
+    "titlePt": "Escolha o conjunto de elementos de resumo do Patient válido",
+    "qEn": "Refer to the image. A client requests Patient using `_summary=true`. Which element set is a valid response from the server based on the Patient structure shown?",
+    "qPt": "Consulte a imagem. Um cliente solicita Patient usando `_summary=true`. Qual conjunto de elementos é uma resposta válida do servidor com base na estrutura do Patient apresentada?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module2a/m2a_q2_q4.png",
+        "altEn": "Patient summary elements question highlighting identifier, active, name, telecom, gender.",
+        "altPt": "Pergunta sobre elementos de resumo do Patient destacando identifier, active, name, telecom, gender."
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "identifier, active, name, telecom, gender",
+        "pt": "identifier, active, name, telecom, gender",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "identifier, name, telecom, gender, maritalStatus",
+        "pt": "identifier, name, telecom, gender, maritalStatus",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "identifier, name, telecom, gender, active, photo",
+        "pt": "identifier, name, telecom, gender, active, photo",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "identifier, name, telecom, gender, multipleBirthBoolean",
+        "pt": "identifier, name, telecom, gender, multipleBirthBoolean",
+        "correct": false
+      }
+    ],
+    "explanationEn": "With `_summary=true`, the server returns only elements flagged as Summary for Patient. The valid set in this scenario is identifier, active, name, telecom, and gender.",
+    "explanationPt": "Com `_summary=true`, o servidor retorna apenas os elementos marcados como Summary para Patient. O conjunto válido neste cenário é identifier, active, name, telecom e gender."
+  },
+  {
+    "id": 5,
+    "titleEn": "Identify the missing Condition element (ruled-out diagnoses shown)",
+    "titlePt": "Identifique o elemento ausente em Condition (diagnósticos descartados exibidos)",
+    "qEn": "Refer to the image. A hospital’s patient app lets patients view their diagnoses. Some patients reported seeing diagnoses that were ruled out by diagnostic/clinical evidence. Which element was missed while processing the Condition resource that caused this error?",
+    "qPt": "Consulte a imagem. O aplicativo do hospital permite que pacientes vejam seus diagnósticos. Alguns relataram ver diagnósticos que foram descartados por evidências diagnósticas/clínicas. Qual elemento foi ignorado ao processar o recurso Condition, causando esse erro?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module2a/m2a_q2_q5.png",
+        "altEn": "Condition resource elements; verificationStatus (modifier) indicates confirmed/refuted/etc.",
+        "altPt": "Elementos do recurso Condition; verificationStatus (modifier) indica confirmado/refutado etc."
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "identifier",
+        "pt": "identifier",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "verificationStatus",
+        "pt": "verificationStatus",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "en": "severity",
+        "pt": "severity",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "category",
+        "pt": "category",
+        "correct": false
+      }
+    ],
+    "explanationEn": "Condition.verificationStatus is a modifier that conveys whether the condition is confirmed, unconfirmed, refuted, or entered-in-error. If it’s ignored, a refuted diagnosis may be displayed as active.",
+    "explanationPt": "Condition.verificationStatus é um modificador que informa se a condição está confirmada, não confirmada, refutada ou lançada por engano. Se for ignorado, um diagnóstico refutado pode ser exibido como ativo.",
+    "tags": [
+      "FHIR",
+      "Condition",
+      "verificationStatus",
+      "modifier",
+      "required-binding"
+    ]
+  },
+  {
+    "id": 6,
+    "titleEn": "Select the valid Organization JSON structure",
+    "titlePt": "Selecione a estrutura JSON válida de Organization",
+    "qEn": "Refer to the image. A provider registry system needs to exchange the Organization resource. According to the Organization resource structure shown, which option represents the correct structure?",
+    "qPt": "Consulte a imagem. Um sistema de registro de provedores precisa trocar o recurso Organization. De acordo com a estrutura do recurso exibida, qual opção representa a estrutura correta?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module2a/m2a_q2_q6.png",
+        "altEn": "Question stem requesting correct Organization structure",
+        "altPt": "Enunciado pedindo a estrutura correta de Organization"
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "<pre><code>\n{ \"resourceType\": \"Organization\",\n \"identifier\": [{ \"use\": \"official\", \"system\": \"http://www.zorgkaartnederland.nl/\", \"value\": \"12323\" }], \"address\": [{ \"use\": \"home\", \"line\": [\"West Wing, floor 5\"] }] }\n</code></pre>",
+        "pt": "<pre><code>\n{ \"resourceType\": \"Organization\",\n \"identifier\": [{ \"use\": \"official\", \"system\": \"http://www.zorgkaartnederland.nl/\", \"value\": \"12323\" }], \"address\": [{ \"use\": \"home\", \"line\": [\"West Wing, floor 5\"] }] }\n</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "<pre><code>\n{ \"resourceType\": \"Organization\", \"identifier\": [{ \"use\": \"official\", \"system\": \"http://www.zorgkaartnederland.nl/UMC\", \"value\": \"12323\" }], \"name\": \"Burgers UMC Ear,Nose,Throat North unit\", \"telecom\": [{ \"system\": \"phone\", \"value\": \"+31715269111\", \"use\": \"home\" }], \"address\": [{ \"line\": [\"West Wing, floor 5\"] }] }\n</code></pre>",
+        "pt": "<pre><code>\n{ \"resourceType\": \"Organization\", \"identifier\": [{ \"use\": \"official\", \"system\": \"http://www.zorgkaartnederland.nl/UMC\", \"value\": \"12323\" }], \"name\": \"Burgers UMC Ear,Nose,Throat North unit\", \"telecom\": [{ \"system\": \"phone\", \"value\": \"+31715269111\", \"use\": \"home\" }], \"address\": [{ \"line\": [\"West Wing, floor 5\"] }] }\n</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "<pre><code>\n{ \"resourceType\": \"Organization\", \"name\": \"Burgers UMC Ear,Nose,Throat unit\", \"identifier\": [ { \"use\": \"official\", \"system\": \"http://www.zorgkaartnederland.nl/UMC\", \"value\": \"12323\" }, { \"use\": \"usual\", \"system\": \"http://www.zorgkaartnederland.nl/FMR\", \"value\": \"34545\" } ], \"address\": [{ \"line\": [\"West Wing, floor 5\"] }] }\n</code></pre>",
+        "pt": "<pre><code>\n{ \"resourceType\": \"Organization\", \"name\": \"Burgers UMC Ear,Nose,Throat unit\", \"identifier\": [ { \"use\": \"official\", \"system\": \"http://www.zorgkaartnederland.nl/UMC\", \"value\": \"12323\" }, { \"use\": \"usual\", \"system\": \"http://www.zorgkaartnederland.nl/FMR\", \"value\": \"34545\" } ], \"address\": [{ \"line\": [\"West Wing, floor 5\"] }] }\n</code></pre>",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "en": "<pre><code>\n{ \"resourceType\": \"Organization\", \"telecom\": [{ \"system\": \"phone\", \"value\": \"+31715269111\", \"use\": \"work\" }], \"address\": [{ \"line\": [\"West Wing, floor 5\"] }] }\n</code></pre>",
+        "pt": "<pre><code>\n{ \"resourceType\": \"Organization\", \"telecom\": [{ \"system\": \"phone\", \"value\": \"+31715269111\", \"use\": \"work\" }], \"address\": [{ \"line\": [\"West Wing, floor 5\"] }] }\n</code></pre>",
+        "correct": false
+      }
+    ],
+    "explanationEn": "Organization.name is 0..1 (cannot repeat) and Organization.identifier is 0..*. At least one of name or identifier SHALL be present. Organization.telecom.use must not be \"home\" and Address.use should not be \"home\" for organizations. Option C satisfies these constraints; A and B violate address/telecom use, and D omits both name and identifier.",
+    "explanationPt": "Organization.name é 0..1 (não repete) e Organization.identifier é 0..*. Pelo menos name ou identifier DEVE estar presente. Organization.telecom.use não deve ser \"home\" e Address.use não deve ser \"home\" para organizações. A opção C atende a essas regras; A e B violam o uso de address/telecom, e D omite tanto name quanto identifier."
+  },
+  {
+    "id": 7,
+    "titleEn": "Indicate Patient data is sensitive/confidential",
+    "titlePt": "Indicar que os dados do Patient são sensíveis/confidenciais",
+    "qEn": "A client system is sending the Patient resource to the EMR FHIR server. The developer needs to share that the patient information is sensitive and confidential. Which element of the Patient resource should be used?",
+    "qPt": "Um sistema cliente está enviando o recurso Patient para o servidor FHIR do EMR. O desenvolvedor precisa indicar que as informações do paciente são sensíveis e confidenciais. Qual elemento do recurso Patient deve ser usado?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "Patient.communication",
+        "pt": "Patient.communication",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "Patient.meta",
+        "pt": "Patient.meta",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "en": "Patient.implicitRules",
+        "pt": "Patient.implicitRules",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Patient.identifier",
+        "pt": "Patient.identifier",
+        "correct": false
+      }
+    ],
+    "explanationEn": "Use Patient.meta.security to carry confidentiality codes (e.g., N=normal, R=restricted). Communication, implicitRules, and identifier do not express confidentiality.",
+    "explanationPt": "Use Patient.meta.security para informar códigos de confidencialidade (por exemplo, N=normal, R=restrito). Communication, implicitRules e identifier não expressam confidencialidade."
+  },
+  {
+    "id": 8,
+    "titleEn": "Identify the element that specifies the resource content language",
+    "titlePt": "Identifique o elemento que especifica o idioma do conteúdo do recurso",
+    "qEn": "The client system needs to send the Patient resource to the EMR FHIR server. The resource content is in German. Which element should the EMR server check to know the language of the resource content?",
+    "qPt": "O sistema cliente precisa enviar o recurso Patient ao servidor FHIR do EMR. O conteúdo do recurso está em alemão. Qual elemento o servidor deve verificar para saber o idioma do conteúdo do recurso?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "communication.language",
+        "pt": "communication.language",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "language",
+        "pt": "language",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "en": "extension",
+        "pt": "extension",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "contact.language",
+        "pt": "contact.language",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The top-level Resource.language indicates the language of the resource content (inherited by Patient). communication.language refers to the patient’s spoken language, not the content language.",
+    "explanationPt": "O elemento Resource.language no nível do recurso indica o idioma do conteúdo (herdado por Patient). communication.language refere-se ao(s) idioma(s) falado(s) pelo paciente, não ao idioma do conteúdo."
+  },
+  {
+    "id": 9,
+    "titleEn": "Which element shows when a version was created?",
+    "titlePt": "Qual elemento mostra quando uma versão foi criada?",
+    "qEn": "A client system queries all versions of the Patient resource with id \"1234\" and the server returns 3 versions. Which element of the Patient resource should the client developer review to understand which version was created first?",
+    "qPt": "Um sistema cliente consulta todas as versões do recurso Patient com id \"1234\" e o servidor retorna 3 versões. Qual elemento do recurso Patient o desenvolvedor deve revisar para entender qual versão foi criada primeiro?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "Patient.text",
+        "pt": "Patient.text",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "Patient.extension",
+        "pt": "Patient.extension",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "Patient.meta.versionId",
+        "pt": "Patient.meta.versionId",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Patient.meta.lastUpdated",
+        "pt": "Patient.meta.lastUpdated",
+        "correct": true
+      }
+    ],
+    "explanationEn": "Patient.meta.lastUpdated is a server-assigned instant reflecting when that particular version was last updated. By comparing lastUpdated across versions, you can determine which was created first (earliest timestamp = first version).",
+    "explanationPt": "Patient.meta.lastUpdated é um instante atribuído pelo servidor que reflete quando aquela versão específica foi atualizada pela última vez. Comparando lastUpdated entre versões, é possível determinar qual foi criada primeiro (menor timestamp = primeira versão)."
+  },
+  {
+    "id": 10,
+    "titleEn": "Refer to the image. How can a DiagnosticReport refer to the original radiology order?",
+    "titlePt": "Consulte a imagem. Como um DiagnosticReport pode referenciar a solicitação original de radiologia?",
+    "qEn": "An implementer needs to create a DiagnosticReport instance based on a radiology test ordered two days ago. How can the DiagnosticReport resource instance refer to the original radiology order?",
+    "qPt": "Um implementador precisa criar uma instância de DiagnosticReport baseada em um exame de radiologia solicitado há dois dias. Como a instância de DiagnosticReport pode referenciar a solicitação original de radiologia?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module2a/m2a_q2_q10.png",
+        "altEn": "Options showing how DiagnosticReport can reference the original order; correct is basedOn(ServiceRequest).",
+        "altPt": "Opções mostrando como o DiagnosticReport pode referenciar a ordem original; correto é basedOn(ServiceRequest)."
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "DiagnosticReport.extension",
+        "pt": "DiagnosticReport.extension",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "DiagnosticReport.basedOn(ServiceRequest)",
+        "pt": "DiagnosticReport.basedOn(ServiceRequest)",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "en": "DiagnosticReport.category",
+        "pt": "DiagnosticReport.category",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "DiagnosticReport.basedOn(NutritionOrder)",
+        "pt": "DiagnosticReport.basedOn(NutritionOrder)",
+        "correct": false
+      }
+    ],
+    "explanationEn": "Use DiagnosticReport.basedOn to reference the ordering resource. For radiology (and lab) orders, the ordering resource is ServiceRequest.",
+    "explanationPt": "Use DiagnosticReport.basedOn para referenciar o recurso que originou o pedido. Para pedidos de radiologia (e laboratório), o recurso de pedido é ServiceRequest."
+  },
+  {
+    "id": 11,
+    "titleEn": "Model Appointment participants and required status",
+    "titlePt": "Modelar participantes e o status \"required\" do Appointment",
+    "qEn": "Refer to the image. An outpatient procedure will involve the PCP (Dr. Undertaker), the assistant (Dr. John), the specialist (Dr. Hulk – not required but may attend), the operating room Location, and the Patient. Which option correctly represents the Appointment.participant.actor references and the Appointment.participant.required codes?",
+    "qPt": "Consulte a imagem. Um procedimento ambulatorial envolve o médico de família (Dr. Undertaker), o assistente (Dr. John), o especialista (Dr. Hulk – não obrigatório, mas pode participar), a sala cirúrgica (Location) e o Paciente. Qual opção representa corretamente as referências em Appointment.participant.actor e os códigos de Appointment.participant.required?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module2a/m2a_q2_q11.png",
+        "altEn": "Appointment resource with participant.actor, participant.required and multiple participants (Patient, 3 Practitioners and Location).",
+        "altPt": "Recurso Appointment com participant.actor, participant.required e múltiplos participantes (Paciente, 3 Practitioners e Location)."
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "Appointment.participant.actor: references to 3 Practitioner resources (PCP, assistant, specialist), 1 Location resource, and 1 Patient resource. Appointment.participant.required: code is \"required\" for PCP and assistant; \"optional\" for the specialist.",
+        "pt": "Appointment.participant.actor: referências para 3 recursos Practitioner (PCP, assistente, especialista), 1 recurso Location e 1 recurso Patient. Appointment.participant.required: código \"required\" para o PCP e o assistente; \"optional\" para o especialista.",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "Appointment.participant.actor: 3 Practitioner, 1 Location, 1 Patient; Appointment.participant.required is \"required\" for PCP, assistant, and specialist.",
+        "pt": "Appointment.participant.actor: 3 Practitioner, 1 Location, 1 Patient; Appointment.participant.required é \"required\" para PCP, assistente e especialista.",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "Appointment.participant.actor: references to 3 Practitioner resources and 1 Patient resource (no Location). Appointment.participant.required: \"required\" for PCP and assistant; \"optional\" for the specialist.",
+        "pt": "Appointment.participant.actor: referências para 3 recursos Practitioner e 1 recurso Patient (sem Location). Appointment.participant.required: \"required\" para PCP e assistente; \"optional\" para o especialista.",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Appointment.participant.actor: references to 2 Practitioner resources (PCP and assistant), 1 Patient resource, and 1 Location resource. Appointment.participant.required: \"required\" for PCP and assistant.",
+        "pt": "Appointment.participant.actor: referências para 2 recursos Practitioner (PCP e assistente), 1 recurso Patient e 1 recurso Location. Appointment.participant.required: \"required\" para PCP e assistente.",
+        "correct": false
+      }
+    ],
+    "explanationEn": "A is correct: all five participants (PCP, assistant, specialist, Location, Patient) must be listed in participant.actor. The required code must be 'required' for PCP and assistant, and 'optional' for the specialist who may or may not attend. B wrongly marks the specialist as 'required'. C omits Location. D omits the specialist.",
+    "explanationPt": "A está correta: todos os cinco participantes (clínico geral, assistente, especialista, Location, Patient) devem ser listados em participant.actor. O código required deve ser 'required' para o clínico e assistente, e 'optional' para o especialista que pode ou não comparecer. B marca erroneamente o especialista como 'required'. C omite Location. D omite o especialista."
+  },
+  {
+    "id": 12,
+    "titleEn": "Select the correct Encounter element set",
+    "titlePt": "Selecione o conjunto correto de elementos do Encounter",
+    "qEn": "Refer to the image. A developer must create an Encounter instance for an outpatient visit. Which list correctly represents the Encounter elements, respecting required/optional cardinalities and the rule that if an optional parent (e.g., classHistory) is present, all its mandatory children must also be present?",
+    "qPt": "Consulte a imagem. Um desenvolvedor precisa criar uma instância de Encounter para uma visita ambulatorial. Qual lista representa corretamente os elementos do Encounter, respeitando as cardinalidades obrigatórias/opcionais e a regra de que, se um elemento pai opcional (por exemplo, classHistory) estiver presente, todos os seus filhos obrigatórios também devem estar presentes?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module2a/m2a_q2_q12.png",
+        "altEn": "Encounter structure showing status, class, type, subject and optional classHistory/statusHistory; note: if classHistory is used, class and period are required.",
+        "altPt": "Estrutura do Encounter com status, class, type, subject e opcionais classHistory/statusHistory; observação: se classHistory for usado, class e period são obrigatórios."
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "Encounter.identifier, Encounter.status, Encounter.class, Encounter.type, Encounter.subject(Reference(Group))",
+        "pt": "Encounter.identifier, Encounter.status, Encounter.class, Encounter.type, Encounter.subject(Reference(Group))",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "Encounter.identifier, Encounter.status, Encounter.class, Encounter.classHistory.class, Encounter.classHistory.period, Encounter.type, Encounter.subject(Reference(Patient))",
+        "pt": "Encounter.identifier, Encounter.status, Encounter.class, Encounter.classHistory.class, Encounter.classHistory.period, Encounter.type, Encounter.subject(Reference(Patient))",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "en": "Encounter.identifier, Encounter.class, Encounter.statusHistory.status, Encounter.statusHistory.period, Encounter.subject(Reference(Patient))",
+        "pt": "Encounter.identifier, Encounter.class, Encounter.statusHistory.status, Encounter.statusHistory.period, Encounter.subject(Reference(Patient))",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Encounter.identifier, Encounter.status, Encounter.statusHistory.status, Encounter.class, Encounter.classHistory.class, Encounter.subject(Reference(Patient))",
+        "pt": "Encounter.identifier, Encounter.status, Encounter.statusHistory.status, Encounter.class, Encounter.classHistory.class, Encounter.subject(Reference(Patient))",
+        "correct": false
+      }
+    ],
+    "explanationEn": "status and class are required on Encounter. subject should reference a Patient (not a Group). classHistory/statusHistory are optional, but when present, each must include its mandatory children; for classHistory, both class and period must appear. Option B satisfies all rules.",
+    "explanationPt": "status e class são obrigatórios em Encounter. subject deve referenciar um Patient (não um Group). classHistory/statusHistory são opcionais, porém, quando presentes, cada um deve incluir seus filhos obrigatórios; para classHistory, class e period devem aparecer. A opção B atende a todas as regras."
+  },
+  {
+    "id": 13,
+    "titleEn": "Define Patient profile with Must Support and cardinalities",
+    "titlePt": "Definir perfil de Patient com Must Support e cardinalidades",
+    "qEn": "The EMR FHIR server must define a Patient profile. Patient.name and Patient.identifier are mandatory and can repeat. Patient.gender and Patient.telecom SHALL be populated by the sender if available; if not, they may be absent. There can be multiple telecom entries. Which option best describes how to express these requirements in the profile?",
+    "qPt": "O servidor FHIR do EMR precisa definir um perfil de Patient. Patient.name e Patient.identifier são obrigatórios e podem repetir. Patient.gender e Patient.telecom DEVEM ser enviados pelo sistema emissor se disponíveis; caso contrário, podem estar ausentes. Pode haver múltiplas entradas de telecom. Qual opção melhor descreve como expressar esses requisitos no perfil?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "Patient.name– Σ 1..*, Patient.identifier– Σ 1..*, Patient.gender– Σ 0..1, Patient.telecom– Σ 0..*",
+        "pt": "Patient.name– Σ 1..*, Patient.identifier– Σ 1..*, Patient.gender– Σ 0..1, Patient.telecom– Σ 0..*",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "Patient.name– Σ 1..*, Patient.identifier– Σ 1..*, Patient.gender– Σ 1..1, Patient.telecom– Σ 1..*",
+        "pt": "Patient.name– Σ 1..*, Patient.identifier– Σ 1..*, Patient.gender– Σ 1..1, Patient.telecom– Σ 1..*",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "Patient.name– 1..*, Patient.identifier– 1..*, Patient.gender– 0..1, Patient.telecom– 0..* (no Σ)",
+        "pt": "Patient.name– 1..*, Patient.identifier– 1..*, Patient.gender– 0..1, Patient.telecom– 0..* (sem Σ)",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Patient.name– Σ 1..*, Patient.identifier– Σ 1..*, Patient.gender– Σ 1..1, Patient.telecom– Σ 0..1",
+        "pt": "Patient.name– Σ 1..*, Patient.identifier– Σ 1..*, Patient.gender– Σ 1..1, Patient.telecom– Σ 0..1",
+        "correct": false
+      }
+    ],
+    "explanationEn": "Σ means Must Support. The profile requires name and identifier with cardinality 1..* (mandatory, repeatable). Gender and telecom are Must Support but optional (0..1 and 0..* respectively) so the sender SHALL populate them when available; otherwise they may be absent.",
+    "explanationPt": "Σ significa Must Support. O perfil exige name e identifier com cardinalidade 1..* (obrigatórios e repetíveis). Gender e telecom são Must Support porém opcionais (0..1 e 0..* respectivamente), ou seja, o emissor DEVE enviá-los quando disponíveis; caso contrário, podem estar ausentes."
+  },
+  {
+    "id": 14,
+    "titleEn": "Select the appropriate Observation.value[x] element for HDL cholesterol",
+    "titlePt": "Selecione o elemento Observation.value[x] apropriado para colesterol HDL",
+    "qEn": "Lab information system (LIS) sending out Observation resource instance with HDL cholesterol value as 60 mg/dL. LIS uses the UCUM dictionary for standard units of measurement. Which Observation.value[x] element is most appropriate to represent this information?",
+    "qPt": "O sistema de informação laboratorial (LIS) envia uma instância do recurso Observation com valor de colesterol HDL de 60 mg/dL. O LIS utiliza o dicionário UCUM para unidades padrão de medida. Qual elemento Observation.value[x] é mais apropriado para representar essa informação?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module2a/m2a_q2_q14.png",
+        "altEn": "Question stem about Observation.value[x] representation for lab result",
+        "altPt": "Enunciado sobre representação de Observation.value[x] em resultado laboratorial"
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "valueString",
+        "pt": "valueString",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "valueInteger",
+        "pt": "valueInteger",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "valueRatio",
+        "pt": "valueRatio",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "valueQuantity",
+        "pt": "valueQuantity",
+        "correct": true
+      }
+    ],
+    "explanationEn": "The Quantity data type in FHIR provides the proper structure to represent numeric values together with their unit of measure, using UCUM for standardization. Observation.valueQuantity allows specifying value, system, code, and unit. Other types such as valueString, valueInteger, or valueRatio do not support standardized units. Therefore, valueQuantity is the correct choice.",
+    "explanationPt": "O tipo de dado Quantity no FHIR fornece a estrutura adequada para representar valores numéricos juntamente com sua unidade de medida, utilizando o UCUM para padronização. O campo Observation.valueQuantity permite especificar valor, sistema, código e unidade. Outros tipos como valueString, valueInteger ou valueRatio não suportam unidades padronizadas. Portanto, valueQuantity é a escolha correta."
+  },
+  {
+    "id": 15,
+    "titleEn": "Best way to reference Patient from Condition resource",
+    "titlePt": "Melhor forma de referenciar Patient a partir de Condition",
+    "qEn": "An implementer creating Condition resource instance needs to refer to the Patient resource instance. The implementer knows about the target Patient resource id as well as the business identifier of the patient. Which is the best way for the implementer to create this reference in the Condition resource?",
+    "qPt": "Um implementador ao criar uma instância do recurso Condition precisa referenciar a instância do recurso Patient. O implementador conhece o resource id do Patient de destino, bem como o identificador de negócio do paciente. Qual é a melhor forma para o implementador criar essa referência no recurso Condition?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module2a/m2a_q2_q15.png",
+        "altEn": "Question about referencing Patient resource from Condition",
+        "altPt": "Questão sobre como referenciar Patient a partir de Condition"
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "use the reference element with resource id",
+        "pt": "usar o elemento reference com o resource id",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "use the identifier element using the resource id",
+        "pt": "usar o elemento identifier utilizando o resource id",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "use the identifier using the business identifier",
+        "pt": "usar o identifier com o identificador de negócio",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "use the reference element using the business identifier",
+        "pt": "usar o elemento reference com o identificador de negócio",
+        "correct": false
+      }
+    ],
+    "explanationEn": "In FHIR, when the target resource id (or logical id) is known, the proper way to create a link between resources is by using the `Reference` element with the resource id. The `identifier` element is used only when the resource id is not available, but a business identifier is. Therefore, the correct choice here is to use the reference element with resource id.",
+    "explanationPt": "No FHIR, quando o resource id (ou logical id) do recurso de destino é conhecido, a forma correta de criar a ligação entre recursos é utilizando o elemento `Reference` com o resource id. O elemento `identifier` é usado apenas quando o resource id não está disponível, mas existe um identificador de negócio. Portanto, a escolha correta neste caso é usar o elemento reference com o resource id."
+  },
+  {
+    "id": 16,
+    "titleEn": "Include location of preparation in DiagnosticReport",
+    "titlePt": "Incluir local de preparação no DiagnosticReport",
+    "qEn": "The implementer is using the DiagnosticReport resource for sending out the urine culture report for a specific patient. The additional requirement is to include facility location or the department where this report was prepared. Which is the best way for the implementer to include the information about the place where the lab report was prepared in the DiagnosticReport resource?",
+    "qPt": "O implementador está usando o recurso DiagnosticReport para enviar o relatório de urocultura de um paciente específico. O requisito adicional é incluir o local da instalação ou o departamento onde este relatório foi preparado. Qual é a melhor forma para o implementador incluir a informação sobre o local onde o relatório laboratorial foi preparado no recurso DiagnosticReport?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module2a/m2a_q2_q16.png",
+        "altEn": "Question about representing location information in DiagnosticReport",
+        "altPt": "Questão sobre representar a informação de localização em DiagnosticReport"
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "DiagnosticReport.presentedForm",
+        "pt": "DiagnosticReport.presentedForm",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "DiagnosticReport.extension(valueString)",
+        "pt": "DiagnosticReport.extension(valueString)",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "DiagnosticReport.performer(Reference(Organization))",
+        "pt": "DiagnosticReport.performer(Reference(Organization))",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "DiagnosticReport.extension(Reference(Location))",
+        "pt": "DiagnosticReport.extension(Reference(Location))",
+        "correct": true
+      }
+    ],
+    "explanationEn": "The DiagnosticReport resource does not have a direct element for facility location. To capture the place where the lab report was prepared, an extension referencing the Location resource must be used. Options such as presentedForm and performer(Organization) do not meet the requirement of specifying a Location. Therefore, the correct approach is DiagnosticReport.extension(Reference(Location)).",
+    "explanationPt": "O recurso DiagnosticReport não possui um elemento direto para o local da instalação. Para registrar o local onde o relatório laboratorial foi preparado, deve-se usar uma extensão que referencie o recurso Location. Opções como presentedForm e performer(Organization) não atendem ao requisito de especificar uma Location. Portanto, a abordagem correta é DiagnosticReport.extension(Reference(Location))."
+  },
+  {
+    "id": 17,
+    "titleEn": "Observation elements for heart rate report",
+    "titlePt": "Elementos do Observation para relatório de frequência cardíaca",
+    "qEn": "The implementer is using the Observation resource for sending out a heart rate value of 70 bpm for a patient whose business identifier (Medical record number) is 15678. The result was observed by doctor John Cena at 12:55 pm on Sunday, 10th Nov. 2024. The value is normal. Which of the following options correctly provides the list of the elements for sending out all the above-mentioned information in the observation resource instance?",
+    "qPt": "O implementador está usando o recurso Observation para enviar um valor de frequência cardíaca de 70 bpm de um paciente cujo identificador de negócio (número do prontuário) é 15678. O resultado foi observado pelo médico John Cena às 12h55 no domingo, 10 de novembro de 2024. O valor é normal. Qual das opções a seguir fornece corretamente a lista dos elementos para enviar todas as informações acima na instância do recurso Observation?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module2a/m2a_q2_q17.png",
+        "altEn": "Question about required elements for Observation resource",
+        "altPt": "Questão sobre os elementos necessários no recurso Observation"
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "code, subject(Patient), effectiveDateTime, value[x], status, performer(Practitioner), interpretation",
+        "pt": "code, subject(Patient), effectiveDateTime, value[x], status, performer(Practitioner), interpretation",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "effectiveDateTime, subject(Patient), value[x], performer(Practitioner), interpretation, identifier, code, category",
+        "pt": "effectiveDateTime, subject(Patient), value[x], performer(Practitioner), interpretation, identifier, code, category",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "subject(Patient), effectiveDateTime, performer(RelatedPerson), identifier, code, value[x], status, category",
+        "pt": "subject(Patient), effectiveDateTime, performer(RelatedPerson), identifier, code, value[x], status, category",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "value[x], effectiveDateTime, subject(Patient), performer(Practitioner), identifier, code, status",
+        "pt": "value[x], effectiveDateTime, subject(Patient), performer(Practitioner), identifier, code, status",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The Observation resource requires the `status` element as mandatory. The `code` specifies what is being measured (heart rate), `subject` refers to the Patient, `effectiveDateTime` records when the observation was made, `value[x]` captures the measurement (70 bpm), and `performer` is the Practitioner (doctor John Cena). `interpretation` is used to indicate normal/abnormal results. The MRN is part of the Patient.identifier, not Observation.identifier. Therefore, option A includes the correct set of elements.",
+    "explanationPt": "O recurso Observation exige o elemento `status` como obrigatório. O `code` especifica o que está sendo medido (frequência cardíaca), `subject` refere-se ao Patient, `effectiveDateTime` registra quando a observação foi feita, `value[x]` captura o valor medido (70 bpm), e `performer` é o Practitioner (médico John Cena). `interpretation` é usado para indicar se o resultado é normal/anormal. O número do prontuário (MRN) faz parte do Patient.identifier, não do Observation.identifier. Portanto, a opção A contém o conjunto correto de elementos."
+  },
+  {
+    "id": 18,
+    "titleEn": "Appropriate Observation.value[x] element for PDF consultation note",
+    "titlePt": "Elemento Observation.value[x] apropriado para nota de consulta em PDF",
+    "qEn": "The client system needs to exchange a consultation note of a patient in the PDF format document in a value[x] element. Which of the following options is most appropriate for the value[x] element?",
+    "qPt": "O sistema cliente precisa trocar uma nota de consulta de um paciente em formato PDF em um elemento value[x]. Qual das opções a seguir é mais apropriada para o elemento value[x]?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "valueString",
+        "pt": "valueString",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "valueCodeableConcept",
+        "pt": "valueCodeableConcept",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "valueAttachment",
+        "pt": "valueAttachment",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "en": "valueSampledData",
+        "pt": "valueSampledData",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The Attachment data type in FHIR allows inclusion of content such as PDF, audio, or video files using base64Binary encoding. This makes `valueAttachment` the correct choice for representing a consultation note in PDF format. Other options such as valueString, valueCodeableConcept, or valueSampledData are not suitable for binary document exchange.",
+    "explanationPt": "O tipo de dado Attachment no FHIR permite a inclusão de conteúdos como PDF, áudio ou vídeo em formato base64Binary. Por isso, `valueAttachment` é a escolha correta para representar uma nota de consulta em formato PDF. Outras opções como valueString, valueCodeableConcept ou valueSampledData não são adequadas para troca de documentos binários."
+  },
+  {
+    "id": 19,
+    "titleEn": "Handling unknown modifierExtension in Patient resource",
+    "titlePt": "Tratamento de modifierExtension desconhecida em Patient",
+    "qEn": "The tester at the receiving system found an extension and a modifierExtension when processing the Patient resource instance. The modifierExtension definition required to understand and utilize these is absent from the receiving system. However, a StructureDefinition resource containing the definition for the extension element is available. In this case, what should the receiving system tester do?",
+    "qPt": "O testador no sistema receptor encontrou uma extensão e uma modifierExtension ao processar a instância do recurso Patient. A definição da modifierExtension necessária para compreendê-la e utilizá-la está ausente no sistema receptor. No entanto, existe um recurso StructureDefinition contendo a definição para o elemento extension. Nesse caso, o que o testador do sistema receptor deve fazer?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "discard the whole resource instance and send an error to the sender system",
+        "pt": "descartar toda a instância do recurso e enviar um erro para o sistema remetente",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "ignore the modifierExtension element and parse the rest of the patient resource content, including the extension element",
+        "pt": "ignorar o elemento modifierExtension e processar o restante do conteúdo do recurso Patient, incluindo o elemento extension",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "ignore the modifierExtension and extension both and parse the rest of the patient resource content",
+        "pt": "ignorar tanto a modifierExtension quanto a extension e processar o restante do conteúdo do recurso Patient",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "parse the patient resource and send a warning to the sender system",
+        "pt": "processar o recurso Patient e enviar um aviso ao sistema remetente",
+        "correct": false
+      }
+    ],
+    "explanationEn": "In FHIR, modifierExtension elements cannot be ignored because they may change the meaning of the resource. If their definition is not available to the receiving system, the entire resource must be considered invalid and rejected. Therefore, the receiving system must discard the resource instance and send an error to the sender system.",
+    "explanationPt": "No FHIR, elementos modifierExtension não podem ser ignorados, pois podem alterar o significado do recurso. Se a sua definição não estiver disponível para o sistema receptor, todo o recurso deve ser considerado inválido e rejeitado. Portanto, o sistema receptor deve descartar a instância do recurso e enviar um erro ao sistema remetente."
+  },
+  {
+    "id": 20,
+    "titleEn": "Element for sending free text data in Patient resource",
+    "titlePt": "Elemento para envio de dados em texto livre no recurso Patient",
+    "qEn": "The client system needs to send the patient data in free text format also along with structured elements. Which element of the Patient resource should be used?",
+    "qPt": "O sistema cliente precisa enviar os dados do paciente em formato de texto livre juntamente com os elementos estruturados. Qual elemento do recurso Patient deve ser usado?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "extension",
+        "pt": "extension",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "contained",
+        "pt": "contained",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "meta",
+        "pt": "meta",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "text",
+        "pt": "text",
+        "correct": true
+      }
+    ],
+    "explanationEn": "The `text` element, inherited from DomainResource, allows including a free-text narrative for the Patient resource. It is designed to provide a human-readable summary in addition to structured elements. Options like extension, contained, or meta serve different purposes and are not meant for free-text data.",
+    "explanationPt": "O elemento `text`, herdado de DomainResource, permite incluir uma narrativa em texto livre no recurso Patient. Ele é projetado para fornecer um resumo legível por humanos além dos elementos estruturados. Opções como extension, contained ou meta têm finalidades diferentes e não são destinadas a dados em texto livre."
+  }
+]

@@ -1,0 +1,305 @@
+[
+  {
+    "id": 1,
+    "titleEn": "FHIR search – Most recent heart rate Observation",
+    "titlePt": "Busca FHIR – Observação de frequência cardíaca mais recente",
+    "qEn": "A client application needs to query an EHR's FHIR server (http://fhirserver.hl7fundamentals.org/fhir/) for a patient's (FHIR resource id \"71\") most recent heart rate Observation measurement (LOINC code \"8867-4\"). Which FHIR search request implements these requirements?",
+    "qPt": "Um aplicativo ccliente precisa consultar o servidor FHIR do EHR (http://fhirserver.hl7fundamentals.org/fhir/) para obter a Observação de frequência cardíaca mais recente (LOINC \"8867-4\") de um paciente (id lógico \"71\"). Qual requisição de busca FHIR cumpre esses requisitos?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "<code>GET http://fhirserver.hl7fundamentals.org/fhir/Patient?_id=71&_has:Observation:code=http://loinc.org|85354-9&_sort=-date&_count=1</code>",
+        "pt": "<code>GET http://fhirserver.hl7fundamentals.org/fhir/Patient?_id=71&_has:Observation:code=http://loinc.org|85354-9&_sort=-date&_count=1</code>",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "<code>GET http://fhirserver.hl7fundamentals.org/fhir/Observation?code=http://loinc.org|8867-4&amp;patient=71&amp;_sort=-date&amp;_total=1</code>",
+        "pt": "<code>GET http://fhirserver.hl7fundamentals.org/fhir/Observation?code=http://loinc.org|8867-4&amp;patient=71&amp;_sort=-date&amp;_total=1</code>",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "<code>GET http://fhirserver.hl7fundamentals.org/fhir/Observation?code=http://loinc.org/8867-4&amp;patient=71&amp;_sort=-date&amp;_count=1</code>",
+        "pt": "<code>GET http://fhirserver.hl7fundamentals.org/fhir/Observation?code=http://loinc.org/8867-4&amp;patient=71&amp;_sort=-date&amp;_count=1</code>",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "<code>GET http://fhirserver.hl7fundamentals.org/fhir/Observation?code=http://loinc.org|8867-4&amp;patient=71&amp;_sort=-date&amp;_count=1</code>",
+        "pt": "<code>GET http://fhirserver.hl7fundamentals.org/fhir/Observation?code=http://loinc.org|8867-4&amp;patient=71&amp;_sort=-date&amp;_count=1</code>",
+        "correct": true
+      }
+    ],
+    "media": [],
+    "explanationEn": "D is correct: code uses the pipe-separated system|code format (http://loinc.org|8867-4), patient=71 searches by resource id, _sort=-date sorts by date descending (newest first), _count=1 returns only the single most recent result. A uses wrong LOINC code (85354-9) and _has instead of direct search. B uses _total=1 (not a paging parameter) instead of _count. C uses a slash instead of pipe in the system|code pair, which is invalid FHIR syntax.",
+    "explanationPt": "D está correta: code usa o formato sistema|código separado por pipe (http://loinc.org|8867-4), patient=71 busca pelo id do recurso, _sort=-date ordena por data decrescente (mais recente primeiro), _count=1 retorna apenas o resultado mais recente. A usa o código LOINC errado (85354-9) e _has em vez de busca direta. B usa _total=1 (não é parâmetro de paginação) em vez de _count. C usa barra em vez de pipe no par sistema|código, que é sintaxe FHIR inválida."
+  },
+  {
+    "id": 2,
+    "module": "Module 3 - Unit 2",
+    "titleEn": "Search Patient resources who are deceased",
+    "titlePt": "Pesquisar recursos Patient que estão falecidos",
+    "qEn": "A client application needs to search for the matching patients who are deceased (not alive). The Patient resource instances on the FHIR server do contain the death date of these patients. Which search parameter should be used?",
+    "qPt": "Um aplicativo cliente precisa pesquisar os pacientes que estão falecidos (não vivos). As instâncias de Patient no servidor FHIR contêm a data de óbito desses pacientes. Qual parâmetro de pesquisa deve ser usado?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "death-date",
+        "pt": "death-date",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "deceasedDateTime",
+        "pt": "deceasedDateTime",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "deceased",
+        "pt": "deceased",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "en": "deathDate",
+        "pt": "deathDate",
+        "correct": false
+      }
+    ],
+    "explanationEn": "Use the Patient search parameter 'deceased' to find patients who are deceased (e.g., Patient?deceased=true). The other options are element names or incorrect parameter names. If filtering by the actual date/time of death were needed, the correct parameter would be 'deceased-date' (not 'death-date').",
+    "explanationPt": "Use o parâmetro de pesquisa do Patient 'deceased' para encontrar pacientes falecidos (ex.: Patient?deceased=true). As outras opções são nomes de elementos ou nomes incorretos de parâmetros. Se fosse necessário filtrar pela data/hora do óbito, o parâmetro correto seria 'deceased-date' (e não 'death-date')."
+  },
+  {
+    "id": 3,
+    "module": "Module 3 - Unit 2",
+    "titleEn": "Search Patients whose name starts with 'John'",
+    "titlePt": "Pesquisar Patients cujo nome começa com 'John'",
+    "qEn": "A client application needs to search for all the patients based on the name that starts with \"John\" (e.g., Johnathan, Johnson). The client application is using a name search parameter whose search parameter type is string. Which FHIR search would help fetch the Patient resources where the name might be the one mentioned above?",
+    "qPt": "Um aplicativo cliente precisa pesquisar todos os pacientes cujo nome comece com \"John\" (por exemplo, Johnathan, Johnson). O aplicativo usa o parâmetro de busca 'name', cujo tipo é string. Qual busca FHIR retornará os recursos Patient com o nome mencionado?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "GET http://fhiserver.hl7fundamentals.org/fhir/Patient?name=%John%",
+        "pt": "GET http://fhiserver.hl7fundamentals.org/fhir/Patient?name=%John%",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "GET http://fhiserver.hl7fundamentals.org/fhir/Patient?name=John",
+        "pt": "GET http://fhiserver.hl7fundamentals.org/fhir/Patient?name=John",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "en": "GET http://fhiserver.hl7fundamentals.org/fhir/Patient?name=John%",
+        "pt": "GET http://fhiserver.hl7fundamentals.org/fhir/Patient?name=John%",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "GET http://fhiserver.hl7fundamentals.org/fhir/Patient?name=Johnathan&Johnson",
+        "pt": "GET http://fhiserver.hl7fundamentals.org/fhir/Patient?name=Johnathan&Johnson",
+        "correct": false
+      }
+    ],
+    "explanationEn": "For string search parameters, FHIR performs a case-insensitive prefix (starts-with) match by default at word boundaries. Therefore `name=John` matches John, Johnathan, Johnson, etc. Wildcards like `%` are not valid in FHIR searches. To find substrings not at the start, the modifier `:contains` would be used (e.g., `name:contains=ohn`).",
+    "explanationPt": "Para parâmetros de busca do tipo string, o FHIR executa por padrão uma correspondência de prefixo (começa com) sem diferenciar maiúsculas/minúsculas nos limites de palavra. Assim, `name=John` corresponde a John, Johnathan, Johnson, etc. Curingas como `%` não são válidos em buscas FHIR. Para buscar por substring no meio da palavra, usa-se o modificador `:contains` (ex.: `name:contains=ohn`)."
+  },
+  {
+    "id": 4,
+    "module": "Module 3 - Unit 2",
+    "titleEn": "Retrieve Patient by id and return a Bundle",
+    "titlePt": "Recuperar Patient por id retornando um Bundle",
+    "qEn": "A user wants to retrieve the Patient resource with patient id 17532. The outcome must be a Bundle. Which URL would fetch this patient from the FHIR server?",
+    "qPt": "Um usuário deseja recuperar o recurso Patient com id do paciente 17532. O resultado deve ser um Bundle. Qual URL buscaria esse paciente no servidor FHIR?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "GET http://fhirserver.hl7fundamentals.org/fhir/Patient/17532",
+        "pt": "GET http://fhirserver.hl7fundamentals.org/fhir/Patient/17532",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "GET http://fhirserver.hl7fundamentals.org/fhir/Patient?id=17532",
+        "pt": "GET http://fhirserver.hl7fundamentals.org/fhir/Patient?id=17532",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "GET http://fhirserver.hl7fundamentals.org/fhir/Patient?_id=17532",
+        "pt": "GET http://fhirserver.hl7fundamentals.org/fhir/Patient?_id=17532",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "en": "GET http://fhirserver.hl7fundamentals.org/fhir/Patient=17532",
+        "pt": "GET http://fhirserver.hl7fundamentals.org/fhir/Patient=17532",
+        "correct": false
+      }
+    ],
+    "explanationEn": "A search request must include '?' and returns a Bundle even if only one resource matches. The correct parameter to search by logical id is `_id`, so `Patient?_id=17532` returns a Bundle. `Patient/17532` is a read interaction (not a search) and returns the single Patient resource, not a Bundle. `id` (without underscore) is not a valid search parameter, and `Patient=17532` is not a valid query.",
+    "explanationPt": "Uma busca deve conter '?' e retorna um Bundle mesmo quando há apenas um recurso correspondente. O parâmetro correto para buscar pelo id lógico é `_id`, portanto `Patient?_id=17532` retorna um Bundle. `Patient/17532` é uma leitura (read) e não uma busca; retorna apenas o recurso Patient, não um Bundle. `id` (sem sublinhado) não é parâmetro de busca válido, e `Patient=17532` não é uma consulta válida."
+  },
+  {
+    "id": 5,
+    "module": "Module 3 - Unit 2",
+    "titleEn": "Search Patients deceased on/after 2022-01-01 and before 2023-01-01",
+    "titlePt": "Buscar Patients falecidos em/apos 2022-01-01 e antes de 2023-01-01",
+    "qEn": "An implementer needs to retrieve all the patients who are deceased on or after January 1, 2022 and with a death-date before January 1, 2023. Which FHIR search would fetch the matching Patient resources?",
+    "qPt": "Um implementador precisa recuperar todos os pacientes que estão falecidos em ou após 01/01/2022 e com data de óbito anterior a 01/01/2023. Qual busca FHIR retornará os recursos Patient correspondentes?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "GET [base]/Patient?death-date=ge2022-01-01&death-date=lt2023-01-01",
+        "pt": "GET [base]/Patient?death-date=ge2022-01-01&death-date=lt2023-01-01",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "GET [base]/Patient?death-date=gt2022-01-01&death-date=lt2023-01-01",
+        "pt": "GET [base]/Patient?death-date=gt2022-01-01&death-date=lt2023-01-01",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "GET [base]/Patient?death-date=ge2022-01-01&death-date=le2023-01-01",
+        "pt": "GET [base]/Patient?death-date=ge2022-01-01&death-date=le2023-01-01",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "GET [base]/Patient?death-date=ge2022-01-01,lt2023-01-01",
+        "pt": "GET [base]/Patient?death-date=ge2022-01-01,lt2023-01-01",
+        "correct": false
+      }
+    ],
+    "explanationEn": "Use two repeats of the same search parameter to AND the constraints: `ge2022-01-01` (on or after) and `lt2023-01-01` (strictly before). Using `gt` would exclude 2022-01-01; using `le2023-01-01` would include 2023-01-01; a comma `,` creates OR (union) rather than intersection.",
+    "explanationPt": "Repita o mesmo parâmetro para fazer AND das restrições: `ge2022-01-01` (maior ou igual) e `lt2023-01-01` (estritamente antes). Usar `gt` excluiria 01/01/2022; usar `le2023-01-01` incluiria 01/01/2023; a vírgula `,` cria OU (união), não interseção."
+  },
+  {
+    "id": 6,
+    "module": "Module 3 - Unit 2",
+    "titleEn": "Search heart rate Observations ≤ 44 bpm using composite parameter",
+    "titlePt": "Buscar Observations de frequência cardíaca ≤ 44 bpm usando parâmetro composto",
+    "qEn": "An implementer needs all heart rate data (LOINC code \"8867-4\") where the value is less than or equal to 44 beats per minute. They will use the composite search parameter code-value-quantity. Which FHIR search will return the matching Observation resources?",
+    "qPt": "Um implementador precisa de todos os dados de frequência cardíaca (LOINC \"8867-4\") cujo valor seja menor ou igual a 44 batimentos por minuto. Ele usará o parâmetro de busca composto code-value-quantity. Qual busca FHIR retornará as Observations correspondentes?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "GET http://fhiserver.hl7fundamentals.org/fhir/Observation?code-value-quantity=http://loinc.org|8867-4,le44",
+        "pt": "GET http://fhiserver.hl7fundamentals.org/fhir/Observation?code-value-quantity=http://loinc.org|8867-4,le44",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "GET http://fhiserver.hl7fundamentals.org/fhir/Observation?code-value-quantity=http://loinc.org|8867-4&value-quantity=le44",
+        "pt": "GET http://fhiserver.hl7fundamentals.org/fhir/Observation?code-value-quantity=http://loinc.org|8867-4&value-quantity=le44",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "GET http://fhiserver.hl7fundamentals.org/fhir/Observation?code-value-quantity=http://loinc.org|8867-4&le44",
+        "pt": "GET http://fhiserver.hl7fundamentals.org/fhir/Observation?code-value-quantity=http://loinc.org|8867-4&le44",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "GET http://fhiserver.hl7fundamentals.org/fhir/Observation?code-value-quantity=http://loinc.org|8867-4$le44",
+        "pt": "GET http://fhiserver.hl7fundamentals.org/fhir/Observation?code-value-quantity=http://loinc.org|8867-4$le44",
+        "correct": true
+      }
+    ],
+    "explanationEn": "The composite parameter 'code-value-quantity' combines a code (Token) and a quantity. FHIR uses '$' to separate the component values. Use the token 'http://loinc.org|8867-4' for heart rate and the quantity comparator 'le44' for ≤ 44. Comma ',' would mean OR; splitting into separate parameters breaks the composite.",
+    "explanationPt": "O parâmetro composto 'code-value-quantity' combina um código (Token) e uma quantidade. No FHIR, usa-se '$' para separar os componentes. Use o token 'http://loinc.org|8867-4' para frequência cardíaca e o comparador de quantidade 'le44' para ≤ 44. A vírgula ',' indicaria OU; separar em parâmetros distintos quebra o composto."
+  },
+  {
+    "id": 7,
+    "module": "Module 3 - Unit 2",
+    "titleEn": "Search heart rate Observations by patient's MRN using chaining",
+    "titlePt": "Buscar Observations de frequência cardíaca pelo MRN do paciente usando chaining",
+    "qEn": "An implementer needs to fetch all the heart rate data of a patient whose resource id is not known, but the medical record number 6789766 from the EMR registration system (system URL \"http://ghh.org/fhir/pat-identifiers\") is known. Which search parameters in the query will return the matching Observation resources?",
+    "qPt": "Um implementador precisa buscar todos os dados de frequência cardíaca de um paciente cujo id lógico não é conhecido, mas o número de prontuário 6789766 do sistema de registro (URL do sistema \"http://ghh.org/fhir/pat-identifiers\") é conhecido. Quais parâmetros de busca na query retornarão as Observations correspondentes?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "GET http://fhiserver.hl7fundamentals.org/fhir/Observation?code=http://loinc.org|8867-4&identifier=http://ghh.org/fhir/pat-identifiers|6789766",
+        "pt": "GET http://fhiserver.hl7fundamentals.org/fhir/Observation?code=http://loinc.org|8867-4&identifier=http://ghh.org/fhir/pat-identifiers|6789766",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "GET http://fhiserver.hl7fundamentals.org/fhir/Patient?_has:Observation:patient:code=http://loinc.org|8867-4&identifier=http://ghh.org/fhir/pat-identifiers|6789766",
+        "pt": "GET http://fhiserver.hl7fundamentals.org/fhir/Patient?_has:Observation:patient:code=http://loinc.org|8867-4&identifier=http://ghh.org/fhir/pat-identifiers|6789766",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "GET http://fhiserver.hl7fundamentals.org/fhir/Observation?code=http://loinc.org|8867-4&Patient.identifier=http://ghh.org/fhir/pat-identifiers|6789766",
+        "pt": "GET http://fhiserver.hl7fundamentals.org/fhir/Observation?code=http://loinc.org|8867-4&Patient.identifier=http://ghh.org/fhir/pat-identifiers|6789766",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "GET http://fhiserver.hl7fundamentals.org/fhir/Observation?code=http://loinc.org|8867-4&patient.identifier=http://ghh.org/fhir/pat-identifiers|6789766",
+        "pt": "GET http://fhiserver.hl7fundamentals.org/fhir/Observation?code=http://loinc.org|8867-4&patient.identifier=http://ghh.org/fhir/pat-identifiers|6789766",
+        "correct": true
+      }
+    ],
+    "explanationEn": "Search the Observation type filtered by LOINC 8867-4 (heart rate) and chain to the referenced Patient using `patient.identifier`. Chaining uses the lowercase reference name and a dot to the target’s search parameter. Match the MRN as a token `system|value`. `identifier` alone searches Observation.identifier (wrong target), and `_has` on Patient would return Patient resources, not Observations. Parameter names are case-sensitive (so `Patient.identifier` is invalid).",
+    "explanationPt": "Pesquise o tipo Observation filtrando pelo LOINC 8867-4 (frequência cardíaca) e faça o encadeamento para o Patient referenciado com `patient.identifier`. No chaining usa-se o nome da referência em minúsculas e ponto para o parâmetro de busca do alvo. Faça a correspondência do MRN como token `sistema|valor`. `identifier` sozinho busca Observation.identifier (alvo errado) e o `_has` em Patient retornaria Patients, não Observations. Os nomes dos parâmetros são sensíveis a maiúsculas/minúsculas (logo `Patient.identifier` é inválido)."
+  },
+  {
+    "id": 8,
+    "module": "Module 3 - Unit 3",
+    "titleEn": "Search with no matches — expected HTTP response",
+    "titlePt": "Busca sem correspondências — resposta HTTP esperada",
+    "qEn": "A client application executes the query:\n\nGET http://fhirserver.hl7fundamentals.org/fhir/Patient?given=johnathan\n\nBut there are no patients whose first name is \"johnathan\". What is the expected response from the server?",
+    "qPt": "Um aplicativo cliente executa a consulta:\n\nGET http://fhirserver.hl7fundamentals.org/fhir/Patient?given=johnathan\n\nPorém, não há pacientes com o primeiro nome \"johnathan\". Qual é a resposta esperada do servidor?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "An HTTP response code 404 (Not Found) with an empty HTTP response body",
+        "pt": "Código HTTP 404 (Not Found) com corpo de resposta vazio",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "An HTTP response code 200 (OK) with an HTTP response body of a FHIR Bundle instance containing zero or more entries",
+        "pt": "Código HTTP 200 (OK) com um corpo contendo um FHIR Bundle com zero ou mais entradas",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "en": "An HTTP response code 412 (Precondition Failed) with an HTTP body of a FHIR OperationOutcome instance",
+        "pt": "Código HTTP 412 (Precondition Failed) com corpo de um FHIR OperationOutcome",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "An HTTP response code 200 (OK) with an HTTP body of a FHIR OperationOutcome instance",
+        "pt": "Código HTTP 200 (OK) com corpo de um FHIR OperationOutcome",
+        "correct": false
+      }
+    ],
+    "explanationEn": "A FHIR search returns HTTP 200 and a Bundle. If no resources match, the Bundle is empty (total=0). HTTP 404 is for read-by-id when the instance is missing. OperationOutcome is returned only when there is an error processing the request (e.g., invalid parameter), not when zero results are found.",
+    "explanationPt": "Uma busca FHIR retorna HTTP 200 e um Bundle. Se não houver correspondências, o Bundle vem vazio (total=0). HTTP 404 é usado para leitura por id quando a instância não existe. OperationOutcome é retornado apenas em caso de erro no processamento (p.ex., parâmetro inválido), não quando há zero resultados."
+  }
+]

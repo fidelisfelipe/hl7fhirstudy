@@ -1,0 +1,686 @@
+[
+  {
+    "titleEn": "Lab result vs vital sign",
+    "titlePt": "Resultado de lab vs sinal vital",
+    "qEn": "Per the Quick Guide to Resources, an aggregated laboratory panel (e.g. CBC with differential) maps to which resource, and a single vital sign (e.g. heart rate) maps to which?",
+    "qPt": "Pelo Quick Guide to Resources, um painel laboratorial agregado (ex.: hemograma com diferencial) mapeia para qual recurso, e um sinal vital único (ex.: frequência cardíaca) para qual?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "Lab panel → DiagnosticReport (with Observations); single vital sign → Observation",
+        "pt": "Painel de lab → DiagnosticReport (com Observations); sinal vital único → Observation",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "Both map to Observation only",
+        "pt": "Ambos mapeiam só para Observation",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "Lab panel → ServiceRequest; vital sign → Condition",
+        "pt": "Painel de lab → ServiceRequest; sinal vital → Condition",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Both map to DiagnosticReport",
+        "pt": "Ambos mapeiam para DiagnosticReport",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The Quick Guide maps Laboratory Results (panels like CBC) to DiagnosticReport with Observations, while Vital Signs (temperature, BP, heart rate) map to Observation. The DiagnosticReport aggregates multiple Observations.",
+    "explanationPt": "O Quick Guide mapeia Resultados Laboratoriais (painéis como hemograma) para DiagnosticReport com Observations, enquanto Sinais Vitais (temperatura, PA, FC) mapeiam para Observation. O DiagnosticReport agrega várias Observations.",
+    "id": 1
+  },
+  {
+    "titleEn": "Medication chain",
+    "titlePt": "Cadeia do medicamento",
+    "qEn": "Per the Quick Guide, a Medication Administration Record (warfarin given on a date/time), home meds the patient reports taking, and a proposed medication order map respectively to:",
+    "qPt": "Pelo Quick Guide, um registro de administração (varfarina administrada em data/hora), medicamentos de uso domiciliar relatados pelo paciente, e um pedido proposto de medicamento mapeiam respectivamente para:",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "MedicationAdministration · MedicationStatement · MedicationRequest",
+        "pt": "MedicationAdministration · MedicationStatement · MedicationRequest",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "MedicationRequest · MedicationAdministration · MedicationDispense",
+        "pt": "MedicationRequest · MedicationAdministration · MedicationDispense",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "MedicationStatement · MedicationRequest · MedicationAdministration",
+        "pt": "MedicationStatement · MedicationRequest · MedicationAdministration",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Immunization · MedicationStatement · MedicationRequest",
+        "pt": "Immunization · MedicationStatement · MedicationRequest",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The Quick Guide: MAR (administered, e.g. 'Warfarin 5mg PO administered on 12/10') → MedicationAdministration; Home Meds (patient-reported) → MedicationStatement; Proposed Medications (e.g. Aspirin, Lisinopril) → MedicationRequest.",
+    "explanationPt": "O Quick Guide: MAR (administrado, ex.: 'Varfarina 5mg VO administrada em 10/12') → MedicationAdministration; Medicamentos domiciliares (relatados pelo paciente) → MedicationStatement; Medicamentos propostos (ex.: Aspirina, Lisinopril) → MedicationRequest.",
+    "id": 2
+  },
+  {
+    "titleEn": "Family history vs own condition",
+    "titlePt": "História familiar vs condição própria",
+    "qEn": "Per the Quick Guide, 'the patient's mother has diabetes' maps to which resource, and the patient's OWN clinical diagnosis maps to which?",
+    "qPt": "Pelo Quick Guide, 'a mãe do paciente tem diabetes' mapeia para qual recurso, e o diagnóstico clínico do PRÓPRIO paciente para qual?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "Family history → FamilyMemberHistory; the patient's own diagnosis → Condition",
+        "pt": "História familiar → FamilyMemberHistory; diagnóstico do próprio paciente → Condition",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "Both → Condition",
+        "pt": "Ambos → Condition",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "Family history → RelatedPerson; own diagnosis → Observation",
+        "pt": "História familiar → RelatedPerson; diagnóstico próprio → Observation",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Family history → Condition; own diagnosis → FamilyMemberHistory",
+        "pt": "História familiar → Condition; diagnóstico próprio → FamilyMemberHistory",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The Quick Guide maps Family History ('Mother has diabetes') to FamilyMemberHistory, and Clinical Diagnosis / Chief Complaint of the patient to Condition. RelatedPerson describes the relative as a person, not their health.",
+    "explanationPt": "O Quick Guide mapeia História Familiar ('Mãe tem diabetes') para FamilyMemberHistory, e Diagnóstico Clínico / Queixa Principal do paciente para Condition. RelatedPerson descreve o familiar como pessoa, não sua saúde.",
+    "id": 3
+  },
+  {
+    "titleEn": "Orders: test, supply, goal",
+    "titlePt": "Pedidos: exame, insumo, meta",
+    "qEn": "Per the Quick Guide, a proposal for a laboratory test, a proposed supply (wheelchair, food tray), and a patient goal map respectively to:",
+    "qPt": "Pelo Quick Guide, uma proposta de exame laboratorial, um insumo proposto (cadeira de rodas, bandeja) e uma meta do paciente mapeiam respectivamente para:",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "ServiceRequest · SupplyRequest · Goal (as part of a CarePlan)",
+        "pt": "ServiceRequest · SupplyRequest · Goal (como parte de um CarePlan)",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "ServiceRequest · ServiceRequest · Condition",
+        "pt": "ServiceRequest · ServiceRequest · Condition",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "DiagnosticReport · SupplyRequest · CarePlan",
+        "pt": "DiagnosticReport · SupplyRequest · CarePlan",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "MedicationRequest · SupplyRequest · Observation",
+        "pt": "MedicationRequest · SupplyRequest · Observation",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The Quick Guide: a proposal for a lab test → ServiceRequest; a proposed supply (wheelchair, food tray) → SupplyRequest; a patient goal (reduce fall risk, lose weight) → Goal (as part of a CarePlan).",
+    "explanationPt": "O Quick Guide: proposta de exame → ServiceRequest; insumo proposto (cadeira de rodas, bandeja) → SupplyRequest; meta do paciente (reduzir risco de queda, perder peso) → Goal (como parte de um CarePlan).",
+    "id": 4
+  },
+  {
+    "titleEn": "Cardinalities & optional parent",
+    "titlePt": "Cardinalidades e pai opcional",
+    "qEn": "The FHIR spec defines which cardinalities, and what happens with an optional parent (Patient.communication 0..*) that has a mandatory child (communication.language 1..1)?",
+    "qPt": "A spec FHIR define quais cardinalidades, e o que ocorre com um pai opcional (Patient.communication 0..*) que tem um filho obrigatório (communication.language 1..1)?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "Only 0..1, 0..*, 1..1, 1..* are defined; language is required ONLY IF communication is present in the instance",
+        "pt": "Só 0..1, 0..*, 1..1, 1..* são definidas; language é obrigatório SOMENTE SE communication estiver presente na instância",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "Any min..max is allowed; language is always required regardless of communication",
+        "pt": "Qualquer min..max é permitido; language é sempre obrigatório independente de communication",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "A mandatory child makes the optional parent mandatory",
+        "pt": "Um filho obrigatório torna o pai opcional obrigatório",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "0..2 and 1..3 are valid base cardinalities",
+        "pt": "0..2 e 1..3 são cardinalidades base válidas",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The spec defines only 0..1, 0..*, 1..1 and 1..*. With an optional parent and mandatory child, the child is required only when the parent is present (e.g., if Patient.communication is omitted, communication.language need not appear).",
+    "explanationPt": "A spec define apenas 0..1, 0..*, 1..1 e 1..*. Com pai opcional e filho obrigatório, o filho só é exigido quando o pai está presente (ex.: se Patient.communication é omitido, communication.language não precisa aparecer).",
+    "id": 5
+  },
+  {
+    "titleEn": "BackboneElement",
+    "titlePt": "BackboneElement",
+    "qEn": "What is the BackboneElement type, as used for elements like Patient.contact?",
+    "qPt": "O que é o tipo BackboneElement, usado para elementos como Patient.contact?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "A specialization of Element that adds modifierExtension, used for complex 'composition' elements defined inside a resource (e.g. Patient.contact)",
+        "pt": "Uma especialização de Element que adiciona modifierExtension, usada para elementos 'composição' complexos definidos dentro de um recurso (ex.: Patient.contact)",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "A primitive data type that holds a single value",
+        "pt": "Um tipo de dado primitivo que guarda um único valor",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "A resource that can be exchanged on its own",
+        "pt": "Um recurso que pode ser trocado por si só",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "The base type for all primitive datatypes",
+        "pt": "O tipo base de todos os tipos primitivos",
+        "correct": false
+      }
+    ],
+    "explanationEn": "BackboneElement is the base for complex elements defined inside a resource definition (composition elements like Patient.contact, Patient.communication). It specializes Element by adding modifierExtension, which ordinary data types don't have (a few like Timing/Dosage/ElementDefinition are exceptions).",
+    "explanationPt": "BackboneElement é a base de elementos complexos definidos dentro da definição de um recurso (elementos de composição como Patient.contact, Patient.communication). Especializa Element adicionando modifierExtension, que tipos de dado comuns não têm (exceções: Timing/Dosage/ElementDefinition).",
+    "id": 6
+  },
+  {
+    "titleEn": "Choice type value[x]",
+    "titlePt": "Choice type value[x]",
+    "qEn": "For a choice element like Patient.deceased[x] (boolean | dateTime), which statement is correct?",
+    "qPt": "Para um elemento choice como Patient.deceased[x] (boolean | dateTime), qual afirmação está correta?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "It has max cardinality 1 (cannot repeat); only ONE type may be used per instance (deceasedBoolean OR deceasedDateTime, never both); the type list is fixed by FHIR",
+        "pt": "Tem cardinalidade máxima 1 (não repete); apenas UM tipo pode ser usado por instância (deceasedBoolean OU deceasedDateTime, nunca ambos); a lista de tipos é fixada pelo FHIR",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "It can repeat and hold both deceasedBoolean and deceasedDateTime at once",
+        "pt": "Pode repetir e conter deceasedBoolean e deceasedDateTime ao mesmo tempo",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "Implementers may add their own data types to the choice",
+        "pt": "Implementadores podem adicionar seus próprios tipos de dado à escolha",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "It is written as 'deceased' with a nested type object",
+        "pt": "É escrito como 'deceased' com um objeto de tipo aninhado",
+        "correct": false
+      }
+    ],
+    "explanationEn": "Choice (value[x]) elements have max cardinality 1 and cannot repeat; an instance uses exactly one of the permitted types (deceasedBoolean OR deceasedDateTime — having both is invalid). The allowed type list is fixed by FHIR; implementers only pick one. The name appends the title-cased type.",
+    "explanationPt": "Elementos choice (value[x]) têm cardinalidade máxima 1 e não repetem; a instância usa exatamente um dos tipos permitidos (deceasedBoolean OU deceasedDateTime — ter ambos é inválido). A lista de tipos é fixada pelo FHIR; o implementador só escolhe um. O nome anexa o tipo em maiúscula inicial.",
+    "id": 7
+  },
+  {
+    "titleEn": "meaningWhenMissing",
+    "titlePt": "meaningWhenMissing",
+    "qEn": "FHIR does not define default values, but some elements have a defined meaning when missing. What does a missing Encounter.period.end mean, per the example?",
+    "qPt": "O FHIR não define valores padrão, mas alguns elementos têm significado definido quando ausentes. O que significa um Encounter.period.end ausente, conforme o exemplo?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "It means the period is ongoing — because Period.end has a defined meaningWhenMissing",
+        "pt": "Significa que o período está em andamento — porque Period.end tem um meaningWhenMissing definido",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "It means the encounter never happened",
+        "pt": "Significa que o encontro nunca aconteceu",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "It defaults to today's date",
+        "pt": "Assume a data de hoje por padrão",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "The resource is invalid without period.end",
+        "pt": "O recurso é inválido sem period.end",
+        "correct": false
+      }
+    ],
+    "explanationEn": "FHIR defines no default values, but ElementDefinition.meaningWhenMissing can give meaning to a missing element. Period.end has meaningWhenMissing = 'If the end of the period is missing, it means the period is ongoing.' Period.start has no such meaning defined.",
+    "explanationPt": "O FHIR não define valores padrão, mas ElementDefinition.meaningWhenMissing pode dar significado a um elemento ausente. Period.end tem meaningWhenMissing = 'se o fim do período está ausente, o período está em andamento.' Period.start não tem esse significado definido.",
+    "id": 8
+  },
+  {
+    "titleEn": "Anatomy of an extension",
+    "titlePt": "Anatomia de uma extensão",
+    "qEn": "What two parts make up a (simple) FHIR extension, and how is the url written in XML?",
+    "qPt": "Quais duas partes compõem uma extensão FHIR (simples), e como a url é escrita em XML?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "A unique url (identifying the extension) plus a value[x]; in XML the url is an attribute of the <extension> element",
+        "pt": "Uma url única (que identifica a extensão) mais um value[x]; em XML a url é um atributo do elemento <extension>",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "A code and a display, with no url",
+        "pt": "Um code e um display, sem url",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "Only a value, identified by position",
+        "pt": "Apenas um value, identificado por posição",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "A system and a value separated by a pipe",
+        "pt": "Um system e um value separados por pipe",
+        "correct": false
+      }
+    ],
+    "explanationEn": "A simple extension carries a unique url (canonically identifying it) and a single value[x] (e.g. valueCode, valueBoolean). In XML the url is an attribute on the extension element (<extension url='...'>), and primitive values use the @value attribute.",
+    "explanationPt": "Uma extensão simples carrega uma url única (que a identifica canonicamente) e um único value[x] (ex.: valueCode, valueBoolean). Em XML a url é um atributo do elemento extension (<extension url='...'>), e valores primitivos usam o atributo @value.",
+    "id": 9
+  },
+  {
+    "titleEn": "modifierExtension",
+    "titlePt": "modifierExtension",
+    "qEn": "How does a modifierExtension differ from an ordinary extension, and what must a receiver do with one it doesn't understand?",
+    "qPt": "Como uma modifierExtension difere de uma extensão comum, e o que um receptor deve fazer com uma que não entende?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "A modifierExtension is an extension flagged Is-Modifier (it can change the meaning of the content); a receiver must NOT ignore one it doesn't understand. Ordinary DomainResource.extension is not a modifier.",
+        "pt": "Uma modifierExtension é uma extensão marcada como Is-Modifier (pode mudar o significado do conteúdo); o receptor NÃO pode ignorar uma que não entende. A extensão comum DomainResource.extension não é modifier.",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "There is no difference; both can always be ignored",
+        "pt": "Não há diferença; ambas podem sempre ser ignoradas",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "A modifierExtension has no url",
+        "pt": "Uma modifierExtension não tem url",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Ordinary extensions can never be ignored, but modifierExtensions can",
+        "pt": "Extensões comuns nunca podem ser ignoradas, mas modifierExtensions podem",
+        "correct": false
+      }
+    ],
+    "explanationEn": "A modifierExtension is simply an extension whose StructureDefinition flags it Is-Modifier — it can change the interpretation of the element/resource, so a receiver that doesn't understand it must NOT ignore it (reject/handle specially). DomainResource.extension and Element.extension are not modifier extensions.",
+    "explanationPt": "Uma modifierExtension é simplesmente uma extensão cuja StructureDefinition a marca como Is-Modifier — ela pode mudar a interpretação do elemento/recurso, então um receptor que não a entende NÃO pode ignorá-la (deve rejeitar/tratar de forma especial). DomainResource.extension e Element.extension não são modifier extensions.",
+    "id": 10
+  },
+  {
+    "titleEn": "What defines an extension",
+    "titlePt": "O que define uma extensão",
+    "qEn": "Which resource is used to define/publish an extension (e.g. the US Core us-core-race extension)?",
+    "qPt": "Qual recurso é usado para definir/publicar uma extensão (ex.: a extensão us-core-race do US Core)?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "StructureDefinition — and the instance references it by its canonical url",
+        "pt": "StructureDefinition — e a instância a referencia pela sua url canônica",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "A resource type called Extension",
+        "pt": "Um tipo de recurso chamado Extension",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "CapabilityStatement",
+        "pt": "CapabilityStatement",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "ValueSet",
+        "pt": "ValueSet",
+        "correct": false
+      }
+    ],
+    "explanationEn": "Extensions are defined by StructureDefinition resources, each with a canonical url. For example, US Core defines us-core-race, us-core-ethnicity and us-core-birthsex extensions, each identified by its StructureDefinition URL, which the instance references in extension.url.",
+    "explanationPt": "Extensões são definidas por recursos StructureDefinition, cada um com uma url canônica. Por exemplo, o US Core define as extensões us-core-race, us-core-ethnicity e us-core-birthsex, cada uma identificada pela URL de sua StructureDefinition, que a instância referencia em extension.url.",
+    "id": 11
+  },
+  {
+    "titleEn": "CodeSystem vs ValueSet binding",
+    "titlePt": "Binding CodeSystem vs ValueSet",
+    "qEn": "How do resource elements bind to terminology, per the Terminology Concepts section?",
+    "qPt": "Como os elementos de recurso fazem binding com terminologia, conforme a seção de Conceitos de Terminologia?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "An element binds to a ValueSet (which in turn refers to 1+ CodeSystems); elements never bind directly to a CodeSystem. CodeSystem defines the codes; ValueSet selects a subset.",
+        "pt": "Um elemento faz binding com um ValueSet (que por sua vez refere 1+ CodeSystems); elementos nunca fazem binding direto a um CodeSystem. O CodeSystem define os códigos; o ValueSet seleciona um subconjunto.",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "An element binds directly to a CodeSystem",
+        "pt": "Um elemento faz binding direto a um CodeSystem",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "ValueSet defines the codes; CodeSystem selects a subset",
+        "pt": "ValueSet define os códigos; CodeSystem seleciona um subconjunto",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Codes are bound by position, without any url",
+        "pt": "Os códigos são vinculados por posição, sem url",
+        "correct": false
+      }
+    ],
+    "explanationEn": "Per the material: a resource element binds to a ValueSet (1..1), and the ValueSet refers to one or more CodeSystems (1..*). Elements never bind directly to a CodeSystem. CodeSystem defines the codes for the concepts; ValueSet selects a subset for a use case. Both are identified by their url.",
+    "explanationPt": "Conforme o material: um elemento de recurso faz binding com um ValueSet (1..1), e o ValueSet refere um ou mais CodeSystems (1..*). Elementos nunca fazem binding direto a um CodeSystem. O CodeSystem define os códigos dos conceitos; o ValueSet seleciona um subconjunto para um caso de uso. Ambos são identificados pela url.",
+    "id": 12
+  },
+  {
+    "titleEn": "ValueSet compose vs expansion",
+    "titlePt": "ValueSet compose vs expansion",
+    "qEn": "A ValueSet has two aspects. What do .compose and .expansion represent?",
+    "qPt": "Um ValueSet tem dois aspectos. O que .compose e .expansion representam?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": ".compose = the definition of which codes are intended to be in the value set (intension); .expansion = the actual list of codes under given conditions (extension). compose.include.system points to a CodeSystem url.",
+        "pt": ".compose = a definição de quais códigos devem estar no value set (intensão); .expansion = a lista concreta de códigos sob certas condições (extensão). compose.include.system aponta para a url de um CodeSystem.",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": ".compose lists final codes; .expansion defines intention",
+        "pt": ".compose lista os códigos finais; .expansion define a intenção",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "Both are identical copies of the CodeSystem",
+        "pt": "Ambos são cópias idênticas do CodeSystem",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "They store the binding strength",
+        "pt": "Eles guardam a força do binding",
+        "correct": false
+      }
+    ],
+    "explanationEn": "A ValueSet's .compose defines which codes are intended to be in it (the 'intension'), referencing CodeSystems via compose.include.system; .expansion is the resolved list of actual codes under given conditions (the 'extension'). Both ValueSet and CodeSystem are identified by their url.",
+    "explanationPt": "O .compose de um ValueSet define quais códigos devem estar nele (a 'intensão'), referenciando CodeSystems via compose.include.system; o .expansion é a lista resolvida de códigos concretos sob certas condições (a 'extensão'). Tanto ValueSet quanto CodeSystem são identificados pela url.",
+    "id": 13
+  },
+  {
+    "titleEn": "Binding strength definitions",
+    "titlePt": "Definições de força de binding",
+    "qEn": "Per the Binding Strength definitions, which statement is correct?",
+    "qPt": "Pelas definições de Binding Strength, qual afirmação está correta?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "required = the code SHALL be from the value set; extensible = SHALL be from the VS if a suitable code exists, otherwise an alternate coding/text may be used; preferred = encouraged but not required; example = illustrative only",
+        "pt": "required = o código DEVE ser do value set; extensible = DEVE ser do VS se houver um código adequado, senão uma codificação/texto alternativo pode ser usado; preferred = encorajado mas não obrigatório; example = apenas ilustrativo",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "required and extensible are identical",
+        "pt": "required e extensible são idênticos",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "example forbids any code outside the value set",
+        "pt": "example proíbe qualquer código fora do value set",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "preferred forbids codes outside the value set",
+        "pt": "preferred proíbe códigos fora do value set",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The four strengths: required (concept SHALL be from the VS), extensible (SHALL be from the VS if any code in it applies; otherwise alternate codings or text may be included), preferred (encouraged for interoperability but not required), example (the VS merely illustrates the kinds of concepts).",
+    "explanationPt": "As quatro forças: required (o conceito DEVE ser do VS), extensible (DEVE ser do VS se algum código nele se aplicar; senão codificações alternativas ou texto podem ser incluídos), preferred (encorajado para interoperabilidade mas não obrigatório), example (o VS apenas ilustra os tipos de conceitos).",
+    "id": 14
+  },
+  {
+    "titleEn": "Creating your own codes",
+    "titlePt": "Criar seus próprios códigos",
+    "qEn": "When binding strength allows it (anything but required), how should you correctly add your own custom codes?",
+    "qPt": "Quando a força do binding permite (qualquer uma menos required), como adicionar corretamente seus próprios códigos customizados?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "Create a NEW CodeSystem resource for your codes (don't add them to an existing CodeSystem), then add your CodeSystem's URL to the existing ValueSet",
+        "pt": "Criar um NOVO recurso CodeSystem para seus códigos (não adicioná-los a um CodeSystem existente), e então adicionar a URL do seu CodeSystem ao ValueSet existente",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "Add your codes directly into the existing official CodeSystem",
+        "pt": "Adicionar seus códigos diretamente no CodeSystem oficial existente",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "Codes can be added even when binding is required",
+        "pt": "Códigos podem ser adicionados mesmo quando o binding é required",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Put the custom codes only in the resource instance, with no CodeSystem",
+        "pt": "Colocar os códigos customizados só na instância do recurso, sem CodeSystem",
+        "correct": false
+      }
+    ],
+    "explanationEn": "Apart from a required binding, you may add/modify codes. The correct way: create a NEW CodeSystem resource (never add to an existing one) and reference its URL from the existing ValueSet. A required binding does not allow codes outside its value set.",
+    "explanationPt": "Exceto num binding required, você pode adicionar/modificar códigos. O modo correto: criar um NOVO recurso CodeSystem (nunca adicionar a um existente) e referenciar sua URL no ValueSet existente. Um binding required não permite códigos fora do seu value set.",
+    "id": 15
+  },
+  {
+    "titleEn": "JSON [] vs {} rule",
+    "titlePt": "Regra JSON [] vs {}",
+    "qEn": "Per the rules for writing FHIR JSON, when do you use [] and when do you use {}?",
+    "qPt": "Pelas regras de escrita do JSON FHIR, quando usar [] e quando usar {}?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "Use [] when the element is repeatable (by cardinality); use {} when the data type is complex. They are decided independently — e.g. Patient.name.given is repeatable but simple, so [] with no {}.",
+        "pt": "Use [] quando o elemento é repetível (pela cardinalidade); use {} quando o tipo de dado é complexo. São decididos de forma independente — ex.: Patient.name.given é repetível mas simples, então [] sem {}.",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "[] is for complex types; {} is for repeatable elements",
+        "pt": "[] é para tipos complexos; {} é para elementos repetíveis",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "You must always use [] and {} together",
+        "pt": "Deve-se sempre usar [] e {} juntos",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Neither is needed; JSON is flat",
+        "pt": "Nenhum é necessário; o JSON é plano",
+        "correct": false
+      }
+    ],
+    "explanationEn": "Rule of thumb: Step 1 — if the element is repeatable (cardinality allows >1), use []. Step 2 — if the data type is complex, use {}. They are independent: a complex repeatable element (Patient.name) uses [] of {}; a simple repeatable element (given) uses [] only (e.g. \"given\": [\"Aditya\",\"Kumar\"]).",
+    "explanationPt": "Regra: Passo 1 — se o elemento é repetível (cardinalidade permite >1), use []. Passo 2 — se o tipo é complexo, use {}. São independentes: um elemento complexo e repetível (Patient.name) usa [] de {}; um elemento simples e repetível (given) usa só [] (ex.: \"given\": [\"Aditya\",\"Kumar\"]).",
+    "id": 16
+  },
+  {
+    "titleEn": "JSON value rules",
+    "titlePt": "Regras de valor em JSON",
+    "qEn": "Which set of JSON serialization rules is correct in FHIR?",
+    "qPt": "Qual conjunto de regras de serialização JSON está correto no FHIR?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "boolean/integer/decimal are unquoted (\"active\": true); other types incl. code/string are quoted even if numeric (\"valueString\": \"35\"); comments (//) are NOT allowed; objects and string values are never empty",
+        "pt": "boolean/integer/decimal sem aspas (\"active\": true); outros tipos incl. code/string com aspas mesmo se numéricos (\"valueString\": \"35\"); comentários (//) NÃO são permitidos; objetos e valores string nunca vazios",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "All values must be quoted, including booleans (\"active\": \"true\")",
+        "pt": "Todos os valores devem ter aspas, incluindo booleanos (\"active\": \"true\")",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "Comments with // are allowed in FHIR JSON",
+        "pt": "Comentários com // são permitidos no JSON FHIR",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Empty strings (\"gender\":\"\") are valid",
+        "pt": "Strings vazias (\"gender\":\"\") são válidas",
+        "correct": false
+      }
+    ],
+    "explanationEn": "In FHIR JSON: boolean/integer/decimal are written without quotes ('active': true, 'valueInteger': 32); all other types (including code and string) are quoted, even a numeric string ('valueString': '35'). Comments (//) SHALL NOT appear. Objects must have content and string values can never be empty.",
+    "explanationPt": "No JSON FHIR: boolean/integer/decimal sem aspas ('active': true, 'valueInteger': 32); todos os outros tipos (incl. code e string) com aspas, mesmo string numérica ('valueString': '35'). Comentários (//) NÃO podem aparecer. Objetos devem ter conteúdo e valores string nunca podem ser vazios.",
+    "id": 17
+  },
+  {
+    "titleEn": "XML serialization rules",
+    "titlePt": "Regras de serialização XML",
+    "qEn": "Which statement about FHIR XML serialization is correct?",
+    "qPt": "Qual afirmação sobre serialização XML do FHIR está correta?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "Primitive values go in the @value attribute (<gender value=\"male\"/>); elements MUST appear in the documented order; the root element is the resource name with namespace http://hl7.org/fhir",
+        "pt": "Valores primitivos vão no atributo @value (<gender value=\"male\"/>); os elementos DEVEM aparecer na ordem documentada; o elemento raiz é o nome do recurso com namespace http://hl7.org/fhir",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "Primitive values go in element text (<gender>male</gender>)",
+        "pt": "Valores primitivos vão no texto do elemento (<gender>male</gender>)",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "Element order is irrelevant in XML",
+        "pt": "A ordem dos elementos é irrelevante em XML",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "XML requires a DTD reference",
+        "pt": "XML exige uma referência DTD",
+        "correct": false
+      }
+    ],
+    "explanationEn": "FHIR XML: primitive values use the @value attribute (<gender value='male'/>), never element text. Elements MUST appear in the documented order (infrastructural elements id, meta… first). The root is the resource name with default namespace http://hl7.org/fhir. No DTD references; UTF-8.",
+    "explanationPt": "XML FHIR: valores primitivos usam o atributo @value (<gender value='male'/>), nunca o texto do elemento. Os elementos DEVEM aparecer na ordem documentada (infraestruturais id, meta… primeiro). A raiz é o nome do recurso com namespace padrão http://hl7.org/fhir. Sem referências DTD; UTF-8.",
+    "id": 18
+  },
+  {
+    "titleEn": "JSON vs XML element order",
+    "titlePt": "Ordem dos elementos JSON vs XML",
+    "qEn": "How does element ordering differ between FHIR JSON and XML, and how is the resource type written in JSON?",
+    "qPt": "Como a ordenação dos elementos difere entre JSON e XML do FHIR, e como o tipo de recurso é escrito no JSON?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "In JSON, properties may appear in any order; in XML, elements must appear in the documented order. The resource type is the explicit \"resourceType\" property (e.g. \"resourceType\": \"Patient\").",
+        "pt": "No JSON, as propriedades podem aparecer em qualquer ordem; no XML, os elementos devem aparecer na ordem documentada. O tipo do recurso é a propriedade explícita \"resourceType\" (ex.: \"resourceType\": \"Patient\").",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "Both JSON and XML require the documented order",
+        "pt": "Tanto JSON quanto XML exigem a ordem documentada",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "Both allow any order",
+        "pt": "Ambos permitem qualquer ordem",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "The resource type in JSON is written as a comment",
+        "pt": "O tipo do recurso no JSON é escrito como comentário",
+        "correct": false
+      }
+    ],
+    "explanationEn": "In JSON, properties can appear in any order inside the resource instance; in XML, elements must appear in the documented order. The resource type is given by the explicit \"resourceType\" property in JSON (the root element name in XML). Property names are case-sensitive and unique.",
+    "explanationPt": "No JSON, as propriedades podem aparecer em qualquer ordem dentro da instância; no XML, os elementos devem aparecer na ordem documentada. O tipo do recurso é dado pela propriedade explícita \"resourceType\" no JSON (o nome do elemento raiz no XML). Nomes de propriedades são case-sensitive e únicos.",
+    "id": 19
+  }
+]

@@ -1,0 +1,722 @@
+[
+  {
+    "titleEn": "GET deleted vs unknown",
+    "titlePt": "GET de excluído vs inexistente",
+    "qEn": "On a read (GET), how does a server differentiate a deleted resource from an unknown one?",
+    "qPt": "Num read (GET), como o servidor diferencia um recurso excluído de um inexistente?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "GET for a deleted resource returns 410 Gone; GET for an unknown resource returns 404 Not Found",
+        "pt": "GET de recurso excluído retorna 410 Gone; GET de recurso inexistente retorna 404 Not Found",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "Both return 404 Not Found",
+        "pt": "Ambos retornam 404 Not Found",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "Deleted returns 404; unknown returns 410",
+        "pt": "Excluído retorna 404; inexistente retorna 410",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Both return 200 OK with an empty body",
+        "pt": "Ambos retornam 200 OK com corpo vazio",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The REST API material states a GET for a deleted resource returns 410, whereas a GET for an unknown resource returns 404. Systems that don't track deleted records treat deleted as unknown.",
+    "explanationPt": "O material da REST API afirma que um GET de recurso excluído retorna 410, enquanto um GET de recurso desconhecido retorna 404. Sistemas que não rastreiam exclusões tratam excluído como desconhecido.",
+    "id": 1
+  },
+  {
+    "titleEn": "PUT success codes & missing id",
+    "titlePt": "Códigos de sucesso do PUT e id ausente",
+    "qEn": "For an update via PUT [base]/[type]/[id], which statement matches the reading material?",
+    "qPt": "Para um update via PUT [base]/[type]/[id], qual afirmação corresponde ao material?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "Success returns 200 OK (updated) or 201 Created (if it created the resource — 'Create as Update'); if the body has no id or a wrong id, the server responds 400",
+        "pt": "Sucesso retorna 200 OK (atualizado) ou 201 Created (se criou o recurso — 'Create as Update'); se o corpo não tem id ou tem id errado, o servidor responde 400",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "Success always returns 204 No Content",
+        "pt": "Sucesso sempre retorna 204 No Content",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "A PUT to a non-existent URI always fails with 404",
+        "pt": "Um PUT para uma URI inexistente sempre falha com 404",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "The body must omit the id; the server assigns it",
+        "pt": "O corpo deve omitir o id; o servidor o atribui",
+        "correct": false
+      }
+    ],
+    "explanationEn": "Per PUT-Updating: the body SHALL be a Resource whose id matches the URL [id]; if no id or wrong id → 400. Success is 200 (updated) or 201 (created, with Location header). PUT to a non-existent URI still saves and returns 201 ('Create as Update').",
+    "explanationPt": "Em PUT-Updating: o corpo DEVE ser um Resource cujo id corresponde ao [id] da URL; sem id ou id errado → 400. Sucesso é 200 (atualizado) ou 201 (criado, com header Location). PUT a uma URI inexistente ainda salva e retorna 201 ('Create as Update').",
+    "id": 2
+  },
+  {
+    "titleEn": "422 vs 400 on update",
+    "titlePt": "422 vs 400 no update",
+    "qEn": "A client PUTs a resource that is well-formed but whose id is already allocated to a different resource type (e.g. id belongs to an Observation, sent as Patient). What does the server return?",
+    "qPt": "Um cliente faz PUT de um recurso bem formado mas cujo id já está alocado a outro tipo de recurso (ex.: id pertence a uma Observation, enviado como Patient). O que o servidor retorna?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "422 Unprocessable Entity — the proposed resource violated FHIR profiles or server business rules",
+        "pt": "422 Unprocessable Entity — o recurso proposto violou perfis FHIR ou regras de negócio do servidor",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "400 Bad Request — the body could not be parsed",
+        "pt": "400 Bad Request — o corpo não pôde ser interpretado",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "404 Not Found",
+        "pt": "404 Not Found",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "200 OK — the server reassigns the id automatically",
+        "pt": "200 OK — o servidor reatribui o id automaticamente",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The PUT error list defines 422 Unprocessable Entity as the proposed resource violating FHIR profiles or server business rules — the material's own example is an id allocated to a different resource type. 400 Bad Request is for content that couldn't be parsed or failed basic validation (e.g. missing id in the URL).",
+    "explanationPt": "A lista de erros do PUT define 422 Unprocessable Entity como o recurso proposto violando perfis FHIR ou regras de negócio do servidor — o próprio exemplo do material é um id alocado a outro tipo de recurso. 400 Bad Request é para conteúdo que não pôde ser interpretado ou falhou na validação básica (ex.: id ausente na URL).",
+    "id": 3
+  },
+  {
+    "titleEn": "Conditional read",
+    "titlePt": "Conditional read",
+    "qEn": "In a conditional read, which HTTP headers does the client use, and which status indicates the content is unchanged?",
+    "qPt": "Num conditional read, quais headers HTTP o cliente usa, e qual status indica que o conteúdo não mudou?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "If-Modified-Since or If-None-Match → 304 Not Modified when unchanged",
+        "pt": "If-Modified-Since ou If-None-Match → 304 Not Modified quando inalterado",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "If-None-Exist → 409 Conflict when unchanged",
+        "pt": "If-None-Exist → 409 Conflict quando inalterado",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "Prefer: handling=strict → 412 Precondition Failed",
+        "pt": "Prefer: handling=strict → 412 Precondition Failed",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "ETag only → 200 OK always",
+        "pt": "Apenas ETag → 200 OK sempre",
+        "correct": false
+      }
+    ],
+    "explanationEn": "Per Conditional read: clients may use the If-Modified-Since or If-None-Match header; they SHALL accept 304 Not Modified (content unchanged) or full content. (If-None-Exist is for conditional create, not conditional read.)",
+    "explanationPt": "Em Conditional read: clientes podem usar o header If-Modified-Since ou If-None-Match; devem aceitar 304 Not Modified (conteúdo inalterado) ou o conteúdo completo. (If-None-Exist é para conditional create, não conditional read.)",
+    "id": 4
+  },
+  {
+    "titleEn": "Token parameter syntax",
+    "titlePt": "Sintaxe de parâmetro token",
+    "qEn": "For a token search parameter (e.g. identifier), how is the value with a system written?",
+    "qPt": "Para um parâmetro de busca do tipo token (ex.: identifier), como se escreve o valor com sistema?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "[system]|[code] — system and code separated by a pipe (e.g. identifier=http://hospital/mrn|12345)",
+        "pt": "[system]|[code] — sistema e código separados por pipe (ex.: identifier=http://hospital/mrn|12345)",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "[system]/[code] — separated by a slash",
+        "pt": "[system]/[code] — separados por barra",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "[system]:[code] — separated by a colon",
+        "pt": "[system]:[code] — separados por dois-pontos",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "[system],[code] — separated by a comma",
+        "pt": "[system],[code] — separados por vírgula",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The Search material's token forms are: [code]; [system]|[code]; |[code] (no system); and [system]| (any with that system). The pipe separates system from code — e.g. identifier=http://curizent.com/hospitals/RegistrationSystem|90100123.",
+    "explanationPt": "As formas de token do material de Search são: [code]; [system]|[code]; |[code] (sem sistema); e [system]| (qualquer com aquele sistema). O pipe separa sistema do código — ex.: identifier=http://curizent.com/hospitals/RegistrationSystem|90100123.",
+    "id": 5
+  },
+  {
+    "titleEn": "String search behavior",
+    "titlePt": "Comportamento da busca string",
+    "qEn": "According to the Search Parameter Types table, how does a 'string' search parameter behave?",
+    "qPt": "Segundo a tabela de Tipos de Parâmetro de Busca, como se comporta um parâmetro 'string'?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "Case-insensitive and accent-insensitive; may match just the start of the string",
+        "pt": "Insensível a maiúsculas/minúsculas e a acentos; pode casar apenas o início da string",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "Exact, case-sensitive match only",
+        "pt": "Apenas correspondência exata e sensível a maiúsculas",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "Matches only the end of the string",
+        "pt": "Casa apenas o final da string",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Requires a system|code pair",
+        "pt": "Exige um par system|code",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The Search material states a string parameter is case-insensitive and accent-insensitive and may match just the start of a string (so 'John' matches 'Johnson'). To force an exact, case-sensitive match, use the :exact modifier (e.g. given:exact=Aditya).",
+    "explanationPt": "O material de Search afirma que um parâmetro string é insensível a maiúsculas e a acentos e pode casar apenas o início da string (então 'John' casa 'Johnson'). Para forçar correspondência exata e sensível a maiúsculas, use o modificador :exact (ex.: given:exact=Aditya).",
+    "id": 6
+  },
+  {
+    "titleEn": "Prefixes and ranges",
+    "titlePt": "Prefixos e intervalos",
+    "qEn": "Which statement about search prefixes and combining criteria is correct, per the Search material?",
+    "qPt": "Qual afirmação sobre prefixos de busca e combinação de critérios está correta, segundo o material de Search?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "Prefixes (eq, ne, gt, lt, ge, le, sa, eb, ap) apply to number/date/quantity and go just before the value; e.g. value-quantity=le44 means ≤ 44; '&' combines parameters as AND",
+        "pt": "Prefixos (eq, ne, gt, lt, ge, le, sa, eb, ap) aplicam-se a number/date/quantity e vêm logo antes do valor; ex.: value-quantity=le44 significa ≤ 44; '&' combina parâmetros como AND",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "Prefixes apply to string parameters and go after the value",
+        "pt": "Prefixos aplicam-se a parâmetros string e vêm depois do valor",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "A comma between two values acts as AND",
+        "pt": "Uma vírgula entre dois valores age como AND",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "There are no prefixes; comparisons use operators like <= in the value",
+        "pt": "Não há prefixos; comparações usam operadores como <= no valor",
+        "correct": false
+      }
+    ],
+    "explanationEn": "Per Prefixes, ordered types (number, date, quantity) accept eq, ne, gt, lt, ge, le, sa (starts after), eb (ends before), ap (approximately), written just before the value (value-quantity=le44 = ≤44). The query material notes '&' separates parameters and acts as AND, so a date range needs two parameters joined by '&'.",
+    "explanationPt": "Em Prefixos, os tipos ordenados (number, date, quantity) aceitam eq, ne, gt, lt, ge, le, sa (começa depois), eb (termina antes), ap (aproximadamente), escritos logo antes do valor (value-quantity=le44 = ≤44). O material de query observa que '&' separa parâmetros e age como AND, então um intervalo de datas precisa de dois parâmetros unidos por '&'.",
+    "id": 7
+  },
+  {
+    "titleEn": "Result parameters _include/_revinclude",
+    "titlePt": "Parâmetros de resultado _include/_revinclude",
+    "qEn": "In the common search parameters summary, _sort, _count, _include and _revinclude are classified as 'search result parameters'. What is the difference between _include and _revinclude?",
+    "qPt": "No resumo de parâmetros de busca comuns, _sort, _count, _include e _revinclude são classificados como 'search result parameters'. Qual a diferença entre _include e _revinclude?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "_include pulls resources that the matched resource references; _revinclude pulls resources that reference the matched resource",
+        "pt": "_include traz recursos que o recurso encontrado referencia; _revinclude traz recursos que referenciam o recurso encontrado",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "_include sorts results; _revinclude reverses the sort",
+        "pt": "_include ordena resultados; _revinclude inverte a ordenação",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "They are identical aliases",
+        "pt": "São aliases idênticos",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "_include limits page size; _revinclude sets the page number",
+        "pt": "_include limita o tamanho da página; _revinclude define o número da página",
+        "correct": false
+      }
+    ],
+    "explanationEn": "In the summary table, _include and _revinclude are search result parameters (alongside _sort, _count, _summary, _total, _elements). _include adds resources referenced by the matched resource; _revinclude adds resources that reference it (reverse direction).",
+    "explanationPt": "Na tabela-resumo, _include e _revinclude são search result parameters (junto a _sort, _count, _summary, _total, _elements). _include adiciona recursos referenciados pelo recurso encontrado; _revinclude adiciona recursos que o referenciam (direção inversa).",
+    "id": 8
+  },
+  {
+    "titleEn": "Atomic Bundle type",
+    "titlePt": "Tipo de Bundle atômico",
+    "qEn": "A client must send several related resources so that either ALL are persisted or NONE are. Which Bundle.type, and how does it differ from batch?",
+    "qPt": "Um cliente deve enviar vários recursos relacionados de modo que TODOS sejam persistidos ou NENHUM seja. Qual Bundle.type, e como difere de batch?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "transaction — it is fully successful or fails completely (atomic); batch processes each entry independently and allows partial failures",
+        "pt": "transaction — é totalmente bem-sucedido ou falha por completo (atômico); batch processa cada entry independentemente e permite falhas parciais",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "batch — it is atomic; transaction allows partial failures",
+        "pt": "batch — é atômico; transaction permite falhas parciais",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "collection — guarantees atomicity",
+        "pt": "collection — garante atomicidade",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "searchset — guarantees all-or-nothing",
+        "pt": "searchset — garante tudo-ou-nada",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The Bundles material: a transaction fails completely even if a single resource/request is wrong (either fully successful or failed completely), whereas batch allows erroneous entries to fail while the rest execute. Use transaction for all-or-nothing.",
+    "explanationPt": "O material de Bundles: uma transaction falha por completo mesmo se um único recurso/request estiver errado (ou totalmente bem-sucedida ou falha por completo), enquanto batch permite que entries com erro falhem e o resto execute. Use transaction para tudo-ou-nada.",
+    "id": 9
+  },
+  {
+    "titleEn": "First resource of document/message",
+    "titlePt": "Primeiro recurso de document/message",
+    "qEn": "According to the Bundle structure rules, what must be the FIRST entry resource in a 'document' Bundle and in a 'message' Bundle?",
+    "qPt": "Pelas regras de estrutura do Bundle, qual deve ser o PRIMEIRO recurso da entry num Bundle 'document' e num Bundle 'message'?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "Document → Composition first; Message → MessageHeader first",
+        "pt": "Document → Composition primeiro; Message → MessageHeader primeiro",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "Document → MessageHeader first; Message → Composition first",
+        "pt": "Document → MessageHeader primeiro; Message → Composition primeiro",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "Both must start with a Patient resource",
+        "pt": "Ambos devem começar com um recurso Patient",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Order does not matter for either",
+        "pt": "A ordem não importa para nenhum",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The Bundle rules state: 'A document must have a Composition as the first resource' and 'A message must have a MessageHeader as the first resource.' (A document must also have an identifier with a system and value, and a date.)",
+    "explanationPt": "As regras do Bundle afirmam: 'Um document deve ter uma Composition como primeiro recurso' e 'Uma message deve ter um MessageHeader como primeiro recurso.' (Um document também deve ter um identifier com system e value, e uma date.)",
+    "id": 10
+  },
+  {
+    "titleEn": "searchset mode and total",
+    "titlePt": "mode e total do searchset",
+    "qEn": "In a 'searchset' Bundle that used _include, what does entry.search.mode indicate, and does Bundle.total count the included resources?",
+    "qPt": "Num Bundle 'searchset' que usou _include, o que entry.search.mode indica, e o Bundle.total conta os recursos incluídos?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "mode = 'match' for resources matching the query and 'include' for resources pulled in by _include; Bundle.total does NOT count the included resources",
+        "pt": "mode = 'match' para recursos que casam a query e 'include' para recursos trazidos por _include; Bundle.total NÃO conta os recursos incluídos",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "mode is always 'match'; total counts every resource in the bundle",
+        "pt": "mode é sempre 'match'; total conta todos os recursos no bundle",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "mode = 'outcome' for all entries; total is omitted",
+        "pt": "mode = 'outcome' para todas as entries; total é omitido",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "mode = 'revinclude'; total counts only included resources",
+        "pt": "mode = 'revinclude'; total conta apenas recursos incluídos",
+        "correct": false
+      }
+    ],
+    "explanationEn": "In a searchset, entry.search.mode is match | include | outcome: 'match' marks resources matching the query, 'include' marks resources added via _include/_revinclude. The material notes total stays at the match count and does NOT add up resources brought in by _include.",
+    "explanationPt": "Num searchset, entry.search.mode é match | include | outcome: 'match' marca recursos que casam a query, 'include' marca recursos adicionados via _include/_revinclude. O material observa que total permanece na contagem de matches e NÃO soma os recursos trazidos por _include.",
+    "id": 11
+  },
+  {
+    "titleEn": "Posting a transaction & temp refs",
+    "titlePt": "Enviar uma transaction e refs temporárias",
+    "qEn": "How is a transaction Bundle submitted, and how are not-yet-created resources referenced within it?",
+    "qPt": "Como um Bundle transaction é enviado, e como recursos ainda não criados são referenciados dentro dele?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "POST the Bundle (type=transaction) to the server base [base] (no resource path); entries use urn:uuid:... as temporary fullUrl, and each entry has a resource + a request (method + url)",
+        "pt": "Faça POST do Bundle (type=transaction) no base do servidor [base] (sem caminho de recurso); as entries usam urn:uuid:... como fullUrl temporário, e cada entry tem um resource + um request (method + url)",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "PUT the Bundle to [base]/Bundle/[id]; references use sequential integers",
+        "pt": "Faça PUT do Bundle em [base]/Bundle/[id]; as referências usam inteiros sequenciais",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "POST each entry to its own resource endpoint separately",
+        "pt": "Faça POST de cada entry no seu próprio endpoint separadamente",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "GET [base]/transaction with the resources as query parameters",
+        "pt": "GET [base]/transaction com os recursos como parâmetros de query",
+        "correct": false
+      }
+    ],
+    "explanationEn": "Per the Transaction section: transactions are POSTed to the FHIR base address (POST [base]), with content a Bundle of type 'transaction'. Each entry contains a resource (the data) and a request (the action: method + url). Inter-related resources use urn:uuid:... as a temporary fullUrl that other entries reference.",
+    "explanationPt": "Na seção Transaction: transactions são enviadas via POST ao endereço base do FHIR (POST [base]), com conteúdo um Bundle de tipo 'transaction'. Cada entry contém um resource (os dados) e um request (a ação: method + url). Recursos inter-relacionados usam urn:uuid:... como fullUrl temporário que outras entries referenciam.",
+    "id": 12
+  },
+  {
+    "titleEn": "GET vs POST for an operation",
+    "titlePt": "GET vs POST numa operação",
+    "qEn": "When may a FHIR operation be invoked using GET (vs requiring POST with a Parameters body)?",
+    "qPt": "Quando uma operação FHIR pode ser invocada com GET (em vez de exigir POST com corpo Parameters)?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "GET is allowed only if the input parameters are all simple (no complex types like Identifier/Reference/Coding) AND the operation does not affect server state; otherwise use POST with a Parameters resource",
+        "pt": "GET é permitido só se os parâmetros de entrada forem todos simples (sem tipos complexos como Identifier/Reference/Coding) E a operação não alterar o estado do servidor; caso contrário use POST com um recurso Parameters",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "GET is always allowed for any operation",
+        "pt": "GET é sempre permitido para qualquer operação",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "GET is only for operations that modify the server",
+        "pt": "GET é só para operações que modificam o servidor",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Operations can only ever use POST",
+        "pt": "Operações só podem usar POST",
+        "correct": false
+      }
+    ],
+    "explanationEn": "Per 'When to use GET': operations may be invoked with GET only if (1) there are only simple input parameters (no complex datatypes like Identifier or Reference) and (2) the operation does not affect the state of the server. Otherwise, POST with a Parameters resource body is used (the body and the returned result are always Resources).",
+    "explanationPt": "Em 'When to use GET': operações podem usar GET só se (1) houver apenas parâmetros de entrada simples (sem tipos complexos como Identifier ou Reference) e (2) a operação não alterar o estado do servidor. Caso contrário, usa-se POST com um corpo do tipo Parameters (o corpo e o resultado são sempre Resources).",
+    "id": 13
+  },
+  {
+    "titleEn": "Operation endpoint levels",
+    "titlePt": "Níveis de endpoint de operação",
+    "qEn": "FHIR operations are prefixed with '$'. On which endpoint levels can an operation be invoked?",
+    "qPt": "Operações FHIR são prefixadas com '$'. Em quais níveis de endpoint uma operação pode ser invocada?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "System level [base]/$op, resource type [base]/Resource/$op, and resource instance [base]/Resource/[id]/$op",
+        "pt": "Nível sistema [base]/$op, tipo de recurso [base]/Resource/$op, e instância [base]/Resource/[id]/$op",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "Only at the resource instance level",
+        "pt": "Apenas no nível de instância de recurso",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "Only at the server (system) level",
+        "pt": "Apenas no nível do servidor (sistema)",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Operations have no URL; they are sent as HTTP headers",
+        "pt": "Operações não têm URL; são enviadas como headers HTTP",
+        "correct": false
+      }
+    ],
+    "explanationEn": "Per 'Executing an Operation': the operation name is prefixed by '$' and can be invoked on four endpoint types described as three levels — server/system ([base]/$op), resource type ([base]/Resource/$op), and resource instance ([base]/Resource/[id]/$op, e.g. Patient/1/$everything).",
+    "explanationPt": "Em 'Executing an Operation': o nome da operação é prefixado por '$' e pode ser invocado em três níveis — servidor/sistema ([base]/$op), tipo de recurso ([base]/Resource/$op) e instância ([base]/Resource/[id]/$op, ex.: Patient/1/$everything).",
+    "id": 14
+  },
+  {
+    "titleEn": "Getting the CapabilityStatement",
+    "titlePt": "Obtendo o CapabilityStatement",
+    "qEn": "How does a client retrieve a server's CapabilityStatement, and what does Bundle... sorry, what resource is returned?",
+    "qPt": "Como um cliente obtém o CapabilityStatement de um servidor, e qual recurso é retornado?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "GET [base]/metadata — it returns a CapabilityStatement resource describing the server's capabilities",
+        "pt": "GET [base]/metadata — retorna um recurso CapabilityStatement descrevendo as capacidades do servidor",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "GET [base]/CapabilityStatement — it returns a Bundle of StructureDefinitions",
+        "pt": "GET [base]/CapabilityStatement — retorna um Bundle de StructureDefinitions",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "POST [base]/$capabilities — it returns a Parameters resource",
+        "pt": "POST [base]/$capabilities — retorna um recurso Parameters",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "GET [base]/$everything — it returns an OperationOutcome",
+        "pt": "GET [base]/$everything — retorna um OperationOutcome",
+        "correct": false
+      }
+    ],
+    "explanationEn": "Per 'Getting capability of a server': you call GET [base]/metadata. It is not the CapabilityStatement resource you 'ask for' by name, but the metadata endpoint whose outcome is a CapabilityStatement resource describing what the server can do.",
+    "explanationPt": "Em 'Getting capability of a server': chama-se GET [base]/metadata. Não é o recurso CapabilityStatement pedido pelo nome, mas o endpoint metadata cujo resultado é um recurso CapabilityStatement descrevendo o que o servidor faz.",
+    "id": 15
+  },
+  {
+    "titleEn": "CapabilityStatement.kind",
+    "titlePt": "CapabilityStatement.kind",
+    "qEn": "In a CapabilityStatement, what do the three kinds — instance, capability, requirements — describe?",
+    "qPt": "Num CapabilityStatement, o que descrevem os três kinds — instance, capability, requirements?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "instance = an actual deployed server; capability = a software solution's generic capabilities (not yet deployed); requirements = a desired/required system (e.g. for an RFP)",
+        "pt": "instance = um servidor realmente implantado; capability = capacidades genéricas de um software (ainda não implantado); requirements = um sistema desejado/exigido (ex.: para um RFP)",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "instance = a desired system; requirements = a deployed server; capability = a test server",
+        "pt": "instance = um sistema desejado; requirements = um servidor implantado; capability = um servidor de teste",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "They are FMM maturity levels of the server",
+        "pt": "São níveis de maturidade FMM do servidor",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "They indicate the FHIR release version supported",
+        "pt": "Indicam a versão de release do FHIR suportada",
+        "correct": false
+      }
+    ],
+    "explanationEn": "Per the CapabilityStatement usage: kind=instance describes an actual deployed/configured server at an endpoint (implementation present); kind=capability describes a software solution's generic capabilities (implementation absent, software present); kind=requirements describes a desired solution (both absent), e.g. used in an RFP/architecture process.",
+    "explanationPt": "Pelo uso do CapabilityStatement: kind=instance descreve um servidor realmente implantado/configurado num endpoint (implementation presente); kind=capability descreve as capacidades genéricas de um software (implementation ausente, software presente); kind=requirements descreve um sistema desejado (ambos ausentes), ex.: usado num processo de RFP/arquitetura.",
+    "id": 16
+  },
+  {
+    "titleEn": "AuditEvent vs BALP IG",
+    "titlePt": "AuditEvent vs BALP IG",
+    "qEn": "The security checklist says to compare a server's AuditEvent resource entries against which implementation guide to determine conformance with recommendations?",
+    "qPt": "O checklist de segurança diz para comparar as entradas do recurso AuditEvent de um servidor com qual implementation guide para determinar conformidade com as recomendações?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "Basic Audit Log Patterns (BALP) Implementation Guide",
+        "pt": "Basic Audit Log Patterns (BALP) Implementation Guide",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "US Core Implementation Guide",
+        "pt": "US Core Implementation Guide",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "International Patient Summary (IPS)",
+        "pt": "International Patient Summary (IPS)",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "CARIN Blue Button Implementation Guide",
+        "pt": "CARIN Blue Button Implementation Guide",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The 'Follow security checklist' slide states: compare the AuditEvent resource entries to the Basic Audit Log Patterns (BALP) Implementation Guide to determine conformance with recommendations. AuditEvent records who accessed what and when.",
+    "explanationPt": "O slide 'Follow security checklist' afirma: compare as entradas do recurso AuditEvent com o Basic Audit Log Patterns (BALP) Implementation Guide para determinar conformidade com as recomendações. O AuditEvent registra quem acessou o quê e quando.",
+    "id": 17
+  },
+  {
+    "titleEn": "Secure communications with FHIR",
+    "titlePt": "Comunicação segura com FHIR",
+    "qEn": "Per the FHIR Security guidance the unit points to, what is recommended for secure transport and for authorization/authentication of FHIR API communications?",
+    "qPt": "Conforme a orientação de FHIR Security que a unidade aponta, o que é recomendado para transporte seguro e para autorização/autenticação das comunicações da API FHIR?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "TLS for transport security, and OAuth 2.0 / SMART-on-FHIR for authorization & authentication",
+        "pt": "TLS para segurança de transporte, e OAuth 2.0 / SMART-on-FHIR para autorização e autenticação",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "Plain HTTP with API keys in the URL",
+        "pt": "HTTP simples com chaves de API na URL",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "FTP with username/password",
+        "pt": "FTP com usuário/senha",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "No transport security is required for clinical data",
+        "pt": "Nenhuma segurança de transporte é exigida para dados clínicos",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The FHIR Security module (referenced by this unit) recommends TLS to secure the communication channel for clinical data, and OAuth 2.0 with SMART-on-FHIR as the standard authorization/authentication framework for FHIR apps.",
+    "explanationPt": "O módulo FHIR Security (referenciado por esta unidade) recomenda TLS para proteger o canal de comunicação de dados clínicos, e OAuth 2.0 com SMART-on-FHIR como framework padrão de autorização/autenticação para apps FHIR.",
+    "id": 18
+  },
+  {
+    "titleEn": "Security labels location",
+    "titlePt": "Onde ficam os security labels",
+    "qEn": "Where in a resource are security labels (e.g. confidentiality/sensitivity codes) carried, per the Security Labels material?",
+    "qPt": "Onde, num recurso, ficam os security labels (ex.: códigos de confidencialidade/sensibilidade), conforme o material de Security Labels?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "In meta.security (the resource's meta element)",
+        "pt": "Em meta.security (o elemento meta do recurso)",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "In the resource's text/narrative element",
+        "pt": "No elemento text/narrative do recurso",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "In a separate AuditEvent resource only",
+        "pt": "Apenas num recurso AuditEvent separado",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "In the HTTP Authorization header",
+        "pt": "No header HTTP Authorization",
+        "correct": false
+      }
+    ],
+    "explanationEn": "Per the Security Labels material, security labels are carried in the resource's meta.security element. They convey confidentiality, sensitivity and handling-control codes that govern how the data may be used (e.g. restricted, very high confidentiality).",
+    "explanationPt": "Conforme o material de Security Labels, os security labels ficam no elemento meta.security do recurso. Eles transmitem códigos de confidencialidade, sensibilidade e controle de tratamento que governam como o dado pode ser usado (ex.: restricted, confidencialidade muito alta).",
+    "id": 19
+  },
+  {
+    "titleEn": "AuditEvent vs Provenance",
+    "titlePt": "AuditEvent vs Provenance",
+    "qEn": "Within the Security and Privacy module, how do AuditEvent and Provenance differ?",
+    "qPt": "Dentro do módulo Security and Privacy, como AuditEvent e Provenance se diferenciam?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "AuditEvent is a security/access log (who accessed what, when, from where); Provenance records the origin and authorship/custody chain of a resource's content",
+        "pt": "AuditEvent é um log de segurança/acesso (quem acessou o quê, quando, de onde); Provenance registra a origem e a cadeia de autoria/custódia do conteúdo de um recurso",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "They are identical and interchangeable",
+        "pt": "São idênticos e intercambiáveis",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "Provenance is the access log; AuditEvent tracks resource authorship",
+        "pt": "Provenance é o log de acesso; AuditEvent rastreia a autoria do recurso",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Both only apply to financial resources",
+        "pt": "Ambos só se aplicam a recursos financeiros",
+        "correct": false
+      }
+    ],
+    "explanationEn": "In the Security and Privacy module, AuditEvent is the security/access log (records of who did what, when, from where — for compliance/forensics), while Provenance documents the origin, authorship and custody chain of a resource's content (clinical traceability).",
+    "explanationPt": "No módulo Security and Privacy, o AuditEvent é o log de segurança/acesso (registros de quem fez o quê, quando, de onde — para compliance/forense), enquanto o Provenance documenta a origem, autoria e cadeia de custódia do conteúdo de um recurso (rastreabilidade clínica).",
+    "id": 20
+  }
+]

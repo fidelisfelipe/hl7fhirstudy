@@ -1,0 +1,218 @@
+[
+  {
+    "id": 1,
+    "titleEn": "Protocol to protect HTTP communication in FHIR",
+    "titlePt": "Protocolo para proteger a comunicação HTTP no FHIR",
+    "qEn": "An implementer needs to access the Patient resource using an HTTP GET command on a FHIR server.\n\nWhich protocol should be established prior to any HTTP command/response so the whole FHIR interaction is protected?",
+    "qPt": "Um implementador precisa acessar o recurso Patient usando um comando HTTP GET em um servidor FHIR.\n\nQual protocolo deve ser estabelecido antes de qualquer comando/resposta HTTP para que toda a interação FHIR esteja protegida?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "MLLP",
+        "pt": "MLLP",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "ABAC",
+        "pt": "ABAC",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "TLS",
+        "pt": "TLS",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "en": "S/MIME",
+        "pt": "S/MIME",
+        "correct": false
+      }
+    ],
+    "explanationEn": "Where resources are exchanged using HTTP, **TLS (Transport Layer Security)** should be utilized to protect the communications channel. FHIR's security framework requires TLS for all HTTP-based exchanges. MLLP is used for HL7 v2 messaging. ABAC is an access control model. S/MIME is for securing email.",
+    "explanationPt": "Quando os recursos são trocados via HTTP, o **TLS (Transport Layer Security)** deve ser utilizado para proteger o canal de comunicação. O framework de segurança do FHIR exige TLS para todas as trocas baseadas em HTTP. MLLP é usado para mensagens HL7 v2. ABAC é um modelo de controle de acesso. S/MIME é para segurança de e-mail."
+  },
+  {
+    "id": 2,
+    "titleEn": "Security label codes to indicate purpose of use for research",
+    "titlePt": "Códigos de rótulo de segurança para indicar finalidade de uso em pesquisa",
+    "qEn": "An application must gather a patient's personal health data in order to investigate the effects of a certain medication. This information will be used for research by the application.\n\nWhich security label codes need to be included in the request to indicate **why** patient data is being accessed?",
+    "qPt": "Uma aplicação deve coletar dados de saúde pessoal de um paciente para investigar os efeitos de um determinado medicamento. Essa informação será usada para pesquisa pela aplicação.\n\nQuais códigos de rótulo de segurança precisam ser incluídos na requisição para indicar **por que** os dados do paciente estão sendo acessados?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "PurposeOfUse (http://terminology.hl7.org/CodeSystem/v3-ActReason)",
+        "pt": "PurposeOfUse (http://terminology.hl7.org/CodeSystem/v3-ActReason)",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "R (http://terminology.hl7.org/CodeSystem/v3-Confidentiality)",
+        "pt": "R (http://terminology.hl7.org/CodeSystem/v3-Confidentiality)",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "ResearchStudy (http://terminology.hl7.org/CodeSystem/v3-ActReason)",
+        "pt": "ResearchStudy (http://terminology.hl7.org/CodeSystem/v3-ActReason)",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "AccessMode (http://terminology.hl7.org/CodeSystem/v3-AccessMode)",
+        "pt": "AccessMode (http://terminology.hl7.org/CodeSystem/v3-AccessMode)",
+        "correct": false
+      }
+    ],
+    "explanationEn": "**PurposeOfUse** (system = `http://terminology.hl7.org/CodeSystem/v3-PurposeOfUse` / `v3-ActReason`) is an indication of *the reason* for performing one or more operations on information, which may be permitted by the source system's security policy in accordance with privacy policies and consent directives — such as collecting personal health information for research or public health purposes. The confidentiality label `R` (Restricted) indicates *how* data should be handled, not *why* it is being accessed.",
+    "explanationPt": "**PurposeOfUse** (sistema = `http://terminology.hl7.org/CodeSystem/v3-PurposeOfUse` / `v3-ActReason`) é uma indicação do *motivo* para realizar uma ou mais operações sobre informações, que pode ser permitida pela política de segurança do sistema de origem de acordo com políticas de privacidade e diretrizes de consentimento — como coletar informações de saúde pessoal para fins de pesquisa ou saúde pública. O rótulo de confidencialidade `R` (Restrito) indica *como* os dados devem ser tratados, não *por que* estão sendo acessados."
+  },
+  {
+    "id": 3,
+    "titleEn": "Security validation for resources containing free text data",
+    "titlePt": "Validação de segurança para recursos contendo dados em texto livre",
+    "qEn": "A client application needs to exchange the Patient resource with the receiving application's FHIR server. The resource contains information in the structure elements along with free text data.\n\nWhich validation activity should be performed from the security perspective?",
+    "qPt": "Uma aplicação cliente precisa trocar o recurso Patient com o servidor FHIR da aplicação receptora. O recurso contém informações nos elementos de estrutura juntamente com dados em texto livre.\n\nQual atividade de validação deve ser realizada do ponto de vista de segurança?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "Validation of patient gender and other coded/terminology data",
+        "pt": "Validação do gênero do paciente e outros dados codificados/terminologia",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "Validation of the patient phone number is necessary",
+        "pt": "Validação do número de telefone do paciente é necessária",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "Validation of narrative content to ensure that there is no active content or external stylesheet references",
+        "pt": "Validação do conteúdo narrativo para garantir que não há conteúdo ativo ou referências a folhas de estilo externas",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "en": "Validation of historical data",
+        "pt": "Validação de dados históricos",
+        "correct": false
+      }
+    ],
+    "explanationEn": "Per the FHIR specification, validation may be required for security reasons. In particular, **validation of narrative may be required to prevent active content or external references** (such as JavaScript or external stylesheets that could be exploited for XSS attacks). The safety checklist states: 'All resources in use are valid against the base specification and the profiles that apply to my system.'",
+    "explanationPt": "De acordo com a especificação FHIR, a validação pode ser exigida por razões de segurança. Em particular, **a validação da narrativa pode ser necessária para evitar conteúdo ativo ou referências externas** (como JavaScript ou folhas de estilo externas que poderiam ser exploradas em ataques XSS). O checklist de segurança afirma: 'Todos os recursos em uso são válidos contra a especificação base e os perfis que se aplicam ao meu sistema.'"
+  },
+  {
+    "id": 4,
+    "titleEn": "Handling highly sensitive patient data with security labels",
+    "titlePt": "Tratamento de dados altamente sensíveis de pacientes com rótulos de segurança",
+    "qEn": "A client application sends a bundle of patient data to the EMR FHIR server. The patient has a history of substance abuse and has tested positive for HIV/AIDS. The Patient resource instance contains both HIV sensitivity and drug abuse information in a security label element.\n\nHow should this information be handled by the receiving EMR application?",
+    "qPt": "Uma aplicação cliente envia um bundle de dados de paciente ao servidor FHIR do EMR. O paciente tem histórico de abuso de substâncias e testou positivo para HIV/AIDS. A instância do recurso Patient contém tanto informações de sensibilidade de HIV quanto de abuso de drogas em um elemento de rótulo de segurança.\n\nComo essa informação deve ser tratada pela aplicação EMR receptora?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "Choose the lowest level of confidentiality and allow access to this data to everyone taking care of the patient",
+        "pt": "Escolher o menor nível de confidencialidade e permitir acesso a esses dados a todos que cuidam do paciente",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "Choose the highest level of confidentiality and allow access to this data only to the authorized personnel as per the security policy",
+        "pt": "Escolher o maior nível de confidencialidade e permitir acesso a esses dados apenas ao pessoal autorizado conforme a política de segurança",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "en": "Choose the moderate level of confidentiality and allow access to this data only to the primary care physician of the patient",
+        "pt": "Escolher o nível moderado de confidencialidade e permitir acesso a esses dados apenas ao médico de atenção primária do paciente",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Choose not to apply any level of confidentiality and allow access to this data to the patient's relatives",
+        "pt": "Optar por não aplicar nenhum nível de confidencialidade e permitir acesso a esses dados aos familiares do paciente",
+        "correct": false
+      }
+    ],
+    "explanationEn": "Information related to HIV status and drug/alcohol abuse is subject to heightened confidentiality protections. Per the FHIR security labels specification, alcohol or drug-abuse information must be afforded the **highest level of confidentiality**, with access restricted only to authorized personnel as per the security policy. These are among the most sensitive categories of health information.",
+    "explanationPt": "Informações relacionadas ao status de HIV e abuso de drogas/álcool estão sujeitas a proteções de confidencialidade elevadas. De acordo com a especificação de rótulos de segurança do FHIR, informações sobre abuso de álcool ou drogas devem ter o **mais alto nível de confidencialidade**, com acesso restrito apenas ao pessoal autorizado conforme a política de segurança. Essas são algumas das categorias mais sensíveis de informações de saúde."
+  },
+  {
+    "id": 5,
+    "titleEn": "Interpreting the NOREUSE security label",
+    "titlePt": "Interpretando o rótulo de segurança NOREUSE",
+    "qEn": "A client application requesting the data for all the doctors who work in Good Health Hospital. After executing the REST API, the client application receives the security label **\"NOREUSE\"** in the matching Practitioner resource instances received from the FHIR server.\n\nHow should the client application deal with this information?",
+    "qPt": "Uma aplicação cliente requisita os dados de todos os médicos que trabalham no Hospital Good Health. Após executar a REST API, a aplicação cliente recebe o rótulo de segurança **\"NOREUSE\"** nas instâncias do recurso Practitioner recebidas do servidor FHIR.\n\nComo a aplicação cliente deve tratar essa informação?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "No disclosure without subject authorization",
+        "pt": "Nenhuma divulgação sem autorização do sujeito",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "No disclosure to patient, family or caregivers without attending provider's authorization",
+        "pt": "Nenhuma divulgação ao paciente, família ou cuidadores sem autorização do provedor responsável",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "No integration into other records",
+        "pt": "Nenhuma integração em outros registros",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "No exchange of these resources with any other application",
+        "pt": "Nenhuma troca desses recursos com qualquer outra aplicação",
+        "correct": true
+      }
+    ],
+    "explanationEn": "The **NOREUSE** security label means: *An application receiving a resource with this label may only use it for the immediate purpose of use.* In particular, the application is **not authorized to re-distribute** (i.e., exchange this resource with any other application). It may be used for the current session/request but must not be forwarded or re-shared.",
+    "explanationPt": "O rótulo de segurança **NOREUSE** significa: *Uma aplicação que recebe um recurso com este rótulo só pode usá-lo para a finalidade imediata de uso.* Em particular, a aplicação **não está autorizada a redistribuir** (ou seja, trocar este recurso com qualquer outra aplicação). Pode ser usado para a sessão/requisição atual, mas não deve ser encaminhado ou compartilhado novamente."
+  },
+  {
+    "id": 6,
+    "titleEn": "Security label for synthetic/test data on a FHIR server",
+    "titlePt": "Rótulo de segurança para dados sintéticos/de teste em um servidor FHIR",
+    "qEn": "A developer needs to create fully fabricated and synthetic data on a FHIR server. This data is not associated with any real patient. The client applications can use this data for checking the FHIR system capabilities.\n\nWhich security label code should be used while creating this data on the FHIR server?",
+    "qPt": "Um desenvolvedor precisa criar dados totalmente fabricados e sintéticos em um servidor FHIR. Esses dados não estão associados a nenhum paciente real. As aplicações cliente podem usar esses dados para verificar as capacidades do sistema FHIR.\n\nQual código de rótulo de segurança deve ser usado ao criar esses dados no servidor FHIR?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "PERFMSR",
+        "pt": "PERFMSR",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "METAMGT",
+        "pt": "METAMGT",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "HTEST",
+        "pt": "HTEST",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "en": "LABELING",
+        "pt": "LABELING",
+        "correct": false
+      }
+    ],
+    "explanationEn": "**HTEST** marks that a resource has been created to test an application and is **not real production data**. This label signals to receiving systems that the data is synthetic/fabricated and should not be treated as real patient data. PERFMSR is for performance measurements; METAMGT is for metadata management; LABELING is for labeling purposes.",
+    "explanationPt": "**HTEST** indica que um recurso foi criado para testar uma aplicação e **não é dado real de produção**. Este rótulo sinaliza aos sistemas receptores que os dados são sintéticos/fabricados e não devem ser tratados como dados reais de pacientes. PERFMSR é para medições de desempenho; METAMGT é para gerenciamento de metadados; LABELING é para fins de rotulagem."
+  }
+]

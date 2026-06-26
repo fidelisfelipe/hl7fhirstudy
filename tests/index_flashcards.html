@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"  />
+  <title>FHIR Quizzes — Loader (JSON per module)</title>
+  <style>
+    :root{--bg:#0b1020;--card:#121a33;--muted:#c9d3f5;--accent:#6ee7b7;--danger:#fca5a5}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial,'Noto Sans',sans-serif;background:linear-gradient(120deg,#0b1020,#151c3a);color:#e9eefc}
+    header{position:sticky;top:0;background:rgba(11,16,32,.9);backdrop-filter:saturate(120%) blur(6px);padding:14px 18px;border-bottom:1px solid #1f2a54;z-index:2}
+    h1{font-size:18px;margin:0}
+    .container{max-width:1100px;margin:24px auto;padding:0 16px}
+    .controls{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0}
+    .btn,.select{padding:10px 12px;border:1px solid #2a376f;background:#121a33;color:#e9eefc;border-radius:12px}
+    .btn{cursor:pointer}
+    .btn:hover{transform:translateY(-1px);border-color:#4156a6}
+    .btn.primary{background:#1a2e4f;border-color:#5b86ff}
+    .btn.success{background:#123826;border-color:#3cd3a5}
+    .btn.danger{background:#3b1a1a;border-color:#ff8a8a}
+    .pill{padding:6px 10px;border:1px solid #33406d;background:#121a33;border-radius:999px;font-size:12px}
+    .card{background:#121a33;border:1px solid #23305c;border-radius:18px;padding:18px;margin:16px 0;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+    .q-title{font-weight:700;margin:0 0 8px}
+    .q-sub{color:var(--muted);font-size:13px;margin:0 0 12px}
+    .opt{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;margin:8px 0;border:1px solid #273566;border-radius:12px;background:#0f1530}
+    .opt input{margin-top:3px}
+    .opt label{cursor:pointer}
+    .correct{border-color:#1f9e6d;background:rgba(31,158,109,.08)}
+    .wrong{border-color:#9e1f1f;background:rgba(158,31,31,.08)}
+    .grid{display:grid;grid-template-columns:1fr;gap:16px}
+    @media(min-width:980px){.grid{grid-template-columns:2fr 1fr}}
+    table{width:100%;border-collapse:collapse}
+    th,td{border-bottom:1px solid #23305c;padding:10px;text-align:left}
+    th{color:#b9c6ff}
+    small{color:#9db2ff}
+
+    /* mostrar imagens nas perguntas */
+    .q-media{margin:8px 0 14px}
+    .q-media figure{margin:0}
+    .q-media img{max-width:100%;height:auto;border:1px solid #23305c;border-radius:12px;display:block}
+    .q-media figcaption{font-size:12px;color:#aab6e9;margin-top:6px}
+    /* código nas opções (XML/JSON) */
+    .opt code{white-space:pre-wrap;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,'Courier New',monospace}
+
+  
+/* ===== Print-optimized styles to minimize paper usage ===== */
+@page { size: A4; margin: 10mm; }
+@media print {
+  /* Reset colors/backgrounds for legibility and ink saving */
+  * { box-shadow: none !important; text-shadow: none !important; }
+  html, body { background: #fff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body, .card, header, .btn, .select, .pill, table, th, td { background: #fff !important; color: #000 !important; border-color: #aaa !important; }
+  a { color: #000 !important; text-decoration: none; }
+
+  /* Hide interactive chrome that isn't needed on paper */
+  header, .controls, aside, #manifestInfo, #historyTable, #scoreNow { display: none !important; }
+  /* Hide media (images/captions) to save space; toggle-able by removing this line if needed */
+  /*.q-media { display: none !important; }*/
+
+  /* Layout: tighter spacing & denser typography */
+  body { font-size: 10pt !important; }
+  .container { max-width: none !important; margin: 0 !important; padding: 0 !important; }
+  main.container { padding: 0 0 !important; }
+  .card { border: 1px solid #aaa !important; border-radius: 0 !important; padding: 8px 10px !important; margin: 6px 0 !important; }
+  .q-title { font-size: 11pt !important; margin: 0 0 4px !important; }
+  .q-sub { font-size: 9.5pt !important; margin: 0 0 6px !important; color: #000 !important; }
+
+  /* Options: two-column compact layout on wide pages */
+  .opt { 
+    display: inline-grid !important; 
+    grid-template-columns: 14px auto !important; 
+    align-items: start !important; 
+    gap: 6px !important; 
+    padding: 2px 4px !important; 
+    margin: 2px 4px !important; 
+    border: 1px solid #ddd !important; 
+    background: #fff !important; 
+    width: calc(50% - 10px) !important;
+    vertical-align: top !important;
+  }
+  .opt input { margin-top: 2px !important; transform: scale(0.9); }
+  .opt label { font-size: 9pt !important; line-height: 1.25 !important; }
+
+  /* Reduce code font size (XML/JSON answers) */
+  .opt code { font-size: 8pt !important; white-space: pre-wrap !important; }
+
+  /* Tables: compact */
+  table, th, td { border-color: #ccc !important; }
+  th, td { padding: 4px 6px !important; font-size: 9pt !important; }
+
+  /* Prevent awkward page breaks */
+  .card { break-inside: avoid; page-break-inside: avoid; }
+  h1, h2, h3, .q-title { page-break-after: avoid; }
+
+  /* Single-column for content area */
+  .grid { display: block !important; }
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
+      <h1>FHIR Quizzes — JSON per module / JSON por módulo</h1><div class="pill" style="display:inline-block">@print optimized</div>
+      <div class="controls">
+        <select id="moduleSelect" class="select" title="Select module from manifest">
+          <option value="">Load manifest… / Carregar manifest…</option>
+        </select>
+        <span class="pill" id="qCount">0</span>
+        <button class="btn" id="langToggle">🇬🇧 / 🇵🇹</button>
+        <button class="btn primary" id="submitBtn">Submit / Enviar</button>
+        <button class="btn" id="reviewBtn">Show Answers / Ver Gabarito</button>
+        <button class="btn" id="retryBtn">Retry / Refazer</button>
+        <button class="btn success" id="exportBtn">Export History</button>
+        <button class="btn" id="flashBtn">Flash Cards</button>
+        <button class="btn danger" id="resetHistoryBtn">Clear History</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container grid">
+    <section>
+      <div class="card" id="manifestInfo">Looking for <code>quizzes/manifest.json</code>… (tip: serve with a local web server, e.g. VSCode Live Server or <code>python -m http.server</code>)</div>
+      <div id="quizContainer"></div>
+    </section>
+    <aside>
+      <div class="card">
+        <h3 style="margin-top:0">Performance / Desempenho</h3>
+        <p id="scoreNow">Select a module and submit answers to see your score. / Selecione um módulo e envie para ver a pontuação.</p>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">History / Histórico</h3>
+        <table id="historyTable"><thead><tr><th>Date</th><th>Module</th><th>Score</th><th>Details</th></tr></thead><tbody></tbody></table>
+      </div>
+    </aside>
+  </main>
+
+<script>
+/**
+ * Folder structure (root):
+ *  /index.html  ← this file
+ *  /quizzes/manifest.json
+ *  /quizzes/module1_q1.json
+ *  /quizzes/module1_q2.json
+ *  /quizzes/use_extensions_q1.json
+ *  ... (one JSON per module)
+ *
+ * manifest.json example:
+ * {
+ *   "modules": [
+ *     {"key":"module1_q1","titleEn":"Module 1 – Principles (Quiz 1)","titlePt":"Módulo 1 – Princípios (Quiz 1)","file":"quizzes/module1_q1.json"},
+ *     {"key":"module1_q2","titleEn":"Module 1 – Principles (Quiz 2)","titlePt":"Módulo 1 – Princípios (Quiz 2)","file":"quizzes/module1_q2.json"},
+ *     {"key":"use_extensions_q1","titleEn":"Use existing extensions (Quiz 1)","titlePt":"Usar extensões existentes (Quiz 1)","file":"quizzes/use_extensions_q1.json"}
+ *   ]
+ * }
+ *
+ * Module JSON schema (array of questions):
+ * [
+ *   {
+ *     "id": 1,
+ *     "titleEn": "Quiz 1 – Full Form of FHIR",
+ *     "titlePt": "Quiz 1 – Forma Completa de FHIR",
+ *     "qEn": "What is the full form of FHIR?",
+ *     "qPt": "Qual é a forma completa de FHIR?",
+ *     "type": "single", // or "multi"
+ *     "options": [
+ *       {"key":"A","en":"Full Health Interoperability Resources","pt":"Recursos de Interoperabilidade Completa em Saúde","correct":false},
+ *       {"key":"D","en":"Fast Healthcare Interoperability Resources","pt":"Recursos de Interoperabilidade Rápida em Saúde","correct":true}
+ *     ]
+ *   }
+ * ]
+ */
+
+const MANIFEST_PATH = 'quizzes/manifest.json';
+let lang = 'EN';
+let moduleKey = null; // current
+let QUESTIONS = []; // loaded questions
+
+const $ = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+
+const historyKey = m => `fhir_history_${m}`;
+function loadHistory(m){ try{return JSON.parse(localStorage.getItem(historyKey(m)))||[]}catch{return []} }
+function saveHistory(m,entry){ const list=loadHistory(m); list.unshift(entry); localStorage.setItem(historyKey(m), JSON.stringify(list)); renderHistory(); }
+function formatPct(n){ return (Math.round(n*1000)/10).toFixed(1)+'%'; }
+
+async function loadManifest(){
+  const info = $('#manifestInfo');
+  try{
+    const res = await fetch(MANIFEST_PATH); if(!res.ok) throw new Error(res.status+' '+res.statusText);
+    const data = await res.json();
+    const modules = data.modules||[];
+    if(modules.length===0) throw new Error('Manifest has no modules');
+
+    // populate select
+    const sel = $('#moduleSelect'); sel.innerHTML = '<option value="">Select module…</option>';
+    for(const m of modules){
+      const opt = document.createElement('option');
+      opt.value = m.key; opt.textContent = `${m.key} — ${m.titleEn}`; opt.dataset.file = m.file; opt.dataset.titleEn = m.titleEn; opt.dataset.titlePt = m.titlePt;
+      sel.appendChild(opt);
+    }
+
+    info.innerHTML = `Loaded <strong>${modules.length}</strong> modules from <code>${MANIFEST_PATH}</code>.`;
+
+    // auto-select via ?module= query
+    const url = new URL(window.location.href); const q = url.searchParams.get('module');
+    if(q && modules.some(m=>m.key===q)){ sel.value=q; await loadModuleFromSelect(); }
+  }catch(err){ info.innerHTML = `⚠️ Could not load <code>${MANIFEST_PATH}</code>: ${err.message}.` }
+}
+
+async function loadModuleFromSelect(){
+  const sel = $('#moduleSelect');
+  const opt = sel.options[sel.selectedIndex];
+  if(!opt || !opt.dataset.file){ return; }
+  moduleKey = sel.value;
+  const file = opt.dataset.file;
+  try{
+    const res = await fetch(file); if(!res.ok) throw new Error(res.status+' '+res.statusText);
+    QUESTIONS = await res.json();
+    $('#manifestInfo').innerHTML = `<strong>Module:</strong> ${opt.dataset.titleEn} <small>(${file})</small>`;
+    renderQuiz(); renderHistory();
+  }catch(err){ $('#manifestInfo').innerHTML = `⚠️ Could not load module JSON <code>${file}</code>: ${err.message}`; }
+}
+
+function renderQuiz(){
+  $('#qCount').textContent = `${QUESTIONS.length} questions / questões`;
+  const wrap = document.createElement('div');
+  QUESTIONS.forEach(q=>{
+    const card = document.createElement('div'); card.className='card';
+    const title=document.createElement('h3'); title.className='q-title'; title.textContent = lang==='EN'? q.titleEn : q.titlePt; card.appendChild(title);
+    const sub=document.createElement('p'); sub.className='q-sub'; sub.innerHTML = lang==='EN'? q.qEn : q.qPt; card.appendChild(sub);
+
+    // --- render media (images) if the question provides it ---
+    if (q.media && Array.isArray(q.media) && q.media.length) {
+      const mediaWrap = document.createElement('div');
+      mediaWrap.className = 'q-media';
+      q.media.forEach(m => {
+        if (m.type === 'image' && m.src) {
+          const fig = document.createElement('figure');
+          const img = new Image();
+          img.src = m.src;
+          img.loading = 'lazy';
+          img.alt = (lang === 'EN' ? (m.altEn || m.altPt || '') : (m.altPt || m.altEn || ''));
+          fig.appendChild(img);
+          if (m.captionEn || m.captionPt) {
+            const cap = document.createElement('figcaption');
+            cap.textContent = (lang === 'EN' ? (m.captionEn || m.captionPt || '') : (m.captionPt || m.captionEn || ''));
+            fig.appendChild(cap);
+          }
+          mediaWrap.appendChild(fig);
+        }
+      });
+      card.appendChild(mediaWrap);
+    }
+
+    q.options.forEach(opt=>{
+      const id = `q${q.id}_${opt.key}`;
+      const optDiv=document.createElement('div'); optDiv.className='opt';
+      const input=document.createElement('input'); input.type = (q.type==='multi')? 'checkbox':'radio'; input.name = `q_${q.id}`; input.value = opt.key; input.id=id;
+      const label=document.createElement('label'); label.setAttribute('for', id); label.innerHTML = `<strong>${opt.key}.</strong> ${lang==='EN'?opt.en:opt.pt}`;
+      optDiv.appendChild(input); optDiv.appendChild(label); card.appendChild(optDiv);
+    });
+    wrap.appendChild(card);
+  });
+  const target=$('#quizContainer'); target.innerHTML=''; target.appendChild(wrap);
+}
+
+function grade(){
+  const details=[]; let correctCount=0;
+  QUESTIONS.forEach(q=>{
+    const chosen = $$(`input[name="q_${q.id}"]`).filter(i=>i.checked).map(i=>i.value).sort();
+    const right = q.options.filter(o=>o.correct).map(o=>o.key).sort();
+    const isCorrect = chosen.length===right.length && chosen.every((v,i)=>v===right[i]);
+    if(isCorrect) correctCount++;
+    details.push({id:q.id, chosen, right, isCorrect});
+  });
+  const score = QUESTIONS.length? (correctCount/QUESTIONS.length):0;
+  return {score, details};
+}
+
+function showFeedback({details}){
+  details.forEach(d=>{
+    const rights=new Set(d.right);
+    $$(`input[name="q_${d.id}"]`).forEach(i=>{
+      const box=i.closest('.opt'); box.classList.remove('correct','wrong');
+      if(i.checked && rights.has(i.value)) box.classList.add('correct');
+      else if(i.checked && !rights.has(i.value)) box.classList.add('wrong');
+      else if(!i.checked && rights.has(i.value)) box.style.borderColor='#1f9e6d66';
+      i.disabled=true;
+    });
+  });
+}
+
+function renderScore(res){
+  $('#scoreNow').innerHTML = `<strong>${formatPct(res.score)}</strong> — ${Math.round(res.score*QUESTIONS.length)}/${QUESTIONS.length} correct`;
+}
+
+function renderHistory(){
+  const tbody = $('#historyTable tbody'); tbody.innerHTML='';
+  if(!moduleKey) return;
+  loadHistory(moduleKey).forEach((h,idx,arr)=>{
+    const tr=document.createElement('tr');
+    const td1=document.createElement('td'); td1.textContent=new Date(h.date).toLocaleString();
+    const td2=document.createElement('td'); td2.textContent=moduleKey;
+    const td3=document.createElement('td'); td3.textContent=formatPct(h.score);
+    const td4=document.createElement('td'); const b=document.createElement('button'); b.className='btn'; b.textContent='View'; b.onclick=()=>alert(`Score: ${formatPct(h.score)}\nCorrect: ${h.correct}/${h.total}`); td4.appendChild(b);
+    tr.appendChild(td1); tr.appendChild(td2); tr.appendChild(td3); tr.appendChild(td4); tbody.appendChild(tr);
+  });
+}
+
+// EVENTS
+$('#moduleSelect').addEventListener('change', loadModuleFromSelect);
+$('#langToggle').onclick=()=>{ lang=(lang==='EN'?'PT':'EN'); renderQuiz(); };
+$('#submitBtn').onclick=()=>{ if(!moduleKey) return alert('Select a module first'); const r=grade(); showFeedback(r); renderScore(r); saveHistory(moduleKey,{date:Date.now(),score:r.score,correct:Math.round(r.score*QUESTIONS.length),total:QUESTIONS.length}); };
+$('#reviewBtn').onclick=()=>{ if(!moduleKey) return; const r=grade(); showFeedback(r); renderScore(r); };
+$('#retryBtn').onclick=()=>{ if(!moduleKey) return; renderQuiz(); $('#scoreNow').textContent=''; };
+$('#exportBtn').onclick=()=>{
+  const bundle={generated:new Date().toISOString(), module:moduleKey, history:loadHistory(moduleKey)};
+  const blob=new Blob([JSON.stringify(bundle,null,2)],{type:'application/json'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download=`history_${moduleKey||'none'}.json`; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+};
+$('#resetHistoryBtn').onclick=()=>{ if(moduleKey){ localStorage.removeItem(historyKey(moduleKey)); renderHistory(); } };
+
+// INIT
+loadManifest();
+
+function generateFlashcards(){
+  if(!QUESTIONS || !QUESTIONS.length){ return alert('Load a module first / Carregue um módulo primeiro'); }
+  const otherLang = (lang==='EN'?'PT':'EN');
+  const getQ = (q)=> (lang==='EN'? q.qEn : q.qPt);
+  const getTitle = (q)=> (lang==='EN'? q.titleEn : q.titlePt);
+  const getOpt = (o)=> (lang==='EN'? o.en : o.pt);
+  const getOptBoth = (o)=> `${o.en} / ${o.pt}`;
+
+  const w = window.open('', '_blank');
+  const head = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Flash Cards — ${moduleKey||''}</title>
+  <style>
+    @page { size: A4; margin: 10mm; }
+    :root{--ink:#000;--border:#999}
+    *{box-sizing:border-box}
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial,'Noto Sans',sans-serif;color:var(--ink);margin:0;font-size:10pt;}
+    header{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;border-bottom:1px solid #ccc;}
+    header .screen{display:inline-flex;gap:8px}
+    @media print{ header{display:none} }
+    .wrap{padding:10mm}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:8mm}
+    .card{border:1px dashed var(--border);padding:6mm;break-inside:avoid;page-break-inside:avoid;min-height:90mm}
+    .title{margin:0 0 2mm;font-weight:700;font-size:11pt}
+    .q{margin:0 0 3mm}
+    .ops{margin:0;padding-left:5mm}
+    .ops li{margin:1.5mm 0}
+    code{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,'Courier New',monospace;font-size:8pt;white-space:pre-wrap}
+    .fold{margin:4mm 0;border-top:1px dashed var(--border)}
+    .ans h4{margin:3mm 0 1mm;font-size:10pt}
+    .ans .correct-list{margin:0;padding-left:5mm}
+    .badge{display:inline-block;border:1px solid var(--border);padding:1mm 2mm;border-radius:3mm;font-size:8pt;margin-left:3mm}
+  </style></head><body>
+  <header><div><strong>Flash Cards</strong> <span class="badge">${moduleKey||''}</span> <span class="badge">${lang}</span></div>
+    <div class="screen"><button onclick="window.print()">Print</button><button onclick="window.close()">Close</button></div>
+  </header>
+  <div class="wrap"><div class="grid">`;
+
+  const parts = [head];
+  QUESTIONS.forEach(q=>{
+    const correct = q.options.filter(o=>o.correct);
+    const corrKeys = correct.map(o=>o.key).join(', ');
+    const frontOps = q.options.map(o=>`<li><strong>${o.key}.</strong> ${getOpt(o)}</li>`).join('');
+    const backOps = correct.map(o=>`<li><strong>${o.key}.</strong> ${getOptBoth(o)}</li>`).join('');
+    parts.push(`<article class="card">
+      <h3 class="title">${getTitle(q)}</h3>
+      <p class="q">${getQ(q)}</p>
+      <ul class="ops">${frontOps}</ul>
+      <div class="fold"></div>
+      <div class="ans">
+        <h4>Resposta / Answer: <span class="badge">${corrKeys||'—'}</span></h4>
+        <ul class="correct-list">${backOps||'<li>(No correct options flagged)</li>'}</ul>
+      </div>
+    </article>`);
+  });
+  parts.push(`</div></div></body></html>`);
+  w.document.open();
+  w.document.write(parts.join(''));
+  w.document.close();
+  try{ w.focus(); w.print(); }catch(e){}
+}
+
+document.getElementById('flashBtn').addEventListener('click', generateFlashcards);
+
+</script>
+</body>
+</html>

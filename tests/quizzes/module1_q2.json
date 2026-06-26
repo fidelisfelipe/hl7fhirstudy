@@ -1,0 +1,422 @@
+[
+  {
+    "id": 1,
+    "titleEn": "Licensing rules – not correct statement",
+    "titlePt": "Regras de licenciamento – afirmação incorreta",
+    "qEn": "Which of the following is not correct statement regarding FHIR licensing rules?",
+    "qPt": "Qual das seguintes não é uma afirmação correta sobre as regras de licenciamento do FHIR?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "FHIR is © and ® HL7. The right to maintain FHIR remains vested in HL7",
+        "pt": "FHIR é © e ® HL7. O direito de manter o FHIR permanece investido na HL7",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "Derivative Specifications can redefine what conformance to FHIR means",
+        "pt": "Especificações derivadas podem redefinir o que significa conformidade com o FHIR",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "en": "You can create derivative specifications or implementation-related products and services",
+        "pt": "Você pode criar especificações derivadas ou produtos e serviços relacionados à implementação",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Implementers can redistribute FHIR and use it for commercial purpose",
+        "pt": "Implementadores podem redistribuir o FHIR e usá-lo para fins comerciais",
+        "correct": false
+      },
+      {
+        "key": "E",
+        "en": "You cannot publish an altered version of the FHIR specification unless it clearly identifies that it is a derivative specification, not FHIR itself",
+        "pt": "Você não pode publicar uma versão alterada da especificação FHIR, a menos que identifique claramente que é uma especificação derivada, não o próprio FHIR",
+        "correct": false
+      },
+      {
+        "key": "F",
+        "en": "FHIR specification is licensed under Creative Commons \"No Rights Reserved\"",
+        "pt": "A especificação FHIR é licenciada sob Creative Commons \"No Rights Reserved\"",
+        "correct": false
+      }
+    ],
+    "explanationEn": "B is incorrect. Derivative specifications (e.g., US Core, IPS) CAN define what conformance means within their scope — that is precisely their purpose. What they cannot do is redefine the base FHIR standard itself or claim that non-FHIR-compliant systems are FHIR-conformant.",
+    "explanationPt": "B está incorreta. Especificações derivadas (ex.: US Core, IPS) PODEM definir o que conformidade significa dentro do seu escopo — esse é exatamente o propósito delas. O que não podem fazer é redefinir o padrão base FHIR ou afirmar que sistemas não conformes com FHIR são conformes."
+  },
+  {
+    "id": 2,
+    "titleEn": "Trademark policies – correct statements (select all)",
+    "titlePt": "Políticas de marca – afirmações corretas (selecione todas)",
+    "qEn": "Which of the following are correct statements regarding FHIR trademark policies? Select all that apply.",
+    "qPt": "Quais das seguintes são afirmações corretas sobre as políticas de marca do FHIR? Selecione todas as que se aplicam.",
+    "type": "multi",
+    "options": [
+      {
+        "key": "A",
+        "en": "When using the FHIR FLAME logo, always include the ® symbol",
+        "pt": "Ao usar o logotipo FHIR FLAME, sempre inclua o símbolo ®",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "You can use the trademarks \"FHIR\" and the FHIR FLAME logo to refer the FHIR specification itself",
+        "pt": "Você pode usar as marcas \"FHIR\" e o logotipo FHIR FLAME para se referir à própria especificação FHIR",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "When referencing the FHIR® standard in a website, document, presentation, or otherwise, please in a place of prominence refer to it as the \"HL7® FHIR® standard\"",
+        "pt": "Ao referenciar o padrão FHIR® em site, documento, apresentação etc., em local de destaque refira-se a ele como \"padrão HL7® FHIR®\"",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "en": "Use of HL7 trademarks in URL domains or to brand your product or service is allowed without any constraints",
+        "pt": "É permitido usar marcas da HL7 em domínios de URL ou para marcar seu produto/serviço sem qualquer restrição",
+        "correct": false
+      },
+      {
+        "key": "E",
+        "en": "All non-trademark uses of the foregoing marks should include the ® symbol and indicate in text that: \"HL7, FHIR and the FHIR [FLAME DESIGN] are the registered trademarks of Health Level Seven International and their use does not constitute endorsement by HL7.\"",
+        "pt": "Todos os usos não-marca dos sinais acima devem incluir o símbolo ® e indicar em texto: \"HL7, FHIR e o FHIR [FLAME DESIGN] são marcas registradas da Health Level Seven International e seu uso não constitui endosso pela HL7.\"",
+        "correct": true
+      },
+      {
+        "key": "F",
+        "en": "HL7®, HEALTH LEVEL SEVEN®, FHIR® and the FHIR FLAME LOGO ® are trademarks owned by Health Level Seven International, registered with the United States Patent and Trademark Office.",
+        "pt": "HL7®, HEALTH LEVEL SEVEN®, FHIR® e o FHIR FLAME LOGO ® são marcas da Health Level Seven International, registradas no United States Patent and Trademark Office.",
+        "correct": true
+      }
+    ],
+    "explanationEn": "A, C, E, F are correct trademark rules. B is wrong (you cannot use the FHIR marks to refer to your implementation without care). D is wrong (using HL7 trademarks in URL domains requires explicit written permission from HL7).",
+    "explanationPt": "A, C, E e F são regras corretas de uso de marca. B está errada (não é permitido usar as marcas FHIR para se referir à sua implementação sem cuidado). D está errada (usar marcas HL7 em domínios de URL requer permissão escrita explícita da HL7)."
+  },
+  {
+    "id": 3,
+    "titleEn": "Standard levels – not correct statement",
+    "titlePt": "Níveis do padrão – afirmação incorreta",
+    "qEn": "Which of the following is not correct for FHIR Standard Levels for specification content?",
+    "qPt": "Qual das seguintes NÃO está correta para os Níveis do Padrão FHIR quanto ao conteúdo da especificação?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "Draft – This portion of the specification is not considered to be complete enough or sufficiently reviewed to be safe for implementation. Resource content can be modified in newer version",
+        "pt": "Rascunho – Esta parte da especificação não é considerada completa o suficiente ou suficientemente revisada para ser segura para implementação. O conteúdo do recurso pode ser modificado em versões posteriores",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "Normative – content considered to be stable and does not allow any change in newer versions",
+        "pt": "Normativo – conteúdo considerado estável e não permite qualquer mudança em versões posteriores",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "en": "Resources with status as TU (Trial Use) can be removed by FHIR in newer versions",
+        "pt": "Recursos com status TU (Trial Use) podem ser removidos pelo FHIR em versões posteriores",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Deprecated content of the specification is outdated and may be withdrawn in a future version",
+        "pt": "Conteúdo obsoleto (deprecated) da especificação está desatualizado e pode ser retirado em uma versão futura",
+        "correct": false
+      },
+      {
+        "key": "E",
+        "en": "Version compatibility is applicable for the content which is Normative",
+        "pt": "A compatibilidade de versão aplica-se ao conteúdo que é Normativo",
+        "correct": false
+      }
+    ],
+    "explanationEn": "B is incorrect. Normative content CAN change, but only through a formal ballot and published version update. It is the most stable tier but is not frozen forever — changes require rigorous process.",
+    "explanationPt": "B está incorreta. O conteúdo Normativo PODE mudar, mas somente por meio de votação formal e atualização de versão publicada. É o nível mais estável, mas não está congelado para sempre — mudanças exigem processo rigoroso."
+  },
+  {
+    "id": 4,
+    "titleEn": "R4 content – not correct statement",
+    "titlePt": "Conteúdo do R4 – afirmação incorreta",
+    "qEn": "Which of the following is not correct for FHIR R4 specification content?",
+    "qPt": "Qual das seguintes NÃO está correta para o conteúdo da especificação FHIR R4?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "R4 FHIR specification hosts mixed content – some content/resources have become Normative and most of the part is still Trial Use or Draft",
+        "pt": "A especificação FHIR R4 contém conteúdo misto — alguns conteúdos/recursos tornaram-se Normativos e a maior parte ainda é Trial Use ou Draft",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "Some Normative Resources contain a few parts labeled as 'Trial Use' even though the artifact itself is labeled 'Normative'",
+        "pt": "Alguns recursos Normativos contêm algumas partes rotuladas como 'Trial Use' embora o artefato em si esteja rotulado como 'Normativo'",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "There are some resources in R4 specification where resource is 'Trial Use' and contains Normative elements",
+        "pt": "Há recursos na especificação R4 em que o recurso é 'Trial Use' e contém elementos Normativos",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "en": "R4 is the first version of FHIR publication with some content normative",
+        "pt": "R4 é a primeira versão da publicação FHIR com algum conteúdo normativo",
+        "correct": false
+      }
+    ],
+    "explanationEn": "C is incorrect. In R4, there are no resources where the resource itself is 'Trial Use' while some of its elements are 'Normative'. The opposite does exist: Normative resources can contain a few 'Trial Use' elements.",
+    "explanationPt": "C está incorreta. No R4, não existem recursos onde o recurso seja 'Trial Use' com alguns elementos 'Normativos'. O inverso existe: recursos Normativos podem conter alguns elementos 'Trial Use'."
+  },
+  {
+    "id": 5,
+    "titleEn": "FHIR Maturity Model – correct statements",
+    "titlePt": "Modelo de Maturidade FHIR – afirmações corretas",
+    "qEn": "Which of the following statements are correct for FHIR Maturity Model?",
+    "qPt": "Quais das seguintes afirmações estão corretas para o Modelo de Maturidade do FHIR?",
+    "type": "multi",
+    "options": [
+      {
+        "key": "A",
+        "en": "FMM 0 is considered as Draft and N is the considered Normative",
+        "pt": "FMM 0 é considerado Rascunho (Draft) e N é considerado Normativo",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "FMM 2 requires resources to be tested across at least 3 independent systems and must use 80% of the core data elements",
+        "pt": "FMM 2 exige que os recursos sejam testados em pelo menos 3 sistemas independentes e usem 80% dos elementos de dados centrais",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "en": "FMM 2 level introduces formal balloting process",
+        "pt": "O nível FMM 2 introduz processo formal de votação (ballot)",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "At FMM 3, the artifact has been verified by the work group as meeting the Conformance Resource Quality Guidelines",
+        "pt": "No FMM 3, o artefato foi verificado pelo grupo de trabalho como atendendo às Diretrizes de Qualidade de Conformidade",
+        "correct": true
+      },
+      {
+        "key": "E",
+        "en": "FMM 4 can be achieved only if the resource is at least published in one formal release of the FHIR specification",
+        "pt": "O FMM 4 pode ser atingido somente se o recurso tiver sido publicado em pelo menos um release formal da especificação FHIR",
+        "correct": true
+      },
+      {
+        "key": "F",
+        "en": "FMM 5 needs the artifact published in two formal publication cycles at FMM1+ (Trial-Use level) and implemented in ≥5 independent production systems in more than one country",
+        "pt": "O FMM 5 requer o artefato publicado em dois ciclos formais (no mínimo FMM1/Trial-Use) e implementado em ≥5 sistemas de produção independentes em mais de um país",
+        "correct": true
+      }
+    ],
+    "explanationEn": "C is wrong — FMM 3 (not FMM 2) introduces formal balloting. Correct: FMM 0=Draft, FMM 2=tested in 3+ independent systems, FMM 3=formal ballot, FMM 4=one publication cycle, FMM 5=two publication cycles, N=Normative.",
+    "explanationPt": "C está errada — FMM 3 (não FMM 2) introduz a votação formal. Correto: FMM 0=Rascunho, FMM 2=testado em 3+ sistemas independentes, FMM 3=votação formal, FMM 4=um ciclo de publicação, FMM 5=dois ciclos, N=Normativo."
+  },
+  {
+    "id": 6,
+    "titleEn": "Compatibility rules apply only to Normative?",
+    "titlePt": "Regras de compatibilidade se aplicam apenas ao Normativo?",
+    "qEn": "Forward and Backward compatibility rules are only applicable for Normative content? True/False.",
+    "qPt": "As regras de compatibilidade retroativa e progressiva aplicam-se apenas ao conteúdo Normativo? Verdadeiro/Falso.",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "True",
+        "pt": "Verdadeiro",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "False",
+        "pt": "Falso",
+        "correct": false
+      }
+    ],
+    "explanationEn": "True. Forward and backward compatibility guarantees apply exclusively to Normative content. Trial Use content can break between versions, which is why it carries the TU label — implementers accept that risk.",
+    "explanationPt": "Verdadeiro. As garantias de compatibilidade forward e backward se aplicam exclusivamente ao conteúdo Normativo. O conteúdo Trial Use pode quebrar entre versões — por isso carrega o rótulo TU e os implementadores aceitam esse risco."
+  },
+  {
+    "id": 7,
+    "titleEn": "Guidelines to improve backward compatibility",
+    "titlePt": "Diretrizes para melhorar a compatibilidade retroativa",
+    "qEn": "Which of the following guidelines should be followed by the receiving system to improve backward compatibility? Select all that apply.",
+    "qPt": "Quais diretrizes o sistema receptor deve seguir para melhorar a compatibilidade retroativa? Selecione todas as que se aplicam.",
+    "type": "multi",
+    "options": [
+      {
+        "key": "A",
+        "en": "Ignore elements that are unexpected as new elements are not going to be modifier elements",
+        "pt": "Ignorar elementos inesperados, já que novos elementos não serão elementos modificadores (modifier)",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "Ignore references to resources that are not recognized",
+        "pt": "Ignorar referências a recursos que não são reconhecidos",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "en": "Ignore unrecognized codes in required and extensible bindings unless the element they appear on is a modifier",
+        "pt": "Ignorar códigos não reconhecidos em bindings required e extensible, a menos que o elemento em que aparecem seja um modifier",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Ignore unrecognized search criteria",
+        "pt": "Ignorar critérios de busca não reconhecidos",
+        "correct": true
+      },
+      {
+        "key": "E",
+        "en": "Respond to HTTP commands on unexpected URLs with an appropriate error code",
+        "pt": "Responder a comandos HTTP em URLs inesperadas com um código de erro apropriado",
+        "correct": true
+      }
+    ],
+    "explanationEn": "A, B, D, E are correct receiver guidelines. C is wrong — unrecognized codes in REQUIRED bindings must NOT be silently ignored; the receiver should flag a validation error because required bindings are mandatory for interoperability.",
+    "explanationPt": "A, B, D e E são diretrizes corretas para receptores. C está errada — códigos não reconhecidos em vinculações OBRIGATÓRIAS não devem ser ignorados silenciosamente; o receptor deve sinalizar erro de validação, pois vinculações obrigatórias são essenciais para interoperabilidade."
+  },
+  {
+    "id": 8,
+    "titleEn": "Normative content rules – not correct",
+    "titlePt": "Regras para conteúdo normativo – incorreta",
+    "qEn": "Which of the following is not correct for Forward and backward compatible rules for Normative content in FHIR R4 Specification?",
+    "qPt": "Qual das seguintes NÃO está correta para as regras de compatibilidade (progressiva e retroativa) do conteúdo Normativo na especificação FHIR R4?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "Existing resources will not have their names changed",
+        "pt": "Recursos existentes não terão seus nomes alterados",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "New resources and data types may be introduced",
+        "pt": "Novos recursos e tipos de dados podem ser introduzidos",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "New optional elements may be introduced at any location provided they do not constitute 'isModifier' elements",
+        "pt": "Novos elementos opcionais podem ser introduzidos em qualquer local desde que não sejam elementos 'isModifier'",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "The names, path and meaning of previously existing data elements will not be changed",
+        "pt": "Os nomes, o caminho e o significado dos elementos de dados existentes não serão alterados",
+        "correct": false
+      },
+      {
+        "key": "E",
+        "en": "Minimum element cardinalities can be changed",
+        "pt": "As cardinalidades mínimas dos elementos podem ser alteradas",
+        "correct": true
+      }
+    ],
+    "explanationEn": "E is incorrect. Minimum element cardinalities CANNOT be increased in a backward-compatible change — raising the minimum would break existing implementations that omit the element. Maximum cardinalities can be relaxed (increased).",
+    "explanationPt": "E está incorreta. Cardinalidades mínimas de elementos NÃO PODEM ser aumentadas em uma mudança retrocompatível — elevar o mínimo quebraria implementações existentes que omitem o elemento. Cardinalidades máximas podem ser relaxadas (aumentadas)."
+  },
+  {
+    "id": 9,
+    "titleEn": "Inter-version changes for Normative content",
+    "titlePt": "Mudanças entre versões para conteúdo Normativo",
+    "qEn": "Which of the following are correct for inter-version change for Normative content in FHIR R4 Specification? Select all that apply.",
+    "qPt": "Quais das seguintes estão corretas para mudanças entre versões no conteúdo Normativo da especificação FHIR R4? Selecione todas as que se aplicam.",
+    "type": "multi",
+    "options": [
+      {
+        "key": "A",
+        "en": "Required and Extensible bindings will remain required and extensible respectively and will continue to point to the same value set",
+        "pt": "Bindings Required e Extensible permanecerão respectivamente como required e extensible e continuarão apontando para o mesmo conjunto de valores",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "Example and Preferred bindings may change to point to different value sets",
+        "pt": "Bindings Example e Preferred podem mudar para apontar para diferentes conjuntos de valores",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "en": "The Is Modifier and Is Summary flags will not be changed",
+        "pt": "Os indicadores Is Modifier e Is Summary não serão alterados",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "en": "New data types may be introduced. Types declared on existing elements will not be removed or changed, except that string may be changed to markdown",
+        "pt": "Novos tipos de dados podem ser introduzidos. Os tipos declarados em elementos existentes não serão removidos ou alterados, exceto o caso especial em que string pode ser alterado para markdown",
+        "correct": true
+      },
+      {
+        "key": "E",
+        "en": "Existing endpoints will not be renamed or removed, nor changed in a way that would make reasonable prior-version systems non-interoperable",
+        "pt": "Endpoints existentes não serão renomeados ou removidos, nem terão seu comportamento alterado de forma a tornar sistemas razoáveis das versões anteriores não interoperáveis",
+        "correct": true
+      },
+      {
+        "key": "F",
+        "en": "Profile structure, extension definitions and search criteria definitions will not be removed or have their URIs changed",
+        "pt": "Estrutura de perfis, definições de extensões e definições de critérios de busca não serão removidas nem terão suas URIs alteradas",
+        "correct": true
+      }
+    ],
+    "explanationEn": "All six statements (A–F) are correct inter-version change rules: binding strength stability, example/preferred bindings can shift, Is-Modifier/Is-Summary flags stable, new types allowed, endpoints stable, profiles/extensions/search definitions stable.",
+    "explanationPt": "Todos os seis enunciados (A–F) são regras corretas de mudança entre versões: estabilidade do nível de vinculação, vinculações example/preferred podem mudar, flags Is-Modifier/Is-Summary estáveis, novos tipos permitidos, endpoints estáveis, perfis/extensões/definições de busca estáveis."
+  },
+  {
+    "id": 10,
+    "titleEn": "Find info & give feedback – ways defined by FHIR",
+    "titlePt": "Encontrar info & dar feedback – formas definidas pelo FHIR",
+    "qEn": "Which of the following are the ways defined by FHIR for finding additional information and providing feedback? Select all that apply.",
+    "qPt": "Quais das seguintes são formas definidas pelo FHIR para obter informações adicionais e fornecer feedback? Selecione todas as que se aplicam.",
+    "type": "multi",
+    "options": [
+      {
+        "key": "A",
+        "en": "Formal change request through Jira tickets",
+        "pt": "Solicitação formal de mudança via tickets do Jira",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "Confluence pages provide documentation on processes, methodology and design decisions",
+        "pt": "Páginas do Confluence fornecem documentação sobre processos, metodologia e decisões de design",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "en": "HL7 provides a Stack Overflow tag for asking programming-related questions on FHIR",
+        "pt": "A HL7 disponibiliza uma tag no Stack Overflow para dúvidas de programação sobre FHIR",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "en": "Online chat system in the form of Zulip FHIR chat",
+        "pt": "Sistema de chat online no formato do chat FHIR no Zulip",
+        "correct": true
+      },
+      {
+        "key": "E",
+        "en": "FHIR Community forum",
+        "pt": "Fórum da Comunidade FHIR",
+        "correct": true
+      }
+    ],
+    "explanationEn": "All five channels are correct: (A) Jira for formal change requests, (B) Confluence for process documentation, (C) Stack Overflow for programming questions (tag: hl7-fhir), (D) Zulip for real-time chat, and (E) the FHIR Community forum for broader discussion.",
+    "explanationPt": "Todos os cinco canais estão corretos: (A) Jira para pedidos formais de mudança, (B) Confluence para documentação de processos, (C) Stack Overflow para questões de programação (tag: hl7-fhir), (D) Zulip para chat ao vivo, e (E) Fórum FHIR Community para discussão ampla."
+  }
+]

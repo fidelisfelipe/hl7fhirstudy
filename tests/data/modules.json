@@ -1,0 +1,8 @@
+{
+  "modules": [
+    { "key": "module1", "file": "data/m1_path.json" },
+    { "key": "module2", "file": "data/m2_path.json" },
+    { "key": "module3", "file": "data/m3_path.json" },
+    { "key": "module4", "file": "data/m4_path.json" }
+  ]
+}

@@ -1,0 +1,150 @@
+{
+  "module": "module4",
+  "titlePt": "Módulo 4 – Perfis e Implementation Guides",
+  "titleEn": "Module 4 – Profiling & Implementation Guides",
+  "examNotePt": "~11–17% da prova. Espere tabelas de perfis: elimine opção por opção, coluna a coluna.",
+  "examNoteEn": "~11–17% of the exam. Expect profile tables: eliminate option by option, column by column.",
+  "sources": {
+    "module4_1_q1": "quizzes/module4_1_q1.json",
+    "module4_2_q1": "quizzes/module4_2_q1.json",
+    "module4_cp": "quizzes/module4_cp.json"
+  },
+  "units": [
+    {
+      "id": "u1",
+      "titlePt": "Perfis e conformidade",
+      "titleEn": "Profiles & conformance",
+      "color": "#6ee7b7",
+      "lessons": [
+        {
+          "id": "m4-l1",
+          "titlePt": "Perfis: o que pode mudar",
+          "titleEn": "Profiles: what can change",
+          "card": {
+            "titlePt": "Um perfil só restringe — nunca afrouxa",
+            "titleEn": "A profile only constrains — never loosens",
+            "analogyPt": "Um perfil é como um formulário 'enxuto' de um documento padrão: você pode tornar campos obrigatórios e tirar opções, mas não pode liberar o que o original já travava.",
+            "analogyEn": "A profile is like a 'tightened' version of a standard form: you can make fields required and remove options, but you can't loosen what the original already locked.",
+            "pointsPt": [
+              "Perfil = StructureDefinition com <b>derivation=constraint</b>; deriva por restrição, não inventa elementos novos.",
+              "PODE: aumentar mínimo (0..1→1..1), diminuir máximo (0..*→0..1), fixar valor, adicionar extensões, fortalecer binding (preferred→required), restringir tipos referenciados.",
+              "NÃO PODE: tornar obrigatório em opcional (1..1→0..1), aumentar máximo além do base, enfraquecer binding (required→extensible), mudar o tipo de um elemento.",
+              "Mnemônico <b>APETAM</b>: Aumenta mínimo · fixa valor (Perfil) · Extensões · Tipos referenciados · Adiciona invariantes · Máximo só diminui."
+            ],
+            "pointsEn": [
+              "Profile = StructureDefinition with <b>derivation=constraint</b>; derives by restriction, doesn't invent new elements.",
+              "CAN: raise min (0..1→1..1), lower max (0..*→0..1), fix a value, add extensions, strengthen binding (preferred→required), restrict referenced types.",
+              "CANNOT: make required→optional (1..1→0..1), raise max beyond base, weaken binding (required→extensible), change an element's type.",
+              "Mnemonic: raise min, fix value, extensions, restrict referenced types, add invariants, lower max only."
+            ],
+            "trapPt": "<b>Must Support (S) ≠ obrigatório.</b> Um elemento pode ser <b>S 0..*</b> (deve processar se presente, mas opcional). Obrigatoriedade vem da cardinalidade mínima.",
+            "trapEn": "<b>Must Support (S) ≠ required.</b> An element can be <b>S 0..*</b> (must process if present, but optional). Required-ness comes from min cardinality.",
+            "refs": [
+              { "kind": "spec", "labelPt": "Profiling — um perfil só restringe, nunca afrouxa", "labelEn": "Profiling — a profile only constrains, never loosens", "url": "https://hl7.org/fhir/R4/profiling.html" },
+              { "kind": "spec", "labelPt": "Conformance rules — Must Support vs required", "labelEn": "Conformance rules — Must Support vs required", "url": "https://hl7.org/fhir/R4/conformance-rules.html#mustSupport" },
+              { "kind": "material", "labelPt": "Material do curso — Módulo 4 · Part 1 \"FHIR Profiling\"", "labelEn": "Course material — Module 4 · Part 1 \"FHIR Profiling\"", "url": "../module-4.md" }
+            ]
+          },
+          "items": [
+            "module4_1_q1#1",
+            "module4_1_q1#2",
+            "module4_1_q1#3"
+          ]
+        },
+        {
+          "id": "m4-l2",
+          "titlePt": "Slicing, validação e eliminação",
+          "titleEn": "Slicing, validation & elimination",
+          "card": {
+            "titlePt": "Diferenciar fatias e validar instâncias",
+            "titleEn": "Differentiate slices and validate instances",
+            "analogyPt": "Slicing é como rotular gavetas de um arquivo repetível: cada fatia tem uma regra (discriminador). 'Open' aceita gavetas extras; 'closed' não.",
+            "analogyEn": "Slicing is like labeling drawers in a repeatable file: each slice has a rule (discriminator). 'Open' accepts extra drawers; 'closed' doesn't.",
+            "pointsPt": [
+              "Slicing diferencia repetições de um elemento 0..*/1..* por <b>discriminador</b>: value, pattern, type, profile, exists.",
+              "<b>rules=open</b> permite fatias extras não definidas; <b>rules=closed</b> proíbe.",
+              "Validação em 3 níveis: estrutural (sintaxe) → spec base → perfil (cardinalidade, Must Support, slicing, invariantes).",
+              "OperationOutcome: <b>error</b> e <b>fatal</b> impedem o processamento; <b>warning</b> não impede."
+            ],
+            "pointsEn": [
+              "Slicing differentiates repetitions of a 0..*/1..* element via a <b>discriminator</b>: value, pattern, type, profile, exists.",
+              "<b>rules=open</b> allows extra undefined slices; <b>rules=closed</b> forbids them.",
+              "3 validation levels: structural (syntax) → base spec → profile (cardinality, Must Support, slicing, invariants).",
+              "OperationOutcome: <b>error</b> and <b>fatal</b> block processing; <b>warning</b> does not."
+            ],
+            "trapPt": "<b>URLs canônicas:</b> <code>http://loinc.org</code> e <code>http://unitsofmeasure.org</code> (UCUM) são corretas. Texto puro 'LOINC'/'UCUM' invalida o perfil. Binding <b>extensible</b> permite código alternativo só quando não há equivalente no VS.",
+            "trapEn": "<b>Canonical URLs:</b> <code>http://loinc.org</code> and <code>http://unitsofmeasure.org</code> (UCUM) are correct. Plain text 'LOINC'/'UCUM' invalidates the profile. <b>extensible</b> binding allows an alternative code only when there's no VS equivalent.",
+            "refs": [
+              { "kind": "spec", "labelPt": "Profiling — slicing e discriminator", "labelEn": "Profiling — slicing and discriminator", "url": "https://hl7.org/fhir/R4/profiling.html#slicing" },
+              { "kind": "spec", "labelPt": "Validation — validar instâncias contra perfis", "labelEn": "Validation — validating instances against profiles", "url": "https://hl7.org/fhir/R4/validation.html" },
+              { "kind": "material", "labelPt": "Material do curso — Módulo 4 · Part 1 \"Slicing / Fatiamento\"", "labelEn": "Course material — Module 4 · Part 1 \"Slicing\"", "url": "../module-4.md" }
+            ]
+          },
+          "items": [
+            "module4_1_q1#4",
+            "module4_1_q1#5"
+          ]
+        }
+      ],
+      "checkpoint": {
+        "items": [
+          "module4_cp#1",
+          "module4_cp#2",
+          "module4_cp#3",
+          "module4_cp#4"
+        ]
+      }
+    },
+    {
+      "id": "u2",
+      "titlePt": "Implementation Guides",
+      "titleEn": "Implementation Guides",
+      "color": "#fcd34d",
+      "lessons": [
+        {
+          "id": "m4-l3",
+          "titlePt": "Escolher o IG certo",
+          "titleEn": "Choosing the right IG",
+          "card": {
+            "titlePt": "Reconheça as palavras-gatilho de cada IG",
+            "titleEn": "Recognize each IG's trigger words",
+            "analogyPt": "Escolher um IG é como escolher o manual certo pela palavra-chave do problema: cada cenário tem um termo que aponta o guia.",
+            "analogyEn": "Choosing an IG is like picking the right manual by the problem's keyword: each scenario has a term that points to the guide.",
+            "pointsPt": [
+              "<b>US Core</b>: dados mínimos de interoperabilidade nos EUA.",
+              "<b>IPS</b>: cuidado <b>não programado transfronteiriço</b> ('turista em emergência em outro país').",
+              "<b>CARIN</b>: dados de sinistros para o consumidor ('<b>EOB</b>', 'portal do membro').",
+              "<b>DaVinci PDex</b> (pagador→provedor) vs <b>CDex</b> (clínico provedor↔pagador, 'prior authorization'); <b>Argonaut Provider Directory</b>: diretório de profissionais EUA (role + organização)."
+            ],
+            "pointsEn": [
+              "<b>US Core</b>: minimum interoperability data in the US.",
+              "<b>IPS</b>: <b>unplanned cross-border</b> care ('tourist in emergency in another country').",
+              "<b>CARIN</b>: claims data for the consumer ('<b>EOB</b>', 'member portal').",
+              "<b>DaVinci PDex</b> (payer→provider) vs <b>CDex</b> (clinical provider↔payer, 'prior authorization'); <b>Argonaut Provider Directory</b>: US practitioner directory (role + organization)."
+            ],
+            "trapPt": "<b>PDex vs CARIN</b>: PDex é pagador→<b>provedor</b> (dados clínicos do plano para o médico); CARIN é pagador→<b>consumidor</b>. O sinal definitivo de CARIN é 'EOB' ou 'portal do membro'.",
+            "trapEn": "<b>PDex vs CARIN</b>: PDex is payer→<b>provider</b> (plan clinical data to the doctor); CARIN is payer→<b>consumer</b>. The definitive CARIN signal is 'EOB' or 'member portal'.",
+            "refs": [
+              { "kind": "spec", "labelPt": "ImplementationGuide — o que é um IG", "labelEn": "ImplementationGuide — what an IG is", "url": "https://hl7.org/fhir/R4/implementationguide.html" },
+              { "kind": "spec", "labelPt": "US Core IG — palavras-gatilho do IG mais cobrado", "labelEn": "US Core IG — trigger words of the most tested IG", "url": "https://hl7.org/fhir/us/core/" },
+              { "kind": "material", "labelPt": "Material do curso — Módulo 4 · Part 2 \"Principais IGs / selecionar o IG\"", "labelEn": "Course material — Module 4 · Part 2 \"Main IGs / selecting the IG\"", "url": "../module-4.md" }
+            ]
+          },
+          "items": [
+            "module4_2_q1#1",
+            "module4_2_q1#2",
+            "module4_2_q1#3"
+          ]
+        }
+      ],
+      "checkpoint": {
+        "items": [
+          "module4_cp#5",
+          "module4_cp#6",
+          "module4_cp#7",
+          "module4_cp#8"
+        ]
+      }
+    }
+  ]
+}

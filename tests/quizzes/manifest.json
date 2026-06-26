@@ -1,0 +1,124 @@
+{
+  "modules": [
+    {
+      "key": "module1_q1",
+      "titleEn": "Module 1 – Principles (Quiz 1)",
+      "titlePt": "Módulo 1 – Princípios (Quiz 1)",
+      "file": "quizzes/module1_q1.json"
+    },
+    {
+      "key": "module1_q2",
+      "titleEn": "Module 1 – Principles (Quiz 2)",
+      "titlePt": "Módulo 1 – Princípios (Quiz 2)",
+      "file": "quizzes/module1_q2.json"
+    },
+    {
+      "key": "module2_q1",
+      "titleEn": "Module 2 – Use existing extensions for a use case (Quiz 1)",
+      "titlePt": "Módulo 2 – Usar extensões existentes para um caso de uso (Quiz 1)",
+      "file": "quizzes/module2_q1.json"
+    },
+    {
+        "key": "module2_q2",
+        "titleEn": "Module 2 – Use selected element based on a use case (Quiz 2)",
+        "titlePt": "Módulo 2 – Usar elemento selecionado com base em um caso de uso (Quiz 2)",
+        "file": "quizzes/module2_q2.json"
+    },
+    {
+        "key": "module2_q3",
+        "titleEn": "Module 2 – Use terminology for a use case (Quiz 3)",
+        "titlePt": "Módulo 2 – Usar terminologia para um caso de uso (Quiz 3)",
+        "file": "quizzes/module2_q3.json"
+    },
+    {
+      "key": "module2a_q1",
+      "titleEn": "Module 2a – Select resources based on use case (Quiz 1)",
+      "titlePt": "Módulo 2a – Selecionar recursos com base no caso de uso (Quiz 1)",
+      "file": "quizzes/module2a_q1.json"
+    },
+    {
+      "key": "module2a_q2",
+      "titleEn": "Module 2a – Determine suitability of element based on use case (Quiz 2)",
+      "titlePt": "Módulo 2a – Determinar a adequação do elemento com base no caso de uso (Quiz 2)",
+      "file": "quizzes/module2a_q2.json"
+    },
+    {
+      "key": "module2a_q3",
+      "titleEn": "Module 2a – Determine existing extensions for a use case (Quiz 3)",
+      "titlePt": "Módulo 2a – Determinar extensões existentes para um caso de uso (Quiz 3)",
+      "file": "quizzes/module2a_q3.json"
+    },
+    {
+      "key": "module2a_q4",
+      "titleEn": "Module 2a – Determine terminology for a use case (Quiz 4)",
+      "titlePt": "Módulo 2a – Determinar terminologia para um caso de uso (Quiz 4)",
+      "file": "quizzes/module2a_q4.json"
+    },
+    {
+      "key": "module3_q1",
+      "titleEn": "Module 3 – Select RESTful API methods for specific interactions (Quiz 1)",
+      "titlePt": "Módulo 3 – Selecionar métodos de API RESTful para interações específicas (Quiz 1)",
+      "file": "quizzes/module3_1_q1.json"
+    },
+    {
+      "key": "module3_2_q1",
+      "titleEn": "Module 3 – Determine search parameter availability for resources (Quiz 1)",
+      "titlePt": "Módulo 3 – Determinar a disponibilidade de parâmetros de pesquisa para recursos (Quiz 1)",
+      "file": "quizzes/module3_2_q1.json"
+    },
+    {
+      "key": "module3_2_q2",
+      "titleEn": "Module 3 – Use search parameter availability for resources (Quiz 2)",
+      "titlePt": "Módulo 3 – Usar a disponibilidade de parâmetros de pesquisa para recursos (Quiz 2)",
+      "file": "quizzes/module3_2_q2.json"
+    },
+    {
+      "key": "module3_3_q1",
+      "titleEn": "Module 3 – Select Bundle features for a use case (Quiz 1)",
+      "titlePt": "Módulo 3 – Select Bundle features for a use case (Quiz 1)",
+      "file": "quizzes/module3_3_q1.json"
+    },
+    {
+      "key": "module3_4_q1",
+      "titleEn": "Module 3 – Select operations for a use case (Quiz 1)",
+      "titlePt": "Módulo 3 – Selecionar operações para um caso de uso (Quiz 1)",
+      "file": "quizzes/module3_4_q1.json"
+    },
+    {
+      "key": "module3_4_q2",
+      "titleEn": "Module 3 – Use operations for a use case (Quiz 2)",
+      "titlePt": "Módulo 3 – Usar operações para um caso de uso (Quiz 2)",
+      "file": "quizzes/module3_4_q2.json"
+    },
+    {
+      "key": "module3_4_q3",
+      "titleEn": "Module 3 – Interpret a capability statement (Quiz 3)",
+      "titlePt": "Módulo 3 – Interpretar um capability statement (Quiz 3)",
+      "file": "quizzes/module3_4_q3.json"
+    },
+    {
+      "key": "module3_5_q1",
+      "titleEn": "Module 3 – Follow safety checklist (Quiz 1)",
+      "titlePt": "Módulo 3 – Seguir checklist de segurança funcional (Quiz 1)",
+      "file": "quizzes/module3_5_q1.json"
+    },
+    {
+      "key": "module3_5_q2",
+      "titleEn": "Module 3 – Follow security checklist (Quiz 2)",
+      "titlePt": "Módulo 3 – Seguir checklist de segurança técnica (Quiz 2)",
+      "file": "quizzes/module3_5_q2.json"
+    },
+    {
+      "key": "module4_1_q1",
+      "titleEn": "Module 4 – Select profiles based on use case (Quiz 1)",
+      "titlePt": "Módulo 4 – Selecionar perfis com base no caso de uso (Quiz 1)",
+      "file": "quizzes/module4_1_q1.json"
+    },
+    {
+      "key": "module4_2_q1",
+      "titleEn": "Module 4 – Determine which implementation guide to use (Quiz 1)",
+      "titlePt": "Módulo 4 – Determinar qual guia de implementação usar (Quiz 1)",
+      "file": "quizzes/module4_2_q1.json"
+    }
+  ]
+}

@@ -1,0 +1,159 @@
+[
+
+
+  {
+    "id": 1,
+    "module": "Module 3 - Unit 3",
+    "titleEn": "Which Bundle type is returned for a search request?",
+    "titlePt": "Qual tipo de Bundle é retornado para uma busca?",
+    "qEn": "On an FHIR server, a client application runs the query:\n\nGET http://test.fhir.org/r4/Patient?_id=71\n\nWhich type of FHIR Bundle should the server return for this request?",
+    "qPt": "Em um servidor FHIR, um aplicativo cliente executa a consulta:\n\nGET http://test.fhir.org/r4/Patient?_id=71\n\nQual tipo de Bundle FHIR o servidor deve retornar para essa requisição?",
+    "type": "single",
+    "media": [],
+    "options": [
+      { "key": "A", "en": "searchset", "pt": "searchset", "correct": true },
+      { "key": "B", "en": "collection", "pt": "collection", "correct": false },
+      { "key": "C", "en": "history", "pt": "history", "correct": false },
+      { "key": "D", "en": "No Bundle, just individual Patient resource instance", "pt": "Sem Bundle, apenas a instância do recurso Patient", "correct": false }
+    ],
+    "explanationEn": "Because the request is a **search** (note the '?' and a search parameter), the response must be a Bundle of type **searchset**. Even if only one Patient matches, the server returns a Bundle. 'collection' is for arbitrary sets not produced by a search, 'history' is for history interactions, and a single resource instance is returned only for a read-by-id (e.g., GET Patient/71).",
+    "explanationPt": "Como a requisição é uma **busca** (observe o '?' e um parâmetro de pesquisa), a resposta deve ser um Bundle do tipo **searchset**. Mesmo que apenas um Patient corresponda, o servidor retorna um Bundle. 'collection' é para conjuntos arbitrários não produzidos por busca, 'history' é para interações de histórico e uma única instância do recurso é retornada apenas para leitura por id (ex.: GET Patient/71)."
+  },
+  {
+    "id": 2,
+    "module": "Module 3 - Unit 3",
+    "titleEn": "Which Bundle type to send vitals + patient + device all-or-nothing?",
+    "titlePt": "Qual tipo de Bundle para enviar sinais vitais + paciente + dispositivo tudo-ou-nada?",
+    "qEn": "A patient's vitals were recorded by a wearable. The FHIR server must receive all vitals (Observation resources), patient demographics, and device details in one go. The sender must update the existing Patient (not create a new one) and requires that either all requested actions succeed or none are applied. Which Bundle type should the client use?",
+    "qPt": "Os sinais vitais de um paciente foram registrados por um wearable. O servidor FHIR deve receber todos os vitais (Observations), os dados demográficos do paciente e os detalhes do dispositivo de uma vez. O cliente deve atualizar o Patient existente (não criar outro) e exige que ou todas as ações sejam aplicadas ou nenhuma. Qual tipo de Bundle o cliente deve usar?",
+    "type": "single",
+    "media": [],
+    "options": [
+      { "key": "A", "en": "document", "pt": "document", "correct": false },
+      { "key": "B", "en": "batch", "pt": "batch", "correct": false },
+      { "key": "C", "en": "transaction", "pt": "transaction", "correct": true },
+      { "key": "D", "en": "message", "pt": "message", "correct": false }
+    ],
+    "explanationEn": "Use a **Bundle.type = transaction** to perform an atomic set of operations in a single request/response—either all entries succeed or none are applied. Inside the transaction the existing Patient can be updated via PUT (or conditional update). **batch** executes entries independently (not atomic); **document** is a signed clinical document; **message** is for event messaging, not bulk create/update.",
+    "explanationPt": "Use **Bundle.type = transaction** para executar um conjunto atômico de operações em uma única requisição/resposta—ou todas as entradas são aplicadas ou nenhuma. Dentro do transaction o Patient existente pode ser atualizado via PUT (ou update condicional). **batch** executa entradas de forma independente (não atômico); **document** é um documento clínico assinado; **message** é para mensageria de eventos, não para criar/atualizar em lote."
+  },
+  {
+    "id": 3,
+    "module": "Module 3 - Unit 3",
+    "titleEn": "Which Bundle type to run multiple searches in one request?",
+    "titlePt": "Qual tipo de Bundle para executar várias buscas em uma única requisição?",
+    "qEn": "A client application needs to retrieve a patient’s **conditions**, **medication statements**, and **blood pressure Observations** since a given date, issuing several GET searches together. Which kind of Bundle should the implementer choose?",
+    "qPt": "Um aplicativo cliente precisa recuperar as **conditions**, **medication statements** e **Observations** de pressão arterial de um paciente desde uma data informada, executando várias buscas (GET) em conjunto. Qual tipo de Bundle o implementador deve escolher?",
+    "type": "single",
+    "media": [],
+    "options": [
+      { "key": "A", "en": "searchset", "pt": "searchset", "correct": false },
+      { "key": "B", "en": "document", "pt": "document", "correct": false },
+      { "key": "C", "en": "batch", "pt": "batch", "correct": true },
+      { "key": "D", "en": "message", "pt": "message", "correct": false }
+    ],
+    "explanationEn": "Use **Bundle.type = batch** to submit multiple independent requests (e.g., several GET searches) in a single HTTP request. Each entry has `Bundle.entry.request` describing the GET. Atomicity is not required; that's what **transaction** would provide. **searchset** is a *response* bundle type returned by a search, not a request container. **document** and **message** are not for grouping ad-hoc searches.",
+    "explanationPt": "Use **Bundle.type = batch** para enviar várias requisições independentes (por exemplo, diversas buscas GET) em uma única chamada HTTP. Cada entrada possui `Bundle.entry.request` descrevendo o GET. Não há necessidade de atomicidade; isso seria com **transaction**. **searchset** é um tipo de *resposta* de busca, não um contêiner de requisições. **document** e **message** não servem para agrupar buscas ad hoc."
+  },
+  {
+    "id": 4,
+    "module": "Module 3 - Unit 3",
+    "titleEn": "Which Bundle type is returned when requesting all versions of a resource?",
+    "titlePt": "Qual tipo de Bundle é retornado ao solicitar todas as versões de um recurso?",
+    "qEn": "An application developer needs to retrieve all the different versions of each FHIR Encounter resource instance. What will be the returned Bundle type in this case?",
+    "qPt": "Um desenvolvedor precisa recuperar todas as diferentes versões de cada instância do recurso FHIR Encounter. Qual será o tipo de Bundle retornado nesse caso?",
+    "type": "single",
+    "media": [],
+    "options": [
+      { "key": "A", "en": "searchset", "pt": "searchset", "correct": false },
+      { "key": "B", "en": "history", "pt": "history", "correct": true },
+      { "key": "C", "en": "collection", "pt": "collection", "correct": false },
+      { "key": "D", "en": "list", "pt": "list", "correct": false }
+    ],
+    "explanationEn": "Requests that return version history (e.g., GET Encounter/{id}/_history or type-level history) produce a Bundle of type **history**. **searchset** is used for search responses, **collection** is for arbitrary sets not produced by search/history, and **list** is a separate List resource, not a Bundle type.",
+    "explanationPt": "Requisições que retornam o histórico de versões (por exemplo, GET Encounter/{id}/_history ou histórico por tipo) produzem um Bundle do tipo **history**. **searchset** é usado para respostas de busca, **collection** é para conjuntos arbitrários não gerados por busca/histórico e **list** é um recurso List separado, não um tipo de Bundle."
+  },
+  {
+    "id": 5,
+    "module": "Module 3 - Unit 3",
+    "titleEn": "Which Bundle type to send a clinical progress note to another hospital?",
+    "titlePt": "Qual tipo de Bundle para enviar uma evolução clínica (Progress Note) a outro hospital?",
+    "qEn": "A hospital EMR needs to send a patient’s **Progress note** to another hospital system. Which FHIR Bundle type should be used?",
+    "qPt": "Um prontuário eletrônico hospitalar precisa enviar a **evolução clínica (Progress note)** de um paciente para outro sistema hospitalar. Qual tipo de Bundle FHIR deve ser usado?",
+    "type": "single",
+    "media": [],
+    "options": [
+      { "key": "A", "en": "document", "pt": "document", "correct": true },
+      { "key": "B", "en": "message", "pt": "message", "correct": false },
+      { "key": "C", "en": "history", "pt": "history", "correct": false },
+      { "key": "D", "en": "transaction", "pt": "transaction", "correct": false }
+    ],
+    "explanationEn": "Clinical documents (e.g., a Progress note) are exchanged as a **Bundle.type = document**, which contains a Composition as the first entry and represents a persistent, signed clinical document. **message** is for event messaging, **history** is for version history, and **transaction** is for atomic sets of CRUD operations.",
+    "explanationPt": "Documentos clínicos (por exemplo, uma evolução/Progress note) são trocados como **Bundle.type = document**, que inclui uma Composition como primeira entrada e representa um documento clínico persistente e assinado. **message** é para mensageria de eventos, **history** é para histórico de versões e **transaction** é para conjuntos atômicos de operações CRUD."
+  },
+  {
+    "id": 6,
+    "module": "Module 3 - Unit 3",
+    "titleEn": "Which Bundle type allows independent processing of entries?",
+    "titlePt": "Qual tipo de Bundle permite processar entradas de forma independente?",
+    "qEn": "An application developer must send patient allergies from the last month in a Bundle. The FHIR server should create or update resources according to each entry.request and process the entries that are correct, while ignoring those with issues. Which Bundle type should be used?",
+    "qPt": "Um desenvolvedor precisa enviar, em um Bundle, as alergias do paciente registradas no último mês. O servidor FHIR deve criar ou atualizar os recursos conforme cada entry.request e processar as entradas corretas, ignorando aquelas com problemas. Qual tipo de Bundle deve ser usado?",
+    "type": "single",
+    "media": [],
+    "options": [
+      { "key": "A", "en": "transaction", "pt": "transaction", "correct": false },
+      { "key": "B", "en": "batch", "pt": "batch", "correct": true },
+      { "key": "C", "en": "document", "pt": "document", "correct": false },
+      { "key": "D", "en": "message", "pt": "message", "correct": false }
+    ],
+    "explanationEn": "**Bundle.type = batch** processes each entry independently; some entries may succeed while others fail/are ignored. **transaction** is all-or-nothing (atomic). **document** is for clinical documents (Composition as first entry), and **message** is for event messaging—not bulk create/update.",
+    "explanationPt": "**Bundle.type = batch** processa cada entrada de forma independente; algumas podem ser aplicadas enquanto outras falham/são ignoradas. **transaction** é tudo-ou-nada (atômico). **document** é para documentos clínicos (Composition como primeira entrada) e **message** é para mensageria de eventos—não para criar/atualizar em lote."
+  },
+  {
+    "id": 7,
+    "module": "Module 3 - Unit 4",
+    "titleEn": "Which Bundle type to request eligibility from a payer system?",
+    "titlePt": "Qual tipo de Bundle para solicitar elegibilidade ao sistema pagador?",
+    "qEn": "A provider application must check a patient's insurance eligibility at admission. The app sends a request to the payer **in a Bundle**, and the payer replies with the eligibility details. Which Bundle type should the provider use?",
+    "qPt": "Um aplicativo do prestador precisa verificar a elegibilidade do convênio do paciente na admissão. O app envia a solicitação ao pagador **em um Bundle**, e o pagador responde com os detalhes de elegibilidade. Qual tipo de Bundle o prestador deve usar?",
+    "type": "single",
+    "media": [],
+    "options": [
+      { "key": "A", "en": "transaction", "pt": "transaction", "correct": false },
+      { "key": "B", "en": "batch", "pt": "batch", "correct": false },
+      { "key": "C", "en": "document", "pt": "document", "correct": false },
+      { "key": "D", "en": "message", "pt": "message", "correct": true }
+    ],
+    "explanationEn": "Use **Bundle.type = message** for request/response event messaging. A message Bundle starts with a **MessageHeader** that identifies the event (e.g., an eligibility check) and carries routing/metadata, followed by the relevant resources. **transaction** is atomic CRUD, **batch** is independent requests, and **document** is for clinical documents (Composition-first).",
+    "explanationPt": "Use **Bundle.type = message** para mensageria de requisição/resposta orientada a eventos. Um Bundle de mensagem inicia com **MessageHeader** que identifica o evento (ex.: checagem de elegibilidade) e carrega metadados/roteamento, seguido pelos recursos relevantes. **transaction** é CRUD atômico, **batch** são requisições independentes e **document** é para documentos clínicos (Composition primeiro)."
+  },
+  {
+    "id": 8,
+    "module": "Module 3 - Unit 4",
+    "titleEn": "What Bundle type should the payer use to reply to a claim message?",
+    "titlePt": "Qual tipo de Bundle o pagador deve usar para responder a uma mensagem de Claim?",
+    "qEn": "A client application submits a physician claim to the insurer using a **Bundle.type = message**. The insurer processes it and replies with a Bundle that includes a ClaimResponse resource. Which Bundle type should the insurer send back?",
+    "qPt": "Um cliente envia um pedido (claim) do médico ao pagador usando **Bundle.type = message**. O pagador processa e responde com um Bundle que inclui um recurso ClaimResponse. Qual tipo de Bundle o pagador deve enviar de volta?",
+    "type": "single",
+    "media": [],
+    "options": [
+      { "key": "A", "en": "message", "pt": "message", "correct": true },
+      { "key": "B", "en": "message-response", "pt": "message-response", "correct": false },
+      { "key": "C", "en": "process-message", "pt": "process-message", "correct": false },
+      { "key": "D", "en": "collection", "pt": "collection", "correct": false }
+    ],
+    "explanationEn": "FHIR messaging uses **Bundle.type = message** for both request and response. The response Bundle begins with a MessageHeader and contains resources such as ClaimResponse. There is no Bundle type named \"message-response\"; \"process-message\" is an operation name, and \"collection\" is not used for messaging exchanges.",
+    "explanationPt": "Em FHIR messaging, usa-se **Bundle.type = message** tanto para a requisição quanto para a resposta. O Bundle de resposta inicia com MessageHeader e inclui recursos como ClaimResponse. Não existe um tipo de Bundle chamado \"message-response\"; \"process-message\" é o nome de uma operação e \"collection\" não é usado para trocas de mensagens."
+  }
+
+
+
+
+
+
+
+
+
+
+
+]

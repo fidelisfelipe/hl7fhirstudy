@@ -1,0 +1,218 @@
+[
+  {
+    "id": 1,
+    "titleEn": "Identify supported Patient interactions from CapabilityStatement",
+    "titlePt": "Identificar interações suportadas no recurso Patient a partir do CapabilityStatement",
+    "qEn": "A client receives this element as part of the CapabilityStatement of a server:\n\n```json\n\"rest\": [{\n  \"mode\": \"server\",\n  \"resource\": [{\n    \"type\": \"Patient\",\n    \"profile\": \"http://hl7.org/fhir/StructureDefinition/Account\",\n    \"interaction\": [\n      { \"code\": \"read\" },\n      { \"code\": \"update\" },\n      { \"code\": \"vread\" }\n    ]\n  }]\n}]\n```\n\nWhat are the supported interactions on the Patient resource?",
+    "qPt": "Um cliente recebe este elemento como parte do CapabilityStatement de um servidor:\n\n```json\n\"rest\": [{\n  \"mode\": \"server\",\n  \"resource\": [{\n    \"type\": \"Patient\",\n    \"profile\": \"http://hl7.org/fhir/StructureDefinition/Account\",\n    \"interaction\": [\n      { \"code\": \"read\" },\n      { \"code\": \"update\" },\n      { \"code\": \"vread\" }\n    ]\n  }]\n}]\n```\n\nQuais são as interações suportadas no recurso Patient?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "Existing instances of the Patient resource can be deleted",
+        "pt": "Instâncias existentes do recurso Patient podem ser excluídas",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "Existing instances of the Patient resource can be created",
+        "pt": "Instâncias existentes do recurso Patient podem ser criadas",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "Existing instances of the Patient resource can be retrieved along with the versions",
+        "pt": "Instâncias existentes do recurso Patient podem ser recuperadas junto com as versões",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "en": "Existing instances of the Patient resource can be retrieved but not the versions",
+        "pt": "Instâncias existentes do recurso Patient podem ser recuperadas, mas não as versões",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The CapabilityStatement lists `read` and `vread` (version read) interactions for Patient. `vread` means the server supports retrieving specific versions of a resource instance. Together, `read` and `vread` indicate that existing instances can be retrieved along with their versions. `delete` and `create` (POST) are not listed.",
+    "explanationPt": "O CapabilityStatement lista as interações `read` e `vread` (version read) para o Patient. `vread` significa que o servidor suporta recuperar versões específicas de uma instância. Juntos, `read` e `vread` indicam que instâncias existentes podem ser recuperadas junto com suas versões. `delete` e `create` (POST) não estão listados."
+  },
+  {
+    "id": 2,
+    "titleEn": "Identify the interaction that supports change history for a resource instance",
+    "titlePt": "Identificar a interação que suporta histórico de mudanças de uma instância de recurso",
+    "qEn": "An application needs to retrieve the change history for a particular resource from a FHIR server.\n\nWhat interaction in the CapabilityStatement indicates support for this requirement?",
+    "qPt": "Uma aplicação precisa recuperar o histórico de mudanças de um recurso específico de um servidor FHIR.\n\nQual interação no CapabilityStatement indica suporte a esse requisito?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "history-instance",
+        "pt": "history-instance",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "history-type",
+        "pt": "history-type",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "_history",
+        "pt": "_history",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "vread",
+        "pt": "vread",
+        "correct": false
+      }
+    ],
+    "explanationEn": "`history-instance` retrieves the change history for a particular resource instance. Example: `GET [base]/Patient/71/_history`. `history-type` retrieves history for all instances of a resource type. `_history` is the URL suffix used in the actual request, not an interaction code in the CapabilityStatement. `vread` reads a specific version, not the full history.",
+    "explanationPt": "`history-instance` recupera o histórico de mudanças de uma instância específica de recurso. Exemplo: `GET [base]/Patient/71/_history`. `history-type` recupera o histórico de todos os instâncias de um tipo de recurso. `_history` é o sufixo de URL usado na requisição real, não um código de interação no CapabilityStatement. `vread` lê uma versão específica, não o histórico completo."
+  },
+  {
+    "id": 3,
+    "titleEn": "Retrieve the CapabilityStatement of a FHIR server",
+    "titlePt": "Recuperar o CapabilityStatement de um servidor FHIR",
+    "qEn": "A client application needs to understand which resources and API features are supported by the FHIR server.\n\nWhich of the following options will retrieve this information from the FHIR server?",
+    "qPt": "Uma aplicação cliente precisa entender quais recursos e funcionalidades de API são suportados pelo servidor FHIR.\n\nQual das opções a seguir recuperará essa informação do servidor FHIR?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "[base]/CapabilityStatement",
+        "pt": "[base]/CapabilityStatement",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "[base]/StructureDefinition",
+        "pt": "[base]/StructureDefinition",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "[base]/ConformanceStatement",
+        "pt": "[base]/ConformanceStatement",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "[base]/metadata",
+        "pt": "[base]/metadata",
+        "correct": true
+      }
+    ],
+    "explanationEn": "The CapabilityStatement of a RESTful FHIR server is retrieved via `GET [base]/metadata`. The path `/CapabilityStatement` is the resource type endpoint (for CRUD), not the server-capabilities endpoint. `/ConformanceStatement` was the old name in DSTU2, replaced by CapabilityStatement in STU3+.",
+    "explanationPt": "O CapabilityStatement de um servidor FHIR RESTful é recuperado via `GET [base]/metadata`. O caminho `/CapabilityStatement` é o endpoint do tipo de recurso (para CRUD), não o endpoint de capacidades do servidor. `/ConformanceStatement` era o nome antigo no DSTU2, substituído por CapabilityStatement a partir do STU3."
+  },
+  {
+    "id": 4,
+    "titleEn": "Locate search parameter support for Observation in a CapabilityStatement",
+    "titlePt": "Localizar suporte a parâmetro de pesquisa para Observation no CapabilityStatement",
+    "qEn": "A client application needs to check that a FHIR server can search for Observation resource instances referring to the patient whose resource id is 71.\n\nWhich section of the capability statement should the application analyze?",
+    "qPt": "Uma aplicação cliente precisa verificar se um servidor FHIR consegue pesquisar instâncias do recurso Observation referentes ao paciente com id 71.\n\nQual seção do capability statement a aplicação deve analisar?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "The searchParam element inside of the rest.resource element with type = \"Patient\"",
+        "pt": "O elemento searchParam dentro do elemento rest.resource com type = \"Patient\"",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "The searchParam element inside of the rest.resource element with type = \"Observation\"",
+        "pt": "O elemento searchParam dentro do elemento rest.resource com type = \"Observation\"",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "en": "The patient element inside of the SearchParameters element with type = \"Observation\"",
+        "pt": "O elemento patient dentro do elemento SearchParameters com type = \"Observation\"",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "The searchParam element inside of the rest element with type = \"Observation\"",
+        "pt": "O elemento searchParam dentro do elemento rest com type = \"Observation\"",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The CapabilityStatement contains a `searchParam` element listing all search parameters for each resource type. Since we need to search Observation resources *by patient reference*, the relevant section is `rest.resource[type=\"Observation\"].searchParam`. The `patient` search parameter there would confirm whether searching Observations by patient reference is supported.",
+    "explanationPt": "O CapabilityStatement contém um elemento `searchParam` que lista todos os parâmetros de pesquisa para cada tipo de recurso. Como precisamos pesquisar recursos Observation *por referência de paciente*, a seção relevante é `rest.resource[type=\"Observation\"].searchParam`. O parâmetro `patient` ali confirmaria se a busca de Observations por referência de paciente é suportada."
+  },
+  {
+    "id": 5,
+    "titleEn": "Check CapabilityStatement support for Bundle transactions",
+    "titlePt": "Verificar suporte a transações de Bundle no CapabilityStatement",
+    "qEn": "An implementer needs to send a Bundle of type=transaction with 10 Patient resources in it to a RESTful FHIR server.\n\nWhat information should the implementer look for in the server's CapabilityStatement to ensure support for sending transactions?",
+    "qPt": "Um implementador precisa enviar um Bundle do tipo transaction com 10 recursos Patient para um servidor FHIR RESTful.\n\nQue informação o implementador deve procurar no CapabilityStatement do servidor para garantir suporte ao envio de transações?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "Check for the \"transaction\" code in the rest.resource.interaction element with type = \"Bundle\"",
+        "pt": "Verificar o código \"transaction\" no elemento rest.resource.interaction com type = \"Bundle\"",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "Check for the \"transaction\" code in the rest.resource.interaction element with type = \"Patient\"",
+        "pt": "Verificar o código \"transaction\" no elemento rest.resource.interaction com type = \"Patient\"",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "Check for the \"transaction\" code in the rest.interaction element",
+        "pt": "Verificar o código \"transaction\" no elemento rest.interaction",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "en": "Check for the \"transaction\" code in the rest.interaction element with type = \"Bundle\"",
+        "pt": "Verificar o código \"transaction\" no elemento rest.interaction com type = \"Bundle\"",
+        "correct": false
+      }
+    ],
+    "explanationEn": "A Bundle of type=transaction is submitted via `POST [base]/` (the system-level endpoint). Support for this is documented in `CapabilityStatement.rest.interaction` (system-level interactions). `rest.resource.interaction` covers resource-level interactions (read, vread, update, create, delete) for a specific resource type — it does not cover system-level batch/transaction interactions. There is no `type` attribute on `rest.interaction`.",
+    "explanationPt": "Um Bundle do tipo transaction é enviado via `POST [base]/` (endpoint de nível de sistema). O suporte a isso é documentado em `CapabilityStatement.rest.interaction` (interações de nível de sistema). `rest.resource.interaction` cobre interações de nível de recurso (read, vread, update, create, delete) para um tipo específico — não cobre interações batch/transaction de nível de sistema. Não há atributo `type` em `rest.interaction`."
+  },
+  {
+    "id": 6,
+    "titleEn": "Interpret the CapabilityStatement kind = \"instance\"",
+    "titlePt": "Interpretar o CapabilityStatement kind = \"instance\"",
+    "qEn": "A client receives the following element as part of the CapabilityStatement of a server:\n\n```json\n\"kind\": \"instance\"\n```\n\nWhat would be the interpretation by the client system based on the above element value?",
+    "qPt": "Um cliente recebe o seguinte elemento como parte do CapabilityStatement de um servidor:\n\n```json\n\"kind\": \"instance\"\n```\n\nQual seria a interpretação pelo sistema cliente com base no valor desse elemento?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "The CapabilityStatement instance represents the present capabilities of a specific system or FHIR server installation",
+        "pt": "A instância do CapabilityStatement representa as capacidades atuais de um sistema específico ou instalação de servidor FHIR",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "The CapabilityStatement instance represents the capabilities of a system or piece of software, independent of a particular installation",
+        "pt": "A instância do CapabilityStatement representa as capacidades de um sistema ou software, independente de uma instalação específica",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "The CapabilityStatement instance represents a set of requirements for other systems to meet (e.g. as part of an implementation guide or request for proposal)",
+        "pt": "A instância do CapabilityStatement representa um conjunto de requisitos para outros sistemas atenderem (ex: como parte de um guia de implementação ou solicitação de proposta)",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "The CapabilityStatement instance represents the capabilities of a system or FHIR server which does not require authorization by the client system",
+        "pt": "A instância do CapabilityStatement representa as capacidades de um sistema ou servidor FHIR que não requer autorização pelo sistema cliente",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The `kind` element in CapabilityStatement has three values: `instance` (describes the capabilities of a deployed, configured solution at a specific access point — i.e., a running server), `capability` (capabilities of a software independent of installation), and `requirements` (a set of requirements for other systems). `kind=instance` is what a live FHIR server returns when you call `GET [base]/metadata`.",
+    "explanationPt": "O elemento `kind` no CapabilityStatement tem três valores: `instance` (descreve as capacidades de uma solução implantada e configurada em um ponto de acesso específico — ou seja, um servidor em execução), `capability` (capacidades de um software independente da instalação) e `requirements` (um conjunto de requisitos para outros sistemas). `kind=instance` é o que um servidor FHIR ativo retorna quando você chama `GET [base]/metadata`."
+  }
+]

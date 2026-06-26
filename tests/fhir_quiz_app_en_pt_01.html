@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Module 1 – FHIR Principles | Quiz EN/PT</title>
+  <style>
+    :root{--bg:#0b1020;--card:#121a33;--muted:#c9d3f5;--accent:#6ee7b7;--accent2:#93c5fd;--danger:#fca5a5}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial,'Noto Sans',sans-serif;background:linear-gradient(120deg,#0b1020,#151c3a);color:#e9eefc}
+    header{position:sticky;top:0;background:rgba(11,16,32,.9);backdrop-filter:saturate(120%) blur(6px);padding:14px 18px;border-bottom:1px solid #1f2a54;z-index:2}
+    h1{font-size:20px;margin:0}
+    .container{max-width:980px;margin:24px auto;padding:0 16px}
+    .controls{display:flex;gap:12px;flex-wrap:wrap;margin:10px 0}
+    .btn{padding:10px 14px;border:1px solid #2a376f;background:#1a2347;color:#e9eefc;border-radius:12px;cursor:pointer;transition:.15s}
+    .btn:hover{transform:translateY(-1px);border-color:#4156a6}
+    .btn.primary{background:#1a2e4f;border-color:#5b86ff}
+    .btn.success{background:#123826;border-color:#3cd3a5}
+    .btn.danger{background:#3b1a1a;border-color:#ff8a8a}
+    .pill{padding:6px 10px;border:1px solid #33406d;background:#121a33;border-radius:999px;font-size:12px}
+    .card{background:var(--card);border:1px solid #23305c;border-radius:18px;padding:18px;margin:16px 0;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+    .q-title{font-weight:700;margin:0 0 8px}
+    .q-sub{color:var(--muted);font-size:13px;margin:0 0 12px}
+    .opt{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;margin:8px 0;border:1px solid #273566;border-radius:12px;background:#0f1530}
+    .opt input{margin-top:3px}
+    .opt label{cursor:pointer}
+    .correct{border-color:#1f9e6d;background:rgba(31,158,109,.08)}
+    .wrong{border-color:#9e1f1f;background:rgba(158,31,31,.08)}
+    .muted{color:#aab6e9}
+    .grid{display:grid;grid-template-columns:1fr;gap:16px}
+    @media(min-width:860px){.grid{grid-template-columns:2fr 1fr}}
+    table{width:100%;border-collapse:collapse}
+    th,td{border-bottom:1px solid #23305c;padding:10px;text-align:left}
+    th{color:#b9c6ff}
+    small{color:#9db2ff}
+    footer{opacity:.7;text-align:center;margin:30px 0}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
+      <h1>Module 1 – FHIR Principles • Quiz (EN/PT)</h1>
+      <div class="controls">
+        <span class="pill" id="qCount"></span>
+        <button class="btn" id="langToggle" title="Alternar idioma">🇬🇧 / 🇵🇹</button>
+        <button class="btn primary" id="submitBtn">Submit / Enviar</button>
+        <button class="btn" id="reviewBtn">Show Answers / Ver Gabarito</button>
+        <button class="btn" id="retryBtn">Retry / Refazer</button>
+        <button class="btn success" id="exportBtn">Export History</button>
+        <button class="btn danger" id="resetHistoryBtn">Clear History</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container grid">
+    <section>
+      <div id="quizContainer"></div>
+    </section>
+    <aside>
+      <div class="card">
+        <h3 style="margin-top:0">Performance / Desempenho</h3>
+        <p class="muted" id="scoreNow">Answer and submit to see your score. / Responda e envie para ver sua pontuação.</p>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">History / Histórico</h3>
+        <table id="historyTable">
+          <thead>
+            <tr><th>Date</th><th>Score</th><th>Details</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </aside>
+  </main>
+
+  <footer>
+    <small>Built for study — supports single & multi-select questions, bilingual UI, and local history.</small>
+  </footer>
+
+<script>
+// ======= QUIZ DATA (from your Module 1, quizzes 1–10) =======
+const QUIZ = [
+  {
+    id: 1,
+    titleEn: 'Quiz 1 – Full Form of FHIR',
+    titlePt: 'Quiz 1 – Forma Completa de FHIR',
+    qEn: 'What is the full form of FHIR?',
+    qPt: 'Qual é a forma completa de FHIR?',
+    type: 'single',
+    options: [
+      { key: 'A', en: 'Full Health Interoperability Resources', pt: 'Recursos de Interoperabilidade Completa em Saúde', correct: false },
+      { key: 'B', en: 'Fast Health Interchange Resources', pt: 'Recursos de Intercâmbio Rápido em Saúde', correct: false },
+      { key: 'C', en: 'Forward Health Interoperability Resources', pt: 'Recursos de Interoperabilidade Avançada em Saúde', correct: false },
+      { key: 'D', en: 'Fast Healthcare Interoperability Resources', pt: 'Recursos de Interoperabilidade Rápida em Saúde', correct: true },
+      { key: 'E', en: 'Fast Health Interoperability Reference', pt: 'Referência de Interoperabilidade Rápida em Saúde', correct: false }
+    ]
+  },
+  {
+    id: 2,
+    titleEn: 'Quiz 2 – Latest FHIR Publication',
+    titlePt: 'Quiz 2 – Publicação mais recente do FHIR',
+    qEn: 'Which is the latest FHIR publication/specification?',
+    qPt: 'Qual é a publicação/especificação mais recente do FHIR?',
+    type: 'single',
+    options: [
+      { key: 'A', en: 'R4', pt: 'R4', correct: false },
+      { key: 'B', en: 'STU 3', pt: 'STU 3', correct: false },
+      { key: 'C', en: 'DSTU 2', pt: 'DSTU 2', correct: false },
+      { key: 'D', en: 'R4B', pt: 'R4B', correct: false },
+      { key: 'E', en: 'R5', pt: 'R5', correct: true }
+    ]
+  },
+  {
+    id: 3,
+    titleEn: "Quiz 3 – FHIR's Primary Focus",
+    titlePt: 'Quiz 3 – Foco Primário do FHIR',
+    qEn: "Which statement is correct about FHIR’s Primary focus?",
+    qPt: 'Qual das afirmações está correta sobre o foco primário do FHIR?',
+    type: 'single',
+    options: [
+      { key: 'A', en: 'It is built for clinical experts and the spec defines best clinical practices', pt: 'Criado para especialistas clínicos e a especificação define melhores práticas clínicas', correct: false },
+      { key: 'B', en: 'Focus is to create specification for domain experts', pt: 'Foco é criar especificações para especialistas de domínio', correct: false },
+      { key: 'C', en: 'The FHIR specification is targeted to individuals and organizations building interoperable solutions that will be using FHIR', pt: 'A especificação FHIR é direcionada a indivíduos e organizações que desenvolvem soluções interoperáveis que usarão FHIR', correct: true },
+      { key: 'D', en: 'The specification defines best clinical practices', pt: 'A especificação define melhores práticas clínicas', correct: false },
+      { key: 'E', en: 'The specification provides guidance on UIs and workflows', pt: 'A especificação fornece orientações sobre interfaces e fluxos', correct: false }
+    ]
+  },
+  {
+    id: 4,
+    titleEn: 'Quiz 4 – FHIR Standard Features',
+    titlePt: 'Quiz 4 – Características do Padrão FHIR',
+    qEn: 'Which of the following is true for FHIR standard? (Select all that apply)',
+    qPt: 'Quais das seguintes são verdadeiras para o padrão FHIR? (Selecione todas que se aplicam)',
+    type: 'multi',
+    options: [
+      { key: 'A', en: 'Strong foundation in Web standards – XML, JSON, HTTP, OAuth, etc.', pt: 'Forte fundamento em padrões Web – XML, JSON, HTTP, OAuth, etc.', correct: true },
+      { key: 'B', en: 'Support for RESTful architectures and other mechanisms like Messages, Documents, SOA', pt: 'Suporte a arquiteturas RESTful e outros mecanismos como Mensagens, Documentos, SOA', correct: true },
+      { key: 'C', en: 'A human-readable serialization format for ease of use by developers', pt: 'Formato de serialização legível por humanos para facilitar o uso por desenvolvedores', correct: true },
+      { key: 'D', en: 'Reference libraries in various languages to quick start development', pt: 'Bibliotecas de referência em várias linguagens para acelerar o desenvolvimento', correct: true },
+      { key: 'E', en: 'Less support for terminology', pt: 'Menor suporte à terminologia', correct: false }
+    ]
+  },
+  {
+    id: 5,
+    titleEn: 'Quiz 5 – Two Main Parts of FHIR',
+    titlePt: 'Quiz 5 – Duas Partes Principais do FHIR',
+    qEn: 'Which of the following are two main parts of the FHIR standard?',
+    qPt: 'Quais são as duas partes principais do padrão FHIR?',
+    type: 'multi',
+    options: [
+      { key: 'A', en: 'Content model', pt: 'Modelo de conteúdo', correct: true },
+      { key: 'B', en: 'Interface engine', pt: 'Motor de interface', correct: false },
+      { key: 'C', en: 'Communication channel', pt: 'Canal de comunicação', correct: false },
+      { key: 'D', en: 'Interface Security', pt: 'Segurança de interface', correct: false },
+      { key: 'E', en: 'APIs – well-defined interfaces for interoperating between two applications', pt: 'APIs – interfaces bem definidas para interoperar entre dois aplicativos', correct: true }
+    ]
+  },
+  {
+    id: 6,
+    titleEn: 'Quiz 6 – FHIR Specification (Not True)',
+    titlePt: 'Quiz 6 – Especificação FHIR (Não Verdadeira)',
+    qEn: 'Which of the following statement is not true about FHIR specification?',
+    qPt: 'Qual das seguintes afirmações não é verdadeira sobre a especificação FHIR?',
+    type: 'single',
+    options: [
+      { key: 'A', en: 'It is divided into various modules', pt: 'É dividida em vários módulos', correct: false },
+      { key: 'B', en: 'Modules are grouped in 5 levels (1 to 5)', pt: 'Os módulos são agrupados em 5 níveis (1 a 5)', correct: false },
+      { key: 'C', en: 'Dependencies between modules are mainly downwards', pt: 'Dependências entre módulos são principalmente descendentes', correct: false },
+      { key: 'D', en: 'Foundation Module provides content to exchange clinical data', pt: 'O Módulo Foundation fornece conteúdo para troca de dados clínicos', correct: true }
+    ]
+  },
+  {
+    id: 7,
+    titleEn: 'Quiz 7 – Common Resource Features',
+    titlePt: 'Quiz 7 – Características Comuns dos Recursos',
+    qEn: 'Which features are common across most of the resources? (Select all that apply)',
+    qPt: 'Quais características são comuns na maioria dos recursos? (Selecione todas que se aplicam)',
+    type: 'multi',
+    options: [
+      { key: 'A', en: 'Common metadata', pt: 'Metadados comuns', correct: true },
+      { key: 'B', en: 'A URL that identifies the resource', pt: 'Uma URL que identifica o recurso', correct: true },
+      { key: 'C', en: 'A human readable summary of the content', pt: 'Um resumo legível por humanos do conteúdo', correct: true },
+      { key: 'D', en: 'Extensibility framework', pt: 'Estrutura de extensibilidade', correct: true },
+      { key: 'E', en: 'Resource specific defined data elements', pt: 'Elementos de dados definidos específicos do recurso', correct: true }
+    ]
+  },
+  {
+    id: 8,
+    titleEn: 'Quiz 8 – Suggesting Changes',
+    titlePt: 'Quiz 8 – Sugerindo Mudanças',
+    qEn: 'How can anyone send review comments or suggest changes for any FHIR page?',
+    qPt: 'Como enviar comentários ou sugerir mudanças em uma página FHIR?',
+    type: 'single',
+    options: [
+      { key: 'A', en: 'Using Stack Overflow', pt: 'Usando Stack Overflow', correct: false },
+      { key: 'B', en: 'There is no formal way', pt: 'Não há maneira formal', correct: false },
+      { key: 'C', en: 'Email to HL7.org', pt: 'Email para HL7.org', correct: false },
+      { key: 'D', en: "There's a link at the bottom of each page to propose any change", pt: 'Há um link no final de cada página para propor alterações', correct: true }
+    ]
+  },
+  {
+    id: 9,
+    titleEn: 'Quiz 9 – Architectural Principles',
+    titlePt: 'Quiz 9 – Princípios Arquiteturais',
+    qEn: 'Which are correct about FHIR Architectural principles? (Select all that apply)',
+    qPt: 'Quais estão corretas sobre os princípios arquiteturais do FHIR? (Selecione todas que se aplicam)',
+    type: 'multi',
+    options: [
+      { key: 'A', en: 'FHIR works 80/20 rule focusing on 20% of requirements', pt: 'O FHIR segue a regra 80/20 focando nos 20% de requisitos', correct: true },
+      { key: 'B', en: 'Using REST APIs, one can achieve scalability', pt: 'Usando APIs REST, é possível atingir escalabilidade', correct: true },
+      { key: 'C', en: 'FHIR resources are lean and suitable for network exchange', pt: 'Recursos FHIR são leves e adequados para troca em rede', correct: true },
+      { key: 'D', en: 'Resources are understood by technical and non-technical people', pt: 'Recursos são compreendidos por pessoas técnicas e não técnicas', correct: true },
+      { key: 'E', en: 'FHIR supports Data Fidelity', pt: 'O FHIR suporta Fidelidade de Dados', correct: true }
+    ]
+  },
+  {
+    id: 10,
+    titleEn: 'Quiz 10 – Resource Categorization',
+    titlePt: 'Quiz 10 – Categorização de Recursos',
+    qEn: 'Which is not a categorization for FHIR resources as per the Composition framework?',
+    qPt: 'Qual NÃO é uma categorização para recursos FHIR conforme o framework de Composição?',
+    type: 'single',
+    options: [
+      { key: 'A', en: 'Base Resources', pt: 'Recursos Base', correct: false },
+      { key: 'B', en: 'Foundation Resources', pt: 'Recursos de Fundação', correct: false },
+      { key: 'C', en: 'Clinical Resources', pt: 'Recursos Clínicos', correct: false },
+      { key: 'D', en: 'Specialized Resources', pt: 'Recursos Especializados', correct: false },
+      { key: 'E', en: 'Logical Resources', pt: 'Recursos Lógicos', correct: true }
+    ]
+  }
+];
+
+// ======= STATE =======
+let lang = 'EN'; // or 'PT'
+const localKey = 'fhir_module1_history_v1';
+
+// ======= HELPERS =======
+const $ = s => document.querySelector(s);
+function saveHistory(entry){
+  const list = loadHistory();
+  list.unshift(entry);
+  localStorage.setItem(localKey, JSON.stringify(list));
+  renderHistory();
+}
+function loadHistory(){
+  try{ return JSON.parse(localStorage.getItem(localKey)) || []; }catch{ return []; }
+}
+function formatPercent(n){ return (Math.round(n*1000)/10).toFixed(1) + '%'; }
+
+// ======= RENDER =======
+function renderQuiz(){
+  $('#qCount').textContent = `${QUIZ.length} questions / questões`;
+  const wrap = document.createElement('div');
+  QUIZ.forEach(q => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    const title = document.createElement('h3');
+    title.className = 'q-title';
+    title.textContent = lang==='EN' ? q.titleEn : q.titlePt;
+    const sub = document.createElement('p');
+    sub.className = 'q-sub';
+    sub.textContent = lang==='EN' ? q.qEn : q.qPt;
+    card.appendChild(title); card.appendChild(sub);
+    q.options.forEach(opt => {
+      const id = `q${q.id}_${opt.key}`;
+      const optDiv = document.createElement('div');
+      optDiv.className = 'opt';
+      const input = document.createElement('input');
+      input.type = q.type==='single' ? 'radio' : 'checkbox';
+      input.name = `q_${q.id}`;
+      input.value = opt.key;
+      input.id = id;
+      const label = document.createElement('label');
+      label.setAttribute('for', id);
+      label.innerHTML = `<strong>${opt.key}.</strong> ${lang==='EN'?opt.en:opt.pt}`;
+      optDiv.appendChild(input); optDiv.appendChild(label);
+      card.appendChild(optDiv);
+    });
+    wrap.appendChild(card);
+  });
+  const target = $('#quizContainer');
+  target.innerHTML = '';
+  target.appendChild(wrap);
+}
+
+// Calculate result
+function grade(){
+  const details = [];
+  let correctCount = 0;
+  QUIZ.forEach(q => {
+    const chosen = Array.from(document.querySelectorAll(`input[name="q_${q.id}"]`))
+                      .filter(i => i.checked).map(i => i.value).sort();
+    const right = q.options.filter(o=>o.correct).map(o=>o.key).sort();
+    const isCorrect = chosen.length===right.length && chosen.every((v,i)=>v===right[i]);
+    if(isCorrect) correctCount++;
+    details.push({id:q.id, chosen, right, isCorrect});
+  });
+  const score = correctCount/QUIZ.length;
+  return {score, details};
+}
+
+function showFeedback({details}){
+  details.forEach(d =>{
+    const name = `q_${d.id}`;
+    const inputs = Array.from(document.querySelectorAll(`input[name="${name}"]`));
+    const rights = new Set(d.right);
+    inputs.forEach(i=>{
+      const w = i.closest('.opt');
+      w.classList.remove('correct','wrong');
+      if(i.checked && rights.has(i.value)){
+        w.classList.add('correct');
+      } else if(i.checked && !rights.has(i.value)){
+        w.classList.add('wrong');
+      } else if(!i.checked && rights.has(i.value)){
+        // highlight correct ones lightly when reviewing
+        w.style.borderColor = '#1f9e6d66';
+      }
+      i.disabled = true; // lock after submit
+    });
+  });
+}
+
+function renderScore(res){
+  const pct = formatPercent(res.score);
+  $('#scoreNow').innerHTML = `<strong>${pct}</strong> — ${Math.round(res.score*QUIZ.length)}/${QUIZ.length} correct<br><small>${new Date().toLocaleString()}</small>`;
+}
+
+function renderHistory(){
+  const tbody = $('#historyTable tbody');
+  tbody.innerHTML = '';
+  loadHistory().forEach((h, idx) =>{
+    const tr = document.createElement('tr');
+    const td1 = document.createElement('td'); td1.textContent = new Date(h.date).toLocaleString();
+    const td2 = document.createElement('td'); td2.textContent = formatPercent(h.score);
+    const td3 = document.createElement('td');
+    const btn = document.createElement('button');
+    btn.className = 'btn'; btn.textContent = 'View';
+    btn.onclick = ()=> alert(`Attempt #${loadHistory().length - idx}\nScore: ${formatPercent(h.score)}\nCorrect: ${h.correct}/${h.total}`);
+    td3.appendChild(btn);
+    tr.appendChild(td1); tr.appendChild(td2); tr.appendChild(td3);
+    tbody.appendChild(tr);
+  });
+}
+
+function exportHistory(){
+  const data = loadHistory();
+  const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'fhir_module1_history.json';
+  document.body.appendChild(a); a.click(); a.remove();
+  URL.revokeObjectURL(url);
+}
+
+function resetHistory(){
+  localStorage.removeItem(localKey);
+  renderHistory();
+}
+
+// ======= EVENTS =======
+$('#langToggle').onclick = ()=>{ lang = (lang==='EN'?'PT':'EN'); renderQuiz(); };
+$('#submitBtn').onclick = ()=>{
+  const res = grade();
+  showFeedback(res); renderScore(res);
+  saveHistory({ date: Date.now(), score: res.score, correct: Math.round(res.score*QUIZ.length), total: QUIZ.length });
+};
+$('#reviewBtn').onclick = ()=>{
+  const res = grade(); showFeedback(res); renderScore(res);
+};
+$('#retryBtn').onclick = ()=>{ renderQuiz(); $('#scoreNow').textContent=''; };
+$('#exportBtn').onclick = exportHistory;
+$('#resetHistoryBtn').onclick = resetHistory;
+
+// INIT
+renderQuiz();
+renderHistory();
+</script>
+</body>
+</html>

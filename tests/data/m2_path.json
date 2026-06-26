@@ -1,0 +1,783 @@
+{
+  "module": "module2",
+  "titlePt": "Módulo 2 – Modelo e Implementação de Recursos",
+  "titleEn": "Module 2 – Resource Model & Implementation",
+  "examNotePt": "O módulo mais pesado: 36–51% da prova. Seleção de recurso e serialização JSON/XML são os campeões de questões.",
+  "examNoteEn": "The heaviest module: 36–51% of the exam. Resource selection and JSON/XML serialization dominate.",
+  "sources": {
+    "module2a_q1": "quizzes/module2a_q1.json",
+    "module2a_q2": "quizzes/module2a_q2.json",
+    "module2a_q3": "quizzes/module2a_q3.json",
+    "module2a_q4": "quizzes/module2a_q4.json",
+    "module2_q1": "quizzes/module2_q1.json",
+    "module2_q2": "quizzes/module2_q2.json",
+    "module2_q3": "quizzes/module2_q3.json",
+    "module2_cp": "quizzes/module2_cp.json"
+  },
+  "units": [
+    {
+      "id": "u1",
+      "titlePt": "Escolher o recurso certo",
+      "titleEn": "Choosing the right resource",
+      "color": "#6ee7b7",
+      "lessons": [
+        {
+          "id": "m2-l1",
+          "titlePt": "Pedidos × Resultados",
+          "titleEn": "Orders × Results",
+          "card": {
+            "titlePt": "ServiceRequest, Observation, DiagnosticReport",
+            "titleEn": "ServiceRequest, Observation, DiagnosticReport",
+            "analogyPt": "Pense num laboratório: o médico manda o pedido (ServiceRequest), a máquina gera medições (Observation) e o laudo final agrega tudo (DiagnosticReport).",
+            "analogyEn": "Think of a lab: the doctor sends the order (ServiceRequest), the machine produces measurements (Observation), and the final report aggregates everything (DiagnosticReport).",
+            "pointsPt": [
+              "<b>ServiceRequest</b> = pedido/ordem de exame ou serviço (enviado ao LIS/RIS).",
+              "<b>Observation</b> = medição/achado clínico unitário (sinais vitais, resultado de lab).",
+              "<b>DiagnosticReport</b> = laudo que agrega várias Observations + PDF.",
+              "<b>Procedure</b> = procedimento já realizado; <b>Specimen</b> = amostra."
+            ],
+            "pointsEn": [
+              "<b>ServiceRequest</b> = order for a test or service (sent to LIS/RIS).",
+              "<b>Observation</b> = a single clinical measurement/finding (vitals, a lab result).",
+              "<b>DiagnosticReport</b> = report aggregating multiple Observations + PDF.",
+              "<b>Procedure</b> = a procedure already performed; <b>Specimen</b> = a sample."
+            ],
+            "trapPt": "ServiceRequest é o <b>pedido</b> do médico; DiagnosticReport é o <b>resultado</b> que volta do lab. Confundir os dois é o erro nº1.",
+            "trapEn": "ServiceRequest is the doctor's <b>order</b>; DiagnosticReport is the <b>result</b> from the lab. Confusing them is the #1 mistake.",
+            "refs": [
+              { "kind": "spec", "labelPt": "ServiceRequest — o pedido/ordem clínica", "labelEn": "ServiceRequest — the clinical order", "url": "https://hl7.org/fhir/R4/servicerequest.html" },
+              { "kind": "spec", "labelPt": "Observation & DiagnosticReport — resultados", "labelEn": "Observation & DiagnosticReport — results", "url": "https://hl7.org/fhir/R4/diagnosticreport.html" },
+              { "kind": "material", "labelPt": "Material do curso — Módulo 2 · §2 \"Recursos do exame\"", "labelEn": "Course material — Module 2 · §2 \"Exam resources\"", "url": "../module-2-guia-estudo.md" }
+            ]
+          },
+          "items": [
+            "module2a_q1#1",
+            "module2a_q1#2",
+            "module2a_q1#3",
+            "module2a_q1#4",
+            "module2a_q1#5"
+          ]
+        },
+        {
+          "id": "m2-l2",
+          "titlePt": "Medicação e imunização",
+          "titleEn": "Medication & immunization",
+          "card": {
+            "titlePt": "A cadeia do medicamento e as vacinas",
+            "titleEn": "The medication chain and vaccines",
+            "analogyPt": "O medicamento percorre uma esteira: prescrever → dispensar → administrar; cada etapa tem seu recurso. Vacina tem trilho próprio.",
+            "analogyEn": "A medication moves down a line: prescribe → dispense → administer; each step has its resource. Vaccines have their own track.",
+            "pointsPt": [
+              "<b>MedicationRequest</b> = prescrição (à farmácia). <b>MedicationDispense</b> = dispensado pela farmácia.",
+              "<b>MedicationAdministration</b> = medicamento já administrado. <b>MedicationStatement</b> = relatado pelo paciente (automedicação).",
+              "<b>Immunization</b> = vacina efetivamente administrada.",
+              "<b>ImmunizationRecommendation</b> = cronograma futuro de vacinação."
+            ],
+            "pointsEn": [
+              "<b>MedicationRequest</b> = prescription (to pharmacy). <b>MedicationDispense</b> = dispensed by pharmacy.",
+              "<b>MedicationAdministration</b> = medication already given. <b>MedicationStatement</b> = patient-reported (self-medication).",
+              "<b>Immunization</b> = vaccine actually administered.",
+              "<b>ImmunizationRecommendation</b> = future vaccination schedule."
+            ],
+            "trapPt": "Vacina aplicada = <b>Immunization</b> (não MedicationAdministration). Calendário futuro = ImmunizationRecommendation.",
+            "trapEn": "Vaccine given = <b>Immunization</b> (not MedicationAdministration). Future schedule = ImmunizationRecommendation.",
+            "refs": [
+              { "kind": "spec", "labelPt": "Immunization — vacina aplicada", "labelEn": "Immunization — vaccine given", "url": "https://hl7.org/fhir/R4/immunization.html" },
+              { "kind": "spec", "labelPt": "MedicationRequest — a cadeia do medicamento", "labelEn": "MedicationRequest — the medication chain", "url": "https://hl7.org/fhir/R4/medicationrequest.html" },
+              { "kind": "material", "labelPt": "Material do curso — Módulo 2 · §2 \"Recursos do exame\"", "labelEn": "Course material — Module 2 · §2 \"Exam resources\"", "url": "../module-2-guia-estudo.md" }
+            ]
+          },
+          "items": [
+            "module2a_q1#6",
+            "module2a_q1#7",
+            "module2a_q1#8",
+            "module2a_q1#9",
+            "module2a_q1#10"
+          ]
+        },
+        {
+          "id": "m2-l3",
+          "titlePt": "Financeiro e tarefas",
+          "titleEn": "Financial & tasks",
+          "card": {
+            "titlePt": "Claim, ClaimResponse, Coverage, Task",
+            "titleEn": "Claim, ClaimResponse, Coverage, Task",
+            "analogyPt": "No financeiro: o prestador pede (Claim), a seguradora responde (ClaimResponse); a apólice é Coverage; o acompanhamento do status é Task.",
+            "analogyEn": "In finance: the provider requests (Claim), the insurer responds (ClaimResponse); the policy is Coverage; status tracking is Task.",
+            "pointsPt": [
+              "<b>Claim</b> = solicitação de reembolso do prestador à seguradora.",
+              "<b>ClaimResponse</b> = resposta da seguradora com a adjudicação.",
+              "<b>Coverage</b> = cobertura/elegibilidade do seguro; <b>Account</b> = saldo e cobranças.",
+              "<b>Task</b> = rastreia o status de uma atividade (pendente/em andamento/concluído)."
+            ],
+            "pointsEn": [
+              "<b>Claim</b> = provider's reimbursement request to the insurer.",
+              "<b>ClaimResponse</b> = insurer's response with the adjudication.",
+              "<b>Coverage</b> = insurance coverage/eligibility; <b>Account</b> = balance and charges.",
+              "<b>Task</b> = tracks an activity's status (pending/in-progress/completed)."
+            ],
+            "trapPt": "Para verificar o <b>status</b> de um claim ainda sem resposta, use <b>Task</b> — não ClaimResponse (que é a resposta formal).",
+            "trapEn": "To check the <b>status</b> of a claim with no response yet, use <b>Task</b> — not ClaimResponse (the formal response).",
+            "refs": [
+              { "kind": "spec", "labelPt": "Claim & ClaimResponse — cobrança e resposta", "labelEn": "Claim & ClaimResponse — billing and response", "url": "https://hl7.org/fhir/R4/claim.html" },
+              { "kind": "spec", "labelPt": "Task — acompanhar o estado de uma solicitação", "labelEn": "Task — tracking a request's status", "url": "https://hl7.org/fhir/R4/task.html" },
+              { "kind": "material", "labelPt": "Material do curso — Módulo 2 · §2 \"Recursos do exame\"", "labelEn": "Course material — Module 2 · §2 \"Exam resources\"", "url": "../module-2-guia-estudo.md" }
+            ]
+          },
+          "items": [
+            "module2a_q1#11",
+            "module2a_q1#12",
+            "module2a_q1#13",
+            "module2a_q1#14",
+            "module2a_q1#15"
+          ]
+        },
+        {
+          "id": "m2-l4",
+          "titlePt": "Pessoas, família e documentos",
+          "titleEn": "People, family & documents",
+          "card": {
+            "titlePt": "Quem é quem e onde vão os documentos",
+            "titleEn": "Who's who and where documents go",
+            "analogyPt": "Distinga o profissional, o familiar e o próprio paciente; documentos clínicos têm um ponteiro (DocumentReference) e os bytes (Binary).",
+            "analogyEn": "Distinguish the practitioner, the relative and the patient; clinical documents have a pointer (DocumentReference) and the bytes (Binary).",
+            "pointsPt": [
+              "<b>Practitioner</b>/<b>PractitionerRole</b> = profissional e seu papel; <b>RelatedPerson</b> = familiar/cuidador.",
+              "<b>FamilyMemberHistory</b> = saúde dos familiares (mãe com AVC, irmão diabético).",
+              "<b>Condition</b> = condição do <b>próprio</b> paciente.",
+              "<b>DocumentReference</b> aponta para o documento; <b>Binary</b> guarda os bytes (PDF, imagem); <b>Composition</b> estrutura o documento FHIR."
+            ],
+            "pointsEn": [
+              "<b>Practitioner</b>/<b>PractitionerRole</b> = professional and their role; <b>RelatedPerson</b> = relative/caregiver.",
+              "<b>FamilyMemberHistory</b> = relatives' health (mother's stroke, diabetic sibling).",
+              "<b>Condition</b> = the <b>patient's own</b> condition.",
+              "<b>DocumentReference</b> points to the document; <b>Binary</b> holds the bytes (PDF, image); <b>Composition</b> structures the FHIR document."
+            ],
+            "trapPt": "Doença de um familiar = <b>FamilyMemberHistory</b> (não Condition, que é do próprio paciente; nem RelatedPerson, que é a pessoa).",
+            "trapEn": "A relative's disease = <b>FamilyMemberHistory</b> (not Condition, which is the patient's; nor RelatedPerson, which is the person).",
+            "refs": [
+              { "kind": "spec", "labelPt": "Patient, RelatedPerson & Person — quem é quem", "labelEn": "Patient, RelatedPerson & Person — who's who", "url": "https://hl7.org/fhir/R4/patient.html" },
+              { "kind": "spec", "labelPt": "FamilyMemberHistory & DocumentReference", "labelEn": "FamilyMemberHistory & DocumentReference", "url": "https://hl7.org/fhir/R4/familymemberhistory.html" },
+              { "kind": "material", "labelPt": "Material do curso — Módulo 2 · §2 \"Recursos do exame\"", "labelEn": "Course material — Module 2 · §2 \"Exam resources\"", "url": "../module-2-guia-estudo.md" }
+            ]
+          },
+          "items": [
+            "module2a_q1#16",
+            "module2a_q1#17",
+            "module2a_q1#18",
+            "module2a_q1#19",
+            "module2a_q1#20"
+          ]
+        }
+      ],
+      "checkpoint": {
+        "items": [
+          "module2_cp#1",
+          "module2_cp#2",
+          "module2_cp#3",
+          "module2_cp#4"
+        ]
+      }
+    },
+    {
+      "id": "u2",
+      "titlePt": "Adequação do elemento",
+      "titleEn": "Element suitability",
+      "color": "#a5b4fc",
+      "lessons": [
+        {
+          "id": "m2-l5",
+          "titlePt": "Cardinalidade",
+          "titleEn": "Cardinality",
+          "card": {
+            "titlePt": "min..max e a regra do pai opcional",
+            "titleEn": "min..max and the optional-parent rule",
+            "analogyPt": "Cardinalidade é a regra de 'quantos cabem': o mínimo diz se é obrigatório, o máximo diz se repete.",
+            "analogyEn": "Cardinality is the 'how many fit' rule: the minimum says if it's required, the maximum says if it repeats.",
+            "pointsPt": [
+              "<b>0..1</b> opcional único · <b>0..*</b> opcional repetível · <b>1..1</b> obrigatório único · <b>1..*</b> obrigatório repetível.",
+              "Pai <b>0..1</b> com filho <b>1..1</b>: o filho só é exigido <b>se o pai estiver presente</b>.",
+              "Num perfil: pode apertar (aumentar mínimo, reduzir máximo); nunca afrouxar.",
+              "'Exatamente uma referência' = <b>1..1</b>."
+            ],
+            "pointsEn": [
+              "<b>0..1</b> optional single · <b>0..*</b> optional repeatable · <b>1..1</b> required single · <b>1..*</b> required repeatable.",
+              "Parent <b>0..1</b> with child <b>1..1</b>: the child is required only <b>if the parent is present</b>.",
+              "In a profile: you can tighten (raise min, lower max); never loosen.",
+              "'Exactly one reference' = <b>1..1</b>."
+            ],
+            "trapPt": "Filho obrigatório de pai opcional não torna o pai obrigatório — só vale se o pai aparecer.",
+            "trapEn": "A required child of an optional parent doesn't make the parent required — it only applies if the parent appears.",
+            "refs": [
+              { "kind": "spec", "labelPt": "ElementDefinition — cardinalidade (min/max)", "labelEn": "ElementDefinition — cardinality (min/max)", "url": "https://hl7.org/fhir/R4/elementdefinition.html#ElementDefinition.min" },
+              { "kind": "material", "labelPt": "Material do curso — Módulo 2 · §3 \"Cardinalidade\"", "labelEn": "Course material — Module 2 · §3 \"Cardinality\"", "url": "../module-2-guia-estudo.md" }
+            ]
+          },
+          "items": [
+            "module2a_q2#1",
+            "module2a_q2#2",
+            "module2a_q2#3",
+            "module2a_q2#4",
+            "module2a_q2#5"
+          ]
+        },
+        {
+          "id": "m2-l6",
+          "titlePt": "Tipos primitivos e o tipo code",
+          "titleEn": "Primitives & the code type",
+          "card": {
+            "titlePt": "Primitivos têm forma exata em JSON",
+            "titleEn": "Primitives have an exact JSON form",
+            "analogyPt": "Cada primitivo tem um 'molde': boolean sem aspas, code é texto simples — fugir do molde quebra a validação.",
+            "analogyEn": "Each primitive has a 'mold': boolean unquoted, code is plain text — breaking the mold breaks validation.",
+            "pointsPt": [
+              "<b>boolean</b>: true/false sem aspas. <b>integer/decimal</b>: número sem aspas.",
+              "<b>code</b>: string simples (<code>\"status\":\"final\"</code>), <b>nunca</b> objeto com coding.",
+              "<b>date</b> 2024-10-07 · <b>dateTime</b> com timezone (ISO 8601) · <b>uri</b> string.",
+              "Campo <b>code</b> com binding required → use a string exata do ValueSet."
+            ],
+            "pointsEn": [
+              "<b>boolean</b>: true/false unquoted. <b>integer/decimal</b>: number unquoted.",
+              "<b>code</b>: plain string (<code>\"status\":\"final\"</code>), <b>never</b> an object with coding.",
+              "<b>date</b> 2024-10-07 · <b>dateTime</b> with timezone (ISO 8601) · <b>uri</b> string.",
+              "A <b>code</b> field with required binding → use the exact ValueSet string."
+            ],
+            "trapPt": "<code>Observation.status</code> é <b>code</b>: <code>\"status\":\"final\"</code>. Nunca <code>{\"coding\":[...]}</code> nem sem aspas.",
+            "trapEn": "<code>Observation.status</code> is a <b>code</b>: <code>\"status\":\"final\"</code>. Never <code>{\"coding\":[...]}</code> nor unquoted.",
+            "refs": [
+              { "kind": "spec", "labelPt": "Data Types — tipos primitivos e o tipo code", "labelEn": "Data Types — primitives and the code type", "url": "https://hl7.org/fhir/R4/datatypes.html#primitive" },
+              { "kind": "material", "labelPt": "Material do curso — Módulo 2 · §4 \"Tipos de dados — Primitivos\"", "labelEn": "Course material — Module 2 · §4 \"Data types — Primitives\"", "url": "../module-2-guia-estudo.md" }
+            ]
+          },
+          "items": [
+            "module2a_q2#6",
+            "module2a_q2#7",
+            "module2a_q2#8",
+            "module2a_q2#9",
+            "module2a_q2#10"
+          ]
+        },
+        {
+          "id": "m2-l7",
+          "titlePt": "Coding × CodeableConcept × Quantity",
+          "titleEn": "Coding × CodeableConcept × Quantity",
+          "card": {
+            "titlePt": "Os tipos complexos de codificação",
+            "titleEn": "The complex coding types",
+            "analogyPt": "Coding é uma etiqueta; CodeableConcept é um envelope com várias etiquetas + texto; Quantity é valor + unidade.",
+            "analogyEn": "Coding is one label; CodeableConcept is an envelope with several labels + text; Quantity is value + unit.",
+            "pointsPt": [
+              "<b>Coding</b>: um código único {system, code, display}.",
+              "<b>CodeableConcept</b>: array <b>coding</b> + texto livre — vários códigos para o mesmo conceito.",
+              "<b>Quantity</b>: {value, unit, system (UCUM), code}.",
+              "Ex.: Condition.clinicalStatus é CodeableConcept; Encounter.class é Coding; Observation.status é code."
+            ],
+            "pointsEn": [
+              "<b>Coding</b>: a single code {system, code, display}.",
+              "<b>CodeableConcept</b>: a <b>coding</b> array + free text — several codes for the same concept.",
+              "<b>Quantity</b>: {value, unit, system (UCUM), code}.",
+              "E.g. Condition.clinicalStatus is CodeableConcept; Encounter.class is Coding; Observation.status is code."
+            ],
+            "trapPt": "CodeableConcept usa array <b>coding</b>; Coding não. Confundir code/Coding/CodeableConcept é a armadilha mais recorrente de serialização.",
+            "trapEn": "CodeableConcept uses a <b>coding</b> array; Coding doesn't. Mixing code/Coding/CodeableConcept is the most recurrent serialization trap.",
+            "refs": [
+              { "kind": "spec", "labelPt": "Data Types — CodeableConcept, Coding e Quantity", "labelEn": "Data Types — CodeableConcept, Coding & Quantity", "url": "https://hl7.org/fhir/R4/datatypes.html#CodeableConcept" },
+              { "kind": "material", "labelPt": "Material do curso — Módulo 2 · §4 \"Tipos de dados — Complexos\"", "labelEn": "Course material — Module 2 · §4 \"Data types — Complex\"", "url": "../module-2-guia-estudo.md" }
+            ]
+          },
+          "items": [
+            "module2a_q2#11",
+            "module2a_q2#12",
+            "module2a_q2#13",
+            "module2a_q2#14",
+            "module2a_q2#15"
+          ]
+        },
+        {
+          "id": "m2-l8",
+          "titlePt": "Flags e referências",
+          "titleEn": "Flags & references",
+          "card": {
+            "titlePt": "Σ, ?!, S, I e como referenciar",
+            "titleEn": "Σ, ?!, S, I and how to reference",
+            "analogyPt": "As flags são etiquetas de comportamento do elemento; a Reference é o 'link' para outro recurso.",
+            "analogyEn": "Flags are behavior tags on an element; a Reference is the 'link' to another resource.",
+            "pointsPt": [
+              "<b>Σ</b> isSummary (entra em _summary=true) · <b>?!</b> Is-Modifier (muda o significado) · <b>S</b> Must Support · <b>I</b> Constraint.",
+              "<b>Is-Modifier</b> ignorado é perigoso: ex. <code>Condition.verificationStatus</code> refutado exibido como ativo.",
+              "<b>Reference</b>: <code>{\"reference\":\"Patient/123\"}</code> (literal) ou <code>{\"identifier\":{...}}</code> (lógica).",
+              "Extensão que aponta a um recurso usa <b>valueReference</b> (nunca valueString)."
+            ],
+            "pointsEn": [
+              "<b>Σ</b> isSummary (in _summary=true) · <b>?!</b> Is-Modifier (changes meaning) · <b>S</b> Must Support · <b>I</b> Constraint.",
+              "Ignoring an <b>Is-Modifier</b> is dangerous: e.g. a refuted <code>Condition.verificationStatus</code> shown as active.",
+              "<b>Reference</b>: <code>{\"reference\":\"Patient/123\"}</code> (literal) or <code>{\"identifier\":{...}}</code> (logical).",
+              "An extension pointing to a resource uses <b>valueReference</b> (never valueString)."
+            ],
+            "trapPt": "Must Support (S) não é obrigatório; obrigatoriedade vem da cardinalidade. Referência a recurso = valueReference.",
+            "trapEn": "Must Support (S) isn't required; required-ness comes from cardinality. Reference to a resource = valueReference.",
+            "refs": [
+              { "kind": "spec", "labelPt": "Element flags (Σ, ?!, S, I) — tabela de formatos", "labelEn": "Element flags (Σ, ?!, S, I) — formats table", "url": "https://hl7.org/fhir/R4/formats.html#table" },
+              { "kind": "spec", "labelPt": "Conformance rules — Must Support", "labelEn": "Conformance rules — Must Support", "url": "https://hl7.org/fhir/R4/conformance-rules.html#mustSupport" },
+              { "kind": "material", "labelPt": "Material do curso — Módulo 2 · §5 \"Flags\"", "labelEn": "Course material — Module 2 · §5 \"Flags\"", "url": "../module-2-guia-estudo.md" }
+            ]
+          },
+          "items": [
+            "module2a_q2#16",
+            "module2a_q2#17",
+            "module2a_q2#18",
+            "module2a_q2#19",
+            "module2a_q2#20"
+          ]
+        }
+      ],
+      "checkpoint": {
+        "items": [
+          "module2_cp#5",
+          "module2_cp#6",
+          "module2_cp#7",
+          "module2_cp#8"
+        ]
+      }
+    },
+    {
+      "id": "u3",
+      "titlePt": "Extensões",
+      "titleEn": "Extensions",
+      "color": "#fcd34d",
+      "lessons": [
+        {
+          "id": "m2-l9",
+          "titlePt": "Quando e onde achar extensões",
+          "titleEn": "When/where to find extensions",
+          "card": {
+            "titlePt": "Reutilize antes de criar",
+            "titleEn": "Reuse before creating",
+            "analogyPt": "Antes de inventar um campo novo, procure se já existe uma 'peça oficial' no registro de extensões.",
+            "analogyEn": "Before inventing a new field, check if an official 'part' already exists in the extension registry.",
+            "pointsPt": [
+              "Use extensão quando o recurso base <b>não tem</b> elemento nativo para o dado.",
+              "Procure primeiro no registro oficial: <code>http://hl7.org/fhir/extensions/</code>.",
+              "Extensões são definidas por <b>StructureDefinition</b> (não existe recurso 'Extension' para publicação).",
+              "Só crie extensão nova se nenhuma existente atender."
+            ],
+            "pointsEn": [
+              "Use an extension when the base resource has <b>no</b> native element for the data.",
+              "Search first in the official registry: <code>http://hl7.org/fhir/extensions/</code>.",
+              "Extensions are defined by <b>StructureDefinition</b> (there's no 'Extension' resource for publishing).",
+              "Only create a new extension if no existing one fits."
+            ],
+            "trapPt": "Para publicar/reutilizar uma extensão, o recurso é <b>StructureDefinition</b> — não existe tipo 'Extension'.",
+            "trapEn": "To publish/reuse an extension, the resource is <b>StructureDefinition</b> — there's no 'Extension' type.",
+            "refs": [
+              { "kind": "spec", "labelPt": "Extensibility — quando e como usar extensões", "labelEn": "Extensibility — when and how to use extensions", "url": "https://hl7.org/fhir/R4/extensibility.html" },
+              { "kind": "spec", "labelPt": "Extension Registry — reutilize antes de criar", "labelEn": "Extension Registry — reuse before creating", "url": "https://hl7.org/fhir/R4/extensibility-registry.html" },
+              { "kind": "material", "labelPt": "Material do curso — Módulo 2 · §7 \"Extensões\"", "labelEn": "Course material — Module 2 · §7 \"Extensions\"", "url": "../module-2-guia-estudo.md" }
+            ]
+          },
+          "items": [
+            "module2a_q3#1",
+            "module2a_q3#2",
+            "module2a_q3#3",
+            "module2a_q3#4"
+          ]
+        },
+        {
+          "id": "m2-l10",
+          "titlePt": "Determinar a extensão certa",
+          "titleEn": "Determining the right extension",
+          "card": {
+            "titlePt": "Casar o dado com a extensão existente",
+            "titleEn": "Matching the data to an existing extension",
+            "analogyPt": "Cada dado extra tem (geralmente) uma extensão oficial pronta; o desafio é reconhecê-la pelo caso de uso.",
+            "analogyEn": "Each extra datum (usually) has a ready official extension; the challenge is recognizing it from the use case.",
+            "pointsPt": [
+              "Exemplos comuns: <b>patient-birthPlace</b>, <b>us-core-race</b>, <b>us-core-ethnicity</b>, <b>patient-mothersMaidenName</b>.",
+              "A <b>url</b> da extensão é única e canônica — identifica exatamente qual extensão é.",
+              "O <b>value[x]</b> tem o tipo definido pela StructureDefinition da extensão.",
+              "Confira o contexto (em qual recurso/elemento a extensão pode ser aplicada)."
+            ],
+            "pointsEn": [
+              "Common examples: <b>patient-birthPlace</b>, <b>us-core-race</b>, <b>us-core-ethnicity</b>, <b>patient-mothersMaidenName</b>.",
+              "The extension's <b>url</b> is unique and canonical — it identifies exactly which extension it is.",
+              "The <b>value[x]</b> has the type defined by the extension's StructureDefinition.",
+              "Check the context (which resource/element the extension may be applied to)."
+            ],
+            "trapPt": "A url canônica é o que identifica a extensão — não o nome amigável. Verifique o contexto de aplicação.",
+            "trapEn": "The canonical url identifies the extension — not the friendly name. Verify the application context.",
+            "refs": [
+              { "kind": "spec", "labelPt": "Defining Extensions — a url canônica identifica a extensão", "labelEn": "Defining Extensions — the canonical url identifies the extension", "url": "https://hl7.org/fhir/R4/defining-extensions.html" },
+              { "kind": "material", "labelPt": "Material do curso — Módulo 2 · §7 \"O que define e o que usa a extensão\"", "labelEn": "Course material — Module 2 · §7 \"What defines vs uses an extension\"", "url": "../module-2-guia-estudo.md" }
+            ]
+          },
+          "items": [
+            "module2a_q3#5",
+            "module2a_q3#6",
+            "module2a_q3#7",
+            "module2a_q3#8"
+          ]
+        },
+        {
+          "id": "m2-l11",
+          "titlePt": "Usar extensões na instância",
+          "titleEn": "Using extensions in the instance",
+          "card": {
+            "titlePt": "Anatomia, shadow property e modifierExtension",
+            "titleEn": "Anatomy, shadow property & modifierExtension",
+            "analogyPt": "Estender um campo simples em JSON usa uma 'sombra' com _ ; modifierExtension é uma extensão que, se desconhecida, obriga rejeitar o recurso.",
+            "analogyEn": "Extending a simple field in JSON uses a '_' shadow; modifierExtension is an extension that, if unknown, forces rejecting the resource.",
+            "pointsPt": [
+              "Extensão simples: um <b>value[x]</b>. Complexa: sub-extensões com url próprias e sem value[x] na raiz.",
+              "Estender primitivo (ex.: HumanName.family): use a sombra <code>_family</code> com extension; o valor original é preservado.",
+              "Em XML, a <b>url</b> é atributo do elemento &lt;extension&gt;.",
+              "<b>modifierExtension</b> desconhecida → <b>rejeitar o recurso inteiro</b>, nunca ignorar."
+            ],
+            "pointsEn": [
+              "Simple extension: one <b>value[x]</b>. Complex: sub-extensions with their own urls and no root value[x].",
+              "Extend a primitive (e.g. HumanName.family): use the <code>_family</code> shadow with extension; the original value is preserved.",
+              "In XML, the <b>url</b> is an attribute of the &lt;extension&gt; element.",
+              "An unknown <b>modifierExtension</b> → <b>reject the whole resource</b>, never ignore it."
+            ],
+            "trapPt": "modifierExtension desconhecida = descartar o recurso e retornar erro. Extensão comum desconhecida pode ser ignorada.",
+            "trapEn": "Unknown modifierExtension = discard the resource and return an error. An unknown plain extension may be ignored.",
+            "refs": [
+              { "kind": "spec", "labelPt": "Extensibility — modifierExtension e anatomia da extensão", "labelEn": "Extensibility — modifierExtension and extension anatomy", "url": "https://hl7.org/fhir/R4/extensibility.html#modifierExtension" },
+              { "kind": "material", "labelPt": "Material do curso — Módulo 2 · §7 \"modifierExtension\"", "labelEn": "Course material — Module 2 · §7 \"modifierExtension\"", "url": "../module-2-guia-estudo.md" }
+            ]
+          },
+          "items": [
+            "module2_q1#1",
+            "module2_q1#2",
+            "module2_q1#3",
+            "module2_q1#4"
+          ]
+        }
+      ],
+      "checkpoint": {
+        "items": [
+          "module2_cp#9",
+          "module2_cp#10",
+          "module2_cp#11"
+        ]
+      }
+    },
+    {
+      "id": "u4",
+      "titlePt": "Terminologia",
+      "titleEn": "Terminology",
+      "color": "#fca5a5",
+      "lessons": [
+        {
+          "id": "m2-l12",
+          "titlePt": "CodeSystem × ValueSet",
+          "titleEn": "CodeSystem × ValueSet",
+          "card": {
+            "titlePt": "Dicionário × lista de compras",
+            "titleEn": "Dictionary × shopping list",
+            "analogyPt": "CodeSystem é o dicionário (define os códigos); ValueSet é a lista de compras (seleciona um subconjunto para um uso).",
+            "analogyEn": "CodeSystem is the dictionary (defines the codes); ValueSet is the shopping list (selects a subset for a use).",
+            "pointsPt": [
+              "<b>CodeSystem</b> define os códigos e seus significados (SNOMED, LOINC, ICD, UCUM, RxNorm).",
+              "<b>ValueSet</b> seleciona subconjuntos de um ou mais CodeSystems para um caso de uso.",
+              "Em <code>coding.system</code> use a URL canônica do <b>CodeSystem</b>, nunca a do ValueSet.",
+              "Observation.code → LOINC; Condition.code → SNOMED CT; MedicationRequest → RxNorm."
+            ],
+            "pointsEn": [
+              "<b>CodeSystem</b> defines codes and their meanings (SNOMED, LOINC, ICD, UCUM, RxNorm).",
+              "<b>ValueSet</b> selects subsets from one or more CodeSystems for a use case.",
+              "In <code>coding.system</code> use the <b>CodeSystem</b>'s canonical URL, never the ValueSet's.",
+              "Observation.code → LOINC; Condition.code → SNOMED CT; MedicationRequest → RxNorm."
+            ],
+            "trapPt": "coding.system = URL do <b>CodeSystem</b> (<code>.../CodeSystem/...</code>), não do ValueSet (<code>.../ValueSet/...</code>).",
+            "trapEn": "coding.system = the <b>CodeSystem</b> URL (<code>.../CodeSystem/...</code>), not the ValueSet (<code>.../ValueSet/...</code>).",
+            "refs": [
+              { "kind": "spec", "labelPt": "CodeSystem — o dicionário de códigos", "labelEn": "CodeSystem — the code dictionary", "url": "https://hl7.org/fhir/R4/codesystem.html" },
+              { "kind": "spec", "labelPt": "ValueSet — a lista de compras de códigos", "labelEn": "ValueSet — the shopping list of codes", "url": "https://hl7.org/fhir/R4/valueset.html" },
+              { "kind": "material", "labelPt": "Material do curso — Módulo 2 · §6 \"Terminologia\"", "labelEn": "Course material — Module 2 · §6 \"Terminology\"", "url": "../module-2-guia-estudo.md" }
+            ]
+          },
+          "items": [
+            "module2a_q4#1",
+            "module2a_q4#2",
+            "module2a_q4#3",
+            "module2a_q4#4"
+          ]
+        },
+        {
+          "id": "m2-l13",
+          "titlePt": "Binding strength (REPE)",
+          "titleEn": "Binding strength (REPE)",
+          "card": {
+            "titlePt": "Quão rígido é o conjunto de códigos",
+            "titleEn": "How strict the code set is",
+            "analogyPt": "O binding é o nível de rigor da regra: de 'só estes códigos' (required) a 'só exemplo' (example).",
+            "analogyEn": "Binding is the rule's strictness: from 'these codes only' (required) to 'just an example' (example).",
+            "pointsPt": [
+              "<b>required</b>: só códigos do VS — fora é erro de validação.",
+              "<b>extensible</b>: use o VS se houver equivalente; código alternativo só se não existir equivalente.",
+              "<b>preferred</b>: recomendado mas não obrigatório · <b>example</b>: apenas ilustrativo.",
+              "Mnemônico do mais ao menos restritivo: <b>REPE</b> (Required, Extensible, Preferred, Example)."
+            ],
+            "pointsEn": [
+              "<b>required</b>: only VS codes — outside is a validation error.",
+              "<b>extensible</b>: use the VS if there's an equivalent; an alternative code only if none exists.",
+              "<b>preferred</b>: recommended but not mandatory · <b>example</b>: illustrative only.",
+              "Mnemonic from strictest to loosest: <b>REPE</b> (Required, Extensible, Preferred, Example)."
+            ],
+            "trapPt": "required nunca aceita código fora do VS. extensible aceita só quando não há equivalente no VS.",
+            "trapEn": "required never accepts a code outside the VS. extensible accepts one only when there's no VS equivalent.",
+            "refs": [
+              { "kind": "spec", "labelPt": "Terminologies — binding strength (required/extensible/preferred/example)", "labelEn": "Terminologies — binding strength", "url": "https://hl7.org/fhir/R4/terminologies.html#strength" },
+              { "kind": "material", "labelPt": "Material do curso — Módulo 2 · §6 \"binding strength\"", "labelEn": "Course material — Module 2 · §6 \"binding strength\"", "url": "../module-2-guia-estudo.md" }
+            ]
+          },
+          "items": [
+            "module2a_q4#5",
+            "module2a_q4#6",
+            "module2a_q4#7"
+          ]
+        },
+        {
+          "id": "m2-l14",
+          "titlePt": "Aplicar terminologia (URLs, UCUM)",
+          "titleEn": "Applying terminology (URLs, UCUM)",
+          "card": {
+            "titlePt": "URLs canônicas e unidades corretas",
+            "titleEn": "Canonical URLs and correct units",
+            "analogyPt": "Usar a URL errada é como discar o número errado: parece certo, mas não conecta. UCUM é o 'idioma' das unidades.",
+            "analogyEn": "Using the wrong URL is like dialing the wrong number: looks right, won't connect. UCUM is the 'language' of units.",
+            "pointsPt": [
+              "LOINC: <code>http://loinc.org</code> · SNOMED CT: <code>http://snomed.info/sct</code> · UCUM: <code>http://unitsofmeasure.org</code>.",
+              "Quantity de exame: value + unit + system (UCUM) + code (ex.: mmol/L).",
+              "Texto puro 'LOINC'/'UCUM' não é URL válida e invalida o dado.",
+              "Em CodeableConcept, ao menos um coding deve usar o system canônico exigido pelo binding."
+            ],
+            "pointsEn": [
+              "LOINC: <code>http://loinc.org</code> · SNOMED CT: <code>http://snomed.info/sct</code> · UCUM: <code>http://unitsofmeasure.org</code>.",
+              "Lab Quantity: value + unit + system (UCUM) + code (e.g. mmol/L).",
+              "Plain text 'LOINC'/'UCUM' is not a valid URL and invalidates the data.",
+              "In a CodeableConcept, at least one coding must use the canonical system the binding requires."
+            ],
+            "trapPt": "system do UCUM é <code>http://unitsofmeasure.org</code>. Variantes como 'ucum.org/unitsofmeasure' estão erradas.",
+            "trapEn": "UCUM's system is <code>http://unitsofmeasure.org</code>. Variants like 'ucum.org/unitsofmeasure' are wrong.",
+            "refs": [
+              { "kind": "spec", "labelPt": "Using Codes — URLs canônicas (LOINC, SNOMED, UCUM)", "labelEn": "Using Codes — canonical URLs (LOINC, SNOMED, UCUM)", "url": "https://hl7.org/fhir/R4/terminologies-systems.html" },
+              { "kind": "spec", "labelPt": "Data Types — Quantity e UCUM", "labelEn": "Data Types — Quantity and UCUM", "url": "https://hl7.org/fhir/R4/datatypes.html#Quantity" },
+              { "kind": "material", "labelPt": "Material do curso — Módulo 2 · §6 \"Terminologia\"", "labelEn": "Course material — Module 2 · §6 \"Terminology\"", "url": "../module-2-guia-estudo.md" }
+            ]
+          },
+          "items": [
+            "module2_q3#1",
+            "module2_q3#2",
+            "module2_q3#3",
+            "module2_q3#4",
+            "module2_q3#5"
+          ]
+        },
+        {
+          "id": "m2-l15",
+          "titlePt": "Terminologia em casos de uso",
+          "titleEn": "Terminology in use cases",
+          "card": {
+            "titlePt": "Escolher a terminologia pelo cenário",
+            "titleEn": "Picking terminology by scenario",
+            "analogyPt": "Cada tipo de dado clínico tem sua terminologia 'natural' — reconhecer o par certo resolve a questão.",
+            "analogyEn": "Each clinical datum has its 'natural' terminology — recognizing the right pair solves the question.",
+            "pointsPt": [
+              "Exames/observações laboratoriais → <b>LOINC</b>; diagnósticos → <b>SNOMED CT</b>.",
+              "Medicamentos → <b>RxNorm</b> (quando disponível); unidades de medida → <b>UCUM</b>.",
+              "required com binding HL7: pelo menos um coding do sistema canônico da HL7 deve estar presente.",
+              "Códigos customizados podem ser <b>adicionais</b>, nunca substituem o código padrão exigido."
+            ],
+            "pointsEn": [
+              "Lab tests/observations → <b>LOINC</b>; diagnoses → <b>SNOMED CT</b>.",
+              "Medications → <b>RxNorm</b> (when available); units of measure → <b>UCUM</b>.",
+              "required with an HL7 binding: at least one coding from HL7's canonical system must be present.",
+              "Custom codes may be <b>additional</b>, never replacing the required standard code."
+            ],
+            "trapPt": "Com binding required, um código customizado sozinho (sem o código HL7 padrão) é erro de validação.",
+            "trapEn": "With a required binding, a custom code alone (without the standard HL7 code) is a validation error.",
+            "refs": [
+              { "kind": "spec", "labelPt": "Using Terminologies — escolher pelo cenário", "labelEn": "Using Terminologies — picking by scenario", "url": "https://hl7.org/fhir/R4/terminologies.html" },
+              { "kind": "material", "labelPt": "Material do curso — Módulo 2 · §6 \"Terminologia\"", "labelEn": "Course material — Module 2 · §6 \"Terminology\"", "url": "../module-2-guia-estudo.md" }
+            ]
+          },
+          "items": [
+            "module2_q3#6",
+            "module2_q3#7",
+            "module2_q3#8",
+            "module2_q3#9"
+          ]
+        }
+      ],
+      "checkpoint": {
+        "items": [
+          "module2_cp#12",
+          "module2_cp#13",
+          "module2_cp#14",
+          "module2_cp#15"
+        ]
+      }
+    },
+    {
+      "id": "u5",
+      "titlePt": "Implementação e serialização",
+      "titleEn": "Implementation & serialization",
+      "color": "#c4b5fd",
+      "lessons": [
+        {
+          "id": "m2-l16",
+          "titlePt": "Serialização JSON",
+          "titleEn": "JSON serialization",
+          "card": {
+            "titlePt": "As regras de ouro do JSON FHIR",
+            "titleEn": "The golden rules of FHIR JSON",
+            "analogyPt": "JSON FHIR é exigente com tipos: número é número, boolean é boolean, e 0..* é sempre array — mesmo com um item.",
+            "analogyEn": "FHIR JSON is strict about types: a number is a number, a boolean is a boolean, and 0..* is always an array — even with one item.",
+            "pointsPt": [
+              "<b>boolean</b>: <code>\"active\":true</code> (nunca \"true\"). <b>número</b> sem aspas.",
+              "<b>code</b>: string simples, nunca objeto com coding.",
+              "Elemento <b>0..*</b> é sempre array <code>[{...}]</code>, mesmo com um único item.",
+              "Chave duplicada (duas \"extension\" no mesmo objeto) = JSON inválido."
+            ],
+            "pointsEn": [
+              "<b>boolean</b>: <code>\"active\":true</code> (never \"true\"). <b>number</b> unquoted.",
+              "<b>code</b>: a plain string, never an object with coding.",
+              "A <b>0..*</b> element is always an array <code>[{...}]</code>, even with a single item.",
+              "A duplicate key (two \"extension\" in the same object) = invalid JSON."
+            ],
+            "trapPt": "value[x] vai tipado direto na raiz: <code>\"performedDateTime\":\"...\"</code>, não aninhado sob \"performed\".",
+            "trapEn": "value[x] goes typed at the root: <code>\"performedDateTime\":\"...\"</code>, not nested under \"performed\".",
+            "refs": [
+              { "kind": "spec", "labelPt": "JSON Format — as regras de ouro do JSON FHIR", "labelEn": "JSON Format — the golden rules of FHIR JSON", "url": "https://hl7.org/fhir/R4/json.html" },
+              { "kind": "material", "labelPt": "Material do curso — Módulo 2 · §9 \"Serialização — JSON\"", "labelEn": "Course material — Module 2 · §9 \"Serialization — JSON\"", "url": "../module-2-guia-estudo.md" }
+            ]
+          },
+          "items": [
+            "module2_q2#1",
+            "module2_q2#2",
+            "module2_q2#3",
+            "module2_q2#4",
+            "module2_q2#5"
+          ]
+        },
+        {
+          "id": "m2-l17",
+          "titlePt": "Serialização XML e choice types",
+          "titleEn": "XML serialization & choice types",
+          "card": {
+            "titlePt": "XML FHIR e o value[x]",
+            "titleEn": "FHIR XML and value[x]",
+            "analogyPt": "Em XML FHIR, todo valor primitivo mora no atributo value; e os 'choice types' assumem o nome do tipo escolhido.",
+            "analogyEn": "In FHIR XML, every primitive value lives in the value attribute; and 'choice types' take the chosen type's name.",
+            "pointsPt": [
+              "XML: valor primitivo no atributo <code>value</code>: <code>&lt;status value=\"final\"/&gt;</code>.",
+              "Namespace obrigatório na raiz: <code>xmlns=\"http://hl7.org/fhir\"</code>; a ordem dos elementos importa.",
+              "<b>choice type value[x]</b>: o nome carrega o tipo — <code>effectiveDateTime</code>, <code>valueQuantity</code>.",
+              "boolean em XML: <code>&lt;active value=\"true\"/&gt;</code> (string no atributo)."
+            ],
+            "pointsEn": [
+              "XML: primitive value in the <code>value</code> attribute: <code>&lt;status value=\"final\"/&gt;</code>.",
+              "Namespace required on the root: <code>xmlns=\"http://hl7.org/fhir\"</code>; element order matters.",
+              "<b>choice type value[x]</b>: the name carries the type — <code>effectiveDateTime</code>, <code>valueQuantity</code>.",
+              "boolean in XML: <code>&lt;active value=\"true\"/&gt;</code> (string in the attribute)."
+            ],
+            "trapPt": "Em XML, <code>&lt;status&gt;final&lt;/status&gt;</code> está errado — o valor vai no atributo value.",
+            "trapEn": "In XML, <code>&lt;status&gt;final&lt;/status&gt;</code> is wrong — the value goes in the value attribute.",
+            "refs": [
+              { "kind": "spec", "labelPt": "XML Format — XML FHIR e atributos value", "labelEn": "XML Format — FHIR XML and value attributes", "url": "https://hl7.org/fhir/R4/xml.html" },
+              { "kind": "spec", "labelPt": "Formats — choice types value[x]", "labelEn": "Formats — choice types value[x]", "url": "https://hl7.org/fhir/R4/formats.html#choice" },
+              { "kind": "material", "labelPt": "Material do curso — Módulo 2 · §9 \"Serialização — XML\"", "labelEn": "Course material — Module 2 · §9 \"Serialization — XML\"", "url": "../module-2-guia-estudo.md" }
+            ]
+          },
+          "items": [
+            "module2_q2#6",
+            "module2_q2#7",
+            "module2_q2#8",
+            "module2_q2#9",
+            "module2_q2#10"
+          ]
+        },
+        {
+          "id": "m2-l18",
+          "titlePt": "Referenciamento de recursos",
+          "titleEn": "Resource referencing",
+          "card": {
+            "titlePt": "Literal, lógica, contained e canônica",
+            "titleEn": "Literal, logical, contained & canonical",
+            "analogyPt": "Referenciar é apontar: pelo endereço (literal), pelo crachá de negócio (lógica), ou para um anexo interno (contained).",
+            "analogyEn": "Referencing is pointing: by address (literal), by business badge (logical), or to an internal attachment (contained).",
+            "pointsPt": [
+              "<b>Literal relativa</b>: <code>\"reference\":\"Patient/123\"</code> quando o id é conhecido.",
+              "<b>Literal absoluta</b>: URL completa para servidor externo.",
+              "<b>Lógica</b>: <code>\"identifier\":{...}</code> quando só o identificador de negócio é conhecido.",
+              "<b>Contained</b>: recurso embutido no array contained, referenciado por <code>#id-local</code>."
+            ],
+            "pointsEn": [
+              "<b>Relative literal</b>: <code>\"reference\":\"Patient/123\"</code> when the id is known.",
+              "<b>Absolute literal</b>: full URL to an external server.",
+              "<b>Logical</b>: <code>\"identifier\":{...}</code> when only the business identifier is known.",
+              "<b>Contained</b>: a resource embedded in the contained array, referenced by <code>#local-id</code>."
+            ],
+            "trapPt": "id conhecido → reference literal; só identificador de negócio → reference lógica (identifier).",
+            "trapEn": "id known → literal reference; only business identifier → logical reference (identifier).",
+            "refs": [
+              { "kind": "spec", "labelPt": "References — literal, lógica, contained e canônica", "labelEn": "References — literal, logical, contained & canonical", "url": "https://hl7.org/fhir/R4/references.html" },
+              { "kind": "material", "labelPt": "Material do curso — Módulo 2 · §8 \"Referenciamento de recursos\"", "labelEn": "Course material — Module 2 · §8 \"Resource referencing\"", "url": "../module-2-guia-estudo.md" }
+            ]
+          },
+          "items": [
+            "module2_q2#11",
+            "module2_q2#12",
+            "module2_q2#13",
+            "module2_q2#14"
+          ]
+        },
+        {
+          "id": "m2-l19",
+          "titlePt": "id lógico × identificador de negócio",
+          "titleEn": "Logical id × business identifier",
+          "card": {
+            "titlePt": "id (servidor) não é o mesmo que identifier (negócio)",
+            "titleEn": "id (server) is not the same as identifier (business)",
+            "analogyPt": "O id lógico é como o número interno do prontuário no sistema; o identifier é o número 'oficial' do paciente (MRN).",
+            "analogyEn": "The logical id is like the system's internal record number; the identifier is the patient's 'official' number (MRN).",
+            "pointsPt": [
+              "<b>id</b>: identificador lógico atribuído pelo servidor — string única, <b>nunca</b> array.",
+              "<b>identifier</b>: identificador de negócio (MRN, CPF) — array de objetos {system, value, use}.",
+              "Ex.: id lógico 90112 e MRN 789099 → <code>\"id\":\"90112\"</code> e <code>\"identifier\":[{\"value\":\"789099\"}]</code>.",
+              "<b>meta</b> guarda versionId, lastUpdated, security, tag."
+            ],
+            "pointsEn": [
+              "<b>id</b>: logical identifier assigned by the server — a single string, <b>never</b> an array.",
+              "<b>identifier</b>: business identifier (MRN, SSN) — an array of {system, value, use} objects.",
+              "E.g. logical id 90112 and MRN 789099 → <code>\"id\":\"90112\"</code> and <code>\"identifier\":[{\"value\":\"789099\"}]</code>.",
+              "<b>meta</b> holds versionId, lastUpdated, security, tag."
+            ],
+            "trapPt": "id lógico é string única (não array). O MRN vai em identifier, que é array.",
+            "trapEn": "The logical id is a single string (not an array). The MRN goes in identifier, which is an array.",
+            "refs": [
+              { "kind": "spec", "labelPt": "Resource — id lógico (servidor)", "labelEn": "Resource — logical id (server)", "url": "https://hl7.org/fhir/R4/resource.html#id" },
+              { "kind": "spec", "labelPt": "Data Types — Identifier (identificador de negócio)", "labelEn": "Data Types — Identifier (business identifier)", "url": "https://hl7.org/fhir/R4/datatypes.html#Identifier" },
+              { "kind": "material", "labelPt": "Material do curso — Módulo 2 · §9 \"Identifier lógico vs de negócio\"", "labelEn": "Course material — Module 2 · §9 \"Logical id vs business identifier\"", "url": "../module-2-guia-estudo.md" }
+            ]
+          },
+          "items": [
+            "module2_q2#15",
+            "module2_q2#16",
+            "module2_q2#17",
+            "module2_q2#18"
+          ]
+        }
+      ],
+      "checkpoint": {
+        "items": [
+          "module2_cp#16",
+          "module2_cp#17",
+          "module2_cp#18",
+          "module2_cp#19"
+        ]
+      }
+    }
+  ]
+}

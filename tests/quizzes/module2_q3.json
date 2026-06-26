@@ -1,0 +1,404 @@
+[
+  {
+    "id": 1,
+    "titleEn": "Represent Appointment.status in JSON",
+    "titlePt": "Representar Appointment.status em JSON",
+    "qEn": "Refer to the image. The scheduling app confirms the patient's appointment at 3 pm on Tuesday. The Appointment.status element must convey the booking confirmation. What is the correct JSON representation?",
+    "qPt": "Consulte a imagem. O aplicativo de agendamento confirma a consulta do paciente às 15h na terça-feira. O elemento Appointment.status deve indicar a confirmação da reserva. Qual é a representação correta em JSON?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module2/m2_q3_q1.png",
+        "altEn": "Appointment resource with ValueSet of appointmentstatus; options include proposed, pending, booked, etc.",
+        "altPt": "Recurso Appointment com ValueSet de appointmentstatus; opções incluem proposed, pending, booked etc."
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "<pre><code>\"code\": \"booked\"</code></pre>",
+        "pt": "<pre><code>\"code\": \"booked\"</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "<pre><code>\"status\": {\"coding\": [{\"system\": \"http://hl7.org/fhir/appointmentstatus\", \"code\": \"booked\", \"display\": \"Booked\"}]}</code></pre>",
+        "pt": "<pre><code>\"status\": {\"coding\": [{\"system\": \"http://hl7.org/fhir/appointmentstatus\", \"code\": \"booked\", \"display\": \"Booked\"}]}</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "<pre><code>\"status\": {\"coding\": [{\"system\": \"http://hl7.org/fhir/appointmentstatus\", \"code\": \"fulfilled\", \"display\": \"Fulfilled\"}]}</code></pre>",
+        "pt": "<pre><code>\"status\": {\"coding\": [{\"system\": \"http://hl7.org/fhir/appointmentstatus\", \"code\": \"fulfilled\", \"display\": \"Fulfilled\"}]}</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "<pre><code>\"status\": \"booked\"</code></pre>",
+        "pt": "<pre><code>\"status\": \"booked\"</code></pre>",
+        "correct": true
+      }
+    ],
+    "explanationEn": "D is correct. Appointment.status is a code (primitive) — its value in JSON is a plain string: \"status\": \"booked\". A uses a wrong property name ('code' instead of 'status'). B and C use object notation with a coding array — code is a primitive, not a CodeableConcept. C also has the wrong status value ('fulfilled' instead of 'booked').",
+    "explanationPt": "D está correta. Appointment.status é um code (primitivo) — seu valor em JSON é uma string simples: \"status\": \"booked\". A usa nome de propriedade errado ('code' em vez de 'status'). B e C usam notação de objeto com array coding — code é primitivo, não CodeableConcept. C também tem valor de status errado ('fulfilled' em vez de 'booked')."
+  },
+  {
+    "id": 2,
+    "titleEn": "Pick the correct Observation.category coding",
+    "titlePt": "Selecione a codificação correta de Observation.category",
+    "qEn": "Refer to the image. An EMR needs to record alcohol types (wine/beer) as social history. Which coding is correct for Observation.category.coding?",
+    "qPt": "Consulte a imagem. Um prontuário eletrônico precisa registrar tipos de álcool (vinho/cerveja) como histórico social. Qual é a codificação correta para Observation.category.coding?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module2/m2_q3_q2.png",
+        "altEn": "ValueSet for Observation.category with codes like social-history, vital-signs, imaging, laboratory, procedure, survey, exam, therapy, activity.",
+        "altPt": "ValueSet de Observation.category com códigos como social-history, vital-signs, imaging, laboratory, procedure, survey, exam, therapy, activity."
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "\"coding\": [{\"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\", \"code\": \"vital-signs\"}]",
+        "pt": "\"coding\": [{\"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\", \"code\": \"vital-signs\"}]",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "\"coding\": [{\"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\", \"code\": \"survey\"}]",
+        "pt": "\"coding\": [{\"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\", \"code\": \"survey\"}]",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "\"coding\": [{\"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\", \"code\": \"activity\"}]",
+        "pt": "\"coding\": [{\"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\", \"code\": \"activity\"}]",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "\"coding\": [{\"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\", \"code\": \"social-history\"}]",
+        "pt": "\"coding\": [{\"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\", \"code\": \"social-history\"}]",
+        "correct": true
+      }
+    ],
+    "explanationEn": "D is correct. Alcohol consumption is classified as 'social-history' in the observation-category CodeSystem. vital-signs (A) is for physiological measurements like blood pressure. survey (B) is for questionnaire responses. activity (C) is for physical activity data.",
+    "explanationPt": "D está correta. O consumo de álcool é classificado como 'social-history' no CodeSystem observation-category. vital-signs (A) é para medidas fisiológicas como pressão arterial. survey (B) é para respostas de questionários. activity (C) é para dados de atividade física."
+  },
+  {
+    "id": 3,
+    "module": "module2",
+    "quiz": "quiz3",
+    "titleEn": "Pick the correct coding for Condition.clinicalStatus",
+    "titlePt": "Escolha a codificação correta para Condition.clinicalStatus",
+    "qEn": "Refer to the image. The patient got better for 6 months but has had headaches again for a week (return of symptoms). Which coding is correct for Condition.clinicalStatus?",
+    "qPt": "Consulte a imagem. O paciente melhorou por 6 meses, mas há uma semana voltou a ter sintomas (retorno dos sintomas). Qual codificação está correta para Condition.clinicalStatus?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module2/m2_q3_q3.png",
+        "altEn": "ValueSet for condition-clinical showing codes: active, recurrence, relapse, inactive, remission, resolved",
+        "altPt": "ValueSet de condition-clinical com códigos: active, recurrence, relapse, inactive, remission, resolved"
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "<pre><code>\"clinicalStatus\": {\n  \"coding\": [\n    { \"system\": \"http://terminology.hl7.org/CodeSystem/condition-clinical\", \"code\": \"relapse\" }\n  ]\n}</code></pre>",
+        "pt": "<pre><code>\"clinicalStatus\": {\n  \"coding\": [\n    { \"system\": \"http://terminology.hl7.org/CodeSystem/condition-clinical\", \"code\": \"relapse\" }\n  ]\n}</code></pre>",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "<pre><code>\"clinicalStatus\": {\n  \"coding\": [\n    { \"system\": \"http://terminology.hl7.org/CodeSystem/condition-clinical\", \"code\": \"remission\" }\n  ]\n}</code></pre>",
+        "pt": "<pre><code>\"clinicalStatus\": {\n  \"coding\": [\n    { \"system\": \"http://terminology.hl7.org/CodeSystem/condition-clinical\", \"code\": \"remission\" }\n  ]\n}</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "<pre><code>\"clinicalStatus\": {\n  \"coding\": [\n    { \"system\": \"http://hl7.org/fhir/ValueSet/condition-clinical\", \"code\": \"recurrence\" }\n  ]\n}</code></pre>",
+        "pt": "<pre><code>\"clinicalStatus\": {\n  \"coding\": [\n    { \"system\": \"http://hl7.org/fhir/ValueSet/condition-clinical\", \"code\": \"recurrence\" }\n  ]\n}</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "<pre><code>\"clinicalStatus\": {\n  \"coding\": [\n    { \"system\": \"http://hl7.org/fhir/ValueSet/condition-clinical\", \"code\": \"relapse\" }\n  ]\n}</code></pre>",
+        "pt": "<pre><code>\"clinicalStatus\": {\n  \"coding\": [\n    { \"system\": \"http://hl7.org/fhir/ValueSet/condition-clinical\", \"code\": \"relapse\" }\n  ]\n}</code></pre>",
+        "correct": false
+      }
+    ],
+    "explanationEn": "Use the CodeSystem canonical URL in coding.system (http://terminology.hl7.org/CodeSystem/condition-clinical), not the ValueSet URL. Given the scenario, the correct code is \"relapse\".",
+    "explanationPt": "Use a URL canônica do CodeSystem em coding.system (http://terminology.hl7.org/CodeSystem/condition-clinical), não a URL do ValueSet. Dado o cenário, o código correto é \"relapse\"."
+  },
+  {
+    "id": 4,
+    "titleEn": "Represent ServiceRequest.status (CodeableConcept)",
+    "titlePt": "Representar ServiceRequest.status (CodeableConcept)",
+    "qEn": "Refer to the image. A client system must notify the receiver that a radiology order was created by mistake and should be ignored. The ServiceRequest.status element has required binding to http://hl7.org/fhir/ValueSet/request-status and its data type is CodeableConcept. Which JSON option is correct?",
+    "qPt": "Consulte a imagem. Um sistema cliente deve notificar o recebedor que um pedido de radiologia foi criado por engano e deve ser ignorado. O elemento ServiceRequest.status possui binding obrigatório para http://hl7.org/fhir/ValueSet/request-status e o tipo de dado é CodeableConcept. Qual opção JSON está correta?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module2/m2_q3_q4.png",
+        "altEn": "Request-status value set table and prompt selecting entered-in-error using CodeableConcept.coding",
+        "altPt": "Tabela do value set request-status e enunciado pedindo entered-in-error usando CodeableConcept.coding"
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "<pre><code>\"status\" : \"entered-in-error\"</code></pre>",
+        "pt": "<pre><code>\"status\" : \"entered-in-error\"</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "<pre><code>\"status\": { \"coding\": [ { \"system\": \"http://hl7.org/fhir/request-status\", \"code\": \"revoked\", \"display\": \"Revoked\" } ] }</code></pre>",
+        "pt": "<pre><code>\"status\": { \"coding\": [ { \"system\": \"http://hl7.org/fhir/request-status\", \"code\": \"revoked\", \"display\": \"Revoked\" } ] }</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "<pre><code>\"status\": { \"coding\": [ { \"system\": \"http://hl7.org/fhir/request-status\", \"code\": \"entered-in-error\", \"display\": \"Entered in Error\" } ] }</code></pre>",
+        "pt": "<pre><code>\"status\": { \"coding\": [ { \"system\": \"http://hl7.org/fhir/request-status\", \"code\": \"entered-in-error\", \"display\": \"Entered in Error\" } ] }</code></pre>",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "en": "<pre><code>\"status\": { \"CodeableConcept\": [ { \"system\": \"http://hl7.org/fhir/request-status\", \"code\": \"revoked\", \"display\": \"Revoked\" } ] }</code></pre>",
+        "pt": "<pre><code>\"status\": { \"CodeableConcept\": [ { \"system\": \"http://hl7.org/fhir/request-status\", \"code\": \"revoked\", \"display\": \"Revoked\" } ] }</code></pre>",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The status element is a CodeableConcept; the correct JSON uses status.coding with system http://hl7.org/fhir/request-status and code \"entered-in-error\". Writing the type name (\"CodeableConcept\") as a property or using a primitive code value is incorrect.",
+    "explanationPt": "O elemento status é um CodeableConcept; o JSON correto usa status.coding com system http://hl7.org/fhir/request-status e code \"entered-in-error\". Escrever o nome do tipo (\"CodeableConcept\") como propriedade ou usar um valor primitivo é incorreto."
+  },
+  {
+    "id": 5,
+    "titleEn": "Choose the correct AllergyIntolerance.clinicalStatus coding",
+    "titlePt": "Escolha o coding correto para AllergyIntolerance.clinicalStatus",
+    "qEn": "A FHIR SME needs to map client-specific data: the patient’s penicillin allergy is \"partially-resolved\" and may take ~3 months to fully resolve. What is the correct way to represent the allergy status in AllergyIntolerance.clinicalStatus using the right code and code system?",
+    "qPt": "Um especialista FHIR precisa mapear um dado específico do cliente: a alergia do paciente à penicilina está \"parcialmente resolvida\" e pode levar ~3 meses para resolver completamente. Qual é a forma correta de representar o status da alergia em AllergyIntolerance.clinicalStatus usando o código e o sistema corretos?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module2/m2_q3_q5.png",
+        "altEn": "AllergyIntolerance clinical status required binding; must use CodeSystem allergyintolerance-clinical",
+        "altPt": "Vinculação obrigatória de clinicalStatus do AllergyIntolerance; deve usar CodeSystem allergyintolerance-clinical"
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "<pre><code>\"clinicalStatus\": {\n  \"coding\": [\n    { \"system\": \"http://ghh.org/CodeSystem/custom-allergyintolerance-clinical\",\n      \"code\": \"partially-resolved\" }\n  ]\n}</code></pre>",
+        "pt": "<pre><code>\"clinicalStatus\": {\n  \"coding\": [\n    { \"system\": \"http://ghh.org/CodeSystem/custom-allergyintolerance-clinical\",\n      \"code\": \"partially-resolved\" }\n  ]\n}</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "<pre><code>\"clinicalStatus\": {\n  \"coding\": [\n    { \"system\": \"http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical\",\n      \"code\": \"active\" },\n    { \"system\": \"http://ghh.org/CodeSystem/custom-allergyintolerance-clinical\",\n      \"code\": \"partially-resolved\" }\n  ]\n}</code></pre>",
+        "pt": "<pre><code>\"clinicalStatus\": {\n  \"coding\": [\n    { \"system\": \"http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical\",\n      \"code\": \"active\" },\n    { \"system\": \"http://ghh.org/CodeSystem/custom-allergyintolerance-clinical\",\n      \"code\": \"partially-resolved\" }\n  ]\n}</code></pre>",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "en": "<pre><code>\"clinicalStatus\": {\n  \"coding\": [\n    { \"system\": \"http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical\",\n      \"code\": \"resolved\" }\n  ]\n}</code></pre>",
+        "pt": "<pre><code>\"clinicalStatus\": {\n  \"coding\": [\n    { \"system\": \"http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical\",\n      \"code\": \"resolved\" }\n  ]\n}</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "<pre><code>\"clinicalStatus\": {\n  \"coding\": [\n    { \"system\": \"http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical\",\n      \"code\": \"partially-resolved\" }\n  ]\n}</code></pre>",
+        "pt": "<pre><code>\"clinicalStatus\": {\n  \"coding\": [\n    { \"system\": \"http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical\",\n      \"code\": \"partially-resolved\" }\n  ]\n}</code></pre>",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The binding for AllergyIntolerance.clinicalStatus is REQUIRED to the HL7 ValueSet. At least one Coding **must** use the canonical CodeSystem (allergyintolerance-clinical). “Partially-resolved” is a client custom code, so it can be included in an additional Coding, but a valid HL7 code such as **active** must also be present. “Resolved” would mean no active reactions, which is not the case here.",
+    "explanationPt": "O clinicalStatus do AllergyIntolerance possui **vinculação obrigatória** ao ValueSet HL7. Pelo menos um Coding **deve** usar o CodeSystem canônico (allergyintolerance-clinical). “Partially-resolved” é um código customizado do cliente, então pode ser incluído como Coding adicional, mas um código HL7 válido como **active** também precisa estar presente. “Resolved” indicaria ausência de reações ativas, o que não é o caso."
+  },
+  {
+    "id": 6,
+    "titleEn": "Choose the correct Observation.code (LOINC + local lab code)",
+    "titlePt": "Escolha o Observation.code correto (LOINC + código local do laboratório)",
+    "qEn": "Refer to the image. A lab (Quest Diagnostics) needs to send the \"CHOLESTEROL, TOTAL\" result from a lipid panel. The LOINC is 35200-5 and the lab’s own code is 25003012. Which JSON best represents Observation.code?",
+    "qPt": "Consulte a imagem. Um laboratório (Quest Diagnostics) precisa enviar o resultado \"CHOLESTEROL, TOTAL\" de um lipid panel. O LOINC é 35200-5 e o código interno do lab é 25003012. Qual JSON representa melhor o Observation.code?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module2/m2_q3_q6.png",
+        "altEn": "Observation.code element with ValueSet (observation-codes) and explanation about using LOINC and custom systems",
+        "altPt": "Elemento Observation.code com ValueSet (observation-codes) e explicação sobre uso de LOINC e sistemas personalizados"
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "<pre><code>{\n  \"resourceType\": \"Observation\",\n  \"code\": {\n    \"coding\": [\n      { \"system\": \"http://loinc.org\", \"code\": \"35200-5\", \"display\": \"Cholesterol [Moles/volume] in Serum or Plasma\" },\n      { \"system\": \"http://hl7.org/fhir/ObservationValue\", \"code\": \"25003012\", \"display\": \"CHOLESTEROL,TOTAL\" }\n    ]\n  }\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"resourceType\": \"Observation\",\n  \"code\": {\n    \"coding\": [\n      { \"system\": \"http://loinc.org\", \"code\": \"35200-5\", \"display\": \"Cholesterol [Moles/volume] in Serum or Plasma\" },\n      { \"system\": \"http://hl7.org/fhir/ObservationValue\", \"code\": \"25003012\", \"display\": \"CHOLESTEROL,TOTAL\" }\n    ]\n  }\n}</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "<pre><code>{\n  \"resourceType\": \"Observation\",\n  \"code\": {\n    \"coding\": [\n      { \"system\": \"http://loinc.org\", \"code\": \"35200-5\", \"display\": \"Cholesterol [Moles/volume] in Serum or Plasma\" },\n      { \"system\": \"http://loinc.org\", \"code\": \"25003012\", \"display\": \"CHOLESTEROL,TOTAL\" }\n    ]\n  }\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"resourceType\": \"Observation\",\n  \"code\": {\n    \"coding\": [\n      { \"system\": \"http://loinc.org\", \"code\": \"35200-5\", \"display\": \"Cholesterol [Moles/volume] in Serum or Plasma\" },\n      { \"system\": \"http://loinc.org\", \"code\": \"25003012\", \"display\": \"CHOLESTEROL,TOTAL\" }\n    ]\n  }\n}</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "<pre><code>{\n  \"resourceType\": \"Observation\",\n  \"code\": {\n    \"coding\": [\n      { \"system\": \"http://questdiagnostics.org/labs\", \"code\": \"25003012\", \"display\": \"CHOLESTEROL,TOTAL\" }\n    ]\n  }\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"resourceType\": \"Observation\",\n  \"code\": {\n    \"coding\": [\n      { \"system\": \"http://questdiagnostics.org/labs\", \"code\": \"25003012\", \"display\": \"CHOLESTEROL,TOTAL\" }\n    ]\n  }\n}</code></pre>",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "en": "<pre><code>{\n  \"resourceType\": \"Observation\",\n  \"code\": {\n    \"coding\": [\n      { \"system\": \"http://loinc.org\", \"code\": \"35200-5\", \"display\": \"Cholesterol [Moles/volume] in Serum or Plasma\" },\n      { \"system\": \"http://terminology.hl7.org/CodeSystem/v3-ObservationValue\", \"code\": \"25003012\", \"display\": \"CHOLESTEROL,TOTAL\" }\n    ]\n  }\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"resourceType\": \"Observation\",\n  \"code\": {\n    \"coding\": [\n      { \"system\": \"http://loinc.org\", \"code\": \"35200-5\", \"display\": \"Cholesterol [Moles/volume] in Serum or Plasma\" },\n      { \"system\": \"http://terminology.hl7.org/CodeSystem/v3-ObservationValue\", \"code\": \"25003012\", \"display\": \"CHOLESTEROL,TOTAL\" }\n    ]\n  }\n}</code></pre>",
+        "correct": false
+      }
+    ],
+    "explanationEn": "C is correct. A CodeableConcept for Observation.code must include both the LOINC coding (with system, code, display) and a local coding from Quest Diagnostics' own system. C correctly represents both codings in the array, plus the CodeableConcept.text. A and B use only one coding or wrong system. D omits required fields or uses wrong structure.",
+    "explanationPt": "C está correta. Um CodeableConcept para Observation.code deve incluir tanto a codificação LOINC (com system, code, display) quanto uma codificação local do sistema próprio do Quest Diagnostics. C representa corretamente ambas as codificações no array, mais o CodeableConcept.text. A e B usam apenas uma codificação ou sistema errado. D omite campos obrigatórios ou usa estrutura errada."
+  },
+  {
+    "id": 7,
+    "titleEn": "Encounter.class – Outpatient visit code with extensible binding",
+    "titlePt": "Encounter.class – Código de visita ambulatorial com binding extensível",
+    "qEn": "Refer to the image. A registration system created a new outpatient visit and internally coded it as \"O\". This must be exchanged with the EMR using the Encounter resource, and the original code \"O\" must still be part of the resource. The Encounter.class element uses a ValueSet with an extensible binding. Which option correctly represents this in JSON?",
+    "qPt": "Consulte a imagem. Um sistema de registro criou uma nova visita ambulatorial e codificou internamente como \"O\". Isso deve ser trocado com o EMR usando o recurso Encounter, e o código original \"O\" deve permanecer no recurso. O elemento Encounter.class utiliza um ValueSet com binding extensível. Qual opção representa corretamente isso em JSON?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module2/m2_q3_q7.png",
+        "altEn": "Encounter resource showing class (Coding) bound to v3-ActCode with extensible binding",
+        "altPt": "Recurso Encounter mostrando class (Coding) vinculado a v3-ActCode com binding extensível"
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "<pre><code>{\n  \"resourceType\": \"Encounter\",\n  \"class\": {\n    \"system\": \"http://ghh.org/registrationSystem/CodeSystem/visitCodes\",\n    \"code\": \"O\",\n    \"display\": \"outpatient\"\n  }\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"resourceType\": \"Encounter\",\n  \"class\": {\n    \"system\": \"http://ghh.org/registrationSystem/CodeSystem/visitCodes\",\n    \"code\": \"O\",\n    \"display\": \"ambulatorial\"\n  }\n}</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "<pre><code>{\n  \"resourceType\": \"Encounter\",\n  \"class\": {\n    \"system\": \"http://terminology.hl7.org/CodeSystem/v3-ActCode\",\n    \"code\": \"AMB\",\n    \"display\": \"ambulatory\"\n  }\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"resourceType\": \"Encounter\",\n  \"class\": {\n    \"system\": \"http://terminology.hl7.org/CodeSystem/v3-ActCode\",\n    \"code\": \"AMB\",\n    \"display\": \"ambulatorial\"\n  }\n}</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "<pre><code>{\n  \"resourceType\": \"Encounter\",\n  \"class\": {\n    \"system\": \"http://terminology.hl7.org/CodeSystem/v3-ActCode\",\n    \"code\": \"AMB\",\n    \"display\": \"ambulatory\"\n  },\n  \"extension\": [\n    {\n      \"url\": \"http://ghh.org/fhir/StructureDefinition/visit-code\",\n      \"valueCode\": \"O\"\n    }\n  ]\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"resourceType\": \"Encounter\",\n  \"class\": {\n    \"system\": \"http://terminology.hl7.org/CodeSystem/v3-ActCode\",\n    \"code\": \"AMB\",\n    \"display\": \"ambulatorial\"\n  },\n  \"extension\": [\n    {\n      \"url\": \"http://ghh.org/fhir/StructureDefinition/visit-code\",\n      \"valueCode\": \"O\"\n    }\n  ]\n}</code></pre>",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "en": "<pre><code>{\n  \"resourceType\": \"Encounter\",\n  \"status\": \"planned\",\n  \"extension\": [\n    { \"url\": \"http://ghh.org/fhir/StructureDefinition/visit-code\", \"valueCode\": \"O\" }\n  ]\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"resourceType\": \"Encounter\",\n  \"status\": \"planned\",\n  \"extension\": [\n    { \"url\": \"http://ghh.org/fhir/StructureDefinition/visit-code\", \"valueCode\": \"O\" }\n  ]\n}</code></pre>",
+        "correct": false
+      }
+    ],
+    "explanationEn": "C is correct. Encounter.class must use the standard ActEncounterCode system (http://terminology.hl7.org/CodeSystem/v3-ActCode) with the FHIR code for outpatient ('AMB'), while classHistory captures the internal system code. A uses only the internal GHH system (missing the required standard code). B has incomplete classHistory. D uses an extension instead of the proper class element.",
+    "explanationPt": "C está correta. Encounter.class deve usar o sistema ActEncounterCode padrão (http://terminology.hl7.org/CodeSystem/v3-ActCode) com o código FHIR para ambulatorial ('AMB'), enquanto classHistory captura o código do sistema interno. A usa apenas o sistema interno GHH (sem o código padrão obrigatório). B tem classHistory incompleto. D usa extensão em vez do elemento class adequado."
+  },
+  {
+    "id": 8,
+    "titleEn": "Represent the bed operational status (preferred binding)",
+    "titlePt": "Representar o status operacional do leito (binding preferred)",
+    "qEn": "A bed management system must exchange the bed status with the registration system. Bed #202 on the second floor is currently available. The internal bed status codes are \"available\" and \"not available\". The team also wants their original bed status code to be kept in the FHIR Location resource. Which JSON option correctly represents the bed operational status using Location.operationalStatus?",
+    "qPt": "Um sistema de gestão de leitos precisa trocar o status do leito com o sistema de registro. O leito 202 no segundo andar está disponível. Os códigos internos de status do leito são \"available\" e \"not available\". A equipe deseja que o código original do status do leito seja mantido no recurso FHIR Location. Qual opção em JSON representa corretamente o status operacional do leito usando Location.operationalStatus?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module2/m2_q3_q8.png",
+        "altEn": "Location.operationalStatus data element (preferred binding) with examples of v2-0116 and custom codes",
+        "altPt": "Elemento Location.operationalStatus (binding preferred) com exemplos de v2-0116 e códigos customizados"
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "<pre><code>{\n  \"resourceType\": \"Location\",\n  \"operationalStatus\": {\n    \"system\": \"http://terminology.hl7.org/ValueSet/v2-0116\",\n    \"code\": \"U\",\n    \"extension\": [\n      { \"url\": \"http://ghh.org/fhir/StructureDefinition/bedStatus\", \"valueCode\": \"available\" }\n    ]\n  }\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"resourceType\": \"Location\",\n  \"operationalStatus\": {\n    \"system\": \"http://terminology.hl7.org/ValueSet/v2-0116\",\n    \"code\": \"U\",\n    \"extension\": [\n      { \"url\": \"http://ghh.org/fhir/StructureDefinition/bedStatus\", \"valueCode\": \"available\" }\n    ]\n  }\n}</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "<pre><code>{\n  \"resourceType\": \"Location\",\n  \"operationalStatus\": {\n    \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0116\",\n    \"code\": \"available\"\n  }\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"resourceType\": \"Location\",\n  \"operationalStatus\": {\n    \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0116\",\n    \"code\": \"available\"\n  }\n}</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "<pre><code>{\n  \"resourceType\": \"Location\",\n  \"operationalStatus\": {\n    \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0116\",\n    \"code\": \"U\"\n  }\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"resourceType\": \"Location\",\n  \"operationalStatus\": {\n    \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0116\",\n    \"code\": \"U\"\n  }\n}</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "<pre><code>{\n  \"resourceType\": \"Location\",\n  \"operationalStatus\": {\n    \"system\": \"http://ghh.org/fhir/CodeSystem/bed-status\",\n    \"code\": \"available\"\n  }\n}</code></pre>",
+        "pt": "<pre><code>{\n  \"resourceType\": \"Location\",\n  \"operationalStatus\": {\n    \"system\": \"http://ghh.org/fhir/CodeSystem/bed-status\",\n    \"code\": \"available\"\n  }\n}</code></pre>",
+        "correct": true
+      }
+    ],
+    "explanation": {
+      "en": "The binding strength is **preferred**, so you may use your own CodeSystem and codes. Option A is invalid because it uses a ValueSet URL where a CodeSystem URL is required. Option B is invalid because it puts a non-existent code (\"available\") in the v2-0116 CodeSystem (the proper code there would be \"U\"). Option C uses v2-0116 correctly but does not keep the organization’s original code as requested. Option D uses a custom CodeSystem with code \"available\", satisfying the requirement to preserve the original code.",
+      "pt": "A força de vinculação é **preferred**, portanto é permitido usar seu próprio CodeSystem e códigos. A Opção A é inválida por usar a URL de um ValueSet onde se exige a URL de um CodeSystem. A Opção B é inválida porque usa um código inexistente (\"available\") no CodeSystem v2-0116 (o código correto seria \"U\"). A Opção C usa v2-0116 corretamente, mas não preserva o código original da organização. A Opção D usa um CodeSystem próprio com o código \"available\", atendendo ao requisito de manter o código original."
+    },
+    "explanationEn": "D is correct. Location.operationalStatus uses a Coding (not CodeableConcept) with the system defined by the hospital's own bed management system for a custom internal status. A, B, C use the HL7 standard operational status system — but the scenario states an internal hospital code system is used, so D's custom system URL is correct.",
+    "explanationPt": "D está correta. Location.operationalStatus usa um Coding (não CodeableConcept) com o sistema definido pelo próprio sistema de gestão de leitos do hospital para um status interno personalizado. A, B e C usam o sistema de status operacional padrão HL7 — mas o cenário afirma que um sistema de código interno do hospital é usado, então a URL de sistema personalizada de D está correta."
+  },
+  {
+    "id": 9,
+    "titleEn": "Representing a custom + standard identifier type",
+    "titlePt": "Representando tipo de identificador (customizado + padrão)",
+    "qEn": "A master patient index (MPI) of Good Health Hospital (GHH) defines the official patient business identifier 908757. The hospital also classifies this identifier with its internal type code \"CPI\" (Common Patient Identifier). How should the Patient.identifier be represented so it carries the value, the standard IdentifierType (MR) and the hospital’s custom type code?",
+    "qPt": "O MPI do Good Health Hospital (GHH) define o identificador oficial do paciente 908757. O hospital também classifica esse identificador com o código de tipo interno \"CPI\" (Common Patient Identifier). Como representar o Patient.identifier para levar o valor, o tipo padrão (MR) e o código de tipo customizado do hospital?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module2/m2_q3_q9.png",
+        "altEn": "Patient.identifier with IdentifierType (v2-0203) and custom code CPI from hospital MPI",
+        "altPt": "Patient.identifier com IdentifierType (v2-0203) e código customizado CPI do MPI do hospital"
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "<pre><code>\"identifier\":[{\n  \"use\":\"official\",\n  \"type\":{ \"coding\":[{ \"system\":\"http://terminology.hl7.org/CodeSystem/v2-0203\", \"code\":\"MR\" }] },\n  \"system\":\"http://ghh.org/mpi/pat-identifier\",\n  \"value\":\"908757\"\n}]</code></pre>",
+        "pt": "<pre><code>\"identifier\":[{\n  \"use\":\"official\",\n  \"type\":{ \"coding\":[{ \"system\":\"http://terminology.hl7.org/CodeSystem/v2-0203\", \"code\":\"MR\" }] },\n  \"system\":\"http://ghh.org/mpi/pat-identifier\",\n  \"value\":\"908757\"\n}]</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "<pre><code>\"identifier\":[{\n  \"use\":\"official\",\n  \"type\":{ \"coding\":[{ \"system\":\"http://ghh.org/mpi/pat-identifierType\", \"code\":\"CPI\" }] },\n  \"system\":\"http://ghh.org/mpi/pat-identifier\",\n  \"value\":\"908757\"\n}]</code></pre>",
+        "pt": "<pre><code>\"identifier\":[{\n  \"use\":\"official\",\n  \"type\":{ \"coding\":[{ \"system\":\"http://ghh.org/mpi/pat-identifierType\", \"code\":\"CPI\" }] },\n  \"system\":\"http://ghh.org/mpi/pat-identifier\",\n  \"value\":\"908757\"\n}]</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "<pre><code>\"identifier\":[{\n  \"use\":\"official\",\n  \"type\":{ \"coding\":[\n    { \"system\":\"http://terminology.hl7.org/CodeSystem/v2-0203\", \"code\":\"MR\" },\n    { \"system\":\"http://ghh.org/mpi/pat-identifierType\", \"code\":\"CPI\" }\n  ]},\n  \"system\":\"http://ghh.org/mpi/pat-identifier\",\n  \"value\":\"908757\"\n}]</code></pre>",
+        "pt": "<pre><code>\"identifier\":[{\n  \"use\":\"official\",\n  \"type\":{ \"coding\":[\n    { \"system\":\"http://terminology.hl7.org/CodeSystem/v2-0203\", \"code\":\"MR\" },\n    { \"system\":\"http://ghh.org/mpi/pat-identifierType\", \"code\":\"CPI\" }\n  ]},\n  \"system\":\"http://ghh.org/mpi/pat-identifier\",\n  \"value\":\"908757\"\n}]</code></pre>",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "en": "<pre><code>\"identifier\":[{\n  \"use\":\"official\",\n  \"type\":{ \"coding\":[{ \"system\":\"http://terminology.hl7.org/CodeSystem/v2-0203\", \"code\":\"MR\" }] },\n  \"extension\":[{\n    \"url\":\"http://ghh.org/fhir/StructureDefinition/pat-identifierType\",\n    \"valueCoding\":{ \"system\":\"http://ghh.org/mpi/pat-identifierType\", \"code\":\"CPI\", \"display\":\"Common Patient identifier\" }\n  }],\n  \"system\":\"http://ghh.org/mpi/pat-identifier\",\n  \"value\":\"908757\"\n}]</code></pre>",
+        "pt": "<pre><code>\"identifier\":[{\n  \"use\":\"official\",\n  \"type\":{ \"coding\":[{ \"system\":\"http://terminology.hl7.org/CodeSystem/v2-0203\", \"code\":\"MR\" }] },\n  \"extension\":[{\n    \"url\":\"http://ghh.org/fhir/StructureDefinition/pat-identifierType\",\n    \"valueCoding\":{ \"system\":\"http://ghh.org/mpi/pat-identifierType\", \"code\":\"CPI\", \"display\":\"Common Patient identifier\" }\n  }],\n  \"system\":\"http://ghh.org/mpi/pat-identifier\",\n  \"value\":\"908757\"\n}]</code></pre>",
+        "correct": false
+      }
+    ],
+    "explanationEn": "C is correct. Patient.identifier.type.coding must include both the standard HL7 terminology coding (http://terminology.hl7.org/CodeSystem/v2-0203) with the standard code AND GHH's own patient id coding system, with the correct use='official'. A uses only one system. B uses only the GHH system, missing the standard HL7 coding. D has incorrect code values or system URLs.",
+    "explanationPt": "C está correta. Patient.identifier.type.coding deve incluir tanto a codificação de terminologia HL7 padrão (http://terminology.hl7.org/CodeSystem/v2-0203) com o código padrão QUANTO o sistema de codificação de id de paciente do GHH, com use='official' correto. A usa apenas um sistema. B usa apenas o sistema GHH, sem a codificação HL7 padrão. D tem valores de código ou URLs de sistema incorretos."
+  }
+]

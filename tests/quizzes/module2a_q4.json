@@ -1,0 +1,316 @@
+[
+  {
+    "id": 1,
+    "titleEn": "Valid system URL for Condition.category.coding",
+    "titlePt": "URL de sistema válida para Condition.category.coding",
+    "qEn": "An implementer needs to assign the diagnosis category for a patient in the Condition.category element whose data type is CodeableConcept. The diagnosis was analyzed during the encounter by the primary care physician. The category element has extensible binding to its ValueSet: http://hl7.org/fhir/ValueSet/condition-category. This ValueSet includes codes from the CodeSystem with the url value as: http://terminology.hl7.org/CodeSystem/condition-category. Which value is valid for the coding element?",
+    "qPt": "Um implementador precisa atribuir a categoria do diagnóstico de um paciente no elemento Condition.category, cujo tipo de dado é CodeableConcept. O diagnóstico foi analisado durante o encontro pelo médico de atenção primária. O elemento category possui binding extensível ao seu ValueSet: http://hl7.org/fhir/ValueSet/condition-category. Esse ValueSet inclui códigos do CodeSystem com a URL: http://terminology.hl7.org/CodeSystem/condition-category. Qual valor é válido para o elemento coding?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "http://hl7.org/fhir/ValueSet/condition-category",
+        "pt": "http://hl7.org/fhir/ValueSet/condition-category",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "http://terminology.hl7.org/ValueSet/condition-category",
+        "pt": "http://terminology.hl7.org/ValueSet/condition-category",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "http://terminology.hl7.org/CodeSystem/condition-category",
+        "pt": "http://terminology.hl7.org/CodeSystem/condition-category",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "en": "http://hl7.org/fhir/CodeSystem/condition-category",
+        "pt": "http://hl7.org/fhir/CodeSystem/condition-category",
+        "correct": false
+      }
+    ],
+    "explanationEn": "In FHIR, the `coding.system` element must always contain the CodeSystem URL, not the ValueSet URL. ValueSets define which codes can be used, but the system reference must point to the source CodeSystem. For Condition.category.coding.system, the valid value is http://terminology.hl7.org/CodeSystem/condition-category.",
+    "explanationPt": "No FHIR, o elemento `coding.system` deve sempre conter a URL do CodeSystem, e não a do ValueSet. O ValueSet define quais códigos podem ser usados, mas a referência do sistema deve apontar para o CodeSystem de origem. Para Condition.category.coding.system, o valor válido é http://terminology.hl7.org/CodeSystem/condition-category."
+  },
+  {
+    "id": 2,
+    "titleEn": "Correct coding for Observation.code element (glucose fasting test)",
+    "titlePt": "Codificação correta para Observation.code (teste de glicose em jejum)",
+    "qEn": "The Lab Information System (LIS) needs to report the patient lab result using an Observation resource instance. The Observation.code element needs to specify the coded value of the glucose fasting lab test (10 hours fasting). Based on the definition of the Observation.code and its associated ValueSet, which is the correct way to represent the Observation.code element content? Select two correct answers.",
+    "qPt": "O Sistema de Informação Laboratorial (LIS) precisa reportar o resultado laboratorial do paciente usando uma instância do recurso Observation. O elemento Observation.code precisa especificar o valor codificado do teste de glicose em jejum (10 horas de jejum). Com base na definição de Observation.code e no ValueSet associado, qual é a forma correta de representar o conteúdo do elemento Observation.code? Selecione duas respostas corretas.",
+    "type": "multi",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module2a/m2a_q4_q2.png",
+        "altEn": "Question about correct system/code for Observation.code element",
+        "altPt": "Questão sobre sistema/código correto para Observation.code"
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "system: http://loinc.org, code: 8764-4",
+        "pt": "system: http://loinc.org, code: 8764-4",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "system: http://hl7.org/fhir/CodeSystem/observation-code, code: 45687",
+        "pt": "system: http://hl7.org/fhir/CodeSystem/observation-code, code: 45687",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "system: http://loinc.org, code: 10450-5",
+        "pt": "system: http://loinc.org, code: 10450-5",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "en": "system: http://mylabs.org/fhir/CodeSystem/results, code: 99101",
+        "pt": "system: http://mylabs.org/fhir/CodeSystem/results, code: 99101",
+        "correct": true
+      }
+    ],
+    "explanationEn": "LOINC is the standard coding system for lab tests. The correct code for glucose fasting (10 hours) is 10450-5, making option C correct. Since the binding strength of Observation.code is 'example', custom codes are also allowed, which justifies option D as valid. Option A is invalid because 8764-4 is not a correct LOINC code for this test. Option B is incorrect because HL7 FHIR does not define clinical codes for lab results.",
+    "explanationPt": "LOINC é o sistema de codificação padrão para testes laboratoriais. O código correto para glicose em jejum (10 horas) é 10450-5, tornando a opção C correta. Como a força do binding de Observation.code é 'example', códigos customizados também são permitidos, o que justifica a opção D como válida. A opção A é inválida porque 8764-4 não é um código LOINC correto para este teste. A opção B é incorreta porque o HL7 FHIR não define códigos clínicos para resultados laboratoriais."
+  },
+  {
+    "id": 3,
+    "titleEn": "Correct coding for Condition.severity element",
+    "titlePt": "Codificação correta para Condition.severity",
+    "qEn": "A clinician needs to report that patient heart condition is severe using Condition.severity element which has a preferred binding with its ValueSet. Based on the definition of the Condition.severity element and its associated ValueSet, which is the correct way to represent the severity element content?",
+    "qPt": "Um clínico precisa reportar que a condição cardíaca do paciente é grave usando o elemento Condition.severity, que possui binding preferencial com seu ValueSet. Com base na definição do elemento Condition.severity e em seu ValueSet associado, qual é a forma correta de representar o conteúdo do elemento severity?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "system: http://ghh.org/fhir/CodeSystem/diagnosis-severity, code: 10098",
+        "pt": "system: http://ghh.org/fhir/CodeSystem/diagnosis-severity, code: 10098",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "system: http://snomed.info/sct, code: 23356782",
+        "pt": "system: http://snomed.info/sct, code: 23356782",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "system: http://hl7.org/fhir/ValueSet/condition-severity, code: 89764 AND system: http://ghh.org/fhir/CodeSystem/diagnosis-severity, code: 10098",
+        "pt": "system: http://hl7.org/fhir/ValueSet/condition-severity, code: 89764 E system: http://ghh.org/fhir/CodeSystem/diagnosis-severity, code: 10098",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "system: http://snomedct.info/sct, code: 24484000",
+        "pt": "system: http://snomedct.info/sct, code: 24484000",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The binding strength of Condition.severity is 'preferred'. This means codes from the provided ValueSet should be used if possible, but local/custom codes can also be used. Option A correctly shows a custom CodeSystem reference (diagnosis-severity). The other options are invalid: option B uses an incorrect SNOMED CT code; option C incorrectly mixes ValueSet and CodeSystem URLs; option D uses a wrong CodeSystem URL format.",
+    "explanationPt": "O binding de Condition.severity é 'preferred'. Isso significa que os códigos do ValueSet fornecido devem ser usados se possível, mas também é permitido o uso de códigos locais/customizados. A opção A mostra corretamente uma referência a um CodeSystem customizado (diagnosis-severity). As outras opções são inválidas: a opção B usa um código incorreto do SNOMED CT; a opção C mistura incorretamente URLs de ValueSet e CodeSystem; a opção D usa um formato incorreto de URL do CodeSystem."
+  },
+  {
+    "id": 4,
+    "titleEn": "Correct representation for FamilyMemberHistory.sex element",
+    "titlePt": "Representação correta para FamilyMemberHistory.sex",
+    "qEn": "During the consultation, the patient mentions that one of his male family members has a history of diabetes. An EPIC EMR system needs to exchange family member condition along with the gender information. The gender codes for the family members defined in the EPIC EMR backed are: M male, F female, UNK unknown. Which of the following options is correct for the FamilyMemberHistory.sex element content?",
+    "qPt": "Durante a consulta, o paciente menciona que um de seus familiares do sexo masculino tem histórico de diabetes. Um sistema EPIC EMR precisa trocar a condição do familiar junto com a informação de gênero. Os códigos de gênero definidos no EPIC EMR são: M masculino, F feminino, UNK desconhecido. Qual das opções a seguir é correta para o conteúdo do elemento FamilyMemberHistory.sex?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module2a/m2a_q4_q4.png",
+        "altEn": "Question about FamilyMemberHistory.sex element coding",
+        "altPt": "Questão sobre codificação do elemento FamilyMemberHistory.sex"
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "The only valid representation is: system: \"http://hl7.org/fhir/administrative-gender\", code: \"male\", display: \"Male\"",
+        "pt": "A única representação válida é: system: \"http://hl7.org/fhir/administrative-gender\", code: \"male\", display: \"Male\"",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "The only valid representation is: system: \"http://epicemr.org/fhir/CodeSystem/gender\", code: \"M\", display: \"male\"",
+        "pt": "A única representação válida é: system: \"http://epicemr.org/fhir/CodeSystem/gender\", code: \"M\", display: \"male\"",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "system: \"http://hl7.org/fhir/administrative-gender\", code: \"Male\", display: \"Male\". AND system: \"http://epicemr.org/fhir/CodeSystem/gender\", code: \"M\", display: \"male\"",
+        "pt": "system: \"http://hl7.org/fhir/administrative-gender\", code: \"Male\", display: \"Male\". E system: \"http://epicemr.org/fhir/CodeSystem/gender\", code: \"M\", display: \"male\"",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "system: \"http://hl7.org/fhir/administrative-gender\", code: \"male\", display: \"Male\". AND system: \"http://epicemr.org/fhir/CodeSystem/gender\", code: \"M\", display: \"male\"",
+        "pt": "system: \"http://hl7.org/fhir/administrative-gender\", code: \"male\", display: \"Male\". E system: \"http://epicemr.org/fhir/CodeSystem/gender\", code: \"M\", display: \"male\"",
+        "correct": true
+      }
+    ],
+    "explanationEn": "The binding strength for FamilyMemberHistory.sex is extensible, which means that if the standard ValueSet code is sufficient, it must be used. Since the family member’s gender is male, the correct code is 'male' from the HL7 administrative-gender CodeSystem. However, as the data type is CodeableConcept, multiple codings can be included, allowing both the HL7-defined code and the EPIC EMR custom code to be represented. Thus, the correct option is D.",
+    "explanationPt": "O binding de FamilyMemberHistory.sex é extensível, o que significa que se o código padrão do ValueSet for suficiente, ele deve ser usado. Como o gênero do familiar é masculino, o código correto é 'male' do CodeSystem administrative-gender do HL7. Entretanto, como o tipo de dado é CodeableConcept, múltiplos codings podem ser incluídos, permitindo representar tanto o código definido pelo HL7 quanto o código customizado do EPIC EMR. Portanto, a opção correta é a D."
+  },
+  {
+    "id": 5,
+    "titleEn": "Confidentiality and sensitivity representation in Patient.meta.security",
+    "titlePt": "Representação de confidencialidade e sensibilidade em Patient.meta.security",
+    "qEn": "The sender system needs to exchange the fact that patient data is confidential. Privacy metadata indicating that the information is extremely sensitive and likely classify health information that presents a very high risk if disclosed without authorization. The Patient.meta.security element is used for reporting this sensitivity information and is validated by the ValueSet shown in the image, with a 'required' binding. Based on this definition, which is the correct way to represent the patient's confidentiality and sensitivity data?",
+    "qPt": "O sistema emissor precisa trocar a informação de que os dados do paciente são confidenciais. Metadados de privacidade indicam que a informação é extremamente sensível e provavelmente classifica dados de saúde que apresentam alto risco se divulgados sem autorização. O elemento Patient.meta.security é usado para reportar essa informação de sensibilidade e é validado pelo ValueSet mostrado na imagem, com binding 'required'. Com base nessa definição, qual é a forma correta de representar os dados de confidencialidade e sensibilidade do paciente?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module2a/m2a_q4_q5.png",
+        "altEn": "Question about confidentiality and sensitivity coding in Patient.meta.security",
+        "altPt": "Questão sobre codificação de confidencialidade e sensibilidade em Patient.meta.security"
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "system: http://terminology.hl7.org/ValueSet/v3-ConfidentialityClassification, code: V",
+        "pt": "system: http://terminology.hl7.org/ValueSet/v3-ConfidentialityClassification, code: V",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "system: http://terminology.hl7.org/CodeSystem/v3-Confidentiality, code: V",
+        "pt": "system: http://terminology.hl7.org/CodeSystem/v3-Confidentiality, code: V",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "en": "system: http://terminology.hl7.org/ValueSet/v3-InformationSensitivityPolicy, code: SPI",
+        "pt": "system: http://terminology.hl7.org/ValueSet/v3-InformationSensitivityPolicy, code: SPI",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "system: http://terminology.hl7.org/CodeSystem/v3-ActCode, code: SPI",
+        "pt": "system: http://terminology.hl7.org/CodeSystem/v3-ActCode, code: SPI",
+        "correct": false
+      },
+      {
+        "key": "E",
+        "en": "system: http://terminology.hl7.org/CodeSystem/v3-Confidentiality, code: M",
+        "pt": "system: http://terminology.hl7.org/CodeSystem/v3-Confidentiality, code: M",
+        "correct": false
+      }
+    ],
+    "explanationEn": "For Patient.meta.security, the correct approach is to use the confidentiality codes defined in the HL7 v3 Confidentiality CodeSystem. The binding strength is 'required', which means only codes from this CodeSystem are valid. The correct code for very restricted information is 'V'. Therefore, the valid representation is system: http://terminology.hl7.org/CodeSystem/v3-Confidentiality, code: V.",
+    "explanationPt": "Para Patient.meta.security, a abordagem correta é usar os códigos de confidencialidade definidos no CodeSystem HL7 v3 Confidentiality. O binding é 'required', o que significa que apenas códigos desse CodeSystem são válidos. O código correto para informação altamente restrita é 'V'. Portanto, a representação válida é system: http://terminology.hl7.org/CodeSystem/v3-Confidentiality, code: V."
+  },
+  {
+    "id": 6,
+    "titleEn": "Correct JSON representation for Observation.valueQuantity (Heart Rate)",
+    "titlePt": "Representação JSON correta para Observation.valueQuantity (Frequência Cardíaca)",
+    "qEn": "A patient's heart rate is calculated through a wearable device. The value of heart rate comes out as 80 BPM. An implementer needs to record this information in Observation.valueQuantity element with standard units from the UCUM dictionary. The standard unit from UCUM is '/min' for heart rate. Which JSON representation is correct?",
+    "qPt": "A frequência cardíaca de um paciente é calculada através de um dispositivo vestível. O valor da frequência cardíaca é 80 BPM. Um implementador precisa registrar essa informação no elemento Observation.valueQuantity usando as unidades padrão do dicionário UCUM. A unidade padrão do UCUM para frequência cardíaca é '/min'. Qual representação JSON está correta?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module2a/m2a_q4_q6.png",
+        "altEn": "Question about correct JSON representation for Observation.valueQuantity with UCUM",
+        "altPt": "Questão sobre representação JSON correta para Observation.valueQuantity com UCUM"
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "\"valueQuantity\": { \"value\": 80, \"unit\": \"bpm\", \"system\": \"http://unitsofmeasure.org\", \"code\": \"/min\" }",
+        "pt": "\"valueQuantity\": { \"value\": 80, \"unit\": \"bpm\", \"system\": \"http://unitsofmeasure.org\", \"code\": \"/min\" }",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "\"valueQuantity\": { \"value\": 80, \"unit\": \"beats per minute\", \"system\": \"http://unitsofmeasure.org\", \"code\": \"/min\" }",
+        "pt": "\"valueQuantity\": { \"value\": 80, \"unit\": \"batimentos por minuto\", \"system\": \"http://unitsofmeasure.org\", \"code\": \"/min\" }",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "en": "\"valueQuantity\": { \"value\": 80, \"unit\": \"BPM\", \"system\": \"UCUM\", \"code\": \"/min\" }",
+        "pt": "\"valueQuantity\": { \"value\": 80, \"unit\": \"BPM\", \"system\": \"UCUM\", \"code\": \"/min\" }",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "\"valueQuantity\": { \"value\": 80, \"unit\": \"/min\", \"system\": \"http://fdasis.nlm.nih.gov\", \"code\": \"/min\" }",
+        "pt": "\"valueQuantity\": { \"value\": 80, \"unit\": \"/min\", \"system\": \"http://fdasis.nlm.nih.gov\", \"code\": \"/min\" }",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The correct UCUM representation for heart rate uses the system 'http://unitsofmeasure.org' and the code '/min' for beats per minute. The 'unit' field may contain the display string 'beats per minute'. Option B is correct. Options A and C misuse the unit/system definitions, and D uses an invalid system.",
+    "explanationPt": "A representação correta do UCUM para frequência cardíaca usa o sistema 'http://unitsofmeasure.org' e o código '/min' para batimentos por minuto. O campo 'unit' pode conter a string de exibição 'batimentos por minuto'. A opção B é a correta. As opções A e C utilizam incorretamente as definições de unidade/sistema, e D usa um sistema inválido."
+  },
+  {
+    "id": 7,
+    "titleEn": "Representing AllergyIntolerance.clinicalStatus with custom and standard codes",
+    "titlePt": "Representando AllergyIntolerance.clinicalStatus com códigos personalizados e padrão",
+    "qEn": "The allergy status codes defined in the Good Health Hospital allergy database are: 01 active, 02 inactive, 03 resolved. A client system needs to report that the patient allergy is still active. It is a mandate from the business client that their custom code for allergy status shall be communicated. Which of the following options best represents the content of the AllergyIntolerance.clinicalStatus element in JSON format, based on the definition of the element and its related ValueSet as seen in the image?",
+    "qPt": "Os códigos de status de alergia definidos no banco de dados do hospital Good Health são: 01 ativo, 02 inativo, 03 resolvido. Um sistema cliente precisa relatar que a alergia do paciente ainda está ativa. É uma exigência do cliente de negócios que seu código personalizado para status de alergia seja comunicado. Qual das seguintes opções representa melhor o conteúdo do elemento AllergyIntolerance.clinicalStatus em formato JSON, com base na definição do elemento e no ValueSet relacionado conforme mostrado na imagem?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module2a/m2a_q4_q7.png",
+        "altEn": "Question about AllergyIntolerance.clinicalStatus representation with custom and standard codes",
+        "altPt": "Questão sobre representação de AllergyIntolerance.clinicalStatus com códigos personalizados e padrão"
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "{ \"resourceType\": \"AllergyIntolerance\", \"clinicalStatus\": { \"coding\": [ { \"system\": \"http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical\", \"code\": \"active\", \"display\": \"Active\" } ] } }",
+        "pt": "{ \"resourceType\": \"AllergyIntolerance\", \"clinicalStatus\": { \"coding\": [ { \"system\": \"http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical\", \"code\": \"active\", \"display\": \"Ativo\" } ] } }",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "{ \"resourceType\": \"AllergyIntolerance\", \"clinicalStatus\": { \"coding\": [ { \"system\": \"http://ghh.org/fhir/CodeSystem/allergy-clinical-status\", \"code\": \"01\", \"display\": \"active\" } ] } }",
+        "pt": "{ \"resourceType\": \"AllergyIntolerance\", \"clinicalStatus\": { \"coding\": [ { \"system\": \"http://ghh.org/fhir/CodeSystem/allergy-clinical-status\", \"code\": \"01\", \"display\": \"ativo\" } ] } }",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "{ \"resourceType\": \"AllergyIntolerance\", \"clinicalStatus\": { \"coding\": [ { \"system\": \"http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical\", \"code\": \"active\", \"display\": \"Active\" }, { \"system\": \"http://ghh.org/fhir/CodeSystem/allergy-clinical-status\", \"code\": \"01\", \"display\": \"active\" } ] } }",
+        "pt": "{ \"resourceType\": \"AllergyIntolerance\", \"clinicalStatus\": { \"coding\": [ { \"system\": \"http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical\", \"code\": \"active\", \"display\": \"Ativo\" }, { \"system\": \"http://ghh.org/fhir/CodeSystem/allergy-clinical-status\", \"code\": \"01\", \"display\": \"ativo\" } ] } }",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "en": "{ \"resourceType\": \"AllergyIntolerance\", \"clinicalStatus\": { \"coding\": [ { \"system\": \"http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical\", \"code\": \"active\", \"display\": \"Active\" } ], \"extension\": [ { \"url\": \"http://ghh.org/fhir/StructureDefinition/additional-allergyStatus\", \"valueCoding\": { \"system\": \"http://ghh.org/fhir/CodeSystem/allergy-clinical-status\", \"code\": \"01\", \"display\": \"active\" } } ] } }",
+        "pt": "{ \"resourceType\": \"AllergyIntolerance\", \"clinicalStatus\": { \"coding\": [ { \"system\": \"http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical\", \"code\": \"active\", \"display\": \"Ativo\" } ], \"extension\": [ { \"url\": \"http://ghh.org/fhir/StructureDefinition/additional-allergyStatus\", \"valueCoding\": { \"system\": \"http://ghh.org/fhir/CodeSystem/allergy-clinical-status\", \"code\": \"01\", \"display\": \"ativo\" } } ] } }",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The AllergyIntolerance.clinicalStatus element is a CodeableConcept with required binding to the HL7-defined ValueSet. At least one coding SHALL come from the required ValueSet. However, because the data type is CodeableConcept, additional custom codes can be included in another repetition of coding. Option C satisfies this rule by including both the standard HL7 code and the custom hospital code. Option D incorrectly uses an extension, which is unnecessary in this case.",
+    "explanationPt": "O elemento AllergyIntolerance.clinicalStatus é um CodeableConcept com binding obrigatório para o ValueSet definido pelo HL7. Pelo menos um coding DEVE vir do ValueSet obrigatório. Entretanto, como o tipo de dado é CodeableConcept, códigos personalizados adicionais podem ser incluídos em outra repetição do coding. A opção C satisfaz essa regra ao incluir tanto o código padrão do HL7 quanto o código personalizado do hospital. A opção D usa incorretamente uma extensão, o que não é necessário nesse caso."
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+]

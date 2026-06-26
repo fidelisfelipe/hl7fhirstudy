@@ -1,0 +1,305 @@
+{
+  "module": "module1",
+  "titleEn": "Module 1 – FHIR Principles",
+  "titlePt": "Módulo 1 – Princípios FHIR",
+  "examNotePt": "Módulo introdutório. FMM, versionamento e compatibilidade são os pontos mais cobrados.",
+  "examNoteEn": "Introductory module. FMM, versioning and compatibility are the most tested points.",
+  "sources": {
+    "module1_q1": "quizzes/module1_q1.json",
+    "module1_q2": "quizzes/module1_q2.json",
+    "module1_cp": "quizzes/module1_cp.json"
+  },
+  "units": [
+    {
+      "id": "u1",
+      "titlePt": "O que é o FHIR",
+      "titleEn": "What is FHIR",
+      "color": "#6ee7b7",
+      "lessons": [
+        {
+          "id": "l1-1",
+          "titlePt": "Definição e as 2 partes",
+          "titleEn": "Definition & the 2 parts",
+          "card": {
+            "titlePt": "FHIR = Fast Healthcare Interoperability Resources",
+            "titleEn": "FHIR = Fast Healthcare Interoperability Resources",
+            "analogyPt": "Pense no HL7 V2 como um dialeto regional antigo: funciona, mas cada fornecedor fala o seu. O FHIR é o inglês técnico universal — todo sistema que 'fala' FHIR se conecta a qualquer outro, com as mesmas palavras e gramática.",
+            "analogyEn": "Think of HL7 V2 as an old regional dialect: it works, but every vendor speaks its own. FHIR is the universal technical English — any system that 'speaks' FHIR connects to any other, same words, same grammar.",
+            "pointsPt": [
+              "Criado pela <b>HL7 International</b> (não por fornecedores como Epic/Apple/Google).",
+              "<b>'Fast'</b> = velocidade de <b>implementação</b>, não de transmissão na rede.",
+              "Tem <b>2 partes oficiais</b>: <b>Modelo de Conteúdo</b> (Resources: Patient, Observation…) e <b>Especificação de Troca</b> (APIs: REST, Mensagens, Documentos, Serviços).",
+              "Forte base em padrões web: <b>JSON, XML, HTTP, OAuth</b>; legível por humanos; suporta REST e também mensagens/documentos."
+            ],
+            "pointsEn": [
+              "Created by <b>HL7 International</b> (not by vendors like Epic/Apple/Google).",
+              "<b>'Fast'</b> = speed of <b>implementation</b>, not network transmission.",
+              "Has <b>2 official parts</b>: <b>Content Model</b> (Resources: Patient, Observation…) and <b>Exchange Specification</b> (APIs: REST, Messages, Documents, Services).",
+              "Strong web-standards base: <b>JSON, XML, HTTP, OAuth</b>; human-readable; supports REST plus messages/documents."
+            ],
+            "trapPt": "Armadilha: opções como 'Interface Engine', 'Communication Channel' ou 'Interface Security' NÃO são partes do FHIR. Só existem <b>Content Model</b> e <b>APIs</b>.",
+            "trapEn": "Trap: options like 'Interface Engine', 'Communication Channel' or 'Interface Security' are NOT parts of FHIR. Only <b>Content Model</b> and <b>APIs</b> exist.",
+            "refs": [
+              { "kind": "spec", "labelPt": "FHIR Overview — o que é e as partes oficiais", "labelEn": "FHIR Overview — what it is and its official parts", "url": "https://hl7.org/fhir/R4/overview.html" },
+              { "kind": "spec", "labelPt": "Summary — visão geral da especificação", "labelEn": "Summary — specification overview", "url": "https://hl7.org/fhir/R4/summary.html" },
+              { "kind": "material", "labelPt": "Material do curso — Módulo 1 · \"What is FHIR?\"", "labelEn": "Course material — Module 1 · \"What is FHIR?\"", "url": "../module-1.md" }
+            ]
+          },
+          "items": [
+            "module1_q1#1",
+            "module1_q1#5",
+            "module1_q1#6",
+            "module1_q1#4"
+          ]
+        },
+        {
+          "id": "l1-2",
+          "titlePt": "Foco e princípios arquiteturais",
+          "titleEn": "Focus & architectural principles",
+          "card": {
+            "titlePt": "Para quem é o FHIR e como ele pensa",
+            "titleEn": "Who FHIR is for and how it thinks",
+            "analogyPt": "O FHIR é uma 'plataforma' para quem constrói software de saúde — como um sistema operacional para apps clínicos. Ele não diz ao médico o que prescrever; dá as peças para os sistemas conversarem.",
+            "analogyEn": "FHIR is a 'platform' for those who build health software — like an operating system for clinical apps. It doesn't tell the doctor what to prescribe; it gives the parts so systems can talk.",
+            "pointsPt": [
+              "Foco primário: <b>implementadores e organizações</b> que constroem sistemas de TI em saúde.",
+              "NÃO define: boas práticas clínicas, fluxos de trabalho/UIs, qual medicamento prescrever.",
+              "5 princípios — mnemônico <b>80/20 · REST · Lean · Legível · Fidelidade</b>: regra 80/20, REST para escala, recursos leves, narrativa legível por humanos, fidelidade dos dados em trânsito.",
+              "Toda Resource compartilha 5 traços: <b>metadados</b> (id/meta/text), <b>URL canônica</b>, <b>narrativa legível</b>, <b>framework de extensão</b> e <b>elementos próprios</b>."
+            ],
+            "pointsEn": [
+              "Primary focus: <b>implementers and organizations</b> building health IT systems.",
+              "Does NOT define: clinical best practices, workflows/UIs, which medication to prescribe.",
+              "5 principles — mnemonic <b>80/20 · REST · Lean · Readable · Fidelity</b>: 80/20 rule, REST for scale, lean resources, human-readable narrative, data fidelity in transit.",
+              "Every Resource shares 5 traits: <b>metadata</b> (id/meta/text), <b>canonical URL</b>, <b>human-readable narrative</b>, <b>extension framework</b> and <b>own elements</b>."
+            ],
+            "trapPt": "Na regra 80/20, todas as 5 afirmações de princípios podem ser corretas ao mesmo tempo (questão 'selecione todas').",
+            "trapEn": "On the 80/20 rule, all 5 principle statements can be correct at once ('select all' question).",
+            "refs": [
+              { "kind": "spec", "labelPt": "FHIR Architecture — princípios e abordagens", "labelEn": "FHIR Architecture — principles & approaches", "url": "https://hl7.org/fhir/R4/overview-arch.html" },
+              { "kind": "spec", "labelPt": "Overview Clinical/Developers — foco e público-alvo", "labelEn": "Developer Overview — focus & audience", "url": "https://hl7.org/fhir/R4/overview-dev.html" },
+              { "kind": "material", "labelPt": "Material do curso — Módulo 1 · \"FHIR Focus / Architectural Principles\"", "labelEn": "Course material — Module 1 · \"FHIR Focus / Architectural Principles\"", "url": "../module-1.md" }
+            ]
+          },
+          "items": [
+            "module1_q1#3",
+            "module1_q1#9",
+            "module1_q1#7"
+          ]
+        }
+      ],
+      "checkpoint": {
+        "items": [
+          "module1_cp#1",
+          "module1_cp#2",
+          "module1_cp#3",
+          "module1_cp#4"
+        ]
+      }
+    },
+    {
+      "id": "u2",
+      "titlePt": "Estrutura e maturidade",
+      "titleEn": "Structure & maturity",
+      "color": "#a5b4fc",
+      "lessons": [
+        {
+          "id": "l2-1",
+          "titlePt": "Versões e categorias de recursos",
+          "titleEn": "Versions & resource categories",
+          "card": {
+            "titlePt": "Versões do FHIR e as 4 categorias de recursos",
+            "titleEn": "FHIR versions and the 4 resource categories",
+            "analogyPt": "Versões são como edições de um livro: R4 é a 'edição mais vendida' (mais usada na prática), R5 é a 'última edição lançada'.",
+            "analogyEn": "Versions are like editions of a book: R4 is the 'best-seller' (most used in practice), R5 is the 'latest edition released'.",
+            "pointsPt": [
+              "Linha do tempo: DSTU1 (2014) → DSTU2 (2015) → STU3 (2017) → <b>R4 (2018, mais usada)</b> → R4B (2022) → <b>R5 (2023, mais recente)</b>.",
+              "O exame é <b>agnóstico de versão</b>: não cobra qual recurso está em qual versão; cobra que R5 é a mais recente e R4 a mais usada.",
+              "4 categorias oficiais de recursos: <b>Base</b> (Patient, Practitioner…), <b>Clinical</b> (Condition, Observation…), <b>Financial</b> (Claim, Coverage…) e <b>Specialized</b> (ResearchStudy…).",
+              "O módulo <b>Foundation</b> dá conformidade (StructureDefinition, CapabilityStatement), terminologia e segurança — <b>mas não conteúdo clínico</b>."
+            ],
+            "pointsEn": [
+              "Timeline: DSTU1 (2014) → DSTU2 (2015) → STU3 (2017) → <b>R4 (2018, most used)</b> → R4B (2022) → <b>R5 (2023, latest)</b>.",
+              "The exam is <b>version-agnostic</b>: it won't ask which resource is in which version; it asks that R5 is latest and R4 is most used.",
+              "4 official resource categories: <b>Base</b> (Patient, Practitioner…), <b>Clinical</b> (Condition, Observation…), <b>Financial</b> (Claim, Coverage…) and <b>Specialized</b> (ResearchStudy…).",
+              "The <b>Foundation</b> module provides conformance (StructureDefinition, CapabilityStatement), terminology and security — <b>but not clinical content</b>."
+            ],
+            "trapPt": "'Logical Resources' NÃO é uma categoria oficial — se aparecer, é o distrator errado.",
+            "trapEn": "'Logical Resources' is NOT an official category — if it appears, it's the wrong distractor.",
+            "refs": [
+              { "kind": "spec", "labelPt": "Resource List — todos os recursos por categoria", "labelEn": "Resource List — all resources by category", "url": "https://hl7.org/fhir/R4/resourcelist.html" },
+              { "kind": "spec", "labelPt": "Versions — releases e numeração do FHIR", "labelEn": "Versions — FHIR releases & numbering", "url": "https://hl7.org/fhir/R4/versions.html" },
+              { "kind": "material", "labelPt": "Material do curso — Módulo 1 · \"FHIR Releases\"", "labelEn": "Course material — Module 1 · \"FHIR Releases\"", "url": "../module-1.md" }
+            ]
+          },
+          "items": [
+            "module1_q1#2",
+            "module1_q1#10"
+          ]
+        },
+        {
+          "id": "l2-2",
+          "titlePt": "FMM e níveis do padrão",
+          "titleEn": "FMM & standard levels",
+          "card": {
+            "titlePt": "FMM — Modelo de Maturidade FHIR (0 → N)",
+            "titleEn": "FMM — FHIR Maturity Model (0 → N)",
+            "analogyPt": "FMM é como a 'classificação de confiança' de um app: quanto maior o nível, mais testado e estável. Subir de nível exige provas cada vez mais fortes de uso real.",
+            "analogyEn": "FMM is like an app's 'trust rating': the higher the level, the more tested and stable. Climbing a level requires ever stronger proof of real-world use.",
+            "pointsPt": [
+              "<b>FMM0</b> Draft · <b>FMM1</b> sem warnings, WG declara pronto · <b>FMM2</b> testado em <b>3+ sistemas independentes</b> · <b>FMM3</b> <b>votação formal</b> + 10 comentários de 3+ orgs · <b>FMM4</b> release formal + protótipos · <b>FMM5</b> 2 ciclos + 5+ sistemas em produção · <b>N</b> Normativo.",
+              "Mnemônico: <b>Draft → 3 sistemas → Votação → Publica → 2× publica → Normativo</b>.",
+              "Níveis do padrão (Standard Levels): conteúdo pode ser <b>Trial Use (STU)</b> ou <b>Normativo</b>; só o Normativo tem garantias de compatibilidade.",
+              "Conteúdo do R4: mistura partes Normativas e Trial Use; nem tudo no R4 é normativo."
+            ],
+            "pointsEn": [
+              "<b>FMM0</b> Draft · <b>FMM1</b> no warnings, WG declares ready · <b>FMM2</b> tested in <b>3+ independent systems</b> · <b>FMM3</b> <b>formal balloting</b> + 10 comments from 3+ orgs · <b>FMM4</b> formal release + prototypes · <b>FMM5</b> 2 cycles + 5+ production systems · <b>N</b> Normative.",
+              "Mnemonic: <b>Draft → 3 systems → Ballot → Publish → 2× publish → Normative</b>.",
+              "Standard Levels: content can be <b>Trial Use (STU)</b> or <b>Normative</b>; only Normative carries compatibility guarantees.",
+              "R4 content: mixes Normative and Trial Use parts; not everything in R4 is normative."
+            ],
+            "trapPt": "Armadilha crítica: a <b>votação formal é no FMM3</b>, não no FMM2. FMM2 exige apenas 3 sistemas independentes. Confundir os dois é o erro mais comum.",
+            "trapEn": "Critical trap: <b>formal balloting is at FMM3</b>, not FMM2. FMM2 only requires 3 independent systems. Confusing the two is the most common mistake.",
+            "refs": [
+              { "kind": "spec", "labelPt": "Maturity Levels (FMM) — critérios de cada nível 0→N", "labelEn": "Maturity Levels (FMM) — criteria for each level 0→N", "url": "https://hl7.org/fhir/R4/versions.html#maturity" },
+              { "kind": "spec", "labelPt": "Standards Status — Draft / Trial Use / Normative", "labelEn": "Standards Status — Draft / Trial Use / Normative", "url": "https://hl7.org/fhir/R4/versions.html#std-process" },
+              { "kind": "material", "labelPt": "Material do curso — Módulo 1 · \"Version Management\"", "labelEn": "Course material — Module 1 · \"Version Management\"", "url": "../module-1.md" }
+            ]
+          },
+          "items": [
+            "module1_q2#5",
+            "module1_q2#3",
+            "module1_q2#4"
+          ]
+        }
+      ],
+      "checkpoint": {
+        "items": [
+          "module1_cp#5",
+          "module1_cp#6",
+          "module1_cp#7",
+          "module1_cp#8"
+        ]
+      }
+    },
+    {
+      "id": "u3",
+      "titlePt": "Governança e compatibilidade",
+      "titleEn": "Governance & compatibility",
+      "color": "#fcd34d",
+      "lessons": [
+        {
+          "id": "l3-1",
+          "titlePt": "Licença e marca registrada",
+          "titleEn": "License & trademark",
+          "card": {
+            "titlePt": "O que você pode e não pode fazer com o FHIR",
+            "titleEn": "What you can and can't do with FHIR",
+            "analogyPt": "É como usar uma marca famosa: você pode citá-la e construir produtos baseados nela, mas não pode fingir que ela te endossa nem usar o nome no seu domínio sem permissão.",
+            "analogyEn": "It's like using a famous brand: you may cite it and build products based on it, but you can't pretend it endorses you, nor use the name in your domain without permission.",
+            "pointsPt": [
+              "PODE: redistribuir o FHIR, criar specs derivadas (US Core, IPS) e produtos, citar a marca com ®.",
+              "NÃO PODE: dizer que a HL7 <b>endossa</b> seu produto, publicar versão alterada sem identificar como derivada, usar a marca em <b>domínio de URL</b> sem permissão escrita, dizer que seu produto 'é' FHIR quando é só baseado nele.",
+              "Marca ®: obrigatório no logo FLAME, na 1ª menção a 'FHIR®' em documentos e sites.",
+              "Specs derivadas <b>podem</b> definir conformidade <b>dentro do próprio escopo</b> (ex.: 'conformidade com US Core'), mas não redefinem o que conformidade com o FHIR base significa."
+            ],
+            "pointsEn": [
+              "CAN: redistribute FHIR, create derived specs (US Core, IPS) and products, cite the mark with ®.",
+              "CANNOT: claim HL7 <b>endorses</b> your product, publish an altered version without marking it derived, use the mark in a <b>URL domain</b> without written permission, say your product 'is' FHIR when it's only based on it.",
+              "® mark: required on the FLAME logo and on the 1st mention of 'FHIR®' in documents and sites.",
+              "Derived specs <b>can</b> define conformance <b>within their own scope</b> (e.g. 'US Core conformance'), but don't redefine what base FHIR conformance means."
+            ],
+            "trapPt": "Cuidado com 'not correct': leia se a frase é sobre o padrão base (não pode redefinir conformidade) ou sobre o escopo da spec derivada (pode, no próprio contexto).",
+            "trapEn": "Beware 'not correct': read whether the statement is about base standard (can't redefine conformance) or the derived spec's scope (it can, within its own context).",
+            "refs": [
+              { "kind": "spec", "labelPt": "FHIR License and TM — uso, marca e atribuição", "labelEn": "FHIR License and TM — usage, trademark & attribution", "url": "https://hl7.org/fhir/R4/license.html" },
+              { "kind": "material", "labelPt": "Material do curso — Módulo 1 · \"FHIR License\"", "labelEn": "Course material — Module 1 · \"FHIR License\"", "url": "../module-1.md" }
+            ]
+          },
+          "items": [
+            "module1_q2#1",
+            "module1_q2#2"
+          ]
+        },
+        {
+          "id": "l3-2",
+          "titlePt": "Compatibilidade entre versões",
+          "titleEn": "Cross-version compatibility",
+          "card": {
+            "titlePt": "Forward & backward compatibility (só Normativo)",
+            "titleEn": "Forward & backward compatibility (Normative only)",
+            "analogyPt": "Compatibilidade é uma promessa de 'não quebrar quem já usa'. Essa promessa só vale para o conteúdo Normativo; o Trial Use pode mudar de forma incompatível.",
+            "analogyEn": "Compatibility is a promise to 'not break existing users'. That promise only holds for Normative content; Trial Use may change incompatibly.",
+            "pointsPt": [
+              "PODE mudar (retrocompatível): novos elementos opcionais, aumentar cardinalidade <b>máxima</b>, mudar bindings <b>example/preferred</b>, novos tipos de dados; endpoints não são removidos/renomeados.",
+              "NÃO PODE mudar: cardinalidade <b>mínima</b>, flags <b>Is-Modifier</b> e <b>Is-Summary</b>, bindings <b>required/extensible</b>.",
+              "Receptor bem implementado DEVE: ignorar elementos inesperados, referências e critérios de busca desconhecidos; responder erro HTTP a URLs inesperadas.",
+              "Receptor NÃO deve: ignorar silenciosamente <b>códigos não reconhecidos em bindings obrigatórios (required)</b> — isso é erro de validação."
+            ],
+            "pointsEn": [
+              "CAN change (backward-compatible): new optional elements, raise <b>max</b> cardinality, change <b>example/preferred</b> bindings, new data types; endpoints aren't removed/renamed.",
+              "CANNOT change: <b>min</b> cardinality, <b>Is-Modifier</b> and <b>Is-Summary</b> flags, <b>required/extensible</b> bindings.",
+              "A well-built receiver MUST: ignore unexpected elements, unknown references and unknown search criteria; respond HTTP error to unexpected URLs.",
+              "A receiver must NOT: silently ignore <b>unrecognized codes in required bindings</b> — that's a validation error."
+            ],
+            "trapPt": "Resumo: compatibilidade = só Normativo; aumentar MÁXIMA ok, aumentar MÍNIMA quebra; required nunca é ignorado.",
+            "trapEn": "Summary: compatibility = Normative only; raising MAX ok, raising MIN breaks; required is never ignored.",
+            "refs": [
+              { "kind": "spec", "labelPt": "Managing Versions — forward & backward compatibility", "labelEn": "Managing Versions — forward & backward compatibility", "url": "https://hl7.org/fhir/R4/versions.html#change" },
+              { "kind": "spec", "labelPt": "Conformance Rules — required / SHALL e cardinalidade", "labelEn": "Conformance Rules — required / SHALL & cardinality", "url": "https://hl7.org/fhir/R4/conformance-rules.html" },
+              { "kind": "material", "labelPt": "Material do curso — Módulo 1 · \"Version Management\"", "labelEn": "Course material — Module 1 · \"Version Management\"", "url": "../module-1.md" }
+            ]
+          },
+          "items": [
+            "module1_q2#6",
+            "module1_q2#7",
+            "module1_q2#8",
+            "module1_q2#9"
+          ]
+        },
+        {
+          "id": "l3-3",
+          "titlePt": "Comunidade e feedback",
+          "titleEn": "Community & feedback",
+          "card": {
+            "titlePt": "Como propor mudanças e onde buscar ajuda",
+            "titleEn": "How to propose changes and where to get help",
+            "analogyPt": "Cada página da especificação tem uma 'caixa de sugestões' no rodapé — é o caminho oficial para pedir mudanças.",
+            "analogyEn": "Every spec page has a 'suggestion box' in the footer — it's the official path to request changes.",
+            "pointsPt": [
+              "Pedidos formais de mudança: link no <b>rodapé de cada página</b> → abre ticket no <b>Jira</b>.",
+              "<b>Confluence</b>: documentação de processos/metodologia.",
+              "<b>Stack Overflow</b> (tag hl7-fhir): perguntas de programação.",
+              "<b>Zulip chat</b> e <b>Community Forum</b>: discussão ao vivo e informal."
+            ],
+            "pointsEn": [
+              "Formal change requests: link in <b>every page's footer</b> → opens a <b>Jira</b> ticket.",
+              "<b>Confluence</b>: process/methodology documentation.",
+              "<b>Stack Overflow</b> (tag hl7-fhir): programming questions.",
+              "<b>Zulip chat</b> and <b>Community Forum</b>: live and informal discussion."
+            ],
+            "trapPt": "'Como enviar comentários sobre a especificação?' → link no rodapé (Jira). Não é e-mail nem Stack Overflow diretamente.",
+            "trapEn": "'How to submit comments on the spec?' → footer link (Jira). Not email, not Stack Overflow directly.",
+            "refs": [
+              { "kind": "spec", "labelPt": "FHIR — Get Involved (comunidade HL7)", "labelEn": "FHIR — Get Involved (HL7 community)", "url": "https://confluence.hl7.org/display/FHIR/Get+Involved" },
+              { "kind": "spec", "labelPt": "chat.fhir.org — fórum oficial (Zulip)", "labelEn": "chat.fhir.org — official forum (Zulip)", "url": "https://chat.fhir.org" },
+              { "kind": "material", "labelPt": "Material do curso — Módulo 1 · comunidade e feedback", "labelEn": "Course material — Module 1 · community & feedback", "url": "../module-1.md" }
+            ]
+          },
+          "items": [
+            "module1_q1#8",
+            "module1_q2#10"
+          ]
+        }
+      ],
+      "checkpoint": {
+        "items": [
+          "module1_cp#9",
+          "module1_cp#10",
+          "module1_cp#11",
+          "module1_cp#12"
+        ]
+      }
+    }
+  ]
+}

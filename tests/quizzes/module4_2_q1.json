@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "titleEn": "Select the correct IG for a US practitioner directory",
+    "titlePt": "Selecionar o IG correto para um diretório de profissionais de saúde nos EUA",
+    "qEn": "A group of hospitals in the United States (US) needs to set up a **single repository for all the practitioners**. It needs to include the practitioner demographic information along with their role and the organization defining those roles (like surgeon). The repository also needs to define how to access the practitioner data using various parameters.\n\nWhich implementation guide should the hospital use to create this repository?",
+    "qPt": "Um grupo de hospitais nos Estados Unidos (EUA) precisa criar um **repositório único para todos os profissionais de saúde**. Ele precisa incluir as informações demográficas dos profissionais juntamente com seu papel e a organização que define esses papéis (como cirurgião). O repositório também precisa definir como acessar os dados dos profissionais usando vários parâmetros.\n\nQual guia de implementação o hospital deve usar para criar esse repositório?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "FHIR Human Services Directory",
+        "pt": "FHIR Human Services Directory",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "Argonaut Provider Directory Implementation Guide",
+        "pt": "Argonaut Provider Directory Implementation Guide",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "en": "PD 2 on FHIR R4 (Australian Provider Directory)",
+        "pt": "PD 2 on FHIR R4 (Diretório de Provedores Australiano)",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "National Healthcare Directory Attestation and Verification",
+        "pt": "National Healthcare Directory Attestation and Verification",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The **Argonaut Provider Directory Implementation Guide** provides the foundation for a robust provider directory. It describes the use cases and search recommendations for finding a practitioner or organization. It outlines the key data elements for any provider directory and basic query guidance. The components developed in this guide are intended to provide a foundation for a central or distributed Provider or Healthcare Directory implementation — exactly what a US hospital group needs.",
+    "explanationPt": "O **Argonaut Provider Directory Implementation Guide** fornece a base para um diretório de provedores robusto. Ele descreve os casos de uso e recomendações de pesquisa para encontrar um profissional ou organização. Descreve os elementos de dados-chave para qualquer diretório de provedores e orientações básicas de consulta. Os componentes desenvolvidos neste guia destinam-se a fornecer uma base para uma implementação central ou distribuída de Diretório de Provedores ou Healthcare — exatamente o que um grupo de hospitais dos EUA precisa."
+  },
+  {
+    "id": 2,
+    "titleEn": "Select the correct IG for insurance EOB exchange via FHIR",
+    "titlePt": "Selecionar o IG correto para troca de EOB de seguro via FHIR",
+    "qEn": "The patient using the member portal needs to retrieve the institutional claims provided by his insurance company (United Health Group). The request is to retrieve **EOB (Explanation of Benefits)**. The insurance company needs to use an implementation guide for providing the EOB details using FHIR resources. The IG should also help the member portal by providing the **query parameters** to retrieve the desired information.\n\nWhich implementation guide should be used in the above case?",
+    "qPt": "O paciente usando o portal do membro precisa recuperar as coberturas institucionais fornecidas pela sua seguradora (United Health Group). A solicitação é para recuperar o **EOB (Explanation of Benefits)**. A seguradora precisa usar um guia de implementação para fornecer os detalhes do EOB usando recursos FHIR. O IG também deve ajudar o portal do membro fornecendo os **parâmetros de consulta** para recuperar as informações desejadas.\n\nQual guia de implementação deve ser usado no caso acima?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "CARIN (Consumer Directed Payer Data Exchange / CARIN for Blue Button®)",
+        "pt": "CARIN (Consumer Directed Payer Data Exchange / CARIN for Blue Button®)",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "DaVinci PDex (Payer Data Exchange)",
+        "pt": "DaVinci PDex (Payer Data Exchange)",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "DaVinci CDex (Clinical Data Exchange)",
+        "pt": "DaVinci CDex (Clinical Data Exchange)",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Argonaut Data Query Implementation Guide",
+        "pt": "Argonaut Data Query Implementation Guide",
+        "correct": false
+      }
+    ],
+    "explanationEn": "**CARIN (Consumer Directed Payer Data Exchange / CARIN for Blue Button®)** covers the required use case of **payer-to-consumer data exchange** related to claims and other insurance-related information, including the Explanation of Benefits (EOB). It uses the FHIR ExplanationOfBenefit resource and provides query parameters for consumers/members to understand the costs and alternatives for drugs and procedures. DaVinci PDex focuses on payer-to-provider data exchange. DaVinci CDex focuses on clinical data exchange between providers and payers.",
+    "explanationPt": "**CARIN (Consumer Directed Payer Data Exchange / CARIN for Blue Button®)** cobre o caso de uso exigido de **troca de dados de pagador para consumidor** relacionada a coberturas e outras informações relacionadas a seguros, incluindo o Explanation of Benefits (EOB). Utiliza o recurso FHIR ExplanationOfBenefit e fornece parâmetros de consulta para consumidores/membros entenderem os custos e alternativas de medicamentos e procedimentos. DaVinci PDex foca na troca de dados de pagador para provedor. DaVinci CDex foca na troca de dados clínicos entre provedores e pagadores."
+  },
+  {
+    "id": 3,
+    "titleEn": "Select the correct IG for cross-border unplanned care",
+    "titlePt": "Selecionar o IG correto para cuidados não planejados transfronteiriços",
+    "qEn": "The United States (US) resident Mr. John Cena has a history of congestive heart failure (CHF). He is receiving treatment at Partners Hospital in the United States.\n\nHe had cardiac problems during his most recent business trip to Germany and was taken to the local hospital there. To learn about his allergies, previous operations, and prescription drugs, the medical staff at the German hospital must consult his medical records from Partners Hospital in the United States.\n\nWhich implementation guide would address this scenario?",
+    "qPt": "O residente dos Estados Unidos (EUA), Sr. John Cena, tem histórico de insuficiência cardíaca congestiva (ICC). Ele está recebendo tratamento no Partners Hospital nos Estados Unidos.\n\nEle teve problemas cardíacos durante sua viagem de negócios mais recente à Alemanha e foi levado ao hospital local lá. Para conhecer suas alergias, operações anteriores e medicamentos prescritos, a equipe médica do hospital alemão deve consultar seus prontuários médicos do Partners Hospital nos Estados Unidos.\n\nQual guia de implementação abordaria esse cenário?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "FHIR Bulk Data Access Implementation Guide",
+        "pt": "FHIR Bulk Data Access Implementation Guide",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "Argonaut Data Query Implementation Guide",
+        "pt": "Argonaut Data Query Implementation Guide",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "US Core Implementation Guide",
+        "pt": "US Core Implementation Guide",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "International Patient Summary Implementation Guide",
+        "pt": "International Patient Summary Implementation Guide",
+        "correct": true
+      }
+    ],
+    "explanationEn": "The **International Patient Summary (IPS) Implementation Guide** is specifically designed for supporting the use case scenario of **'unplanned, cross-border care'**. It provides support to access a patient's medical history including allergies, medications, surgeries, vitals, diagnosis, procedures, and vaccination data. This is exactly what is needed when a patient from the US requires emergency care in Germany and the treating physician needs their medical history.",
+    "explanationPt": "O **International Patient Summary (IPS) Implementation Guide** foi especificamente projetado para suportar o cenário de uso de **cuidados não planejados transfronteiriços**. Ele fornece suporte para acessar o histórico médico do paciente, incluindo alergias, medicamentos, cirurgias, sinais vitais, diagnósticos, procedimentos e dados de vacinação. É exatamente o que é necessário quando um paciente dos EUA requer atendimento de emergência na Alemanha e o médico tratador precisa de seu histórico médico."
+  }
+]

@@ -1,0 +1,146 @@
+[
+  {
+    "id": 1,
+    "titleEn": "Deny access without exposing patient data existence (Smart-On-FHIR)",
+    "titlePt": "Negar acesso sem expor a existência de dados do paciente (Smart-On-FHIR)",
+    "qEn": "A server has implemented Smart-On-FHIR security protocol to authorize and authenticate the client applications accessing the FHIR resources.\n\nThe server shall not allow unauthorized users to have access to the data. For unauthorized users, the FHIR server shall deny access **but without exposing** denial of access (i.e., not stating the fact that the user doesn't have access) **or the existence of patient data**.\n\nWhich option should be used to meet these requirements when access is denied for a Patient search request?",
+    "qPt": "Um servidor implementou o protocolo de segurança Smart-On-FHIR para autorizar e autenticar as aplicações cliente que acessam os recursos FHIR.\n\nO servidor não deve permitir que usuários não autorizados tenham acesso aos dados. Para usuários não autorizados, o servidor FHIR deve negar acesso **sem expor** a negação de acesso (ou seja, sem declarar que o usuário não tem acesso) **nem a existência de dados do paciente**.\n\nQual opção deve ser usada para atender a esses requisitos quando o acesso é negado para uma requisição de pesquisa de Patient?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "Always return a Success (200 OK) with a Bundle containing zero results",
+        "pt": "Sempre retornar um Sucesso (200 OK) com um Bundle contendo zero resultados",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "Always return a 404 (Not Found) response with an empty payload",
+        "pt": "Sempre retornar uma resposta 404 (Not Found) com payload vazio",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "Always return a 401 \"Unauthorized\" with an OperationOutcome instance",
+        "pt": "Sempre retornar um 401 \"Unauthorized\" com uma instância de OperationOutcome",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Always return a 404 (Not Found) response with an OperationOutcome instance",
+        "pt": "Sempre retornar uma resposta 404 (Not Found) com uma instância de OperationOutcome",
+        "correct": false
+      }
+    ],
+    "explanationEn": "Per the FHIR specification (security.html#AccessDenied): \"Return a Success with Bundle containing zero results — This result is indistinguishable from the case where no data is known. When consistently returned on Access Denied, this will not expose which patients exist, or what data might be blinded. This method is also consistent with cases where some results are authorized while other results are blinded.\" Returning 401 or 404 would reveal that the user lacks access or that the resource doesn't exist.",
+    "explanationPt": "De acordo com a especificação FHIR (security.html#AccessDenied): \"Retornar um Sucesso com Bundle contendo zero resultados — Este resultado é indistinguível do caso em que nenhum dado é conhecido. Quando retornado consistentemente em caso de Acesso Negado, não revelará quais pacientes existem ou quais dados podem estar ocultados. Este método também é consistente com casos em que alguns resultados são autorizados enquanto outros estão ocultados.\" Retornar 401 ou 404 revelaria que o usuário não tem acesso ou que o recurso não existe."
+  },
+  {
+    "id": 2,
+    "titleEn": "Protocol for synchronizing system clocks in FHIR",
+    "titlePt": "Protocolo para sincronização de relógios do sistema no FHIR",
+    "qEn": "A developer needs to ensure that system clocks are synchronized and the server is robust against clients that have the wrong clock set.\n\nWhich protocol should be leveraged?",
+    "qPt": "Um desenvolvedor precisa garantir que os relógios do sistema estejam sincronizados e que o servidor seja robusto contra clientes com o relógio configurado errado.\n\nQual protocolo deve ser utilizado?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "HTTPS",
+        "pt": "HTTPS",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "NTP",
+        "pt": "NTP",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "en": "OAuth 2.0",
+        "pt": "OAuth 2.0",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "TLS",
+        "pt": "TLS",
+        "correct": false
+      }
+    ],
+    "explanationEn": "**NTP (Network Time Protocol)** / SNTP should be used to synchronize system clocks. The FHIR security guidelines state that all clocks should be synchronized using NTP/SNTP, and the design of the system should be robust against a system clock with the wrong value. Clock synchronization is critical for token validity windows, audit log timestamps, and preventing replay attacks.",
+    "explanationPt": "**NTP (Network Time Protocol)** / SNTP deve ser usado para sincronizar os relógios do sistema. As diretrizes de segurança do FHIR afirmam que todos os relógios devem ser sincronizados usando NTP/SNTP, e o design do sistema deve ser robusto contra um relógio do sistema com valor incorreto. A sincronização de relógio é crítica para janelas de validade de tokens, timestamps de logs de auditoria e prevenção de ataques de replay."
+  },
+  {
+    "id": 3,
+    "titleEn": "FHIR resource for maintaining security audit logs",
+    "titlePt": "Recurso FHIR para manutenção de logs de auditoria de segurança",
+    "qEn": "A FHIR server maintains a complete, tamper-proof log of all API access and other security- and privacy-relevant events. The server has recently recorded an authorized access by a user.\n\nWhat FHIR resource can a developer use for the maintenance of security log information mentioned above?",
+    "qPt": "Um servidor FHIR mantém um log completo e à prova de adulteração de todos os acessos à API e outros eventos relevantes de segurança e privacidade. O servidor registrou recentemente um acesso autorizado por um usuário.\n\nQual recurso FHIR um desenvolvedor pode usar para a manutenção das informações de log de segurança mencionadas acima?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "Provenance",
+        "pt": "Provenance",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "Subscription",
+        "pt": "Subscription",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "Consent",
+        "pt": "Consent",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "AuditEvent",
+        "pt": "AuditEvent",
+        "correct": true
+      }
+    ],
+    "explanationEn": "**AuditEvent** is a FHIR resource specifically designed for maintaining security audit logs. It records events made for purposes of maintaining a security log, including detection of intrusion attempts and monitoring for inappropriate usage. `Provenance` tracks the origin and history of resource data (who created/changed it), not security access logs. `Consent` manages patient consent policies. `Subscription` is for event-based notifications.",
+    "explanationPt": "**AuditEvent** é um recurso FHIR especificamente projetado para manutenção de logs de auditoria de segurança. Ele registra eventos feitos para fins de manutenção de um log de segurança, incluindo detecção de tentativas de intrusão e monitoramento de uso inadequado. `Provenance` rastreia a origem e o histórico dos dados do recurso (quem criou/alterou), não logs de acesso de segurança. `Consent` gerencia políticas de consentimento do paciente. `Subscription` é para notificações baseadas em eventos."
+  },
+  {
+    "id": 4,
+    "titleEn": "Purpose of implementing SMART-On-FHIR",
+    "titlePt": "Finalidade da implementação do SMART-On-FHIR",
+    "qEn": "A FHIR server has implemented SMART-On-FHIR protocol.\n\nWhat is the purpose behind this implementation?",
+    "qPt": "Um servidor FHIR implementou o protocolo SMART-On-FHIR.\n\nQual é a finalidade por trás dessa implementação?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "Authorize the client application and user",
+        "pt": "Autorizar a aplicação cliente e o usuário",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "To implement the security based on the security labels",
+        "pt": "Para implementar a segurança baseada nos rótulos de segurança",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "Ensuring FHIR resource integrity",
+        "pt": "Garantir a integridade dos recursos FHIR",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Encrypting the FHIR resources",
+        "pt": "Criptografar os recursos FHIR",
+        "correct": false
+      }
+    ],
+    "explanationEn": "**SMART-On-FHIR** (Substitutable Medical Applications and Reusable Technologies) is a profile on OAuth 2.0 specifically designed to **authorize client applications and users** to access FHIR resources. It is an open-source library that implements the OAuth authorization protocol in the context of healthcare data. It handles authentication and authorization, not encryption, data integrity, or security labeling.",
+    "explanationPt": "**SMART-On-FHIR** (Substitutable Medical Applications and Reusable Technologies) é um perfil sobre OAuth 2.0 especificamente projetado para **autorizar aplicações cliente e usuários** a acessar recursos FHIR. É uma biblioteca open-source que implementa o protocolo de autorização OAuth no contexto de dados de saúde. Ele trata de autenticação e autorização, não de criptografia, integridade de dados ou rotulagem de segurança."
+  }
+]

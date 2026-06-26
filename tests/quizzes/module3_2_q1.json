@@ -1,0 +1,230 @@
+[
+  {
+    "id": 1,
+    "module": "Module 3 - Unit 2",
+    "titleEn": "Search Practitioner by gender",
+    "titlePt": "Pesquisar Practitioner por gênero",
+    "qEn": "A client application needs to search the Practitioner resource by the doctor's gender value. Which search parameter should be used?",
+    "qPt": "Um aplicativo cliente precisa pesquisar o recurso Practitioner pelo valor de gênero do médico. Qual parâmetro de pesquisa deve ser usado?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module3/m3_2_q1.png",
+        "altEn": "Question asking which search parameter to use to query Practitioner by gender",
+        "altPt": "Questão perguntando qual parâmetro de pesquisa usar para consultar Practitioner por gênero"
+      }
+    ],
+    "options": [
+      { "key": "A", "en": "Practitioner.gender", "pt": "Practitioner.gender", "correct": false },
+      { "key": "B", "en": "token", "pt": "token", "correct": false },
+      { "key": "C", "en": "Gender", "pt": "Gender", "correct": false },
+      { "key": "D", "en": "gender", "pt": "gender", "correct": true }
+    ],
+    "explanationEn": "In FHIR, search parameters are predefined, case-sensitive names. To search by gender, the correct parameter is 'gender'. 'Practitioner.gender' is an element path (not a search parameter), 'Gender' has the wrong case, and 'token' is a parameter type, not a parameter name.",
+    "explanationPt": "No FHIR, os parâmetros de pesquisa são nomes predefinidos e sensíveis a maiúsculas/minúsculas. Para pesquisar por gênero, o parâmetro correto é 'gender'. 'Practitioner.gender' é um caminho de elemento (não um parâmetro de pesquisa), 'Gender' está com capitalização incorreta e 'token' é um tipo de parâmetro, não um nome."
+  },
+  {
+    "id": 2,
+    "module": "Module 3 - Unit 2",
+    "titleEn": "Search Patient resources who are deceased",
+    "titlePt": "Pesquisar recursos Patient que estão falecidos",
+    "qEn": "A client application needs to search for the matching patients who are deceased (not alive). The Patient resource instances on the FHIR server do contain the death date of these patients. Which search parameter should be used?",
+    "qPt": "Um aplicativo cliente precisa pesquisar os pacientes que estão falecidos (não vivos). As instâncias de Patient no servidor FHIR contêm a data de óbito desses pacientes. Qual parâmetro de pesquisa deve ser usado?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module3/m3_2_q2.png",
+        "altEn": "Question asking which search parameter finds deceased patients",
+        "altPt": "Questão perguntando qual parâmetro de pesquisa encontra pacientes falecidos"
+      }
+    ],
+    "options": [
+      { "key": "A", "en": "death-date", "pt": "death-date", "correct": false },
+      { "key": "B", "en": "deceasedDateTime", "pt": "deceasedDateTime", "correct": false },
+      { "key": "C", "en": "deceased", "pt": "deceased", "correct": true },
+      { "key": "D", "en": "deathDate", "pt": "deathDate", "correct": false }
+    ],
+    "explanationEn": "Use the Patient search parameter 'deceased' to find patients who are deceased (e.g., Patient?deceased=true). The other options are element names or incorrect parameter names. If filtering by the actual date/time of death were needed, the correct parameter would be 'deceased-date' (not 'death-date').",
+    "explanationPt": "Use o parâmetro de pesquisa do Patient 'deceased' para encontrar pacientes falecidos (ex.: Patient?deceased=true). As outras opções são nomes de elementos ou nomes incorretos de parâmetros. Se fosse necessário filtrar pela data/hora do óbito, o parâmetro correto seria 'deceased-date' (não 'death-date')."
+  },
+  {
+    "id": 3,
+    "module": "Module 3 - Unit 2",
+    "titleEn": "Search DiagnosticReport for lipid panel outcome",
+    "titlePt": "Pesquisar DiagnosticReport para resultado de painel lipídico",
+    "qEn": "A provider application for a hospital needs to retrieve the final lipid panel report for the patient with id 15176. The responsible diagnostic service is Acme Laboratory, Inc. (id 15678). The report is the outcome of the order (order placer number 102345 from the Good Health Hospital provider system) sent 2 days ago. Which combination of search parameters will return the matching DiagnosticReport resource?",
+    "qPt": "Um aplicativo do hospital precisa recuperar o relatório final do painel lipídico do paciente com id 15176. O serviço diagnóstico responsável é a Acme Laboratory, Inc. (id 15678). O relatório é o resultado do pedido (nº do solicitante 102345 do sistema do provedor Good Health Hospital) enviado há 2 dias. Qual combinação de parâmetros de busca retornará o recurso DiagnosticReport correspondente?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module3/m3_2_q3.png",
+        "altEn": "Multiple-choice asking which DiagnosticReport search parameters to use",
+        "altPt": "Múltipla escolha perguntando quais parâmetros de busca usar em DiagnosticReport"
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "patient, performer (Organization), code, status, based-on (ServiceRequest)",
+        "pt": "patient, performer (Organization), code, status, based-on (ServiceRequest)",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "patient, performer (Practitioner), code, status, date, based-on (ServiceRequest)",
+        "pt": "patient, performer (Practitioner), code, status, date, based-on (ServiceRequest)",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "patient, performer (Organization), code, status, date, based-on (ServiceRequest)",
+        "pt": "patient, performer (Organization), code, status, date, based-on (ServiceRequest)",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "subject, results-interpreter (Organization), code, status, based-on (ServiceRequest)",
+        "pt": "subject, results-interpreter (Organization), code, status, based-on (ServiceRequest)",
+        "correct": false
+      }
+    ],
+    "explanationEn": "Use 'patient' to target Patient/15176, 'performer' referencing the Organization (Acme Laboratory) that produced the report, 'code' for the lipid panel test, 'status' for the final report, and 'based-on' to link the report to the originating ServiceRequest (order placer number 102345). The 'date' filter is not appropriate here because the '2 days ago' refers to the order date (on ServiceRequest), not the DiagnosticReport date. Options B and C wrongly include 'date' and B also uses performer as Practitioner. Option D uses 'results-interpreter' instead of 'performer' and 'subject' instead of 'patient'.",
+    "explanationPt": "Use 'patient' para direcionar Patient/15176, 'performer' referenciando a Organization (Acme Laboratory) que produziu o relatório, 'code' para o exame de painel lipídico, 'status' para indicar relatório final e 'based-on' para vincular o relatório ao ServiceRequest de origem (nº do solicitante 102345). O filtro 'date' não é adequado aqui porque 'há 2 dias' refere-se à data do pedido (no ServiceRequest), não à data do DiagnosticReport. As opções B e C incluem 'date' indevidamente e B ainda usa performer como Practitioner. A opção D usa 'results-interpreter' no lugar de 'performer' e 'subject' no lugar de 'patient'."
+  },
+  {
+    "id": 4,
+    "module": "Module 3 - Unit 2",
+    "titleEn": "Search booked routine check-up appointments for a patient",
+    "titlePt": "Pesquisar consultas agendadas de check-up de um paciente",
+    "qEn": "A scheduling system wants to search for all the booked appointments for a patient. These appointments are routine check-up visits with the patient’s primary care physician (Dr. John Cena) and will be held at the physician's office located at 2nd Street, Ann Arbor, MI. Which search parameters should be utilized?",
+    "qPt": "Um sistema de agendamento deseja pesquisar todas as consultas com status 'booked' para um paciente. Essas consultas são check-ups de rotina com o médico de cuidados primários do paciente (Dr. John Cena) e ocorrerão no consultório do médico localizado na 2nd Street, Ann Arbor, MI. Quais parâmetros de busca devem ser utilizados?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module3/m3_2_q4.png",
+        "altEn": "Multiple-choice about Appointment search parameters (patient, practitioner, location, status, appointment-type)",
+        "altPt": "Múltipla escolha sobre parâmetros de busca do Appointment (patient, practitioner, location, status, appointment-type)"
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "patient, practitioner, location, date, service-category",
+        "pt": "patient, practitioner, location, date, service-category",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "location, patient, practitioner, status, date",
+        "pt": "location, patient, practitioner, status, date",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "location, status, patient, practitioner, appointment-type",
+        "pt": "location, status, patient, practitioner, appointment-type",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "en": "location, status, patient, practitioner, date, service-category",
+        "pt": "location, status, patient, practitioner, date, service-category",
+        "correct": false
+      }
+    ],
+    "explanationEn": "Use Appointment search parameters: 'status=booked' to return only booked visits; 'patient' for the patient; 'practitioner' for Dr. John Cena; 'location' for the physician’s office; and 'appointment-type' for routine check-up. 'date' and 'service-category' are not required by the scenario.",
+    "explanationPt": "Use os parâmetros de busca do Appointment: 'status=booked' para retornar apenas consultas agendadas; 'patient' para o paciente; 'practitioner' para o Dr. John Cena; 'location' para o consultório; e 'appointment-type' para check-up de rotina. 'date' e 'service-category' não são exigidos pelo cenário."
+  },
+  {
+    "id": 5,
+    "module": "Module 3 - Unit 2",
+    "titleEn": "Search verified, clinically active Penicillin allergies with severe reaction",
+    "titlePt": "Pesquisar alergias a Penicilina verificadas, ativas clinicamente e com reação severa",
+    "qEn": "A clinical quality application needs to retrieve all clinically active allergies of the patient due to Penicillin that are verified/confirmed through clinical testing and captured in the system last month. The reaction severity for such retrieved allergies shall be severe. Which search parameters should be used?",
+    "qPt": "Um aplicativo de qualidade clínica precisa recuperar todas as alergias clinicamente ativas do paciente devido à Penicilina que estejam verificadas/confirmadas por teste clínico e registradas no sistema no mês passado. A severidade da reação deve ser severa. Quais parâmetros de busca devem ser usados?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module3/m3_2_q5.png",
+        "altEn": "Multiple-choice asking which AllergyIntolerance search parameters to use",
+        "altPt": "Múltipla escolha perguntando quais parâmetros de busca usar em AllergyIntolerance"
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "clinical-status, code, date, patient, severity",
+        "pt": "clinical-status, code, date, patient, severity",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "code, date, patient, criticality, verification-status",
+        "pt": "code, date, patient, criticality, verification-status",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "clinical-status, code, date, patient, severity, verification-status",
+        "pt": "clinical-status, code, date, patient, severity, verification-status",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "en": "clinical-status, code, recordedDate, patient, severity, verification-status",
+        "pt": "clinical-status, code, recordedDate, patient, severity, verification-status",
+        "correct": false
+      }
+    ],
+    "explanationEn": "Use AllergyIntolerance search parameters: 'patient' to target the patient; 'code' for Penicillin; 'clinical-status=active' for clinically active allergies; 'verification-status=confirmed' for verified/confirmed results; 'severity=severe' for reaction severity; and 'date' to filter by when it was captured. 'recordedDate' is not the defined search parameter—'date' is.",
+    "explanationPt": "Use os parâmetros de busca de AllergyIntolerance: 'patient' para o paciente; 'code' para Penicilina; 'clinical-status=active' para alergias clinicamente ativas; 'verification-status=confirmed' para resultados verificados/confirmados; 'severity=severe' para a severidade da reação; e 'date' para filtrar quando foi registrado. 'recordedDate' não é o parâmetro de busca definido — o correto é 'date'."
+  },
+  {
+    "id": 6,
+    "module": "Module 3 - Unit 2",
+    "titleEn": "Query patients with Asthma diagnosis registered at Good Health Hospital",
+    "titlePt": "Consultar pacientes com diagnóstico de Asma registrados no Good Health Hospital",
+    "qEn": "A client application wants to query for all the patients with a diagnosis of \"Asthma\" where patients have been registered in Good Health Hospital. Diagnosis data is fetched through the Condition resource in FHIR, which can refer to the Patient resource. Which query will the portal implement to meet these requirements?",
+    "qPt": "Um aplicativo cliente deseja consultar todos os pacientes com diagnóstico de “Asma”, registrados no Good Health Hospital. Os dados de diagnóstico são obtidos via o recurso Condition no FHIR, que referencia o recurso Patient. Qual consulta o portal deve implementar para atender a esses requisitos?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "Type level search on the Condition resource",
+        "pt": "Pesquisa em nível de tipo no recurso Condition",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "Type level search on the Patient resource type",
+        "pt": "Pesquisa em nível de tipo no recurso Patient",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "en": "Type level search on the Organization resource type",
+        "pt": "Pesquisa em nível de tipo no recurso Organization",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Type level search on the Condition resource type",
+        "pt": "Pesquisa em nível de tipo no recurso Condition",
+        "correct": false
+      }
+    ],
+    "explanationEn": "You must query **Patient** resources and constrain them by related Condition records using the `_has` reverse chaining parameter (e.g., `GET [base]/Patient?_has:Condition:subject:code=asthma`) and by the registration organization (e.g., `organization=GoodHealthHospitalId`). Searching the Condition type would return Condition resources, not the required Patient list.",
+    "explanationPt": "É necessário consultar recursos **Patient** e restringi-los por Conditions relacionadas usando o parâmetro de encadeamento reverso `_has` (ex.: `GET [base]/Patient?_has:Condition:subject:code=asthma`) e pela organização de cadastro (ex.: `organization=GoodHealthHospitalId`). Pesquisar o tipo Condition retornaria Conditions, não a lista de Patients solicitada."
+  }
+
+
+
+
+
+]

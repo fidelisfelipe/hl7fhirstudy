@@ -1,0 +1,750 @@
+[
+  {
+    "id": 1,
+    "titleEn": "Publish an Extension Definition",
+    "titlePt": "Publicar uma Definição de Extensão",
+    "qEn": "An EMR (MyEMR) system creates an extension definition for writing Patient race information in the Patient resource. The definition provides url, data type, and coded values and is hosted on the MyEMR FHIR server. Which resource should the server use so other systems can fetch and use this extension definition?",
+    "qPt": "Um sistema EMR (MyEMR) cria uma definição de extensão para registrar a raça do paciente no recurso Patient. A definição fornece url, tipo de dado e valores codificados e está hospedada no servidor FHIR do MyEMR. Qual recurso o servidor deve usar para que outros sistemas possam buscar e usar essa definição de extensão?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "Patient",
+        "pt": "Patient",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "Extension",
+        "pt": "Extension",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "CapabilityStatement",
+        "pt": "CapabilityStatement",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "StructureDefinition",
+        "pt": "StructureDefinition",
+        "correct": true
+      }
+    ],
+    "explanationEn": "Extension definitions are represented as StructureDefinition resources with kind=complex-type and derivation=constraint on Extension. A StructureDefinition is the resource type used to publish any profile or extension on a FHIR server so other systems can fetch and reuse it.",
+    "explanationPt": "Definições de extensão são representadas como recursos StructureDefinition com kind=complex-type e derivation=constraint em Extension. StructureDefinition é o tipo de recurso usado para publicar qualquer perfil ou extensão num servidor FHIR para que outros sistemas possam buscá-lo e reutilizá-lo."
+  },
+  {
+    "id": 2,
+    "titleEn": "Record TT2 doses — pick the resource",
+    "titlePt": "Registrar doses de TT2 — escolha o recurso",
+    "qEn": "A clinician needs to report that the patient has been administered 2 doses of tetanus toxoid (TT2) vaccine. Which resource should the clinician system use?",
+    "qPt": "Um clínico precisa informar que o paciente recebeu 2 doses da vacina de toxoide tetânico (TT2). Qual recurso o sistema do clínico deve usar?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "ImmunizationRecommendation",
+        "pt": "ImmunizationRecommendation",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "Immunization",
+        "pt": "Immunization",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "en": "MedicationAdministration",
+        "pt": "MedicationAdministration",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "MedicationStatement",
+        "pt": "MedicationStatement",
+        "correct": false
+      }
+    ],
+    "explanationEn": "Immunization represents the event of a vaccine actually being administered. ImmunizationRecommendation covers future vaccination schedules. MedicationAdministration is for drugs (not vaccines). MedicationStatement is self-reported drug use.",
+    "explanationPt": "Immunization representa o evento de uma vacina sendo efetivamente administrada. ImmunizationRecommendation cobre cronogramas futuros de vacinação. MedicationAdministration é para medicamentos (não vacinas). MedicationStatement é uso de medicamento relatado pelo próprio paciente."
+  },
+  {
+    "id": 3,
+    "titleEn": "Choose the correct resource for a diagnosis",
+    "titlePt": "Escolha o recurso correto para um diagnóstico",
+    "qEn": "A clinician has diagnosed the patient with a Heart valve disorder of moderate severity. Which resource should the clinician system use?",
+    "qPt": "Um clínico diagnosticou o paciente com distúrbio da válvula cardíaca de gravidade moderada. Qual recurso o sistema do clínico deve usar?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "Observation",
+        "pt": "Observation",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "Procedure",
+        "pt": "Procedure",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "DiagnosticReport",
+        "pt": "DiagnosticReport",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Condition",
+        "pt": "Condition",
+        "correct": true
+      }
+    ],
+    "explanationEn": "Use **Condition** to represent a clinical condition/problem/diagnosis that has risen to a level of concern.",
+    "explanationPt": "Use **Condition** para representar uma condição/problema/diagnóstico clínico que atingiu um nível de preocupação."
+  },
+  {
+    "id": 4,
+    "titleEn": "Select the correct FHIR resource to send heart rate data",
+    "titlePt": "Selecione o recurso FHIR correto para enviar dados de frequência cardíaca",
+    "qEn": "A developer needs to create an interface for sending patient heart rate data from the device backend to the EMR FHIR server. Which resource would the developer use to send this information through the FHIR REST API?",
+    "qPt": "Um desenvolvedor precisa criar uma interface para enviar dados de frequência cardíaca do backend de um dispositivo para o servidor FHIR do EMR. Qual recurso deve ser usado para enviar essas informações pela API REST do FHIR?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "Specimen",
+        "pt": "Specimen",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "Observation",
+        "pt": "Observation",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "en": "Media",
+        "pt": "Media",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "BodyStructure",
+        "pt": "BodyStructure",
+        "correct": false
+      }
+    ],
+    "explanationEn": "Use Observation to exchange vital signs such as heart rate.",
+    "explanationPt": "Use Observation para trocar sinais vitais como frequência cardíaca."
+  },
+  {
+    "id": 5,
+    "titleEn": "Which resource should be used to check the status of a previously submitted claim?",
+    "titlePt": "Qual recurso deve ser usado para verificar o status de um claim já enviado?",
+    "qEn": "A provider submitted the charges for goods and services (claim). There is no response from the insurer, and the provider wants to check the current status (processed, in process, etc.) using the claim business identifier. Which FHIR resource should be used to check the status of the previously submitted claim?",
+    "qPt": "Um prestador enviou as cobranças pelos serviços/produtos (claim). Como não houve resposta do segurador, o prestador deseja verificar o status atual (processado, em processamento, etc.) usando o identificador comercial do claim. Qual recurso FHIR deve ser usado para consultar o status do claim já enviado?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "ServiceRequest",
+        "pt": "ServiceRequest",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "Claim",
+        "pt": "Claim",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "Task",
+        "pt": "Task",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "en": "ClaimResponse",
+        "pt": "ClaimResponse",
+        "correct": false
+      }
+    ],
+    "explanationEn": "Task tracks the state of an activity (to-do, in-progress, completed). When the provider needs to check whether a submitted claim was processed, Task is the appropriate resource — it holds a business identifier and a status. ClaimResponse would come from the insurer once the claim is adjudicated.",
+    "explanationPt": "Task rastreia o estado de uma atividade (a fazer, em andamento, concluída). Quando o prestador precisa verificar se uma solicitação enviada foi processada, Task é o recurso adequado — ele contém um identificador comercial e um status. ClaimResponse viria da seguradora após adjudicação da solicitação."
+  },
+  {
+    "id": 6,
+    "titleEn": "Select the resource to send adjudication results",
+    "titlePt": "Selecione o recurso para enviar os resultados de adjudicação",
+    "qEn": "The insurance company has received the reimbursement request for services provided during the patient's hospitalization and has determined the amounts. Which resource should be used to send the insurer's adjudication results back to the hospital?",
+    "qPt": "A seguradora recebeu a solicitação de reembolso pelos serviços prestados durante a internação do paciente e definiu os valores. Qual recurso deve ser usado para enviar os resultados de adjudicação da seguradora ao hospital?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "Claim",
+        "pt": "Claim",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "Coverage",
+        "pt": "Coverage",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "ClaimResponse",
+        "pt": "ClaimResponse",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "en": "Account",
+        "pt": "Account",
+        "correct": false
+      }
+    ],
+    "explanationEn": "ClaimResponse carries the insurer's decision: amounts approved, denied, adjusted, and payment details. Claim is the initial request from the provider; Coverage describes insurance eligibility; Account tracks balances.",
+    "explanationPt": "ClaimResponse carrega a decisão da seguradora: valores aprovados, negados, ajustados e detalhes de pagamento. Claim é a solicitação inicial do prestador; Coverage descreve elegibilidade de seguro; Account rastreia saldos."
+  },
+  {
+    "id": 7,
+    "titleEn": "Select the correct resource used inside DocumentReference to point to each PDF",
+    "titlePt": "Selecione o recurso correto usado no DocumentReference para apontar cada PDF",
+    "qEn": "All patient clinical notes (PDFs) are requested. The server must create a DocumentReference that includes a reference to a resource which can serve each PDF separately and uniquely. Which resource should be referenced from DocumentReference?",
+    "qPt": "Todas as anotações clínicas do paciente (PDFs) foram solicitadas. O servidor deve criar um DocumentReference que inclua uma referência a um recurso capaz de fornecer cada PDF de forma separada e única. Qual recurso deve ser referenciado a partir do DocumentReference?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "CapabilityStatement",
+        "pt": "CapabilityStatement",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "DiagnosticReport",
+        "pt": "DiagnosticReport",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "Composition",
+        "pt": "Composition",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Binary",
+        "pt": "Binary",
+        "correct": true
+      }
+    ],
+    "explanationEn": "Binary represents the actual bytes of a single artifact (e.g., PDF, image, ZIP) addressable as a resource. DocumentReference typically points its content.attachment.url to a Binary resource (or includes the data inline) to uniquely reference each document.",
+    "explanationPt": "Binary representa os bytes reais de um artefato único (por exemplo, PDF, imagem, ZIP) acessível como recurso. O DocumentReference geralmente aponta seu content.attachment.url para um recurso Binary (ou inclui os dados embutidos) para referenciar cada documento de forma única."
+  },
+  {
+    "id": 8,
+    "titleEn": "Transmit lab orders to the LIS",
+    "titlePt": "Transmitir pedidos de laboratório ao LIS",
+    "qEn": "The doctor wishes to arrange a lipid panel test for the patient after making a diagnosis. Lab tests are created by doctors using the order entry system and sent to the lab information system (LIS). Which resource would be used to transmit the lab orders through the order entry system?",
+    "qPt": "O médico deseja solicitar um exame de lipidograma para o paciente após o diagnóstico. Os exames são criados pelos médicos no sistema de entrada de pedidos e enviados ao sistema de informação laboratorial (LIS). Qual recurso deve ser usado para transmitir esses pedidos?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "DiagnosticReport",
+        "pt": "DiagnosticReport",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "Specimen",
+        "pt": "Specimen",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "Observation",
+        "pt": "Observation",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "ServiceRequest",
+        "pt": "ServiceRequest",
+        "correct": true
+      }
+    ],
+    "explanationEn": "ServiceRequest is used to request diagnostics, referrals, or procedures. When a physician orders a lipid panel, the order entry system creates a ServiceRequest and sends it to the LIS. DiagnosticReport comes back when results are available.",
+    "explanationPt": "ServiceRequest é usado para solicitar diagnósticos, referências ou procedimentos. Quando um médico solicita um painel lipídico, o sistema de entrada de pedidos cria um ServiceRequest e o envia ao LIS. DiagnosticReport retorna quando os resultados estão disponíveis."
+  },
+  {
+    "id": 9,
+    "titleEn": "Share a patient's drug prescription with the pharmacy",
+    "titlePt": "Compartilhar a prescrição do paciente com a farmácia",
+    "qEn": "An implementer needs to share the drug prescription information of a specific patient with the pharmacy system. Which resource should be used to exchange this information?",
+    "qPt": "Um implementador precisa compartilhar as informações de prescrição de medicamentos de um paciente com o sistema da farmácia. Qual recurso deve ser usado para trocar essa informação?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "MedicationRequest",
+        "pt": "MedicationRequest",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "Medication",
+        "pt": "Medication",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "MedicationDispense",
+        "pt": "MedicationDispense",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "ServiceRequest",
+        "pt": "ServiceRequest",
+        "correct": false
+      }
+    ],
+    "explanationEn": "Use MedicationRequest to communicate a patient’s prescription/order to a pharmacy. Medication defines the drug itself, MedicationDispense records a supplied medication, and ServiceRequest is for ordering services (e.g., labs, imaging).",
+    "explanationPt": "Use MedicationRequest para comunicar a prescrição/solicitação do paciente à farmácia. Medication define o produto em si, MedicationDispense registra a dispensação do medicamento e ServiceRequest é para solicitar serviços (por exemplo, exames laboratoriais, imagem)."
+  },
+  {
+    "id": 10,
+    "titleEn": "Select the resource to send a complete lab report",
+    "titlePt": "Selecione o recurso para enviar um relatório laboratorial completo",
+    "qEn": "The Lab Information System (LIS) needs to send the complete blood count report to the EMR system. The outcome includes multiple results, the lab’s original PDF report, references to the subject of the report, and other information. Which resource should the LIS use?",
+    "qPt": "O sistema de informações laboratoriais (LIS) precisa enviar o hemograma completo para o sistema EMR. O resultado inclui múltiplos resultados, o PDF original do laboratório, referências ao sujeito do relatório e outras informações. Qual recurso o LIS deve usar?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "Media",
+        "pt": "Media",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "DiagnosticReport",
+        "pt": "DiagnosticReport",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "en": "ServiceRequest",
+        "pt": "ServiceRequest",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "ImagingStudy",
+        "pt": "ImagingStudy",
+        "correct": false
+      }
+    ],
+    "explanationEn": "DiagnosticReport aggregates all lab results for a test event: it references Observation instances (one per discrete value), can include the original PDF as an attachment, and links to the patient subject and ordering ServiceRequest.",
+    "explanationPt": "DiagnosticReport agrega todos os resultados laboratoriais de um evento: referencia instâncias de Observation (uma por valor discreto), pode incluir o PDF original como anexo e vincula ao paciente e ao ServiceRequest de pedido."
+  },
+  {
+    "id": 11,
+    "titleEn": "Select the resource to exchange next-of-kin health conditions",
+    "titlePt": "Selecione o recurso para trocar condições de saúde de familiares",
+    "qEn": "A system needs to exchange information about a patient's next-of-kin health conditions (e.g., mother died from stroke at 56, brother with diabetes). The actual patient is represented using the Patient resource. Which resource should be used to exchange these next-of-kin health conditions?",
+    "qPt": "Um sistema precisa trocar informações sobre as condições de saúde de parentes do paciente (ex.: mãe faleceu por AVC aos 56 anos, irmão com diabetes). O próprio paciente é representado pelo recurso Patient. Qual recurso deve ser usado para trocar essas informações de saúde de familiares?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "RelatedPerson",
+        "pt": "RelatedPerson",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "Group",
+        "pt": "Group",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "FamilyMemberHistory",
+        "pt": "FamilyMemberHistory",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "en": "Condition",
+        "pt": "Condition",
+        "correct": false
+      }
+    ],
+    "explanationEn": "FamilyMemberHistory captures health conditions of a patient's relatives, not the relatives themselves. RelatedPerson represents an actual person related to the patient (e.g., emergency contact). Condition is for the patient's own conditions.",
+    "explanationPt": "FamilyMemberHistory registra condições de saúde dos familiares do paciente, não os próprios familiares. RelatedPerson representa uma pessoa real relacionada ao paciente (ex.: contato de emergência). Condition é para as próprias condições do paciente."
+  },
+  {
+    "id": 12,
+    "titleEn": "Resource to define message details for patient eligibility (FHIR messaging)",
+    "titlePt": "Recurso para definir detalhes da mensagem de elegibilidade (mensageria FHIR)",
+    "qEn": "A provider and payer will interact using FHIR messages. The provider defines a message for checking patient eligibility. Which resource is used to define the message details, including the event code, the resources that will be part of the message, and the allowed responses?",
+    "qPt": "Um provedor e um pagador vão interagir usando mensagens FHIR. O provedor define uma mensagem para verificação de elegibilidade do paciente. Qual recurso é usado para definir os detalhes da mensagem, incluindo o código do evento, os recursos que farão parte da mensagem e as respostas permitidas?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "StructureDefinition",
+        "pt": "StructureDefinition",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "MessageDefinition",
+        "pt": "MessageDefinition",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "en": "StructureMap",
+        "pt": "StructureMap",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "ConceptMap",
+        "pt": "ConceptMap",
+        "correct": false
+      }
+    ],
+    "explanationEn": "MessageDefinition describes a FHIR messaging event, including the trigger (event code), focus resources, allowed responses, and profiles. StructureDefinition is for profiles/extensions, StructureMap is for transforms, and ConceptMap is for code mappings.",
+    "explanationPt": "MessageDefinition descreve um evento de mensageria FHIR, incluindo o gatilho (código do evento), recursos foco, respostas permitidas e perfis. StructureDefinition serve para perfis/extensões, StructureMap para transformações e ConceptMap para mapeamentos de códigos."
+  },
+  {
+    "id": 13,
+    "titleEn": "Representing a treatment target (HbA1c < 5.6% in 3 months)",
+    "titlePt": "Representando uma meta de tratamento (HbA1c < 5,6% em 3 meses)",
+    "qEn": "The primary care physician (PCP) sets a target for a patient with diabetes: HbA1c less than 5.6% in three months. Which FHIR resource should the PCP system use to exchange this information?",
+    "qPt": "O médico de atenção primária (PCP) define uma meta para um paciente com diabetes: HbA1c menor que 5,6% em três meses. Qual recurso FHIR o sistema do PCP deve usar para trocar essa informação?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "CarePlan",
+        "pt": "CarePlan",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "CareTeam",
+        "pt": "CareTeam",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "Goal",
+        "pt": "Goal",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "en": "ServiceRequest",
+        "pt": "ServiceRequest",
+        "correct": false
+      }
+    ],
+    "explanationEn": "Use the Goal resource to communicate desired outcomes or targets (e.g., HbA1c < 5.6% within 3 months). CarePlan would detail activities to achieve the goal; CareTeam defines participants; ServiceRequest is for ordering services.",
+    "explanationPt": "Use o recurso Goal para comunicar resultados ou metas desejadas (por exemplo, HbA1c < 5,6% em 3 meses). CarePlan detalharia as atividades para atingir a meta; CareTeam define os participantes; ServiceRequest é para solicitação de serviços."
+  },
+  {
+    "id": 14,
+    "titleEn": "Select the resource that documents a FHIR server's capabilities",
+    "titlePt": "Selecione o recurso que documenta as capacidades de um servidor FHIR",
+    "qEn": "An EMR system sets up a FHIR server to exchange data with other healthcare systems. The server supports specific REST APIs and a limited set of resources. Which resource is used by the FHIR server to describe which resources it supports, its API features, search parameters, and FHIR operations?",
+    "qPt": "Um sistema EMR configura um servidor FHIR para trocar dados com outros sistemas de saúde. O servidor suporta APIs REST específicas e um conjunto limitado de recursos. Qual recurso é usado pelo servidor FHIR para descrever quais recursos suporta, seus recursos de API, parâmetros de busca e operações FHIR?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "StructureDefinition",
+        "pt": "StructureDefinition",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "OperationDefinition",
+        "pt": "OperationDefinition",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "OperationOutcome",
+        "pt": "OperationOutcome",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "CapabilityStatement",
+        "pt": "CapabilityStatement",
+        "correct": true
+      }
+    ],
+    "explanationEn": "CapabilityStatement describes a FHIR server’s functionality: supported resources & interactions, search parameters, operations and security.",
+    "explanationPt": "CapabilityStatement descreve a funcionalidade de um servidor FHIR: recursos e interações suportados, parâmetros de busca, operações e segurança."
+  },
+  {
+    "id": 15,
+    "titleEn": "Best way to exchange a lipid panel report with discrete results",
+    "titlePt": "Melhor forma de trocar um relatório de painel lipídico com resultados discretos",
+    "qEn": "Refer to the image. A lab information system needs to send a lipid panel report that includes 4 distinct results (e.g., Cholesterol, Triglyceride, HDL, LDL). What is the best way to exchange this information with correct referencing?",
+    "qPt": "Consulte a imagem. Um sistema de laboratório precisa enviar um relatório de painel lipídico que inclui 4 resultados distintos (p.ex., Colesterol, Triglicerídeos, HDL, LDL). Qual é a melhor forma de trocar essa informação com a referenciação correta?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module2a/m2_q1_q15.png",
+        "altEn": "Lipid report showing four discrete results; question asks best FHIR referencing approach",
+        "altPt": "Relatório de lipídios com quatro resultados distintos; pergunta sobre melhor abordagem FHIR de referência"
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "One DiagnosticReport capturing the lipid panel and PDF report, referencing four separate Observation resources (one per discrete result).",
+        "pt": "Um único DiagnosticReport contendo o painel lipídico e o PDF do relatório, referenciando quatro Observations separadas (uma por resultado discreto).",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "One DiagnosticReport referencing a single Observation that aggregates all four discrete results.",
+        "pt": "Um único DiagnosticReport referenciando uma única Observation que agrega os quatro resultados.",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "Four DiagnosticReport resources—one per discrete result—plus the report document.",
+        "pt": "Quatro recursos DiagnosticReport — um por resultado discreto — além do documento do relatório.",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Four Observation resources for the discrete results along with the lipid panel data and PDF, without using DiagnosticReport.",
+        "pt": "Quatro recursos Observation para os resultados discretos junto com os dados do painel lipídico e o PDF, sem usar DiagnosticReport.",
+        "correct": false
+      }
+    ],
+    "explanationEn": "In FHIR, a panel/report is represented by DiagnosticReport. Each discrete analyte/result is an Observation referenced by the DiagnosticReport.",
+    "explanationPt": "No FHIR, o painel/relatório é representado por DiagnosticReport. Cada analito/resultado discreto é uma Observation referenciada pelo DiagnosticReport."
+  },
+  {
+    "id": 16,
+    "titleEn": "Select the resource that records who/what created & updated a resource",
+    "titlePt": "Selecione o recurso que registra quem/o quê criou e atualizou um recurso",
+    "qEn": "An application captures the activities performed on a Patient resource (logical id 345676). After creating it, the user updated it twice on the FHIR server via PUT. Which resource should be used to exchange information about the activity that created/updated a version of a resource, including the entities and agents involved?",
+    "qPt": "Um aplicativo captura as atividades realizadas em um recurso Patient (id lógico 345676). Após a criação, o usuário o atualizou duas vezes no servidor FHIR via PUT. Qual recurso deve ser usado para trocar as informações sobre a atividade que criou/atualizou uma versão de um recurso, incluindo as entidades e os agentes envolvidos?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "Patient",
+        "pt": "Patient",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "Provenance",
+        "pt": "Provenance",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "en": "StructureDefinition",
+        "pt": "StructureDefinition",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "AuditEvent",
+        "pt": "AuditEvent",
+        "correct": false
+      }
+    ],
+    "explanation": {
+      "en": "Use the Provenance resource to record the activity that created, revised, deleted, or signed a version of a resource, describing the entities and agents involved.",
+      "pt": "Use o recurso Provenance para registrar a atividade que criou, revisou, excluiu ou assinou uma versão de um recurso, descrevendo as entidades e os agentes envolvidos."
+    },
+    "explanationEn": "Provenance records who did what on a specific resource version: the agents (users, systems), entities (the resource version), and activities (create, update). AuditEvent is for security/access logs and is broader; Provenance is specifically designed for resource lineage.",
+    "explanationPt": "Provenance registra quem fez o quê em uma versão específica de recurso: os agentes (usuários, sistemas), entidades (a versão do recurso) e atividades (criar, atualizar). AuditEvent é para logs de segurança/acesso e é mais amplo; Provenance é especificamente para linhagem de recursos."
+  },
+  {
+    "id": 17,
+    "titleEn": "Select the resource used to report validation errors",
+    "titlePt": "Selecione o recurso usado para reportar erros de validação",
+    "qEn": "A FHIR server is validating a Patient resource sent by a client. The element Patient.gender has cardinality 0..1 and is bound (required) to a ValueSet that allows only the codes \"male\" and \"female\". The instance being validated contains the value \"other\". Which resource should the server use to convey this issue back to the client?",
+    "qPt": "Um servidor FHIR está validando um recurso Patient enviado por um cliente. O elemento Patient.gender tem cardinalidade 0..1 e está ligado (required) a um ValueSet que permite apenas os códigos \"male\" e \"female\". A instância validada contém o valor \"other\". Qual recurso o servidor deve usar para informar esse problema ao cliente?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "CodeSystem",
+        "pt": "CodeSystem",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "ValueSet",
+        "pt": "ValueSet",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "OperationOutcome",
+        "pt": "OperationOutcome",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "en": "Patient",
+        "pt": "Patient",
+        "correct": false
+      }
+    ],
+    "explanationEn": "Validation errors are returned using OperationOutcome, which carries issues (error, warning, information) detected by the server.",
+    "explanationPt": "Erros de validação são retornados usando OperationOutcome, que transporta issues (erro, aviso, informação) detectadas pelo servidor."
+  },
+  {
+    "id": 18,
+    "titleEn": "Update participation status for an appointment",
+    "titlePt": "Atualizar o status de participação de um agendamento",
+    "qEn": "A patient requested booking a slot for an MRI at a hospital. The request was sent to the hospital scheduling app (GHH_SCH). The MRI test involves the radiologist, the radiologist’s assistant, and the MRI machine (device). Each must update their participation status back to GHH_SCH. Which resource should each participant system use to report its participation status?",
+    "qPt": "Um paciente solicitou o agendamento de um horário para uma RM no hospital. O pedido foi enviado ao app de agendamento do hospital (GHH_SCH). O exame envolve o radiologista, o assistente e o equipamento de RM (device). Cada um precisa atualizar seu status de participação para o GHH_SCH. Qual recurso cada sistema participante deve usar para informar seu status de participação?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "Appointment",
+        "pt": "Appointment",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "Schedule",
+        "pt": "Schedule",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "Slot",
+        "pt": "Slot",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "AppointmentResponse",
+        "pt": "AppointmentResponse",
+        "correct": true
+      }
+    ],
+    "explanationEn": "Participants (people, devices, etc.) respond to an Appointment using AppointmentResponse to accept, decline, or propose changes. Appointment is the master record; Schedule/Slot manage availability but not participant responses.",
+    "explanationPt": "Participantes (pessoas, dispositivos etc.) respondem a um Appointment usando AppointmentResponse para aceitar, recusar ou propor mudanças. Appointment é o registro principal; Schedule/Slot tratam disponibilidade, não a resposta dos participantes."
+  },
+  {
+    "id": 19,
+    "titleEn": "Select the correct FHIR resource for a lab technician",
+    "titlePt": "Selecione o recurso FHIR correto para um técnico de laboratório",
+    "qEn": "The lab technician who performed the patient's ECG (Luigi Maas) must be shared with an identifier \"12345678902\". Which FHIR resource should be used to exchange this information?",
+    "qPt": "O técnico de laboratório que realizou o ECG do paciente (Luigi Maas) deve ser compartilhado com o identificador \"12345678902\". Qual recurso FHIR deve ser usado para trocar essas informações?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "Person",
+        "pt": "Person",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "RelatedPerson",
+        "pt": "RelatedPerson",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "Observation",
+        "pt": "Observation",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Practitioner",
+        "pt": "Practitioner",
+        "correct": true
+      }
+    ],
+    "explanationEn": "Practitioner represents a qualified healthcare professional — physicians, nurses, lab technicians — who provide care. Person is a generic identity; RelatedPerson is a non-professional related to a patient; Observation is for clinical measurements.",
+    "explanationPt": "Practitioner representa um profissional de saúde qualificado — médicos, enfermeiros, técnicos de laboratório — que prestam assistência. Person é uma identidade genérica; RelatedPerson é um não-profissional relacionado a um paciente; Observation é para medições clínicas."
+  },
+  {
+    "id": 20,
+    "titleEn": "Select the resource for patient-reported medication",
+    "titlePt": "Selecione o recurso para medicação relatada pelo paciente",
+    "qEn": "During an outpatient visit, the patient reported taking a drug named \"Disprin Regular 325 mg Effervescent Tablet\" for some headache episodes. The doctor captured this as patient-reported medication in the OPD application. Which FHIR resource should be used to exchange this information?",
+    "qPt": "Durante uma consulta ambulatorial, o paciente relatou ter tomado o medicamento \"Disprin Regular 325 mg Effervescent Tablet\" em alguns episódios de dor de cabeça. O médico registrou isso como medicação relatada pelo paciente no sistema. Qual recurso FHIR deve ser usado para trocar essa informação?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "Medication",
+        "pt": "Medication",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "MedicationStatement",
+        "pt": "MedicationStatement",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "en": "MedicationAdministration",
+        "pt": "MedicationAdministration",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "MedicationDispense",
+        "pt": "MedicationDispense",
+        "correct": false
+      }
+    ],
+    "explanationEn": "MedicationStatement records a medication being taken by a patient (often based on patient report or other sources). It is not part of the prescribe → dispense → administer workflow.",
+    "explanationPt": "MedicationStatement registra uma medicação tomada pelo paciente (geralmente com base no relato do paciente ou outras fontes). Não faz parte do fluxo prescrever → dispensar → administrar."
+  }
+]

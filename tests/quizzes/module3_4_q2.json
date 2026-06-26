@@ -1,0 +1,227 @@
+[
+  {
+    "id": 1,
+    "titleEn": "Choose the correct $validate-code invocation",
+    "titlePt": "Escolha a chamada correta do $validate-code",
+    "qEn": "A client must validate the patient insurance category codes (M, U, V) in an extension that binds to the ValueSet `http://minhealth.gov.bk/core/ValueSet/PPHTaxSituationVS`, which includes the CodeSystem `http://minhealth.gov.bk/core/CodeSystem/PPHTaxSituationCS`. The client will call **$validate-code** on the FHIR server (`https://testehr.com/fhir/`). According to the FHIR Extended Operations framework, which option shows the **correct** request to validate a code?",
+    "qPt": "Um cliente precisa validar os códigos de categoria de seguro do paciente (M, U, V) em uma extensão vinculada ao ValueSet `http://minhealth.gov.bk/core/ValueSet/PPHTaxSituationVS`, que inclui o CodeSystem `http://minhealth.gov.bk/core/CodeSystem/PPHTaxSituationCS`. O cliente chamará **$validate-code** no servidor FHIR (`https://testehr.com/fhir/`). De acordo com o framework de Operações Estendidas do FHIR, qual opção mostra a requisição **correta** para validar um código?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module3/m3_4_q2_q1.png",
+        "altEn": "Multiple-choice showing four HTTP request patterns for $validate-code",
+        "altPt": "Múltipla escolha com quatro padrões de requisição HTTP para $validate-code"
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "<pre><code>HTTP Method: GET\nURL: https://testehr.com/fhir/ValueSet/$validate-code?\n  url=http://minhealth.gov.bk/core/ValueSet/PPHTaxSituationVS\n  &amp;code=V\n  &amp;system=http://minhealth.gov.bk/core/CodeSystem/PPHTaxSituationCS\nBody: (empty)</code></pre>",
+        "pt": "<pre><code>Método HTTP: GET\nURL: https://testehr.com/fhir/ValueSet/$validate-code?\n  url=http://minhealth.gov.bk/core/ValueSet/PPHTaxSituationVS\n  &amp;code=V\n  &amp;system=http://minhealth.gov.bk/core/CodeSystem/PPHTaxSituationCS\nCorpo: (vazio)</code></pre>",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "<pre><code>HTTP Method: POST\nURL: https://testehr.com/fhir/ValueSet/$validate-code?\n  url=http://minhealth.gov.bk/core/ValueSet/PPHTaxSituationVS\n  &amp;code=V\n  &amp;system=http://minhealth.gov.bk/core/CodeSystem/PPHTaxSituationCS\nBody: (empty)</code></pre>",
+        "pt": "<pre><code>Método HTTP: POST\nURL: https://testehr.com/fhir/ValueSet/$validate-code?\n  url=http://minhealth.gov.bk/core/ValueSet/PPHTaxSituationVS\n  &amp;code=V\n  &amp;system=http://minhealth.gov.bk/core/CodeSystem/PPHTaxSituationCS\nCorpo: (vazio)</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "<pre><code>HTTP Method: POST\nURL: https://testehr.com/fhir/ValueSet/$validate-code?\n  url=http://minhealth.gov.bk/core/ValueSet/PPHTaxSituationVS\nBody:\n{\n  \"resourceType\": \"Parameters\",\n  \"parameter\": [\n    { \"name\": \"code\",   \"valueCode\": \"M\" },\n    { \"name\": \"system\", \"valueUri\": \"http://minhealth.gov.bk/core/CodeSystem/PPHTaxSituationCS\" }\n  ]\n}</code></pre>",
+        "pt": "<pre><code>Método HTTP: POST\nURL: https://testehr.com/fhir/ValueSet/$validate-code?\n  url=http://minhealth.gov.bk/core/ValueSet/PPHTaxSituationVS\nCorpo:\n{\n  \"resourceType\": \"Parameters\",\n  \"parameter\": [\n    { \"name\": \"code\",   \"valueCode\": \"M\" },\n    { \"name\": \"system\", \"valueUri\": \"http://minhealth.gov.bk/core/CodeSystem/PPHTaxSituationCS\" }\n  ]\n}</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "<pre><code>HTTP Method: GET\nURL: https://testehr.com/fhir/ValueSet/$validate-code\nBody:\n{\n  \"resourceType\": \"Parameters\",\n  \"parameter\": [\n    { \"name\": \"url\",    \"valueUri\": \"http://minhealth.gov.bk/core/ValueSet/PPHTaxSituationVS\" },\n    { \"name\": \"code\",   \"valueCode\": \"M\" },\n    { \"name\": \"system\", \"valueUri\": \"http://minhealth.gov.bk/core/CodeSystem/PPHTaxSituationCS\" }\n  ]\n}</code></pre>",
+        "pt": "<pre><code>Método HTTP: GET\nURL: https://testehr.com/fhir/ValueSet/$validate-code\nCorpo:\n{\n  \"resourceType\": \"Parameters\",\n  \"parameter\": [\n    { \"name\": \"url\",    \"valueUri\": \"http://minhealth.gov.bk/core/ValueSet/PPHTaxSituationVS\" },\n    { \"name\": \"code\",   \"valueCode\": \"M\" },\n    { \"name\": \"system\", \"valueUri\": \"http://minhealth.gov.bk/core/CodeSystem/PPHTaxSituationCS\" }\n  ]\n}</code></pre>",
+        "correct": false
+      }
+    ],
+    "explanationEn": "For **$validate-code**, when **all parameters are primitive types** (`url`, `code`, `system`), FHIR allows invoking the operation with **HTTP GET** and passing parameters in the query string. With **POST**, inputs must be carried in a **Parameters** resource in the request body (not on the URL). A GET request **must not** include a body. Therefore, Option A is correct; B and D violate the rules, and C mixes POST with parameters split between URL and body.",
+    "explanationPt": "Para **$validate-code**, quando **todos os parâmetros são tipos primitivos** (`url`, `code`, `system`), o FHIR permite invocar a operação via **HTTP GET** passando os parâmetros na query da URL. Com **POST**, as entradas devem ir em um recurso **Parameters** no corpo da requisição (não na URL). Requisições GET **não** utilizam corpo. Assim, a Opção A é correta; B e D violam as regras, e C mistura POST com parâmetros divididos entre URL e corpo."
+  },
+  {
+    "id": 2,
+    "titleEn": "Choose the correct $process-message invocation",
+    "titlePt": "Escolha a chamada correta do $process-message",
+    "qEn": "A developer must send a **message Bundle** (Bundle.id = \"B4567\", MessageHeader.id = \"M123\") to the EPIC EHR FHIR server using the **$process-message** standard operation. According to the FHIR Extended Operations framework, which option shows the **correct** request to process this message?",
+    "qPt": "Um desenvolvedor precisa enviar um **Bundle de mensagem** (Bundle.id = \"B4567\", MessageHeader.id = \"M123\") ao servidor FHIR da EPIC usando a operação padrão **$process-message**. De acordo com o framework de Operações Estendidas do FHIR, qual opção mostra a requisição **correta** para processar essa mensagem?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module3/m3_4_q2_q2.png",
+        "altEn": "Multiple-choice showing four HTTP request patterns for $process-message",
+        "altPt": "Múltipla escolha com quatro padrões de requisição HTTP para $process-message"
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "<pre><code>HTTP Method: GET\nURL: https://testepic.org/fhir/Bundle/$process-message?content=B4567\nBody: (empty)</code></pre>",
+        "pt": "<pre><code>Método HTTP: GET\nURL: https://testepic.org/fhir/Bundle/$process-message?content=B4567\nCorpo: (vazio)</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "<pre><code>HTTP Method: POST\nURL: https://testepic.org/fhir/$process-message\nBody (Parameters):\n&lt;Parameters xmlns=\"http://hl7.org/fhir\"&gt;\n  &lt;parameter&gt;\n    &lt;name value=\"content\" /&gt;\n    &lt;valueBundle&gt;\n      &lt;Bundle&gt;\n        &lt;id value=\"B4567\" /&gt;\n        &lt;type value=\"message\" /&gt;\n        &lt;entry&gt;&lt;resource&gt;\n          &lt;MessageHeader&gt;&lt;id value=\"M123\" /&gt;&lt;/MessageHeader&gt;\n        &lt;/resource&gt;&lt;/entry&gt;\n        ...\n      &lt;/Bundle&gt;\n    &lt;/valueBundle&gt;\n  &lt;/parameter&gt;\n&lt;/Parameters&gt;</code></pre>",
+        "pt": "<pre><code>Método HTTP: POST\nURL: https://testepic.org/fhir/$process-message\nCorpo (Parameters):\n&lt;Parameters xmlns=\"http://hl7.org/fhir\"&gt;\n  &lt;parameter&gt;\n    &lt;name value=\"content\" /&gt;\n    &lt;valueBundle&gt;\n      &lt;Bundle&gt;\n        &lt;id value=\"B4567\" /&gt;\n        &lt;type value=\"message\" /&gt;\n        &lt;entry&gt;&lt;resource&gt;\n          &lt;MessageHeader&gt;&lt;id value=\"M123\" /&gt;&lt;/MessageHeader&gt;\n        &lt;/resource&gt;&lt;/entry&gt;\n        ...\n      &lt;/Bundle&gt;\n    &lt;/valueBundle&gt;\n  &lt;/parameter&gt;\n&lt;/Parameters&gt;</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "<pre><code>HTTP Method: POST\nURL: https://testepic.org/fhir/Bundle/$process-message\nBody (Parameters):\n&lt;Parameters xmlns=\"http://hl7.org/fhir\"&gt;\n  &lt;parameter&gt;\n    &lt;name value=\"content\" /&gt;\n    &lt;resource&gt;\n      &lt;Bundle&gt;\n        &lt;id value=\"B4567\" /&gt;\n        &lt;type value=\"message\" /&gt;\n        &lt;entry&gt;&lt;resource&gt;\n          &lt;MessageHeader&gt;&lt;id value=\"M123\" /&gt;&lt;/MessageHeader&gt;\n        &lt;/resource&gt;&lt;/entry&gt;\n        ...\n      &lt;/Bundle&gt;\n    &lt;/resource&gt;\n  &lt;/parameter&gt;\n  &lt;parameter&gt;&lt;name value=\"async\" /&gt;&lt;valueBoolean value=\"false\" /&gt;&lt;/parameter&gt;\n&lt;/Parameters&gt;</code></pre>",
+        "pt": "<pre><code>Método HTTP: POST\nURL: https://testepic.org/fhir/Bundle/$process-message\nCorpo (Parameters):\n&lt;Parameters xmlns=\"http://hl7.org/fhir\"&gt;\n  &lt;parameter&gt;\n    &lt;name value=\"content\" /&gt;\n    &lt;resource&gt;\n      &lt;Bundle&gt;\n        &lt;id value=\"B4567\" /&gt;\n        &lt;type value=\"message\" /&gt;\n        &lt;entry&gt;&lt;resource&gt;\n          &lt;MessageHeader&gt;&lt;id value=\"M123\" /&gt;&lt;/MessageHeader&gt;\n        &lt;/resource&gt;&lt;/entry&gt;\n        ...\n      &lt;/Bundle&gt;\n    &lt;/resource&gt;\n  &lt;/parameter&gt;\n  &lt;parameter&gt;&lt;name value=\"async\" /&gt;&lt;valueBoolean value=\"false\" /&gt;&lt;/parameter&gt;\n&lt;/Parameters&gt;</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "<pre><code>HTTP Method: POST\nURL: https://testepic.org/fhir/$process-message\nBody (Bundle):\n&lt;Bundle&gt;\n  &lt;id value=\"B4567\" /&gt;\n  &lt;type value=\"message\" /&gt;\n  &lt;entry&gt;\n    &lt;resource&gt;\n      &lt;MessageHeader&gt;&lt;id value=\"M123\" /&gt;...&lt;/MessageHeader&gt;\n    &lt;/resource&gt;\n  &lt;/entry&gt;\n  ... (other resources)\n&lt;/Bundle&gt;</code></pre>",
+        "pt": "<pre><code>Método HTTP: POST\nURL: https://testepic.org/fhir/$process-message\nCorpo (Bundle):\n&lt;Bundle&gt;\n  &lt;id value=\"B4567\" /&gt;\n  &lt;type value=\"message\" /&gt;\n  &lt;entry&gt;\n    &lt;resource&gt;\n      &lt;MessageHeader&gt;&lt;id value=\"M123\" /&gt;...&lt;/MessageHeader&gt;\n    &lt;/resource&gt;\n  &lt;/entry&gt;\n  ... (outros recursos)\n&lt;/Bundle&gt;</code></pre>",
+        "correct": true
+      }
+    ],
+    "explanationEn": "For **$process-message**, the request must be **HTTP POST** to **[base]/$process-message**, and the **message Bundle itself** is the HTTP **request body**. The operation does **not** use a Parameters resource for inputs, and it is **not** invoked on a type-specific endpoint (e.g., `/Bundle/$process-message`). Therefore, Option D is correct; A is the wrong method, B and C incorrectly use `Parameters` (and C also uses the wrong endpoint).",
+    "explanationPt": "Para **$process-message**, a requisição deve ser **HTTP POST** para **[base]/$process-message**, e o **próprio Bundle de mensagem** é o **corpo** da requisição. A operação **não** usa recurso Parameters como entrada e **não** é invocada em endpoint específico de tipo (por exemplo, `/Bundle/$process-message`). Assim, a Opção D é correta; A usa método incorreto, B e C usam `Parameters` (e C também usa endpoint incorreto)."
+  },
+  {
+    "id": 3,
+    "titleEn": "Use $everything with _type for a single Patient",
+    "titlePt": "Usar $everything com _type para um único Patient",
+    "qEn": "A client app must retrieve **only Immunization, Encounter, and Observation (vitals)** for the Patient whose logical id on the FHIR server (`http://hapi.fhir.org/baseR4`) is **45870060**. The app will use the **$everything** operation to fetch this patient-related information. What is the correct request?",
+    "qPt": "Um app cliente precisa recuperar **apenas Immunization, Encounter e Observation (sinais vitais)** do Patient cujo id lógico no servidor FHIR (`http://hapi.fhir.org/baseR4`) é **45870060**. O app usará a operação **$everything** para obter essas informações relacionadas ao paciente. Qual é a requisição correta?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module3/m3_4_q2_q3.png",
+        "altEn": "Multiple-choice showing various $everything URLs; correct uses /Patient/45870060/$everything?_type=Immunization,Encounter,Observation",
+        "altPt": "Múltipla escolha com várias URLs do $everything; a correta usa /Patient/45870060/$everything?_type=Immunization,Encounter,Observation"
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "<pre><code>GET {baseURL}/Patient/$everything?_id=45870060&amp;_type=Immunization,Encounter,Observation</code></pre>",
+        "pt": "<pre><code>GET {baseURL}/Patient/$everything?_id=45870060&amp;_type=Immunization,Encounter,Observation</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "<pre><code>GET {baseURL}/Patient/45870060/$everything?_type=Immunization,Encounter,Observation</code></pre>",
+        "pt": "<pre><code>GET {baseURL}/Patient/45870060/$everything?_type=Immunization,Encounter,Observation</code></pre>",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "en": "<pre><code>GET {baseURL}/Patient/45870060/$everything?_resources=Immunization,Encounter,Observation</code></pre>",
+        "pt": "<pre><code>GET {baseURL}/Patient/45870060/$everything?_resources=Immunization,Encounter,Observation</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "<pre><code>GET {baseURL}/Patient/$everything/45870060?_type=Immunization,Encounter,Observation</code></pre>",
+        "pt": "<pre><code>GET {baseURL}/Patient/$everything/45870060?_type=Immunization,Encounter,Observation</code></pre>",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The **instance-level** form of $everything is **/Patient/{id}/$everything**. To limit which resource types are returned, use the standard **_type** parameter with a comma-separated list of types. Parameters **_id** or **id** are not standard inputs for $everything (the id belongs in the URL path), and **_resources** is not a valid parameter. Thus, the correct request is `{baseURL}/Patient/45870060/$everything?_type=Immunization,Encounter,Observation`.",
+    "explanationPt": "A forma **no nível da instância** do $everything é **/Patient/{id}/$everything**. Para limitar os tipos retornados, usa-se o parâmetro padrão **_type** com a lista de tipos separada por vírgulas. Os parâmetros **_id** ou **id** não são entradas padrão do $everything (o id deve estar no caminho da URL) e **_resources** não é um parâmetro válido. Portanto, a requisição correta é `{baseURL}/Patient/45870060/$everything?_type=Immunization,Encounter,Observation`."
+  },
+  {
+    "id": 4,
+    "titleEn": "Choose the correct $validate invocation (Observation vs US Core Heart Rate profile)",
+    "titlePt": "Escolha a chamada correta do $validate (Observação vs perfil US Core Heart Rate)",
+    "qEn": "A developer must validate an **Observation** instance (id `98`, heart rate) against the profile `http://hl7.org/fhir/us/core/StructureDefinition/us-core-heart-rate` using the **$validate** operation. Which request is **correct** per the FHIR Extended Operations rules?",
+    "qPt": "Um desenvolvedor precisa validar uma instância de **Observation** (id `98`, frequência cardíaca) contra o perfil `http://hl7.org/fhir/us/core/StructureDefinition/us-core-heart-rate` usando a operação **$validate**. Qual requisição está **correta** de acordo com as regras de Operações Estendidas do FHIR?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module3/m3_4_q2_q4.png",
+        "altEn": "Four HTTP request options for invoking $validate with an Observation against US Core Heart Rate profile",
+        "altPt": "Quatro opções de requisição HTTP para invocar $validate com Observation contra o perfil US Core Heart Rate"
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "<pre><code>HTTP Method: GET\nURL: {baseURL}/Observation/$validate?profile=http://hl7.org/fhir/us/core/StructureDefinition/us-core-heart-rate\nBody: { ...Observation JSON... }</code></pre>",
+        "pt": "<pre><code>Método HTTP: GET\nURL: {baseURL}/Observation/$validate?profile=http://hl7.org/fhir/us/core/StructureDefinition/us-core-heart-rate\nCorpo: { ...Observation JSON... }</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "<pre><code>HTTP Method: POST\nURL: {baseURL}/Observation/$validate?resource=Observation&amp;profile=http://hl7.org/fhir/us/core/StructureDefinition/us-core-heart-rate\nBody: { ...Observation JSON... }</code></pre>",
+        "pt": "<pre><code>Método HTTP: POST\nURL: {baseURL}/Observation/$validate?resource=Observation&amp;profile=http://hl7.org/fhir/us/core/StructureDefinition/us-core-heart-rate\nCorpo: { ...Observation JSON... }</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "<pre><code>HTTP Method: POST\nURL: {baseURL}/Observation/$validate?profile=http://hl7.org/fhir/us/core/StructureDefinition/us-core-heart-rate\nBody:\n{\n  \"resourceType\": \"Observation\",\n  \"id\": \"98\",\n  \"status\": \"final\",\n  \"code\": {\"coding\": [{\"system\": \"http://loinc.org\", \"code\": \"8867-4\", \"display\": \"Heart rate\"}]},\n  \"subject\": {\"reference\": \"Patient/71\"},\n  \"effectiveDateTime\": \"1999-07-02\",\n  \"valueQuantity\": {\"value\": 44}\n}</code></pre>",
+        "pt": "<pre><code>Método HTTP: POST\nURL: {baseURL}/Observation/$validate?profile=http://hl7.org/fhir/us/core/StructureDefinition/us-core-heart-rate\nCorpo:\n{\n  \"resourceType\": \"Observation\",\n  \"id\": \"98\",\n  \"status\": \"final\",\n  \"code\": {\"coding\": [{\"system\": \"http://loinc.org\", \"code\": \"8867-4\", \"display\": \"Heart rate\"}]},\n  \"subject\": {\"reference\": \"Patient/71\"},\n  \"effectiveDateTime\": \"1999-07-02\",\n  \"valueQuantity\": {\"value\": 44}\n}</code></pre>",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "en": "<pre><code>HTTP Method: POST\nURL: {baseURL}/Observation/$validate?usageContext=http://hl7.org/fhir/us/core/StructureDefinition/us-core-heart-rate\nBody: { ...Observation JSON... }</code></pre>",
+        "pt": "<pre><code>Método HTTP: POST\nURL: {baseURL}/Observation/$validate?usageContext=http://hl7.org/fhir/us/core/StructureDefinition/us-core-heart-rate\nCorpo: { ...Observation JSON... }</code></pre>",
+        "correct": false
+      }
+    ],
+    "explanationEn": "For **$validate**, you may use **GET** or **POST**. • **GET** is for validating an existing instance and must include the **target instance in the URL** (e.g., `Observation/98/$validate`) and **no body**. • **POST** is for validating supplied content; the **full resource instance goes in the request body**, and the constraint is indicated with the **`profile`** parameter (canonical URL). Options A and D misuse the parameters (GET with body; `usageContext` is not the correct parameter). Option B includes a non-standard `resource` parameter. Option **C** follows the spec correctly.",
+    "explanationPt": "Para **$validate**, pode-se usar **GET** ou **POST**. • **GET** valida uma instância existente e deve incluir a **instância alvo na URL** (ex.: `Observation/98/$validate`) e **sem corpo**. • **POST** valida o conteúdo enviado; a **instância completa** vai no corpo e a restrição é indicada pelo parâmetro **`profile`** (URL canônica). As opções A e D usam parâmetros incorretamente (GET com corpo; `usageContext` não é o parâmetro correto). A opção B inclui o parâmetro não padrão `resource`. A opção **C** segue corretamente a especificação."
+  },
+  {
+    "id": 5,
+    "titleEn": "What is the correct $validate response when there are no errors?",
+    "titlePt": "Qual é a resposta correta do $validate quando não há erros?",
+    "qEn": "A client system validates a **Patient** resource on an EMR FHIR server using the **$validate** operation. The HTTP request body contains the Patient instance to be validated. According to the FHIR specification, which option correctly represents the **successful outcome** (no errors) returned by the server?",
+    "qPt": "Um sistema cliente valida um recurso **Patient** em um servidor FHIR do EMR usando a operação **$validate**. O corpo da requisição HTTP contém a instância de Patient a ser validada. De acordo com a especificação FHIR, qual opção representa corretamente o **resultado de sucesso** (sem erros) retornado pelo servidor?",
+    "type": "single",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/module3/m3_4_q2_q5.png",
+        "altEn": "Multiple-choice showing different HTTP bodies for $validate results (Parameters vs OperationOutcome vs empty)",
+        "altPt": "Múltipla escolha com diferentes corpos HTTP para resultados do $validate (Parameters vs OperationOutcome vs vazio)"
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "en": "<pre><code>HTTP 200 OK\nBody:\n{\n  \"resourceType\": \"Parameters\",\n  \"parameter\": [{\n    \"name\": \"return\",\n    \"valueOperationOutcome\": {\n      \"issue\": [{\n        \"severity\": \"information\",\n        \"code\": \"informational\",\n        \"diagnostics\": \"No issues detected during validation\"\n      }]\n    }\n  }]\n}</code></pre>",
+        "pt": "<pre><code>HTTP 200 OK\nCorpo:\n{\n  \"resourceType\": \"Parameters\",\n  \"parameter\": [{\n    \"name\": \"return\",\n    \"valueOperationOutcome\": {\n      \"issue\": [{\n        \"severity\": \"information\",\n        \"code\": \"informational\",\n        \"diagnostics\": \"No issues detected during validation\"\n      }]\n    }\n  }]\n}</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "<pre><code>HTTP 200 OK\nBody:\n{\n  \"resourceType\": \"Parameters\",\n  \"parameter\": [{\n    \"name\": \"return\",\n    \"resource\": {\n      \"resourceType\": \"OperationOutcome\",\n      \"issue\": [{\n        \"severity\": \"information\",\n        \"code\": \"informational\",\n        \"diagnostics\": \"No issues detected during validation\"\n      }]\n    }\n  }]\n}</code></pre>",
+        "pt": "<pre><code>HTTP 200 OK\nCorpo:\n{\n  \"resourceType\": \"Parameters\",\n  \"parameter\": [{\n    \"name\": \"return\",\n    \"resource\": {\n      \"resourceType\": \"OperationOutcome\",\n      \"issue\": [{\n        \"severity\": \"information\",\n        \"code\": \"informational\",\n        \"diagnostics\": \"No issues detected during validation\"\n      }]\n    }\n  }]\n}</code></pre>",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "<pre><code>HTTP 200 OK\nBody:\n{\n  \"resourceType\": \"OperationOutcome\",\n  \"issue\": [{\n    \"severity\": \"information\",\n    \"code\": \"informational\",\n    \"diagnostics\": \"No issues detected during validation\"\n  }]\n}</code></pre>",
+        "pt": "<pre><code>HTTP 200 OK\nCorpo:\n{\n  \"resourceType\": \"OperationOutcome\",\n  \"issue\": [{\n    \"severity\": \"information\",\n    \"code\": \"informational\",\n    \"diagnostics\": \"No issues detected durante a validação\"\n  }]\n}</code></pre>",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "en": "<pre><code>HTTP 200 OK\nBody: (empty)</code></pre>",
+        "pt": "<pre><code>HTTP 200 OK\nCorpo: (vazio)</code></pre>",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The **$validate** operation returns an **OperationOutcome** indicating the validation result. Because the single output parameter is named **return** and is of type **OperationOutcome**, the server returns the resource **directly** (not wrapped in a Parameters resource). Therefore, an HTTP 200 with an OperationOutcome body is correct. Empty bodies are not correct for $validate success responses.",
+    "explanationPt": "A operação **$validate** retorna um **OperationOutcome** indicando o resultado da validação. Como existe apenas um parâmetro de saída chamado **return** do tipo **OperationOutcome**, o servidor retorna o recurso **diretamente** (sem envolver em um Parameters). Portanto, o correto é HTTP 200 com um OperationOutcome no corpo. Respostas vazias não são corretas para sucesso do $validate."
+  }
+
+
+
+
+
+]

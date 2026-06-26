@@ -1,0 +1,434 @@
+[
+  {
+    "id": 1,
+    "titleEn": "Out of scope for FHIR",
+    "titlePt": "Fora do escopo do FHIR",
+    "qEn": "According to the FHIR Focus, which of the following is explicitly OUTSIDE the scope of the FHIR specification?",
+    "qPt": "De acordo com o FHIR Focus, qual das opções está explicitamente FORA do escopo da especificação FHIR?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "Defining good or best clinical practices and guidance on user interfaces or workflows",
+        "pt": "Definir boas/melhores práticas clínicas e orientação sobre interfaces de usuário ou fluxos de trabalho",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "Enabling exchange of healthcare-related information",
+        "pt": "Permitir a troca de informações relacionadas à saúde",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "Covering clinical, administrative, public health and research data",
+        "pt": "Cobrir dados clínicos, administrativos, de saúde pública e de pesquisa",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Being usable world-wide across human and veterinary medicine",
+        "pt": "Ser utilizável mundialmente em medicina humana e veterinária",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The reading material (FHIR Focus) states FHIR does not attempt to define good or best clinical practices, nor provide guidance on user interfaces or workflows — that is outside FHIR's scope. Its primary focus is implementation of data exchange.",
+    "explanationPt": "O material de leitura (FHIR Focus) afirma que o FHIR não tenta definir boas/melhores práticas clínicas, nem dá orientação sobre interfaces ou fluxos de trabalho — isso está fora do escopo. Seu foco primário é a implementação da troca de dados."
+  },
+  {
+    "id": 2,
+    "titleEn": "What is 'common' about the API",
+    "titlePt": "O que é 'comum' na API",
+    "qEn": "FHIR offers a 'common' API. What exactly is common/standard about it, and who defines it?",
+    "qPt": "O FHIR oferece uma API 'comum'. O que exatamente é comum/padrão nela, e quem a define?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "The API signature and outcome format, defined by FHIR itself (not by EMR vendors like Epic/Cerner or Apple/Google)",
+        "pt": "A assinatura da API e o formato de saída, definidos pelo próprio FHIR (não por fornecedores de EMR como Epic/Cerner ou Apple/Google)",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "The network transport protocol, defined by each EMR vendor",
+        "pt": "O protocolo de transporte de rede, definido por cada fornecedor de EMR",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "The database schema, defined by Apple and Google",
+        "pt": "O esquema do banco de dados, definido por Apple e Google",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "The clinical terminology, defined by the implementer",
+        "pt": "A terminologia clínica, definida pelo implementador",
+        "correct": false
+      }
+    ],
+    "explanationEn": "Per the reading material, the API is provided by FHIR — not by EMR vendors or big tech. What is 'common' is the signature and format: every FHIR-compliant system uses the same API signature and returns the same outcome format.",
+    "explanationPt": "Segundo o material, a API é fornecida pelo FHIR — não por fornecedores de EMR nem big techs. O que é 'comum' é a assinatura e o formato: todo sistema compatível usa a mesma assinatura de API e retorna o mesmo formato de saída."
+  },
+  {
+    "id": 3,
+    "titleEn": "Resource serialization formats",
+    "titlePt": "Formatos de serialização de recursos",
+    "qEn": "In which formats can FHIR resource instances be represented, according to the Framework section?",
+    "qPt": "Em quais formatos as instâncias de recursos FHIR podem ser representadas, segundo a seção Framework?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "XML, JSON or RDF",
+        "pt": "XML, JSON ou RDF",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "Only JSON",
+        "pt": "Apenas JSON",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "XML or CSV",
+        "pt": "XML ou CSV",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "YAML or JSON",
+        "pt": "YAML ou JSON",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The Framework section states resource instances are represented as either XML, JSON or RDF, and that there are currently 145 different resource types defined in the FHIR specification.",
+    "explanationPt": "A seção Framework afirma que instâncias de recursos são representadas como XML, JSON ou RDF, e que há atualmente 145 tipos de recursos definidos na especificação FHIR."
+  },
+  {
+    "id": 4,
+    "titleEn": "REST and statelessness",
+    "titlePt": "REST e ausência de estado",
+    "qEn": "The reading material says aligning FHIR APIs to the REST architectural style makes all transactions stateless, eliminating 'sticky' sessions. Which architectural principle does this support?",
+    "qPt": "O material afirma que alinhar as APIs FHIR ao estilo REST torna todas as transações sem estado, eliminando sessões 'sticky'. Qual princípio arquitetural isso sustenta?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "Scalability",
+        "pt": "Escalabilidade",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "Data Fidelity",
+        "pt": "Fidelidade dos dados",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "Usability",
+        "pt": "Usabilidade",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Reuse and Composability",
+        "pt": "Reúso e composabilidade",
+        "correct": false
+      }
+    ],
+    "explanationEn": "Under Architectural Principles, Scalability is described as aligning FHIR APIs to REST so all transactions are stateless, which reduces memory usage and supports horizontal scalability.",
+    "explanationPt": "Em Princípios Arquiteturais, Escalabilidade é descrita como alinhar as APIs FHIR ao REST para que todas as transações sejam sem estado, reduzindo uso de memória e suportando escala horizontal."
+  },
+  {
+    "id": 5,
+    "titleEn": "Informative standard level",
+    "titlePt": "Nível de padrão Informative",
+    "qEn": "Which Standard Level is provided for implementer assistance, does NOT make rules implementers must follow, and includes content like tables of contents, registries and examples?",
+    "qPt": "Qual Nível de Padrão é fornecido para auxílio ao implementador, NÃO cria regras obrigatórias e inclui conteúdo como índices, registros e exemplos?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "Informative",
+        "pt": "Informative",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "Normative",
+        "pt": "Normative",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "Trial Use",
+        "pt": "Trial Use",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Deprecated",
+        "pt": "Deprecated",
+        "correct": false
+      }
+    ],
+    "explanationEn": "Per The Standards Development Process: Informative content is provided for implementer assistance and does not make rules implementers are required to follow; typical examples are tables of contents, registries, examples and implementer advice.",
+    "explanationPt": "Conforme o Processo de Desenvolvimento de Padrões: o conteúdo Informative é fornecido para auxílio ao implementador e não cria regras obrigatórias; exemplos típicos são índices, registros, exemplos e conselhos ao implementador."
+  },
+  {
+    "id": 6,
+    "titleEn": "Reaching FMM2",
+    "titlePt": "Alcançar o FMM2",
+    "qEn": "According to the FMM definitions, what must an artifact achieve to reach FMM 2?",
+    "qPt": "Segundo as definições do FMM, o que um artefato precisa alcançar para chegar ao FMM 2?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "Be tested supporting interoperability among at least 3 independently developed systems (≈80% of core data elements), with results reported to and accepted by the FMG",
+        "pt": "Ser testado suportando interoperabilidade entre pelo menos 3 sistemas desenvolvidos independentemente (≈80% dos elementos centrais), com resultados reportados e aceitos pelo FMG",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "Pass a round of formal balloting with 10 implementer comments from 3 organizations",
+        "pt": "Passar por uma rodada de votação formal com 10 comentários de implementadores de 3 organizações",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "Be implemented in at least 5 independent production systems in more than one country",
+        "pt": "Ser implementado em pelo menos 5 sistemas de produção independentes em mais de um país",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Produce no warnings during the build and have the WG declare it ready",
+        "pt": "Não gerar warnings na build e ter o WG declarando-o pronto",
+        "correct": false
+      }
+    ],
+    "explanationEn": "FMM2 requires the artifact to be tested and successfully support interoperability among at least three independently developed systems (≈80% of core data elements) using semi-realistic data (e.g., at a connectathon), with results reported to and accepted by the FMG. Formal balloting is FMM3; the 5-production-systems/2-countries criterion is FMM5; no-warnings + WG ready is FMM1.",
+    "explanationPt": "O FMM2 exige que o artefato seja testado e suporte interoperabilidade entre pelo menos três sistemas desenvolvidos independentemente (≈80% dos elementos centrais) com dados semi-realistas (ex.: connectathon), com resultados reportados e aceitos pelo FMG. Votação formal é FMM3; 5 sistemas/2 países é FMM5; sem-warnings + WG pronto é FMM1."
+  },
+  {
+    "id": 7,
+    "titleEn": "Version string parts",
+    "titlePt": "Partes da string de versão",
+    "qEn": "A FHIR version is identified by 'publication.major.minor.revision'. Which part increments every time a breaking change is made?",
+    "qPt": "Uma versão FHIR é identificada por 'publication.major.minor.revision'. Qual parte é incrementada toda vez que uma mudança quebra-compatibilidade (breaking) é feita?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "major",
+        "pt": "major",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "publication",
+        "pt": "publication",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "minor",
+        "pt": "minor",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "revision",
+        "pt": "revision",
+        "correct": false
+      }
+    ],
+    "explanationEn": "Per FHIR Release Versioning: publication increments when HL7 publishes an updated specification; major increments on a breaking change; minor increments on an official snapshot with substantive changes; revision is the git hash. The current publication cited is 4.0.1.",
+    "explanationPt": "Conforme o Versionamento de Releases: publication incrementa quando a HL7 publica uma especificação atualizada; major incrementa em mudança breaking; minor incrementa em snapshot oficial com mudanças substantivas; revision é o hash do git. A publicação atual citada é 4.0.1."
+  },
+  {
+    "id": 8,
+    "titleEn": "Composition framework category",
+    "titlePt": "Categoria no framework de composição",
+    "qEn": "In the FHIR Composition Framework, resources such as CapabilityStatement, StructureDefinition and ValueSet (Conformance & Terminology) belong to which top layer?",
+    "qPt": "No FHIR Composition Framework, recursos como CapabilityStatement, StructureDefinition e ValueSet (Conformidade e Terminologia) pertencem a qual camada superior?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "Layer 1 — Foundation Resources",
+        "pt": "Camada 1 — Foundation Resources",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "Layer 3 — Clinical Resources",
+        "pt": "Camada 3 — Clinical Resources",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "Layer 4 — Financial Resources",
+        "pt": "Camada 4 — Financial Resources",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Layer 6 — Resource Contextualization",
+        "pt": "Camada 6 — Resource Contextualization",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The Composition Framework places Foundation Resources at Layer 1, grouping Security, Conformance, Terminology, Documents and Other. Conformance (CapabilityStatement, StructureDefinition) and Terminology (CodeSystem, ValueSet) live there. Clinical is Layer 3, Financial Layer 4, and Profiles/Graphs are Layer 6.",
+    "explanationPt": "O Composition Framework coloca os Foundation Resources na Camada 1, agrupando Security, Conformance, Terminology, Documents e Other. Conformance (CapabilityStatement, StructureDefinition) e Terminology (CodeSystem, ValueSet) ficam ali. Clinical é Camada 3, Financial Camada 4, e Profiles/Graphs são Camada 6."
+  },
+  {
+    "id": 9,
+    "titleEn": "Third-party terminology licenses",
+    "titlePt": "Licenças de terminologias de terceiros",
+    "qEn": "A team building on FHIR wants to use SNOMED CT, LOINC and ICD. Regarding licensing, what does the FHIR License section state?",
+    "qPt": "Uma equipe que constrói sobre FHIR quer usar SNOMED CT, LOINC e ICD. Quanto ao licenciamento, o que diz a seção FHIR License?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "HL7/FHIR does not license third-party IP; the licensee alone is responsible for obtaining the necessary licenses",
+        "pt": "A HL7/FHIR não licencia IP de terceiros; o licenciado é o único responsável por obter as licenças necessárias",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "The FHIR license automatically grants rights to SNOMED, LOINC and ICD",
+        "pt": "A licença FHIR concede automaticamente direitos sobre SNOMED, LOINC e ICD",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "These terminologies are public domain and need no license",
+        "pt": "Essas terminologias são domínio público e não precisam de licença",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "HL7 obtains the licenses on behalf of all implementers",
+        "pt": "A HL7 obtém as licenças em nome de todos os implementadores",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The FHIR License section is explicit: HL7 or FHIR does not provide a license to third-party applications referenced in the spec (SNOMED, DICOM, LOINC, ICD, CPT, etc.). The licensee alone is responsible for identifying and obtaining any necessary licenses.",
+    "explanationPt": "A seção FHIR License é explícita: a HL7 ou FHIR não fornece licença para aplicações de terceiros referenciadas na spec (SNOMED, DICOM, LOINC, ICD, CPT etc.). O licenciado é o único responsável por identificar e obter as licenças necessárias."
+  },
+  {
+    "id": 10,
+    "titleEn": "Trademark in domain names",
+    "titlePt": "Marca em nomes de domínio",
+    "qEn": "Per the FHIR Trademark rules, using HL7 International trademarks (e.g., 'FHIR') in URL domains or to brand your product without express written consent is:",
+    "qPt": "Pelas regras de Marca do FHIR, usar marcas da HL7 International (ex.: 'FHIR') em domínios de URL ou para marcar seu produto sem consentimento escrito é:",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "Strictly prohibited",
+        "pt": "Estritamente proibido",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "Allowed if you add the ® symbol",
+        "pt": "Permitido se você adicionar o símbolo ®",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "Allowed for non-commercial sites only",
+        "pt": "Permitido apenas para sites não comerciais",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Allowed if you notify HL7 afterwards",
+        "pt": "Permitido se você notificar a HL7 depois",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The Trademark section states that use of HL7 International trademarks in URL domains or to brand a product or service without the express written consent of HL7 International is strictly prohibited. The ® symbol covers nominative reference, not domain/brand use.",
+    "explanationPt": "A seção de Marca afirma que usar marcas da HL7 International em domínios de URL ou para marcar produto/serviço sem consentimento escrito expresso da HL7 é estritamente proibido. O símbolo ® cobre a referência nominativa, não o uso em domínio/marca."
+  },
+  {
+    "id": 11,
+    "titleEn": "Substantive change",
+    "titlePt": "Mudança substantiva",
+    "qEn": "Which term describes a change that introduces new functionality/capabilities but would NOT render unchanged existing applications non-conformant?",
+    "qPt": "Qual termo descreve uma mudança que introduz nova funcionalidade/capacidade mas que NÃO tornaria não conformes as aplicações existentes inalteradas?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "Substantive change",
+        "pt": "Mudança substantiva (substantive)",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "Breaking change",
+        "pt": "Mudança quebra-compatibilidade (breaking)",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "Non-substantive change",
+        "pt": "Mudança não substantiva (non-substantive)",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Deprecation",
+        "pt": "Depreciação",
+        "correct": false
+      }
+    ],
+    "explanationEn": "Per Rules for Inter-version change: Substantive changes introduce new functionality/capabilities but do not make unchanged applications non-conformant. Breaking changes do make prior apps non-conformant; non-substantive changes (renumbering, typos, broken links) cause no change in any conformant app.",
+    "explanationPt": "Conforme as Regras de mudança entre versões: mudanças substantivas introduzem nova funcionalidade/capacidade mas não tornam as aplicações inalteradas não conformes. Mudanças breaking tornam apps anteriores não conformes; não substantivas (renumeração, typos, links quebrados) não causam mudança em nenhuma app conforme."
+  },
+  {
+    "id": 12,
+    "titleEn": "Backward compatibility behavior",
+    "titlePt": "Comportamento de retrocompatibilidade",
+    "qEn": "To maximize backward compatibility, how SHOULD an application handle an unrecognized code that appears in a required or extensible binding?",
+    "qPt": "Para maximizar a retrocompatibilidade, como uma aplicação DEVE tratar um código não reconhecido que aparece em um binding required ou extensible?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "Ignore the unrecognized code — unless the element it appears on is a modifier, in which case treat it as an unrecognized modifier extension",
+        "pt": "Ignorar o código não reconhecido — a menos que o elemento em que ele aparece seja um modifier, caso em que deve tratá-lo como uma modifier extension não reconhecida",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "Always reject the whole resource",
+        "pt": "Sempre rejeitar o recurso inteiro",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "Always ignore it, even on modifier elements",
+        "pt": "Sempre ignorar, mesmo em elementos modifier",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Convert the code to the nearest known code automatically",
+        "pt": "Converter o código automaticamente para o código conhecido mais próximo",
+        "correct": false
+      }
+    ],
+    "explanationEn": "Forward & Backward compatibility guidance: applications SHOULD ignore unrecognized codes in required and extensible bindings, UNLESS the element they appear on is a modifier — then it must be treated as an unrecognized modifier extension (which generally means rejecting/handling specially, not silently ignoring).",
+    "explanationPt": "Orientação de compatibilidade: as aplicações DEVEM ignorar códigos não reconhecidos em bindings required e extensible, A MENOS que o elemento seja um modifier — então deve ser tratado como uma modifier extension não reconhecida (o que geralmente significa rejeitar/tratar de forma especial, não ignorar silenciosamente)."
+  }
+]

@@ -1,0 +1,290 @@
+[
+  {
+    "id": 1,
+    "titleEn": "What a profile is",
+    "titlePt": "O que é um perfil",
+    "qEn": "In FHIR, a profile is technically represented as:",
+    "qPt": "No FHIR, um perfil é tecnicamente representado como:",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "A StructureDefinition with kind = constraint (a set of constraints on a resource)",
+        "pt": "Uma StructureDefinition com kind = constraint (um conjunto de restrições sobre um recurso)",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "A separate resource type called 'Profile'",
+        "pt": "Um tipo de recurso próprio chamado 'Profile'",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "A CapabilityStatement with kind = instance",
+        "pt": "Uma CapabilityStatement com kind = instance",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "A free-text Word/PDF document, like in HL7 V2",
+        "pt": "Um documento Word/PDF em texto livre, como no HL7 V2",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The Profiling reading material states a FHIR Profile is simply a StructureDefinition resource — 'a set of constraints on a resource represented as a structure definition with kind = constraint.' Both the profile and the instances validated against it are Resources.",
+    "explanationPt": "O material de Profiling afirma que um Perfil FHIR é simplesmente uma StructureDefinition — 'um conjunto de restrições sobre um recurso, representado como structure definition com kind = constraint.' Tanto o perfil quanto as instâncias validadas contra ele são Resources."
+  },
+  {
+    "id": 2,
+    "titleEn": "Allowed cardinality restriction",
+    "titlePt": "Restrição de cardinalidade permitida",
+    "qEn": "A base element has cardinality 0..1. According to the 'Changing Cardinality' table, which derived cardinality is NOT allowed in a profile?",
+    "qPt": "Um elemento base tem cardinalidade 0..1. Pela tabela 'Changing Cardinality', qual cardinalidade derivada NÃO é permitida num perfil?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "0..* (optional, many)",
+        "pt": "0..* (opcional, muitos)",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "1..1 (required)",
+        "pt": "1..1 (obrigatório)",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "0..1 (optional)",
+        "pt": "0..1 (opcional)",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "0..0 (not used)",
+        "pt": "0..0 (não usado)",
+        "correct": false
+      }
+    ],
+    "explanationEn": "Per the cardinality table, a base 0..1 can be derived to 0..0, 0..1 or 1..1 — but NOT to 0..* or 1..* (you cannot raise the maximum beyond the base). A profile may only tighten, never broaden the base concept.",
+    "explanationPt": "Pela tabela de cardinalidade, um base 0..1 pode virar 0..0, 0..1 ou 1..1 — mas NÃO 0..* nem 1..* (não se pode aumentar o máximo além do base). Um perfil só pode apertar, nunca ampliar o conceito base."
+  },
+  {
+    "id": 3,
+    "titleEn": "Binding strength in a profile",
+    "titlePt": "Força de binding num perfil",
+    "qEn": "In the base specification an element has binding strength 'required'. According to the 'Changing Binding Strength' table, what can a profile change it to?",
+    "qPt": "Na especificação base, um elemento tem força de binding 'required'. Pela tabela 'Changing Binding Strength', para o que um perfil pode mudá-la?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "It must remain 'required' — required cannot be weakened to extensible/preferred/example",
+        "pt": "Deve permanecer 'required' — required não pode ser enfraquecido para extensible/preferred/example",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "To extensible",
+        "pt": "Para extensible",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "To preferred",
+        "pt": "Para preferred",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "To example",
+        "pt": "Para example",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The binding-strength table shows a base 'required' can only stay 'required'. A constraining profile cannot make codes valid that are invalid in the base profile, so required cannot be weakened. (A profile may instead keep the strength and tighten the value set.)",
+    "explanationPt": "A tabela de força de binding mostra que um base 'required' só pode permanecer 'required'. Um perfil de restrição não pode tornar válidos códigos que são inválidos no perfil base, então required não pode ser enfraquecido. (O perfil pode, em vez disso, manter a força e apertar o value set.)"
+  },
+  {
+    "id": 4,
+    "titleEn": "Slicing discriminator & rules",
+    "titlePt": "Discriminador e rules de slicing",
+    "qEn": "In ElementDefinition.slicing, which set correctly lists the allowed discriminator TYPES and the allowed RULES values?",
+    "qPt": "Em ElementDefinition.slicing, qual conjunto lista corretamente os TIPOS de discriminador permitidos e os valores de RULES permitidos?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "discriminator.type: value | exists | pattern | type | profile  ·  rules: closed | open | openAtEnd",
+        "pt": "discriminator.type: value | exists | pattern | type | profile  ·  rules: closed | open | openAtEnd",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "discriminator.type: required | extensible | preferred  ·  rules: min | max",
+        "pt": "discriminator.type: required | extensible | preferred  ·  rules: min | max",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "discriminator.type: system | code | display  ·  rules: AND | OR",
+        "pt": "discriminator.type: system | code | display  ·  rules: AND | OR",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "discriminator.type: read | vread | search  ·  rules: open | closed",
+        "pt": "discriminator.type: read | vread | search  ·  rules: open | closed",
+        "correct": false
+      }
+    ],
+    "explanationEn": "Per the Slicing section, a discriminator is a pair (type + FHIRPath path); the five discriminator types are value, exists, pattern, type and profile. ElementDefinition.slicing.rules takes closed | open | openAtEnd, controlling whether additional (undefined) slices are allowed.",
+    "explanationPt": "Na seção de Slicing, um discriminador é um par (type + caminho FHIRPath); os cinco tipos são value, exists, pattern, type e profile. ElementDefinition.slicing.rules aceita closed | open | openAtEnd, controlando se fatias adicionais (não definidas) são permitidas."
+  },
+  {
+    "id": 5,
+    "titleEn": "Purpose of an IG",
+    "titlePt": "Propósito de um IG",
+    "qEn": "Why are Implementation Guides needed, according to the 'Use of Implementation Guide' material?",
+    "qPt": "Por que Implementation Guides são necessários, segundo o material 'Use of Implementation Guide'?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "FHIR is a 'platform' specification; to achieve real interoperability we must constrain it, and an IG is a document with complete information on constraining resources and which APIs to use for exchange",
+        "pt": "O FHIR é uma especificação 'plataforma'; para interoperabilidade real é preciso restringi-lo, e um IG é um documento com informação completa sobre como restringir recursos e quais APIs usar na troca",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "To replace the base FHIR specification with a new standard",
+        "pt": "Para substituir a especificação FHIR base por um novo padrão",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "To define the HTTP transport protocol used by FHIR",
+        "pt": "Para definir o protocolo de transporte HTTP usado pelo FHIR",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "To assign FMM maturity levels to resources",
+        "pt": "Para atribuir níveis de maturidade FMM aos recursos",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The material says FHIR is a 'platform' specification; constraints express community consensus on using the standard for real-world problems. Implementation Guides are documents providing complete information on constraining the resources and what APIs to use for data exchange.",
+    "explanationPt": "O material diz que o FHIR é uma especificação 'plataforma'; as restrições expressam o consenso da comunidade sobre usar o padrão em problemas reais. Implementation Guides são documentos com informação completa sobre como restringir os recursos e quais APIs usar na troca de dados."
+  },
+  {
+    "id": 6,
+    "titleEn": "Who created Argonaut",
+    "titlePt": "Quem criou o Argonaut",
+    "qEn": "The Argonaut IGs were created by the Argonauts (Epic, Cerner, Apple, Boston Children's/SMART, etc.). Under which HL7 program does this group work?",
+    "qPt": "Os IGs Argonaut foram criados pelos Argonautas (Epic, Cerner, Apple, Boston Children's/SMART etc.). Sob qual programa da HL7 esse grupo atua?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "FHIR Accelerators",
+        "pt": "FHIR Accelerators",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "FHIR Maturity Model (FMM)",
+        "pt": "FHIR Maturity Model (FMM)",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "FHIR Management Group (FMG)",
+        "pt": "FHIR Management Group (FMG)",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "SMART Health IT Foundation",
+        "pt": "SMART Health IT Foundation",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The IG material states the Argonauts are sponsored by organizations such as Accenture, Apple, Cerner, Epic and Boston Children's Hospital (SMART), with 100+ registered organizations, and the group works under a special HL7 program called FHIR Accelerators.",
+    "explanationPt": "O material de IG afirma que os Argonautas são patrocinados por organizações como Accenture, Apple, Cerner, Epic e Boston Children's Hospital (SMART), com 100+ organizações registradas, e o grupo atua sob um programa especial da HL7 chamado FHIR Accelerators."
+  },
+  {
+    "id": 7,
+    "titleEn": "Argonaut Data Query basis",
+    "titlePt": "Base do Argonaut Data Query",
+    "qEn": "The Argonaut Data Query Implementation Guide (most complete version) describes which specific EHR patient data can be accessed. It is based on which IG, and which interaction does it mostly use?",
+    "qPt": "O Argonaut Data Query Implementation Guide (versão mais completa) descreve quais dados específicos de paciente do EHR podem ser acessados. Em qual IG ele se baseia, e qual interação ele usa principalmente?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "Based on US Core, and it is mostly about READING data (lots of GET, not PUT/POST)",
+        "pt": "Baseado no US Core, e é principalmente sobre LEITURA de dados (muito GET, não PUT/POST)",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "Based on CARIN, and mostly about writing data (PUT/POST)",
+        "pt": "Baseado no CARIN, e principalmente sobre escrita de dados (PUT/POST)",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "Based on IPS, and mostly about deleting data (DELETE)",
+        "pt": "Baseado no IPS, e principalmente sobre exclusão de dados (DELETE)",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Based on DaVinci PDex, and mostly about transactions",
+        "pt": "Baseado no DaVinci PDex, e principalmente sobre transações",
+        "correct": false
+      }
+    ],
+    "explanationEn": "The material says the last/most complete Argonaut Data Query version is based on US CORE and covers access to demographics, documents, diagnostic reports, immunizations, lab results, encounters, goals, care teams, medications, etc. The Argonaut guides are mostly about READING: REST-programming an Argonaut server means lots of GET, but not PUT/POST.",
+    "explanationPt": "O material diz que a versão mais completa do Argonaut Data Query é baseada no US CORE e cobre acesso a dados demográficos, documentos, laudos, imunizações, resultados de lab, encontros, metas, equipes de cuidado, medicamentos etc. Os guias Argonaut são principalmente sobre LEITURA: programar via REST num servidor Argonaut significa muito GET, mas não PUT/POST."
+  },
+  {
+    "id": 8,
+    "titleEn": "US Core actors",
+    "titlePt": "Atores do US Core",
+    "qEn": "In the US Core IG, what do the actors 'US Core Requestor' and 'US Core Responder' correspond to?",
+    "qPt": "No IG US Core, a que correspondem os atores 'US Core Requestor' e 'US Core Responder'?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "Requestor = the client (initiates the data access request); Responder = the server (provides the patient data)",
+        "pt": "Requestor = o cliente (inicia a requisição de acesso a dados); Responder = o servidor (fornece os dados do paciente)",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "Requestor = the server; Responder = the client",
+        "pt": "Requestor = o servidor; Responder = o cliente",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "Both are servers in a federation",
+        "pt": "Ambos são servidores em uma federação",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Requestor = the patient; Responder = the practitioner",
+        "pt": "Requestor = o paciente; Responder = o profissional",
+        "correct": false
+      }
+    ],
+    "explanationEn": "Per the US Core walkthrough: the US Core Requestor is an application that initiates a data access request to retrieve patient data (the client), and the US Core Responder is a product that responds providing the patient data (the server).",
+    "explanationPt": "Pelo walkthrough do US Core: o US Core Requestor é uma aplicação que inicia uma requisição para obter dados do paciente (o cliente), e o US Core Responder é um produto que responde fornecendo os dados (o servidor)."
+  }
+]

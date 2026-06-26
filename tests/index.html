@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FHIR Quizzes</title>
+  <style>
+    :root{--bg:#0b1020;--card:#121a33;--muted:#c9d3f5;--accent:#6ee7b7;--danger:#fca5a5}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial,'Noto Sans',sans-serif;background:linear-gradient(120deg,#0b1020,#151c3a);color:#e9eefc}
+    header{position:sticky;top:0;background:rgba(11,16,32,.9);backdrop-filter:saturate(120%) blur(6px);padding:14px 18px;border-bottom:1px solid #1f2a54;z-index:2}
+    h1{font-size:18px;margin:0}
+    .container{max-width:1100px;margin:24px auto;padding:0 16px}
+    .controls{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0}
+    .btn,.select{padding:10px 12px;border:1px solid #2a376f;background:#121a33;color:#e9eefc;border-radius:12px}
+    .btn{cursor:pointer}
+    .btn:hover{transform:translateY(-1px);border-color:#4156a6}
+    .btn.primary{background:#1a2e4f;border-color:#5b86ff}
+    .btn.success{background:#123826;border-color:#3cd3a5}
+    .btn.danger{background:#3b1a1a;border-color:#ff8a8a}
+    .btn.warn{background:#2a1f0a;border-color:#f59e0b}
+    .pill{padding:6px 10px;border:1px solid #33406d;background:#121a33;border-radius:999px;font-size:12px}
+    .card{background:#121a33;border:1px solid #23305c;border-radius:18px;padding:18px;margin:16px 0;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+    .q-title{font-weight:700;margin:0 0 8px;display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+    .q-sub{color:var(--muted);font-size:13px;margin:0 0 12px}
+    .opt{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;margin:8px 0;border:1px solid #273566;border-radius:12px;background:#0f1530}
+    .opt input{margin-top:3px}
+    .opt label{cursor:pointer}
+    .correct{border-color:#1f9e6d;background:rgba(31,158,109,.08)}
+    .wrong{border-color:#9e1f1f;background:rgba(158,31,31,.08)}
+    .grid{display:grid;grid-template-columns:1fr;gap:16px}
+    @media(min-width:980px){.grid{grid-template-columns:2fr 1fr}}
+    table{width:100%;border-collapse:collapse}
+    th,td{border-bottom:1px solid #23305c;padding:10px;text-align:left}
+    th{color:#b9c6ff}
+    small{color:#9db2ff}
+    /* media */
+    .q-media{margin:8px 0 14px}
+    .q-media figure{margin:0}
+    .q-media img{max-width:100%;height:auto;border:1px solid #23305c;border-radius:12px;display:block}
+    .q-media figcaption{font-size:12px;color:#aab6e9;margin-top:6px}
+    .opt code{white-space:pre-wrap;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,'Courier New',monospace}
+    /* explanation */
+    .explanation{margin-top:12px;padding:10px 14px;border-left:3px solid #4156a6;background:rgba(65,86,166,.1);border-radius:0 10px 10px 0;font-size:12px;color:#c9d3f5;display:none}
+    .explanation.visible{display:block}
+    /* per-question stat badge */
+    .q-stat{font-size:11px;white-space:nowrap;padding:2px 8px;border-radius:999px;flex-shrink:0}
+    .q-stat.new{background:rgba(99,102,241,.15);border:1px solid #6366f155;color:#a5b4fc}
+    .q-stat.good{background:rgba(31,158,109,.2);border:1px solid #1f9e6d66;color:#6ee7b7}
+    .q-stat.warn{background:rgba(251,191,36,.15);border:1px solid #f59e0b66;color:#fcd34d}
+    .q-stat.bad{background:rgba(239,68,68,.15);border:1px solid #ef444466;color:#fca5a5}
+    /* weak topics panel */
+    .weak-row{padding:7px 2px;border-bottom:1px solid #1a2346;display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:12px}
+    .weak-row:last-child{border-bottom:none}
+    .weak-title{flex:1;color:#c9d3f5;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .acc-pill{font-size:11px;padding:1px 7px;border-radius:999px;flex-shrink:0}
+    .acc-pill.good{background:rgba(31,158,109,.2);border:1px solid #1f9e6d66;color:#6ee7b7}
+    .acc-pill.warn{background:rgba(251,191,36,.15);border:1px solid #f59e0b66;color:#fcd34d}
+    .acc-pill.bad{background:rgba(239,68,68,.15);border:1px solid #ef444466;color:#fca5a5}
+    /* overall progress bar */
+    .prog-bar-wrap{background:#0f1530;border-radius:6px;overflow:hidden;height:8px;margin:8px 0}
+    .prog-bar{height:100%;border-radius:6px;transition:width .4s}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
+      <h1>FHIR Quizzes</h1>
+      <div class="controls">
+        <select id="moduleSelect" class="select" title="Select module from manifest">
+          <option value="">Carregar manifest…</option>
+        </select>
+        <span class="pill" id="qCount">0</span>
+        <button class="btn" id="langToggle">🇬🇧 / 🇵🇹</button>
+        <button class="btn primary" id="submitBtn">Submit / Enviar</button>
+        <button class="btn" id="reviewBtn">Gabarito</button>
+        <button class="btn warn" id="weakBtn">⚠ Revisar Fracos</button>
+        <button class="btn" id="retryBtn">Refazer</button>
+        <button class="btn success" id="exportBtn">Exportar</button>
+        <button class="btn danger" id="resetHistoryBtn">Limpar</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container grid">
+    <section>
+      <div class="card" id="manifestInfo">Buscando <code>quizzes/manifest.json</code>… (dica: abra com Live Server ou <code>python -m http.server</code>)</div>
+      <div id="quizContainer"></div>
+    </section>
+    <aside>
+      <div class="card">
+        <h3 style="margin-top:0">Desempenho / Performance</h3>
+        <div id="scoreNow" style="color:var(--muted);font-size:13px">Selecione um módulo e envie para ver a pontuação.</div>
+        <div class="prog-bar-wrap" id="progBarWrap" style="display:none">
+          <div class="prog-bar" id="progBar" style="width:0%;background:#6ee7b7"></div>
+        </div>
+      </div>
+      <div class="card" id="weakPanel">
+        <h3 style="margin-top:0">⚠ Tópicos Fracos / Weak Topics</h3>
+        <div id="weakList" style="color:var(--muted);font-size:12px">Nenhum dado ainda. Complete um quiz para ver os pontos fracos.</div>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">Histórico / History</h3>
+        <table id="historyTable"><thead><tr><th>Data</th><th>Módulo</th><th>Nota</th><th></th></tr></thead><tbody></tbody></table>
+      </div>
+    </aside>
+  </main>
+
+<script>
+const MANIFEST_PATH = 'quizzes/manifest.json';
+let lang = 'EN';
+let moduleKey = null;
+let QUESTIONS = [];
+let weakMode = false; // true = only showing weak questions
+
+const $ = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+const formatPct = n => (Math.round(n * 1000) / 10).toFixed(1) + '%';
+
+/* ── localStorage helpers ── */
+const historyKey = m => `fhir_history_${m}`;
+const qstatsKey  = m => `fhir_qstats_${m}`;
+
+function loadHistory(m) { try { return JSON.parse(localStorage.getItem(historyKey(m))) || []; } catch { return []; } }
+function saveHistory(m, entry) { const l = loadHistory(m); l.unshift(entry); localStorage.setItem(historyKey(m), JSON.stringify(l)); renderHistory(); }
+
+function loadQStats(m)  { try { return JSON.parse(localStorage.getItem(qstatsKey(m)))  || {}; } catch { return {}; } }
+function saveQStats(m, s) { localStorage.setItem(qstatsKey(m), JSON.stringify(s)); }
+
+function updateQStats(m, details) {
+  const stats = loadQStats(m);
+  details.forEach(d => {
+    const k = String(d.id);
+    if (!stats[k]) stats[k] = { attempts: 0, correct: 0, title: '' };
+    stats[k].attempts++;
+    if (d.isCorrect) stats[k].correct++;
+    // store title for display (find in QUESTIONS)
+    const q = QUESTIONS.find(q => q.id === d.id);
+    if (q) stats[k].title = lang === 'EN' ? q.titleEn : q.titlePt;
+  });
+  saveQStats(m, stats);
+  return stats;
+}
+
+/* ── stat badge helpers ── */
+function statClass(attempts, correct) {
+  if (!attempts) return 'new';
+  const pct = correct / attempts;
+  if (pct >= 0.75) return 'good';
+  if (pct >= 0.5)  return 'warn';
+  return 'bad';
+}
+function statLabel(attempts, correct) {
+  if (!attempts) return 'novo';
+  return `${correct}/${attempts} ✓`;
+}
+
+/* ── manifest & module loading ── */
+async function loadManifest() {
+  const info = $('#manifestInfo');
+  try {
+    const res = await fetch(MANIFEST_PATH);
+    if (!res.ok) throw new Error(res.status + ' ' + res.statusText);
+    const data = await res.json();
+    const modules = data.modules || [];
+    if (!modules.length) throw new Error('Manifest sem módulos');
+    const sel = $('#moduleSelect');
+    sel.innerHTML = '<option value="">Selecione um módulo…</option>';
+    for (const m of modules) {
+      const opt = document.createElement('option');
+      opt.value = m.key;
+      opt.textContent = `${m.key} — ${lang === 'EN' ? m.titleEn : m.titlePt}`;
+      opt.dataset.file = m.file;
+      opt.dataset.titleEn = m.titleEn;
+      opt.dataset.titlePt = m.titlePt;
+      sel.appendChild(opt);
+    }
+    info.innerHTML = `<strong>${modules.length}</strong> módulos carregados de <code>${MANIFEST_PATH}</code>.`;
+    const url = new URL(window.location.href);
+    const q = url.searchParams.get('module');
+    if (q && modules.some(m => m.key === q)) { sel.value = q; await loadModuleFromSelect(); }
+  } catch (err) {
+    info.innerHTML = `⚠️ Não foi possível carregar <code>${MANIFEST_PATH}</code>: ${err.message}.`;
+  }
+}
+
+async function loadModuleFromSelect() {
+  const sel = $('#moduleSelect');
+  const opt = sel.options[sel.selectedIndex];
+  if (!opt || !opt.dataset.file) return;
+  moduleKey = sel.value;
+  weakMode = false;
+  const file = opt.dataset.file;
+  try {
+    const res = await fetch(file);
+    if (!res.ok) throw new Error(res.status + ' ' + res.statusText);
+    QUESTIONS = await res.json();
+    $('#manifestInfo').innerHTML = `<strong>Módulo:</strong> ${opt.dataset.titleEn} <small>(${file})</small>`;
+    renderQuiz(QUESTIONS);
+    renderHistory();
+    renderWeakTopics();
+  } catch (err) {
+    $('#manifestInfo').innerHTML = `⚠️ Erro ao carregar <code>${file}</code>: ${err.message}`;
+  }
+}
+
+/* ── render quiz ── */
+function renderQuiz(questions) {
+  const stats = moduleKey ? loadQStats(moduleKey) : {};
+  $('#qCount').textContent = `${questions.length} questões`;
+  const wrap = document.createElement('div');
+
+  questions.forEach(q => {
+    const s = stats[String(q.id)];
+    const cls = statClass(s?.attempts || 0, s?.correct || 0);
+    const lbl = statLabel(s?.attempts || 0, s?.correct || 0);
+
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.dataset.qid = q.id;
+
+    // title row with stat badge
+    const titleRow = document.createElement('h3');
+    titleRow.className = 'q-title';
+    const titleText = document.createElement('span');
+    titleText.textContent = lang === 'EN' ? q.titleEn : q.titlePt;
+    const badge = document.createElement('span');
+    badge.className = `q-stat ${cls}`;
+    badge.textContent = lbl;
+    titleRow.appendChild(titleText);
+    titleRow.appendChild(badge);
+    card.appendChild(titleRow);
+
+    const sub = document.createElement('p');
+    sub.className = 'q-sub';
+    sub.innerHTML = lang === 'EN' ? q.qEn : q.qPt;
+    card.appendChild(sub);
+
+    // media
+    if (q.media?.length) {
+      const mw = document.createElement('div');
+      mw.className = 'q-media';
+      q.media.forEach(m => {
+        if (m.type === 'image' && m.src) {
+          const fig = document.createElement('figure');
+          const img = new Image();
+          img.src = m.src;
+          img.loading = 'lazy';
+          img.alt = lang === 'EN' ? (m.altEn || m.altPt || '') : (m.altPt || m.altEn || '');
+          fig.appendChild(img);
+          if (m.captionEn || m.captionPt) {
+            const cap = document.createElement('figcaption');
+            cap.textContent = lang === 'EN' ? (m.captionEn || '') : (m.captionPt || '');
+            fig.appendChild(cap);
+          }
+          mw.appendChild(fig);
+        }
+      });
+      card.appendChild(mw);
+    }
+
+    // options
+    q.options.forEach(o => {
+      const id = `q${q.id}_${o.key}`;
+      const div = document.createElement('div');
+      div.className = 'opt';
+      const input = document.createElement('input');
+      input.type = q.type === 'multi' ? 'checkbox' : 'radio';
+      input.name = `q_${q.id}`;
+      input.value = o.key;
+      input.id = id;
+      const label = document.createElement('label');
+      label.setAttribute('for', id);
+      label.innerHTML = `<strong>${o.key}.</strong> ${lang === 'EN' ? o.en : o.pt}`;
+      div.appendChild(input);
+      div.appendChild(label);
+      card.appendChild(div);
+    });
+
+    // explanation (hidden until submission)
+    if (q.explanationEn || q.explanationPt) {
+      const exp = document.createElement('div');
+      exp.className = 'explanation';
+      exp.dataset.en = q.explanationEn || '';
+      exp.dataset.pt = q.explanationPt || '';
+      exp.innerHTML = lang === 'EN' ? (q.explanationEn || '') : (q.explanationPt || '');
+      card.appendChild(exp);
+    }
+
+    wrap.appendChild(card);
+  });
+
+  const target = $('#quizContainer');
+  target.innerHTML = '';
+  target.appendChild(wrap);
+}
+
+/* ── grade & feedback ── */
+function grade(questions) {
+  const details = [];
+  let correctCount = 0;
+  questions.forEach(q => {
+    const chosen = $$(`input[name="q_${q.id}"]`).filter(i => i.checked).map(i => i.value).sort();
+    const right  = q.options.filter(o => o.correct).map(o => o.key).sort();
+    const isCorrect = chosen.length === right.length && chosen.every((v, i) => v === right[i]);
+    if (isCorrect) correctCount++;
+    details.push({ id: q.id, chosen, right, isCorrect });
+  });
+  const score = questions.length ? correctCount / questions.length : 0;
+  return { score, details };
+}
+
+function showFeedback({ details }) {
+  details.forEach(d => {
+    const rights = new Set(d.right);
+    $$(`input[name="q_${d.id}"]`).forEach(i => {
+      const box = i.closest('.opt');
+      box.classList.remove('correct', 'wrong');
+      if (i.checked && rights.has(i.value))       box.classList.add('correct');
+      else if (i.checked && !rights.has(i.value)) box.classList.add('wrong');
+      else if (!i.checked && rights.has(i.value)) box.style.borderColor = '#1f9e6d66';
+      i.disabled = true;
+    });
+    // show explanation
+    const card = document.querySelector(`.card[data-qid="${d.id}"]`);
+    if (card) {
+      const exp = card.querySelector('.explanation');
+      if (exp) exp.classList.add('visible');
+    }
+  });
+}
+
+function renderScore(res, total) {
+  const pct = res.score;
+  const correct = Math.round(pct * total);
+  const color = pct >= 0.75 ? '#6ee7b7' : pct >= 0.5 ? '#fcd34d' : '#fca5a5';
+  $('#scoreNow').innerHTML = `<strong style="color:${color};font-size:22px">${formatPct(pct)}</strong> &nbsp;${correct}/${total} corretas`;
+  const bar = $('#progBar');
+  const wrap = $('#progBarWrap');
+  bar.style.width = Math.round(pct * 100) + '%';
+  bar.style.background = color;
+  wrap.style.display = 'block';
+}
+
+/* ── weak topics panel ── */
+function renderWeakTopics() {
+  if (!moduleKey) return;
+  const stats = loadQStats(moduleKey);
+  const entries = Object.entries(stats)
+    .filter(([, s]) => s.attempts > 0)
+    .map(([id, s]) => ({ id, ...s, pct: s.correct / s.attempts }))
+    .sort((a, b) => a.pct - b.pct);
+
+  const list = $('#weakList');
+  if (!entries.length) {
+    list.innerHTML = '<span style="color:var(--muted)">Nenhum dado ainda. Complete um quiz para ver os pontos fracos.</span>';
+    return;
+  }
+
+  // update titles from current QUESTIONS if available
+  entries.forEach(e => {
+    const q = QUESTIONS.find(q => String(q.id) === String(e.id));
+    if (q) e.title = lang === 'EN' ? q.titleEn : q.titlePt;
+  });
+
+  const top = entries.slice(0, 10);
+  list.innerHTML = top.map(e => {
+    const cls = e.pct >= 0.75 ? 'good' : e.pct >= 0.5 ? 'warn' : 'bad';
+    const title = e.title || `Q${e.id}`;
+    return `<div class="weak-row">
+      <span class="weak-title" title="${title}">${title}</span>
+      <span class="acc-pill ${cls}">${e.correct}/${e.attempts}</span>
+    </div>`;
+  }).join('');
+}
+
+/* ── history panel ── */
+function renderHistory() {
+  const tbody = $('#historyTable tbody');
+  tbody.innerHTML = '';
+  if (!moduleKey) return;
+  loadHistory(moduleKey).slice(0, 8).forEach(h => {
+    const tr = document.createElement('tr');
+    const pct = h.score;
+    const color = pct >= 0.75 ? '#6ee7b7' : pct >= 0.5 ? '#fcd34d' : '#fca5a5';
+    tr.innerHTML = `
+      <td style="font-size:11px">${new Date(h.date).toLocaleString('pt-BR',{dateStyle:'short',timeStyle:'short'})}</td>
+      <td style="font-size:11px">${moduleKey}</td>
+      <td style="color:${color};font-weight:700">${formatPct(pct)}</td>
+      <td style="font-size:11px;color:#9db2ff">${h.correct}/${h.total}</td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+/* ── event handlers ── */
+$('#moduleSelect').addEventListener('change', loadModuleFromSelect);
+
+$('#langToggle').onclick = () => {
+  lang = lang === 'EN' ? 'PT' : 'EN';
+  const activeQ = weakMode
+    ? QUESTIONS.filter(q => { const s = loadQStats(moduleKey)[String(q.id)]; return s && s.attempts > 0 && s.correct / s.attempts < 0.6; })
+    : QUESTIONS;
+  renderQuiz(activeQ.length ? activeQ : QUESTIONS);
+  renderWeakTopics();
+};
+
+$('#submitBtn').onclick = () => {
+  if (!moduleKey) return alert('Selecione um módulo primeiro.');
+  const activeQ = weakMode
+    ? QUESTIONS.filter(q => { const s = loadQStats(moduleKey)[String(q.id)]; return s && s.attempts > 0 && s.correct / s.attempts < 0.6; })
+    : QUESTIONS;
+  const r = grade(activeQ.length ? activeQ : QUESTIONS);
+  showFeedback(r);
+  renderScore(r, r.details.length);
+  updateQStats(moduleKey, r.details);
+  saveHistory(moduleKey, { date: Date.now(), score: r.score, correct: Math.round(r.score * r.details.length), total: r.details.length });
+  renderWeakTopics();
+};
+
+$('#reviewBtn').onclick = () => {
+  if (!moduleKey) return;
+  const activeQ = weakMode
+    ? QUESTIONS.filter(q => { const s = loadQStats(moduleKey)[String(q.id)]; return s && s.attempts > 0 && s.correct / s.attempts < 0.6; })
+    : QUESTIONS;
+  const r = grade(activeQ.length ? activeQ : QUESTIONS);
+  showFeedback(r);
+  renderScore(r, r.details.length);
+};
+
+$('#weakBtn').onclick = () => {
+  if (!moduleKey) return alert('Selecione um módulo primeiro.');
+  const stats = loadQStats(moduleKey);
+  const weak = QUESTIONS.filter(q => {
+    const s = stats[String(q.id)];
+    return !s || s.attempts === 0 || s.correct / s.attempts < 0.6;
+  });
+  if (!weak.length) { alert('Parabéns! Nenhuma questão fraca encontrada. Continue praticando para manter!'); return; }
+  weakMode = true;
+  renderQuiz(weak);
+  $('#qCount').textContent = `${weak.length} questões fracas / weak`;
+  $('#scoreNow').innerHTML = `<span style="color:#fcd34d">Modo Revisão: ${weak.length} questão(ões) com acurácia abaixo de 60%</span>`;
+  $('#progBarWrap').style.display = 'none';
+};
+
+$('#retryBtn').onclick = () => {
+  if (!moduleKey) return;
+  weakMode = false;
+  renderQuiz(QUESTIONS);
+  $('#scoreNow').innerHTML = 'Selecione um módulo e envie para ver a pontuação.';
+  $('#progBarWrap').style.display = 'none';
+};
+
+$('#exportBtn').onclick = () => {
+  const bundle = {
+    generated: new Date().toISOString(),
+    module: moduleKey,
+    history: loadHistory(moduleKey),
+    qstats: loadQStats(moduleKey)
+  };
+  const blob = new Blob([JSON.stringify(bundle, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = `fhir_stats_${moduleKey || 'none'}.json`;
+  document.body.appendChild(a); a.click(); a.remove();
+  URL.revokeObjectURL(url);
+};
+
+$('#resetHistoryBtn').onclick = () => {
+  if (!moduleKey) return;
+  if (!confirm(`Limpar TODO o histórico e estatísticas de "${moduleKey}"?`)) return;
+  localStorage.removeItem(historyKey(moduleKey));
+  localStorage.removeItem(qstatsKey(moduleKey));
+  renderHistory();
+  renderWeakTopics();
+  renderQuiz(QUESTIONS);
+  $('#scoreNow').innerHTML = 'Histórico apagado.';
+  $('#progBarWrap').style.display = 'none';
+};
+
+// INIT
+loadManifest();
+</script>
+</body>
+</html>

@@ -1,0 +1,226 @@
+[
+  {
+    "id": 1,
+    "module": "Module 3 - Unit 4",
+    "titleEn": "Which FHIR operation returns all information about a patient?",
+    "titlePt": "Qual operação FHIR retorna todas as informações de um paciente?",
+    "qEn": "A developer needs to retrieve all the information about a patient from a FHIR server using only one FHIR operation. Which standard operation is defined by the FHIR spec?",
+    "qPt": "Um desenvolvedor precisa recuperar todas as informações sobre um paciente a partir de um servidor FHIR usando apenas uma operação FHIR. Qual operação padrão é definida na especificação FHIR?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "Patient/$all-resources",
+        "pt": "Patient/$all-resources",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "Patient/$everything",
+        "pt": "Patient/$everything",
+        "correct": true
+      },
+      {
+        "key": "C",
+        "en": "Patient/$complete",
+        "pt": "Patient/$complete",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "Patient/$every-resource",
+        "pt": "Patient/$every-resource",
+        "correct": false
+      }
+    ],
+    "explanationEn": "**Patient/$everything** is the standard FHIR operation used to return all information related to a patient (can be invoked at instance `/Patient/{id}/$everything` or type `/Patient/$everything`). The other names are not defined operations in FHIR.",
+    "explanationPt": "**Patient/$everything** é a operação padrão do FHIR utilizada para retornar todas as informações relacionadas a um paciente (pode ser chamada no nível da instância `/Patient/{id}/$everything` ou do tipo `/Patient/$everything`). As demais opções não são operações definidas no FHIR."
+  },
+  {
+    "id": 2,
+    "module": "Module 3 - Unit 4",
+    "titleEn": "Which $everything operation should be used for a clinical trial cohort?",
+    "titlePt": "Qual operação $everything deve ser usada para um grupo (coorte) de estudo clínico?",
+    "qEn": "There are 10 patients enrolled in a clinical trial Group for testing a new medication. The EMR has captured data for all of these patients. The client application needs to access all information related to these patients using only one FHIR operation on the server. Which $everything operation should the application invoke?",
+    "qPt": "Há 10 pacientes inscritos em um Group de estudo clínico para testar um novo medicamento. O prontuário eletrônico registrou dados de todos esses pacientes. O aplicativo cliente precisa acessar todas as informações relacionadas a esses pacientes usando apenas uma operação FHIR no servidor. Qual operação $everything o aplicativo deve invocar?",
+    "type": "single",
+    "media": [],
+    "options": [
+      {
+        "key": "A",
+        "en": "Encounter",
+        "pt": "Encounter",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "Patient",
+        "pt": "Patient",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "Group",
+        "pt": "Group",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "en": "MedicinalProduct",
+        "pt": "MedicinalProduct",
+        "correct": false
+      }
+    ],
+    "explanationEn": "Invoke **Group/$everything** to return all information related to the patients that are members of that Group in a single operation. The response is a Bundle (type searchset) with the aggregated data. Patient/$everything is for a single patient; Encounter/$everything is scoped to one encounter; MedicinalProduct has no $everything operation.",
+    "explanationPt": "Invoque **Group/$everything** para retornar, em uma única operação, todas as informações relacionadas aos pacientes membros desse Group. A resposta é um Bundle (tipo searchset) com os dados agregados. Patient/$everything é para um único paciente; Encounter/$everything se limita a um encontro; MedicinalProduct não possui a operação $everything."
+  },
+  {
+    "id": 3,
+    "titleEn": "Validate before create – use $validate",
+    "titlePt": "Validar antes de criar – usar $validate",
+    "qEn": "An implementer needs to create the Patient resource on the FHIR server. Before that, he needs the FHIR server to check the content against a profile and then verify that the content would be acceptable as a create (e.g., would not violate any uniqueness constraints). Which standard operation should be used for this purpose?",
+    "qPt": "Um implementador precisa criar o recurso Patient no servidor FHIR. Antes disso, ele precisa que o servidor verifique o conteúdo contra um perfil e confirme se o conteúdo seria aceitável como uma criação (por exemplo, sem violar restrições de unicidade). Qual operação padrão deve ser usada para esse propósito?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "<code>$validate</code>",
+        "pt": "<code>$validate</code>",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "<code>$conforms</code>",
+        "pt": "<code>$conforms</code>",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "<code>$apply</code>",
+        "pt": "<code>$apply</code>",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "<code>$evaluate-measure</code>",
+        "pt": "<code>$evaluate-measure</code>",
+        "correct": false
+      }
+    ],
+    "media": [],
+    "explanationEn": "The $validate operation checks whether a resource instance conforms to a profile or base definition WITHOUT persisting it. It is used to pre-flight validate before a create/update. The URL form is POST [base]/Patient/$validate with the instance in the body.",
+    "explanationPt": "A operação $validate verifica se uma instância de recurso está em conformidade com um perfil ou definição base SEM persistir. É usada para validar antes de criar/atualizar. A forma da URL é POST [base]/Patient/$validate com a instância no corpo."
+  },
+  {
+    "id": 4,
+    "titleEn": "Validate marital status code – ValueSet/$validate-code",
+    "titlePt": "Validar código de estado civil – ValueSet/$validate-code",
+    "qEn": "The Patient.maritalStatus draws codes from multiple code systems, including those defined by FHIR and custom codes from a terminology server. A client application needs to validate a patient's marital status code against a FHIR Terminology Server to determine whether the code is valid. Which is the correct FHIR operation?",
+    "qPt": "O elemento Patient.maritalStatus usa códigos de múltiplos sistemas, incluindo os definidos pelo FHIR e códigos personalizados do servidor de terminologia. Um aplicativo cliente precisa validar o código de estado civil do paciente em um Servidor de Terminologia FHIR para verificar se o código é válido. Qual é a operação FHIR correta?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "<code>CodeSystem/$validateCode</code>",
+        "pt": "<code>CodeSystem/$validateCode</code>",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "<code>ValueSet/$validate</code>",
+        "pt": "<code>ValueSet/$validate</code>",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "<code>CodeSystem/$validate</code>",
+        "pt": "<code>CodeSystem/$validate</code>",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "<code>ValueSet/$validate-code</code>",
+        "pt": "<code>ValueSet/$validate-code</code>",
+        "correct": true
+      }
+    ],
+    "media": [],
+    "explanationEn": "ValueSet/$validate-code checks whether a specific code (or code+system pair) is valid within a given ValueSet. CodeSystem/$lookup looks up information about a single code; CodeSystem/$validate-code validates against a CodeSystem, not a ValueSet.",
+    "explanationPt": "ValueSet/$validate-code verifica se um código específico (ou par código+sistema) é válido dentro de um ValueSet. CodeSystem/$lookup busca informações sobre um único código; CodeSystem/$validate-code valida em relação a um CodeSystem, não a um ValueSet."
+  },
+  {
+    "id": 5,
+    "titleEn": "Map SNOMED CT → ICD-10 – ConceptMap/$translate",
+    "titlePt": "Mapear SNOMED CT → ICD-10 – ConceptMap/$translate",
+    "qEn": "A client application possesses the SNOMED CT code for asthma (707444001) but requires the ICD-10 equivalent before exchanging a Condition resource. By providing the SNOMED CT source code, which terminology operation on the ConceptMap resource should the client call to obtain the ICD-10 code?",
+    "qPt": "Um aplicativo cliente possui o código SNOMED CT para asma (707444001), mas precisa do equivalente em ICD-10 antes de enviar uma instância de Condition. Fornecendo o código SNOMED CT de origem, qual operação de terminologia no recurso ConceptMap o cliente deve chamar para obter o código ICD-10?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "<code>$expand</code>",
+        "pt": "<code>$expand</code>",
+        "correct": false
+      },
+      {
+        "key": "B",
+        "en": "<code>$find-matches</code>",
+        "pt": "<code>$find-matches</code>",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "<code>$translate</code>",
+        "pt": "<code>$translate</code>",
+        "correct": true
+      },
+      {
+        "key": "D",
+        "en": "<code>$closure</code>",
+        "pt": "<code>$closure</code>",
+        "correct": false
+      }
+    ],
+    "media": [],
+    "explanationEn": "ConceptMap/$translate converts a code from one system to another — for example, SNOMED CT → ICD-10. $expand expands a ValueSet into its complete list of codes. $closure creates a closure table for subsumption queries.",
+    "explanationPt": "ConceptMap/$translate converte um código de um sistema para outro — por exemplo, SNOMED CT → ICD-10. $expand expande um ValueSet em sua lista completa de códigos. $closure cria uma tabela de fechamento para consultas de subsunção."
+  },
+  {
+    "id": 6,
+    "titleEn": "Process FHIR message Bundle – $process-message",
+    "titlePt": "Processar Bundle de mensagem – $process-message",
+    "qEn": "An application needs to send a Bundle of type=message to a FHIR server, which will process it according to the definition of the event in the message header and return one or more response messages. Which of the following options represents the correct approach the application should use?",
+    "qPt": "Um aplicativo precisa enviar um Bundle com type=message para um servidor FHIR, que o processará de acordo com a definição do evento no cabeçalho da mensagem e retornará uma ou mais mensagens de resposta. Qual das opções a seguir representa a abordagem correta que o aplicativo deve usar?",
+    "type": "single",
+    "options": [
+      {
+        "key": "A",
+        "en": "<code>[base]/$process-message</code>",
+        "pt": "<code>[base]/$process-message</code>",
+        "correct": true
+      },
+      {
+        "key": "B",
+        "en": "<code>[base]/Bundle/$process-message</code>",
+        "pt": "<code>[base]/Bundle/$process-message</code>",
+        "correct": false
+      },
+      {
+        "key": "C",
+        "en": "<code>[base]/</code>",
+        "pt": "<code>[base]/</code>",
+        "correct": false
+      },
+      {
+        "key": "D",
+        "en": "<code>[base]/$submit</code>",
+        "pt": "<code>[base]/$submit</code>",
+        "correct": false
+      }
+    ],
+    "media": [],
+    "explanationEn": "The $process-message operation is invoked at [base]/$process-message to submit a Bundle of type=message to a FHIR messaging endpoint. It is a server-level operation, not scoped to a resource type like Bundle.",
+    "explanationPt": "A operação $process-message é invocada em [base]/$process-message para enviar um Bundle do tipo=message a um endpoint de mensagens FHIR. É uma operação no nível do servidor, não vinculada a um tipo de recurso específico como Bundle."
+  }
+]
